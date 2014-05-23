@@ -1,0 +1,37 @@
+* buyuk kucuk harf donusturme;
+Degistirecegin yeri secip visual mode'a gec
+U Uppercase 
+u Lowercase 
+
+* Metin icerisindeki turkce karakterleri aratmak;
+:set digraph
+Ctrl-k c, -> ç
+Ctrl-k C, -> Ç
+Ctrl-k g( -> ğ
+Ctrl-k G> -> Ğ
+Ctrl-k i. -> ı
+Ctrl-k I. -> I
+Ctrl-k s, -> ş
+Ctrl-k S, -> Ş
+Ctrl-k u: -> ü
+Ctrl-k U: -> Ü
+
+satir atlama: jump --> j
+5j 5 satir asagi
+
+imlecin bir altindaki satirla bulundugu satiri birlestirme; J
+
+kullanmaya kullanmaya unuttugum bir komut;
+:Bclose
+http://vim.wikia.com/wiki/Deleting_a_buffer_without_closing_the_window
+
+* zz kullanimini vi'de denedigimde boyle bir sey cikti;
+Usage: [line]z[window_size][-|.|+|^|<CR>]
+
+* shift+v ile satiri secebiliyoruz.
+
+pencereleri yeniden boyutlandirma 
+c+w sayi +-
+
+bos buffer'da bir dosya acma 
+:n

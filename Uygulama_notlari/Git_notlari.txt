@@ -1,0 +1,4 @@
+* Yeni acilmis repo'ya ilk push'u yapmadan once asagidaki komut verilir;
+git push origin master 
+
+* git'te her zaman calisan surum tutulur, gelistirme branch'inda da olsan calismayan surumu push etmezsin.

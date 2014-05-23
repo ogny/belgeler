@@ -1,0 +1,16 @@
+
+/set weechat.bar.status.color_bg black
+/set weechat.bar.title.hidden on
+/set weechat.look.buffer_time_format ""      
+/set irc.look.smart_filter on
+/filter add jpk * irc_join,irc_part,irc_quit *
+/bar toggle nicklist
+ /bar set nicklist  size 35
+ /toggle_nicklist add
+in channel
+/set plugins.var.python.toggle_nicklist.action "show"
+now all nicklists will be hidden except the channels you add
+server degistirme ^x
+
+* Bir kanala otomatik giris yapmak;
+/set irc.server.freenode.autojoin ""

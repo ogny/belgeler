@@ -1,0 +1,4 @@
+pdf'e cevirmek icin kurulmasi gereken paketler;
+texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
+
+
