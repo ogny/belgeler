@@ -16,12 +16,12 @@ Ctrl-k S, -> Ş
 Ctrl-k u: -> ü
 Ctrl-k U: -> Ü
 
-satir atlama: jump --> j
+*satir atlama: jump --> j
 5j 5 satir asagi
 
-imlecin bir altindaki satirla bulundugu satiri birlestirme; J
+* imlecin bir altindaki satirla bulundugu satiri birlestirme; J
 
-kullanmaya kullanmaya unuttugum bir komut;
+* kullanmaya kullanmaya unuttugum bir komut;
 :Bclose
 http://vim.wikia.com/wiki/Deleting_a_buffer_without_closing_the_window
 
@@ -30,8 +30,11 @@ Usage: [line]z[window_size][-|.|+|^|<CR>]
 
 * shift+v ile satiri secebiliyoruz.
 
-pencereleri yeniden boyutlandirma 
+* pencereleri yeniden boyutlandirma 
 c+w sayi +-
 
-bos buffer'da bir dosya acma 
+* bos buffer'da bir dosya acma 
 :n
+
+* kolon yapisi;
+
