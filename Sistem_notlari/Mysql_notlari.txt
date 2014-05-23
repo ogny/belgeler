@@ -43,8 +43,8 @@ SET PASSWORD FOR 'user-name-here'@'hostname-name-here' = PASSWORD('new-password-
 
 
 dump ve restore
-mysql -u root -p beyaz2013test < dosya.sql
-mysqldump -u root -p24wrsfxv veritabani > veritabaniadi.sql
+mysql -u root -p < dosya.sql
+mysqldump -u root -p veritabani > veritabaniadi.sql
 
 
 linux ilk kurulumda default InnoDB engine geliyor

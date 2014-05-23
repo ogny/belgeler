@@ -1,7 +1,7 @@
 #############################################################################
 #
 # Beyaz Bilgisayar
-# ogunay@beyaz.net
+# Orkun Gunay
 #
 #############################################################################
 #### Paket Yonetimi
@@ -79,15 +79,15 @@ qmqtool -d -o 24
 cd /var/qmail/ 
 mv queue queue_yeni_ad
 
-* Daha once hazirladigimiz, bu dizinde bulunan queue.beyaz.tar.gz dosyasini aciyoruz. (Dosya yoksa scp ile sunucuya gonderiyoruz.)
-scp queue.beyaz.tar.gz -P PortNo KullanıcıAdı@IPAdresi:~/uzak/sunucudaki/dizinin/yolu .
-tar -zxvf queue.beyaz.tar.gz
+* Daha once hazirladigimiz, bu dizinde bulunan queue.tar.gz dosyasini aciyoruz. (Dosya yoksa scp ile sunucuya gonderiyoruz.)
+scp queue.tar.gz -P PortNo KullanıcıAdı@IPAdresi:~/uzak/sunucudaki/dizinin/yolu .
+tar -zxvf queue.tar.gz
 
 * Qmail servislerinin tamamen durup durmadigini kontrol ediyoruz
 ps aux |grep mail
 
-* Artik queue.beyaz'i queue olarak adini degistirip servisleri baslatabiliriz.
-mv queue.beyaz queue
+* Artik queue'i queue olarak adini degistirip servisleri baslatabiliriz.
+mv queue. queue
 /usr/local/etc/rc.d/svscan.sh start
 /usr/local/etc/rc.d/dovecot start
 /usr/local/etc/rc.d/mysql-server start
