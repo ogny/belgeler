@@ -1,0 +1,2 @@
+gzip kullanilip kullanilmadigini anlamak icin;
+curl -I -H 'Accept-Encoding: gzip,deflate' http://site/
