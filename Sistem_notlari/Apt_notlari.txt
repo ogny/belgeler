@@ -1,11 +1,8 @@
-Debian işletim sistemini güncellerken, bazı uygulamaların güncellenmemesi istendiğinde, aşağıda aynı işlevi gören aşağıdaki komutlardan bir tanesi yazılır;
-
-sudo aptitude hold paket_adı
-
-veya
-
-sudo apt-mark hold paket_adı 
-
+sudo aptitude hold paket_adı veya sudo apt-mark hold paket_adı 
 Sistemde askıya alınmış paket olup olmadığını kontrol etmek için;
-
 sudo aptitude search "~ahold"
+
+paketlerin surumlerini repo'dakilerle kurulu olanlar arasindak kiyaslama;
+apt-cache policy 
+
+* apt-listchanges — Show new changelog entries from Debian package archives 
