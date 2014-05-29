@@ -35,6 +35,11 @@ c+w sayi +-
 
 * bos buffer'da bir dosya acma 
 :n
+* buffer'lar arasi gezinme;
+:bn, :bp
 
 * kolon yapisi;
+vim-transpose ile cevrilebiliyor. manuel'i var.
 
+* bos satirlari silme;
+:g/^$/d
