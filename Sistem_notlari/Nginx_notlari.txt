@@ -96,3 +96,9 @@ http {
 }
 
 # cache'te key belirtince query string'le baslayan parametreleri de cache'e dahil ediyor.
+
+If you want no www.* traffic to your server;
+server { 
+server_name ~^www\.(?<domain>.*)$; return 301
+$scheme://$domain$request_uri; 
+}
