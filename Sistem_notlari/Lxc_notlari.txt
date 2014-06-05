@@ -69,6 +69,11 @@ ssh {container-name}@<ip from lxc-info>
 sudo vagrant plugin install vagrant-lxc --plugin-version 1.0.0.alpha.2
 vagrant plugin install vagrant-lxc
 apt-get install linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,') virtualbox 
+aptitude install  lxc lxctl debootstrap
+vagrant init fgrehm/precise64-lxc 
+vagrant up --provider=lxc
+
+
 
 # Yapilandirma:
 vagrant up --provider=virtualbox

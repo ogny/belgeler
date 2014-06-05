@@ -55,3 +55,10 @@ for i in {0..22}; do for j in {471..1118}; do egrep -l 'info' $i/$j* 2> /dev/nul
 
 * inotify-tools
 IN_ACCESS ve IN_REMOVE'u izlememiz lazim. 2.si var mi?
+
+* pwgen ile parola olusturma
+pwgen -syB
+
+* Shred: Disk uzerine random veri basar. verilerin geri okunmasini engeller
+apt-get install coreutils
+shred -vfz -n 10 /dev/sda5

@@ -84,7 +84,7 @@ cp -rp ~/vundle/* ~/.vim/bundle
 # bitlbee i emrah'tan al.
 # pulseaudio emrah'tan ref.'te
 # Repo'dan kurulacaklar
-# chromium scrot feh tig zathura ranger redshift leafpad youtube-dl dosfstools rxvt-unicode-256color (buna gore derlenecek: http://wilmer.gaa.st/blog/archives/36-rxvt-unicode-and-ISO-14755-mode.html)  dnsutils suckless-tools dos2unix ffmpeg apt-listchanges fontconfig-infinality wicd-curses wireless-tools parted curl systemd	pandoc imgurbash.sh wodim rtmpdump numlockx dstat mtr sshuttle ca-certificates lxc lxctl debootstrap
+# chromium scrot feh tig zathura ranger redshift leafpad youtube-dl dosfstools rxvt-unicode-256color (buna gore derlenecek: http://wilmer.gaa.st/blog/archives/36-rxvt-unicode-and-ISO-14755-mode.html)  dnsutils suckless-tools dos2unix ffmpeg apt-listchanges fontconfig-infinality wicd-curses wireless-tools parted curl systemd pandoc imgurbash.sh wodim rtmpdump numlockx dstat mtr sshuttle ca-certificates lxc lxctl debootstrap rfkill
 
 # github'tan
 # monacofont  
