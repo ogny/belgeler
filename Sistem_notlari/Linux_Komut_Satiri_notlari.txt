@@ -62,3 +62,7 @@ pwgen -syB
 * Shred: Disk uzerine random veri basar. verilerin geri okunmasini engeller
 apt-get install coreutils
 shred -vfz -n 10 /dev/sda5
+
+* Ontanimli ayarlari degistirmek icin;
+ update-alternatives --config {editor, x-www-browser, etc.}
+
