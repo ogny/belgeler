@@ -1,0 +1,4 @@
+vagrant up ciktisinda bir not;
+==> default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> default: to force provisioning. Provisioners marked to run always will still run.
+

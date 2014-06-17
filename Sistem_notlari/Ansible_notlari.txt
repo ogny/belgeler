@@ -1,0 +1,99 @@
+# Test edilen ortam: ubuntu precise x86 on vagrant
+
+# Kurulum: (unstable)
+sudo apt-add-repository ppa:rquillo/ansible
+sudo apt-get update
+sudo apt-get install ansible
+
+Ansible resmi belgeden notlar;
+# unstable surumun kurulum sebebi;
+there is no software to actually install for Ansible itself. No daemons or
+database setup are required. Because of this, many users in our community use
+the development version of Ansible all of the time, 
+
+# python2.x ile calistirilacak.
+Python 3 is a slightly different language than Python 2 and most Python
+programs (including Ansible) are not switching over yet. 
+
+# /etc/ansible/ansible.cfg'den notlar;
+
+* logging is off by default unless this path is defined
+  if so defined, consider logrotate
+log_path = /var/log/ansible.log
+
+* list any Jinja2 extensions to enable here:
+jinja2_extensions = jinja2.ext.do,jinja2.ext.i18n
+
+* set plugin path directories here, separate with colons
+/usr/share/ansible_plugins/
+
+# Bu konuyu arastir;
+Enabling pipelining reduces the number of SSH operations required to 
+execute a module on the remote server. This can result in a significant 
+performance improvement when enabled, however when using "sudo:" you must 
+first disable 'requiretty' in /etc/sudoers
+
+By default, this option is disabled to preserve compatibility with
+sudoers configurations that have requiretty (the default on many distros).
+#pipelining = False
+
+# Accelerate daemon nasil calisiyor? incelenecek. Ayarlari boyle;
+[accelerate]
+accelerate_port = 5099
+accelerate_timeout = 30
+accelerate_connect_timeout = 5.0
+
+# Bizim icin kolaylastirici bir duzenleme; 
+If you have multiple hosts following a pattern you can specify                                                                                            
+them like this:                                                                                                                                           
+www[001:006].example.com                                                                                                                                    
+
+
+Yapilandirma 
+# ansible ile ping komutunda hata;
+ansible all -m ping
+	Traceback (most recent call last):
+	File "/usr/local/bin/ansible", line 4, in <module>
+	import pkg_resources
+	File "/usr/lib/python2.7/dist-packages/pkg_resources.py", line 2711, in <module>
+	    parse_requirements(__requires__), Environment()
+	File "/usr/lib/python2.7/dist-packages/pkg_resources.py", line 584, in resolve
+	    raise DistributionNotFound(req)
+	pkg_resources.DistributionNotFound: pycrypto>=2.6
+
+apt-get install python-dev g++
+
+depoda olan asagidaki paketin kurulmamasindan oturu sistem upgrade edildi.  
+	  update'te grub'i nereye yazayim diye soracak, 
+	  sanal sunucunun oldugu yeri goster
+	  /dev/dm-0, buraya yazamadi, yine de devam et.
+	  vagrant'i kapatip yeniden baglanmada sorun yok.
+
+apt-cache policy python-pycryptopp
+python-pycryptopp:
+  Installed: (none)
+  Candidate: 0.5.29-1build1
+  Version table:
+     0.5.29-1build1 0
+        500 http://us.archive.ubuntu.com/ubuntu/ precise/universe i386 Packages
+
+apt-get install python-pycryptopp                                                                                                       
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+E: Unable to locate package python-pycryptopp
+
+Upgrade'ten sonra paket sorunsuz kuruldu. Ancak hata devam ediyor.
+sorun kurulu pycrypto surumun 2.4.1 (<2.6 olmasindan kaynaklaniyor.)
+Linkteki gibi elle indirip kurdugumda hata duzeldi;
+https://community.webfaction.com/questions/12333/pycrypto-import-error
+
+public key'i import edip ssh-add ile eklediginde komutun ciktisi;
+127.0.0.1 | success >> {
+    "changed": false, 
+    "ping": "pong"
+}
+
+-u ile kullanici belirtiliyor;
+ansible all -m ping -u vagrant --sudo --sudo-user baska_biri
+(sudoers'ten cektigi icin sudoers yapilandirmanin onemi artiyor.)
