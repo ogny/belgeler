@@ -2,3 +2,11 @@
 git push origin master 
 
 * git'te her zaman calisan surum tutulur, gelistirme branch'inda da olsan calismayan surumu push etmezsin.
+
+* bare repo'da ilk commit'te duzeltme
+git push --set-upstream origin master
+
+# Yapilandirma
+genel olmasi icin ~/.gitconfig'e yaz;
+
+

@@ -5,52 +5,9 @@ sudo apt-add-repository ppa:rquillo/ansible
 sudo apt-get update
 sudo apt-get install ansible
 
-Ansible resmi belgeden notlar;
-# unstable surumun kurulum sebebi;
-there is no software to actually install for Ansible itself. No daemons or
-database setup are required. Because of this, many users in our community use
-the development version of Ansible all of the time, 
 
-# python2.x ile calistirilacak.
-Python 3 is a slightly different language than Python 2 and most Python
-programs (including Ansible) are not switching over yet. 
-
-# /etc/ansible/ansible.cfg'den notlar;
-
-* logging is off by default unless this path is defined
-  if so defined, consider logrotate
-log_path = /var/log/ansible.log
-
-* list any Jinja2 extensions to enable here:
-jinja2_extensions = jinja2.ext.do,jinja2.ext.i18n
-
-* set plugin path directories here, separate with colons
-/usr/share/ansible_plugins/
-
-# Bu konuyu arastir;
-Enabling pipelining reduces the number of SSH operations required to 
-execute a module on the remote server. This can result in a significant 
-performance improvement when enabled, however when using "sudo:" you must 
-first disable 'requiretty' in /etc/sudoers
-
-By default, this option is disabled to preserve compatibility with
-sudoers configurations that have requiretty (the default on many distros).
-#pipelining = False
-
-# Accelerate daemon nasil calisiyor? incelenecek. Ayarlari boyle;
-[accelerate]
-accelerate_port = 5099
-accelerate_timeout = 30
-accelerate_connect_timeout = 5.0
-
-# Bizim icin kolaylastirici bir duzenleme; 
-If you have multiple hosts following a pattern you can specify                                                                                            
-them like this:                                                                                                                                           
-www[001:006].example.com                                                                                                                                    
-
-
-Yapilandirma 
-# ansible ile ping komutunda hata;
+# Yapilandirma 
+* ansible ile ping komutunda hata;
 ansible all -m ping
 	Traceback (most recent call last):
 	File "/usr/local/bin/ansible", line 4, in <module>
@@ -77,7 +34,7 @@ python-pycryptopp:
      0.5.29-1build1 0
         500 http://us.archive.ubuntu.com/ubuntu/ precise/universe i386 Packages
 
-apt-get install python-pycryptopp                                                                                                       
+apt-get install python-pycryptopp 
 Reading package lists... Done
 Building dependency tree       
 Reading state information... Done
@@ -97,3 +54,67 @@ public key'i import edip ssh-add ile eklediginde komutun ciktisi;
 -u ile kullanici belirtiliyor;
 ansible all -m ping -u vagrant --sudo --sudo-user baska_biri
 (sudoers'ten cektigi icin sudoers yapilandirmanin onemi artiyor.)
+--ask-sudo-pass (-K)
+
+
+Ansible resmi belgeden notlar;
+# unstable surumun kurulum sebebi;
+there is no software to actually install for Ansible itself. No daemons or
+database setup are required. Because of this, many users in our community use
+the development version of Ansible all of the time, 
+
+# python2.x ile calistirilacak.
+Python 3 is a slightly different language than Python 2 and most Python
+programs (including Ansible) are not switching over yet. 
+
+* What’s an ad-hoc command?
+An ad-hoc command is something that you might type in to do something really
+quick, but don’t want to save for later.
+For instance, if you wanted to power off all of your lab for Christmas
+vacation, you could execute a quick one-liner in Ansible without writing a
+playbook.
+
+* Patterns
+
+
+## Diger
+
+# IRC'den notlar;
+is there a difference between  action: apt pkg={{item}} state=installed and
+apt: name={{item} state=installed also, action: syntax is an old notation, you
+can use it but most people don't one instance I know of that it's rather
+required is "action: setup"          
+In apt module show 'name' vs pkg to standardize with the rest of the modules.
+'pkg' is an alias for name.
+
+# /etc/ansible/ansible.cfg'den notlar;
+
+* logging is off by default unless this path is defined
+  if so defined, consider logrotate
+log_path = /var/log/ansible.log
+
+* list any Jinja2 extensions to enable here:
+jinja2_extensions = jinja2.ext.do,jinja2.ext.i18n
+
+* set plugin path directories here, separate with colons
+/usr/share/ansible_plugins/
+
+* Bu konuyu arastir;
+Enabling pipelining reduces the number of SSH operations required to 
+execute a module on the remote server. This can result in a significant 
+performance improvement when enabled, however when using "sudo:" you must 
+first disable 'requiretty' in /etc/sudoers
+
+By default, this option is disabled to preserve compatibility with
+sudoers configurations that have requiretty (the default on many distros).
+#pipelining = False
+
+* Accelerate daemon nasil calisiyor? incelenecek. Ayarlari boyle;
+[accelerate]
+accelerate_port = 5099
+accelerate_timeout = 30
+accelerate_connect_timeout = 5.0
+
+* Bizim icin kolaylastirici bir duzenleme; 
+If you have multiple hosts following a pattern you can specify them like this:
+www[001:006].example.com
