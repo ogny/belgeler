@@ -99,6 +99,7 @@ boolean value (true/false)
 		foo: "{{ variable }}"
 
 
+
 # Diger
 
 ## /etc/ansible/ansible.cfg'den notlar;
