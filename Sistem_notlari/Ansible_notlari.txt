@@ -5,7 +5,6 @@ sudo apt-add-repository ppa:rquillo/ansible
 sudo apt-get update
 sudo apt-get install ansible
 
-
 # Yapilandirma 
 * ansible ile ping komutunda hata;
 ansible all -m ping
@@ -58,12 +57,12 @@ ansible all -m ping -u vagrant --sudo --sudo-user baska_biri
 
 
 Ansible resmi belgeden notlar;
-# unstable surumun kurulum sebebi;
+* unstable surumun kurulum sebebi;
 there is no software to actually install for Ansible itself. No daemons or
 database setup are required. Because of this, many users in our community use
 the development version of Ansible all of the time, 
 
-# python2.x ile calistirilacak.
+* python2.x ile calistirilacak.
 Python 3 is a slightly different language than Python 2 and most Python
 programs (including Ansible) are not switching over yet. 
 
@@ -107,7 +106,7 @@ first disable 'requiretty' in /etc/sudoers
 
 By default, this option is disabled to preserve compatibility with
 sudoers configurations that have requiretty (the default on many distros).
-#pipelining = False
+pipelining = False
 
 * Accelerate daemon nasil calisiyor? incelenecek. Ayarlari boyle;
 [accelerate]
