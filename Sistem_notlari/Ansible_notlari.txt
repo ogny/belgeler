@@ -56,7 +56,7 @@ ansible all -m ping -u vagrant --sudo --sudo-user baska_biri
 --ask-sudo-pass (-K)
 
 
-Ansible resmi belgeden notlar;
+## Ansible resmi belgeden notlar;
 * unstable surumun kurulum sebebi;
 there is no software to actually install for Ansible itself. No daemons or
 database setup are required. Because of this, many users in our community use
@@ -66,25 +66,40 @@ the development version of Ansible all of the time,
 Python 3 is a slightly different language than Python 2 and most Python
 programs (including Ansible) are not switching over yet. 
 
-* What’s an ad-hoc command?
+If Ansible modules are the tools in your workshop, playbooks are your design
+plans.
+
+### What’s an ad-hoc command?
 An ad-hoc command is something that you might type in to do something really
 quick, but don’t want to save for later.
 For instance, if you wanted to power off all of your lab for Christmas
 vacation, you could execute a quick one-liner in Ansible without writing a
 playbook.
 
-* Patterns
+### command line syntax:
+ansible <pattern_goes_here> -m <module_name> -a <arguments>
+
+### Patterns
+Patterns in Ansible are how we decide which hosts to manage.
+
+### Playbooks
+Playbooks are Ansible’s language in YAML format 
+	YAML syntax;
+	begin with ---
+	All lines begin with -
+	Each item in the list is a list of key/value pairs, commonly called a
+“hash” or a “dictionary”
+	Ansible doesn’t really use these too much, but you can also specify a
+boolean value (true/false)
+	* iki nokta ustuste barindiran satirlari tirnak icine al, ornek;
+	f̶o̶o̶:̶ ̶s̶o̶m̶e̶b̶o̶d̶y̶ ̶s̶a̶i̶d̶ ̶I̶ ̶s̶h̶o̶u̶l̶d̶ ̶p̶u̶t̶ ̶a̶ ̶c̶o̶l̶o̶n̶ ̶h̶e̶r̶e̶:̶ ̶s̶o̶ ̶I̶ ̶d̶i̶d̶
+	foo: “somebody said I should put a colon here: so I did”
+	* iki nokta ustusteden sonra suslu parantez ile basliyorsa tirnak icine
+	al, aksi durumda ansible bunu bir dictionary olarak algilar, ornek;
+		foo: "{{ variable }}"
 
 
 # Diger
-
-## IRC'den notlar;
-is there a difference between  action: apt pkg={{item}} state=installed and
-apt: name={{item} state=installed also, action: syntax is an old notation, you
-can use it but most people don't one instance I know of that it's rather
-required is "action: setup"          
-In apt module show 'name' vs pkg to standardize with the rest of the modules.
-'pkg' is an alias for name.
 
 ## /etc/ansible/ansible.cfg'den notlar;
 
@@ -98,7 +113,8 @@ jinja2_extensions = jinja2.ext.do,jinja2.ext.i18n
 * set plugin path directories here, separate with colons
 /usr/share/ansible_plugins/
 
-* Bu konuyu arastir;
+## Arastirilacak
+### Pipelining
 Enabling pipelining reduces the number of SSH operations required to 
 execute a module on the remote server. This can result in a significant 
 performance improvement when enabled, however when using "sudo:" you must 
@@ -108,7 +124,7 @@ By default, this option is disabled to preserve compatibility with
 sudoers configurations that have requiretty (the default on many distros).
 pipelining = False
 
-* Accelerate daemon nasil calisiyor? incelenecek. Ayarlari boyle;
+### Accelerate daemon 
 [accelerate]
 accelerate_port = 5099
 accelerate_timeout = 30
@@ -117,3 +133,13 @@ accelerate_connect_timeout = 5.0
 * Bizim icin kolaylastirici bir duzenleme; 
 If you have multiple hosts following a pattern you can specify them like this:
 www[001:006].example.com
+
+### Dynamic Inventory
+
+## IRC'den notlar;
+is there a difference between  action: apt pkg={{item}} state=installed and
+apt: name={{item} state=installed also, action: syntax is an old notation, you
+can use it but most people don't one instance I know of that it's rather
+required is "action: setup"          
+In apt module show 'name' vs pkg to standardize with the rest of the modules.
+'pkg' is an alias for name.

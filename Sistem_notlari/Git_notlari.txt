@@ -12,5 +12,4 @@ genel olmasi icin ~/.gitconfig'e yaz;
 
 fatal: The current branch master has multiple upstream branches, refusing to
 push. 
-git push origin master
-
+git config remote.origin.push HEAD
