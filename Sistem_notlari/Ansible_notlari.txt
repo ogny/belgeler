@@ -1,11 +1,11 @@
-# Test edilen ortam: ubuntu precise x86 on vagrant
+## Test edilen ortam: ubuntu precise x86 on vagrant
 
-# Kurulum: (unstable)
+## Kurulum: (unstable)
 sudo apt-add-repository ppa:rquillo/ansible
 sudo apt-get update
 sudo apt-get install ansible
 
-# Yapilandirma 
+## Yapilandirma 
 * ansible ile ping komutunda hata;
 ansible all -m ping
 	Traceback (most recent call last):
@@ -76,9 +76,9 @@ playbook.
 * Patterns
 
 
-## Diger
+# Diger
 
-# IRC'den notlar;
+## IRC'den notlar;
 is there a difference between  action: apt pkg={{item}} state=installed and
 apt: name={{item} state=installed also, action: syntax is an old notation, you
 can use it but most people don't one instance I know of that it's rather
@@ -86,7 +86,7 @@ required is "action: setup"
 In apt module show 'name' vs pkg to standardize with the rest of the modules.
 'pkg' is an alias for name.
 
-# /etc/ansible/ansible.cfg'den notlar;
+## /etc/ansible/ansible.cfg'den notlar;
 
 * logging is off by default unless this path is defined
   if so defined, consider logrotate

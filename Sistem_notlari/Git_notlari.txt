@@ -1,7 +1,8 @@
 * Yeni acilmis repo'ya ilk push'u yapmadan once asagidaki komut verilir;
 git push origin master 
 
-* git'te her zaman calisan surum tutulur, gelistirme branch'inda da olsan calismayan surumu push etmezsin.
+* git'te her zaman calisan surum tutulur, gelistirme branch'inda da olsan
+* calismayan surumu push etmezsin.
 
 * bare repo'da ilk commit'te duzeltme
 git push --set-upstream origin master
@@ -9,4 +10,7 @@ git push --set-upstream origin master
 # Yapilandirma
 genel olmasi icin ~/.gitconfig'e yaz;
 
+fatal: The current branch master has multiple upstream branches, refusing to
+push. 
+git push origin master
 
