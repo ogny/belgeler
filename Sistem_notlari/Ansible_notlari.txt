@@ -1,59 +1,22 @@
 ## Test edilen ortam: ubuntu precise x86 on vagrant
 
-## Kurulum: (unstable)
-sudo apt-add-repository ppa:rquillo/ansible
-sudo apt-get update
-sudo apt-get install ansible
+## Kurulum: (unstable)   
+sudo apt-add-repository ppa:rquillo/ansible \  
+sudo apt-get update sudo \  
+sudo apt-get install ansible \  
+wget https://ftp.dlitz.net/pub/dlitz/crypto/pycrypto/pycrypto-2.6.tar.gz \  
+tar -xf pycrypto-2.6.tar.gz \  
+cd pycrypto-2.6 \  
+sudo python2.7 setup.py install \  
 
-## Yapilandirma 
-* ansible ile ping komutunda hata;
-ansible all -m ping
-	Traceback (most recent call last):
-	File "/usr/local/bin/ansible", line 4, in <module>
-	import pkg_resources
-	File "/usr/lib/python2.7/dist-packages/pkg_resources.py", line 2711, in <module>
-	    parse_requirements(__requires__), Environment()
-	File "/usr/lib/python2.7/dist-packages/pkg_resources.py", line 584, in resolve
-	    raise DistributionNotFound(req)
-	pkg_resources.DistributionNotFound: pycrypto>=2.6
+## Yapilandirma  
 
-apt-get install python-dev g++
+public key'i import edip ssh-add ile eklediginde komutun ciktisi; 127.0.0.1 |
+success >> { "changed": false, "ping": "pong" }
 
-depoda olan asagidaki paketin kurulmamasindan oturu sistem upgrade edildi.  
-	  update'te grub'i nereye yazayim diye soracak, 
-	  sanal sunucunun oldugu yeri goster
-	  /dev/dm-0, buraya yazamadi, yine de devam et.
-	  vagrant'i kapatip yeniden baglanmada sorun yok.
-
-apt-cache policy python-pycryptopp
-python-pycryptopp:
-  Installed: (none)
-  Candidate: 0.5.29-1build1
-  Version table:
-     0.5.29-1build1 0
-        500 http://us.archive.ubuntu.com/ubuntu/ precise/universe i386 Packages
-
-apt-get install python-pycryptopp 
-Reading package lists... Done
-Building dependency tree       
-Reading state information... Done
-E: Unable to locate package python-pycryptopp
-
-Upgrade'ten sonra paket sorunsuz kuruldu. Ancak hata devam ediyor.
-sorun kurulu pycrypto surumun 2.4.1 (<2.6 olmasindan kaynaklaniyor.)
-Linkteki gibi elle indirip kurdugumda hata duzeldi;
-https://community.webfaction.com/questions/12333/pycrypto-import-error
-
-public key'i import edip ssh-add ile eklediginde komutun ciktisi;
-127.0.0.1 | success >> {
-    "changed": false, 
-    "ping": "pong"
-}
-
--u ile kullanici belirtiliyor;
-ansible all -m ping -u vagrant --sudo --sudo-user baska_biri
-(sudoers'ten cektigi icin sudoers yapilandirmanin onemi artiyor.)
---ask-sudo-pass (-K)
+-u ile kullanici belirtiliyor; ansible all -m ping -u vagrant --sudo
+--sudo-user baska_biri (sudoers'ten cektigi icin sudoers yapilandirmanin onemi
+artiyor.) --ask-sudo-pass (-K)
 
 
 ## Ansible resmi belgeden notlar;
@@ -67,95 +30,85 @@ Python 3 is a slightly different language than Python 2 and most Python
 programs (including Ansible) are not switching over yet. 
 
 
-### Ad-hoc commands
-An ad-hoc command is something that you might type in to do something really
-quick, but don’t want to save for later.
-For instance, if you wanted to power off all of your lab for Christmas
-vacation, you could execute a quick one-liner in Ansible without writing a
-playbook.
+### Ad-hoc commands  
+An ad-hoc command is something that you might type in to do
+something really quick, but don’t want to save for later.  For instance, if you
+wanted to power off all of your lab for Christmas vacation, you could execute a
+quick one-liner in Ansible without writing a playbook. 
 
 command line syntax:  
 ansible <pattern_goes_here> -m <module_name> -a <arguments>  
 * -u ansible'i farkli bir kullaniciyla calistirmak.  
-passwordless sudo kullanmak gerekiyor. sunuculara bu hakka sahip bir standart kullanici 
-eklemek kolaylik saglar.   
+passwordless sudo kullanmak gerekiyor. sunuculara bu hakka sahip bir standart
+kullanici eklemek kolaylik saglar.   
 * -f 10 es zamanli kac process calistirabilecegini belirtiyorsun, bu sayi
 ansible.cfg'te default 5, tanimladigin host gruplardaki sunucu sayilarina gore
 yeniden tanimlamak gerek.  
+* -m ile module calistiriliyor. Eger module'un calistirilmasi icin shell
+gerekliyse shell module'unu kullan.   
+** ansible raleigh -m shell -a 'echo $TERM'  
+*** Ad-hoc'ta syntax onemli; yukaridaki ornekte cift tirnak 
+kullansaydik komut karsi sunucudaki kabukta degil kendi makinamizda
+calistirilacakti.  
 
+### Patterns  
+Patterns in Ansible are how we decide which hosts to manage.  
 
-### Patterns
-Patterns in Ansible are how we decide which hosts to manage.
-
-### Playbooks
-Playbooks are Ansible’s language in YAML format 
-If Ansible modules are the tools in your workshop, playbooks are your design
-plans.
-	YAML syntax;
-	begin with ---
-	All lines begin with -
-	Each item in the list is a list of key/value pairs, commonly called a
-“hash” or a “dictionary”
-	Ansible doesn’t really use these too much, but you can also specify a
-boolean value (true/false)
-	* iki nokta ustuste barindiran satirlari tirnak icine al, ornek;
-	f̶o̶o̶:̶ ̶s̶o̶m̶e̶b̶o̶d̶y̶ ̶s̶a̶i̶d̶ ̶I̶ ̶s̶h̶o̶u̶l̶d̶ ̶p̶u̶t̶ ̶a̶ ̶c̶o̶l̶o̶n̶ ̶h̶e̶r̶e̶:̶ ̶s̶o̶ ̶I̶ ̶d̶i̶d̶ 
-	foo: “somebody said I should put a colon here: so I did” 
+### Playbooks  
+Playbooks are Ansible’s language in YAML format. If Ansible
+modules are the tools in your workshop, playbooks are your design plans.  
+* YAML syntax;  
+Tum dosyalar ---  ile baslar.  
+All lines begin with - Each item in the list is a list
+of key/value pairs, commonly called a “hash” or a “dictionary”  
+Ansible doesn’t really use these too much, 
+but you can also specify a boolean value (true/false)  
+	* iki nokta ustuste barindiran satirlari tirnak icine al, ornek;  
+	f̶o̶o̶:̶ ̶s̶o̶m̶e̶b̶o̶d̶y̶ ̶s̶a̶i̶d̶ ̶I̶ ̶s̶h̶o̶u̶l̶d̶ ̶p̶u̶t̶ ̶a̶ ̶c̶o̶l̶o̶n̶ ̶h̶e̶r̶e̶:̶ ̶s̶o̶ ̶I̶ ̶d̶i̶d̶  
+	foo: “somebody said I should put a colon here: so I did”  
 	* iki nokta ustusteden sonra suslu parantez ile basliyorsa tirnak icine
-	al, aksi durumda ansible bunu bir dictionary olarak algilar, ornek;
-		foo: "{{ variable }}"
+	al, aksi durumda ansible bunu bir dictionary olarak algilar, ornek;  
+	foo: "{{ variable }}" 
 
 
+# Diger  
+### Yapilandirma dosyasi /etc/ansible/ansible.cfg  
+* Regex destekliyor; If you have multiple hosts following a pattern you can
+specify them like this www[001:006].example.com  
 
-# Diger
-### Yapilandirma dosyasi /etc/ansible/ansible.cfg
-* Regex destekliyor; If you have multiple hosts following a pattern you can specify them like this www[001:006].example.com   
+* logging is off by default unless this path is defined if so defined, consider
+logrotate  
+log_path = /var/log/ansible.log  
 
-* logging is off by default unless this path is defined if so defined, consider logrotate
-log_path = /var/log/ansible.log
+* list any Jinja2 extensions to enable here:  
+jinja2_extensions = jinja2.ext.do,jinja2.ext.i18n  
 
-* list any Jinja2 extensions to enable here:
-jinja2_extensions = jinja2.ext.do,jinja2.ext.i18n
+* set plugin path directories here, separate with colons  
+/usr/share/ansible_plugins/  
 
-* set plugin path directories here, separate with colons
-/usr/share/ansible_plugins/
+## Arastirilacak  
+### Pipelining 
+Enabling pipelining reduces the number of SSH operations required to execute 
+a module on the remote server. This can result
+in a significant performance improvement when enabled, however when using
+"sudo:" you must first disable 'requiretty' in /etc/sudoers
+By default, this option is disabled to preserve compatibility with sudoers
+configurations that have requiretty (the default on many distros).  
+pipelining = False 
 
-## Arastirilacak
-### Pipelining
-Enabling pipelining reduces the number of SSH operations required to 
-execute a module on the remote server. This can result in a significant 
-performance improvement when enabled, however when using "sudo:" you must 
-first disable 'requiretty' in /etc/sudoers
+### Accelerate daemon    
+[accelerate]  
+accelerate_port = 5099  
+accelerate_timeout = 30  
+accelerate_connect_timeout = 5.0 
 
-By default, this option is disabled to preserve compatibility with
-sudoers configurations that have requiretty (the default on many distros).
-pipelining = False
+### Dynamic Inventory 
 
-### Accelerate daemon 
-[accelerate]
-accelerate_port = 5099
-accelerate_timeout = 30
-accelerate_connect_timeout = 5.0
+## Gelistirmeler Sunuculardaki kullanicilarn  hangi komutlari
+calistirabileceklerini sudoers'te duzenlemek iyi olur. 
 
+## IRC'den notlar  
 
-### Dynamic Inventory
-
-## Gelistirmeler
-Sunuculardaki kullanicilarn  hangi komutlari calistirabileceklerini sudoers'te
-duzenlemek iyi olur.
-
-## IRC'den notlar;
-is there a difference between  action: apt pkg={{item}} state=installed and
-apt: name={{item} state=installed also, action: syntax is an old notation, you
-can use it but most people don't one instance I know of that it's rather
-required is "action: setup"          
-In apt module show 'name' vs pkg to standardize with the rest of the modules.
-'pkg' is an alias for name.
-
-do roles gets executed before tasks in playbooks ?
-Donno offhand, but you can use pre_tasks and post_tasks to define that
-definitively
-just got a debug message in a role and task and role one displayed first
-just asking as though everything was top to bottom
-
-
+# Kaynaklar
+* https://community.webfaction.com/questions/12333/pycrypto-import-error
+* http://docs.ansible.com/
