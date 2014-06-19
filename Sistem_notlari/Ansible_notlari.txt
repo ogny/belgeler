@@ -74,8 +74,8 @@ For instance, if you wanted to power off all of your lab for Christmas
 vacation, you could execute a quick one-liner in Ansible without writing a
 playbook.
 
-* command line syntax:
-ansible <pattern_goes_here> -m <module_name> -a <arguments>
+command line syntax:  
+ansible <pattern_goes_here> -m <module_name> -a <arguments>  
 -u ansible'i farkli bir kullaniciyla calistirmak.  
 passwordless sudo kullanmak gerekiyor. sunuculara bu hakka sahip bir standart kullanici 
 eklemek kolaylik saglar.   
