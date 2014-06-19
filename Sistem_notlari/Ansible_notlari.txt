@@ -67,7 +67,7 @@ Python 3 is a slightly different language than Python 2 and most Python
 programs (including Ansible) are not switching over yet. 
 
 
-### What’s an ad-hoc command?
+### Ad-hoc commands
 An ad-hoc command is something that you might type in to do something really
 quick, but don’t want to save for later.
 For instance, if you wanted to power off all of your lab for Christmas
@@ -76,16 +76,13 @@ playbook.
 
 command line syntax:  
 ansible <pattern_goes_here> -m <module_name> -a <arguments>  
--u ansible'i farkli bir kullaniciyla calistirmak.  
+* -u ansible'i farkli bir kullaniciyla calistirmak.  
 passwordless sudo kullanmak gerekiyor. sunuculara bu hakka sahip bir standart kullanici 
 eklemek kolaylik saglar.   
--f 10 es zamanli kac process calistirabilecegini belirtiyorsun, bu sayi
+* -f 10 es zamanli kac process calistirabilecegini belirtiyorsun, bu sayi
 ansible.cfg'te default 5, tanimladigin host gruplardaki sunucu sayilarina gore
 yeniden tanimlamak gerek.  
 
-* Bizim icin kolaylastirici bir duzenleme; 
-If you have multiple hosts following a pattern you can specify them like this:
-www[001:006].example.com
 
 ### Patterns
 Patterns in Ansible are how we decide which hosts to manage.
@@ -112,9 +109,9 @@ boolean value (true/false)
 
 # Diger
 ### Yapilandirma dosyasi /etc/ansible/ansible.cfg
+* Regex destekliyor; If you have multiple hosts following a pattern you can specify them like this www[001:006].example.com   
 
-* logging is off by default unless this path is defined
-  if so defined, consider logrotate
+* logging is off by default unless this path is defined if so defined, consider logrotate
 log_path = /var/log/ansible.log
 
 * list any Jinja2 extensions to enable here:
