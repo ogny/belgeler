@@ -1,5 +1,12 @@
-* vagrantfile
+# platform; 3.13.0-29-generic x86_64 jessie/sid (ubuntu trusty 14.04) 
 
+# kurulum
+sudo apt-get install virtualbox vagrant
+
+# yapilandirma
+Yeni bir imaj olusturma;
+
+* vagrantfile
 
 vagrant up ciktisinda bir not;
 ==> default: Machine already provisioned. Run `vagrant provision` or use the `--provision`

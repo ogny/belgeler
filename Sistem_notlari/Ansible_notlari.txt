@@ -66,8 +66,6 @@ the development version of Ansible all of the time,
 Python 3 is a slightly different language than Python 2 and most Python
 programs (including Ansible) are not switching over yet. 
 
-If Ansible modules are the tools in your workshop, playbooks are your design
-plans.
 
 ### What’s an ad-hoc command?
 An ad-hoc command is something that you might type in to do something really
@@ -76,14 +74,26 @@ For instance, if you wanted to power off all of your lab for Christmas
 vacation, you could execute a quick one-liner in Ansible without writing a
 playbook.
 
-### command line syntax:
+* command line syntax:
 ansible <pattern_goes_here> -m <module_name> -a <arguments>
+-u ansible'i farkli bir kullaniciyla calistirmak.  
+passwordless sudo kullanmak gerekiyor. sunuculara bu hakka sahip bir standart kullanici 
+eklemek kolaylik saglar.   
+-f 10 es zamanli kac process calistirabilecegini belirtiyorsun, bu sayi
+ansible.cfg'te default 5, tanimladigin host gruplardaki sunucu sayilarina gore
+yeniden tanimlamak gerek.  
+
+* Bizim icin kolaylastirici bir duzenleme; 
+If you have multiple hosts following a pattern you can specify them like this:
+www[001:006].example.com
 
 ### Patterns
 Patterns in Ansible are how we decide which hosts to manage.
 
 ### Playbooks
 Playbooks are Ansible’s language in YAML format 
+If Ansible modules are the tools in your workshop, playbooks are your design
+plans.
 	YAML syntax;
 	begin with ---
 	All lines begin with -
@@ -101,8 +111,7 @@ boolean value (true/false)
 
 
 # Diger
-
-## /etc/ansible/ansible.cfg'den notlar;
+### Yapilandirma dosyasi /etc/ansible/ansible.cfg
 
 * logging is off by default unless this path is defined
   if so defined, consider logrotate
@@ -131,11 +140,12 @@ accelerate_port = 5099
 accelerate_timeout = 30
 accelerate_connect_timeout = 5.0
 
-* Bizim icin kolaylastirici bir duzenleme; 
-If you have multiple hosts following a pattern you can specify them like this:
-www[001:006].example.com
 
 ### Dynamic Inventory
+
+## Gelistirmeler
+Sunuculardaki kullanicilarn  hangi komutlari calistirabileceklerini sudoers'te
+duzenlemek iyi olur.
 
 ## IRC'den notlar;
 is there a difference between  action: apt pkg={{item}} state=installed and
@@ -144,3 +154,11 @@ can use it but most people don't one instance I know of that it's rather
 required is "action: setup"          
 In apt module show 'name' vs pkg to standardize with the rest of the modules.
 'pkg' is an alias for name.
+
+do roles gets executed before tasks in playbooks ?
+Donno offhand, but you can use pre_tasks and post_tasks to define that
+definitively
+just got a debug message in a role and task and role one displayed first
+just asking as though everything was top to bottom
+
+
