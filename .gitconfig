@@ -1,0 +1,73 @@
+#[user]
+#	name = Orkun Gunay
+#	email = orkungunayx@gmail.com
+#[core]
+#	editor = vim
+#	repositoryformatversion = 0
+#	filemode = true
+#	bare = false
+#	logallrefupdates = true
+#	excludesfile = /home/orkung/.gitignore
+#
+#[branch "master"]
+#	remote = origin
+#	merge = refs/heads/master
+#[web]
+#	browser = chromium
+#[color]
+#	ui = true
+#[color "branch"]
+#	current = yellow bold
+#	local = green bold
+#	remote = cyan bold
+#[color "diff"]
+#	meta = yellow bold
+#	frag = magenta bold
+#	old = red bold
+#	new = green bold
+#	whitespace = red reverse
+#[color "status"]
+#	added = green bold
+#	changed = yellow bold
+#	untracked = red bold
+#[github]
+#	user = Orkun Gunay
+#	token = ogny
+#[color]
+#  branch = auto
+#  diff = auto
+#  status = auto
+#
+#[color "branch"]
+#  current = yellow reverse
+#  local = yellow
+#  remote = green
+#
+#[color "diff"]
+#  meta = yellow bold
+#  frag = magenta bold
+#  old = red bold
+#  new = green bold
+#
+#[color "status"]
+#  added = yellow
+#  changed = green
+#  untracked = cyan
+#[merge]
+#	tool = vimdiff
+#[push]
+#	default = simple
+#
+[include]
+   path = ~/.gitconfig.d/alias.txt
+   path = ~/.gitconfig.d/apply.txt
+   path = ~/.gitconfig.d/branch.txt
+   path = ~/.gitconfig.d/color.txt
+   path = ~/.gitconfig.d/core.txt
+   path = ~/.gitconfig.d/diff.txt
+   path = ~/.gitconfig.d/github.txt
+   path = ~/.gitconfig.d/merge.txt
+   path = ~/.gitconfig.d/mergetool.txt
+   path = ~/.gitconfig.d/push.txt
+   path = ~/.gitconfig.d/rerere.txt
+   path = ~/.gitconfig.d/user.txt

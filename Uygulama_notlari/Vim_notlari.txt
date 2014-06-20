@@ -43,3 +43,10 @@ vim-transpose ile cevrilebiliyor. manuel'i var.
 
 * bos satirlari silme;
 :g/^$/d
+
+* her satir sonuna * ekle 
+:%norm A*
+
+ %       = for every line
+ norm    = type the following commands
+ A*      = append '*' to the end of current line

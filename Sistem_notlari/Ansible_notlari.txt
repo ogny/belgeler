@@ -11,15 +11,7 @@ sudo python2.7 setup.py install \
 
 ## Yapilandirma  
 
-public key'i import edip ssh-add ile eklediginde komutun ciktisi; 127.0.0.1 |
-success >> { "changed": false, "ping": "pong" }
-
--u ile kullanici belirtiliyor; ansible all -m ping -u vagrant --sudo
---sudo-user baska_biri (sudoers'ten cektigi icin sudoers yapilandirmanin onemi
-artiyor.) --ask-sudo-pass (-K)
-
-
-## Ansible resmi belgeden notlar;
+## Resmi Belgeden Notlar;
 * unstable surumun kurulum sebebi;
 there is no software to actually install for Ansible itself. No daemons or
 database setup are required. Because of this, many users in our community use
@@ -28,7 +20,6 @@ the development version of Ansible all of the time,
 * python2.x ile calistirilacak.
 Python 3 is a slightly different language than Python 2 and most Python
 programs (including Ansible) are not switching over yet. 
-
 
 ### Ad-hoc commands  
 An ad-hoc command is something that you might type in to do
@@ -40,13 +31,15 @@ command line syntax:
 ansible <pattern_goes_here> -m <module_name> -a <arguments>  
 * -u ansible'i farkli bir kullaniciyla calistirmak.  
 passwordless sudo kullanmak gerekiyor. sunuculara bu hakka sahip bir standart
-kullanici eklemek kolaylik saglar.   
+kullanici eklemek kolaylik saglar.  
+--sudo-user baska_biri (sudoers'ten cektigi icin sudoers yapilandirmanin onemi
+artiyor.) --ask-sudo-pass (-K)  
 * -f 10 es zamanli kac process calistirabilecegini belirtiyorsun, bu sayi
 ansible.cfg'te default 5, tanimladigin host gruplardaki sunucu sayilarina gore
 yeniden tanimlamak gerek.  
 * -m ile module calistiriliyor. Eger module'un calistirilmasi icin shell
 gerekliyse shell module'unu kullan.   
-** ansible raleigh -m shell -a 'echo $TERM'  
+** ansible <pattern_goes_here> -m shell -a 'echo $TERM'  
 *** Ad-hoc'ta syntax onemli; yukaridaki ornekte cift tirnak 
 kullansaydik komut karsi sunucudaki kabukta degil kendi makinamizda
 calistirilacakti.  
@@ -88,8 +81,8 @@ ansible.cfg (in the current directory)
 
 #### /etc/ansible/ansible.cfg  
 * forks: ayni anda kac uzak sunucuyla is gormesi icin belirlenen ust limit. 1.3
-surumunden sonra olasi sunucu sayisiyla sinirlandirilmis, ancak pratikte bu
-siniri hosts dosyasindan mi cekiyor, arastirmali.  
+surumunden sonra olasi sunucu sayisiyla sinirlandirilmis. Bu deger 500 versen
+de 5 sunucun varsa verdigin degerin bir onemi yok.  
 
 * If you have multiple hosts following a pattern you can
 specify them like this www[001:006].example.com  
@@ -103,6 +96,13 @@ jinja2_extensions = jinja2.ext.do,jinja2.ext.i18n
 
 * set plugin path directories here, separate with colons  
 /usr/share/ansible_plugins/  
+
+* library: Butun moduller burada tutuluyor, alt dizinler;  
+cloud     files      messaging           network       
+commands  internal   monitoring          notification  
+database  inventory  packaging     	 utilities
+web_infrastructure   net_infrastructure  source_control
+system
 
 #### /etc/ansible/hosts  
 * SSH port default olmadiginda belirtilir. :2222  
@@ -130,8 +130,7 @@ accelerate_port = 5099
 accelerate_timeout = 30  
 accelerate_connect_timeout = 5.0 
 
-## Gelistirmeler Sunuculardaki kullanicilarn  hangi komutlari
-calistirabileceklerini sudoers'te duzenlemek iyi olur. 
+## Gelistirmeler  
 
 ## IRC'den notlar  
 
