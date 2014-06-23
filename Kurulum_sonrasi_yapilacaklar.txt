@@ -81,7 +81,7 @@ cp -rp ~/vundle/* ~/.vim/bundle
 *  bitlbee i emrah'tan al.
 *  pulseaudio emrah'tan ref.'te
 # Repo'dan kurulacaklar
-chromium scrot feh tig zathura ranger redshift leafpad youtube-dl dosfstools dnsutils suckless-tools dos2unix ffmpeg apt-listchanges fontconfig-infinality wicd-curses wireless-tools parted curl systemd pandoc imgurbash.sh wodim rtmpdump numlockx dstat mtr sshuttle ca-certificates lxc lxctl debootstrap rfkill coreutils pepperflashplugin-nonfree gnupg pass sshpass
+chromium scrot feh tig zathura ranger redshift leafpad whois dosfstools dnsutils suckless-tools dos2unix ffmpeg apt-listchanges fontconfig-infinality wicd-curses wireless-tools parted curl systemd pandoc imgurbash.sh wodim rtmpdump numlockx dstat mtr sshuttle ca-certificates lxc lxctl debootstrap rfkill coreutils pepperflashplugin-nonfree gnupg pass sshpass
 # makinanin dis ip'den cikisi varsa nagios-nrpe-server (--with-recommends ile)
 # pass ve gnupg organize et (http://www.passwordstore.org/)
 

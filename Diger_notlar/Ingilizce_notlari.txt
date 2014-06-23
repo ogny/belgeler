@@ -1,0 +1,29 @@
+-----
+Delete all t̲r̲a̲i̲l̲i̲n̲g̲ whitespace (at the end of each line) with:
+trail : iz, izlemek, peşten sürükleyen şey, kuyruk
+
+-----
+the latter :)
+latter : ikisinden sonuncusu
+
+-----
+ NOTE: your shell may have its own version of true, which usually s̲u̲p̲e̲r̲s̲e̲d̲e̲s
+the version described here.
+supersede : yerini almak, yerine geçmek, yerine başkasını koymak, yerine başka
+bir şey koyarak iptal etmek ilga etmek, yürürlükten kaldırmak
+
+-----
+This is a bit of a n̲i̲c̲h̲e̲ case but can come in handy
+niche : mihrap, niş
+
+-----
+Should you want to i̲n̲v̲e̲r̲t̲ the architecture of Ansible
+invert-revert
+(verse'in tersi)
+revert : dönmek, geri dönen kimse, geri gitmek
+
+-----
+Ansible playbook output is v̲a̲s̲t̲l̲y̲ upgraded
+vast : geniş, engin, vasi, çok büyük
+
+-----

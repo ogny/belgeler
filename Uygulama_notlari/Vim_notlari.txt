@@ -44,8 +44,11 @@ vim-transpose ile cevrilebiliyor. manuel'i var.
 * bos satirlari silme;
 :g/^$/d
 
-* her satir sonuna * ekle 
-:%norm A*
+* her satir sonuna 2 bos karakter ekle 
+:%norm A  
+
+* her satirin sonundaki boslugu sil
+:%s/\s\+$//
 
  %       = for every line
  norm    = type the following commands
