@@ -173,21 +173,22 @@ in a significant performance improvement when enabled, however when using
        
 ## IRC'den notlar         
 brucelee let's say i want to have a playbook that would connect to DB server as
-long as the database is runing on the DB server, so it would first log into the
+	 long as the database is runing on the DB server, so it would first log into the
 DB server and check the state of the DB, whether its running or not 
 brucelee can ansible do something like that?  
-ktosiek yes, I'm doing something like that 
+ktosiek  yes, I'm doing something like that 
 brucelee whats your particular exmaple btw 
-ktosiek I'm checking with pacemaker if current server is master, and only apply
-database/users creation there 
+ktosiek  I'm checking with pacemaker if current server is master, and only apply
+	 database/users creation there 
 brucelee oh can i see your playbook? 
 brucelee or that part of it that connects to the master, to verify its the master 
-ktosiek it connects to all servers and uses crm_resource to find the master (so
-if you're not using pacemaker it won't help you) 
+ktosiek  it connects to all servers and uses crm_resource to find the master (so
+	 if you're not using pacemaker it won't help you) 
 brucelee how do you mkae it connect to other servers though during a playbook 
 brucelee it runs a "command 'ssh host crm_resource' or something?
-ktosiek http://pastie.org/9315702
-ktosiek no, I just run this playbook on all the DB servers (it's from my general postgresql role)
+ktosiek  http://pastie.org/9315702
+ktosiek  no, I just run this playbook on all the DB servers 
+	 (it's from my general postgresql role)
 ========================================
 - name: Find master
   shell: "crm_resource -W --resource msPostgresql | awk '/Master$/ { print $(NF
@@ -205,6 +206,20 @@ ktosiek no, I just run this playbook on all the DB servers (it's from my general
   tags: new_app
 
 # And then I use "when: postgresql_master_hostname == ansible_hostname"
+========================================
+stickybo I will have to run a command like `find /blah -type d -exec chmod
+         755 {} \; -type f -exec chmod 644 {}\;` on it afterwards.
+ drybjed check umask
+stickybo But when I run with Ansible, it's apparently different.
+ drybjed ansible uses /bin/sh by default
+ drybjed ln -s /bin/sh ?
+ drybjed ansible's json fact interpreter is as strict as ever, one
+         misplaced comma and you're done, no facts for you today.
+stickybo Even if ansible uses sh, it should still use the default
+         umask eh?
+stickybo I am using git to clone because `copy` sucks when you have more
+         than a few directories/files... and `synchronize` doesn't work
+         with sudo's requiretty.
 ========================================
        
 # Kaynaklar       

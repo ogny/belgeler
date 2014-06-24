@@ -27,3 +27,9 @@ Ansible playbook output is v̲a̲s̲t̲l̲y̲ upgraded
 vast : geniş, engin, vasi, çok büyük
 
 -----
+run arbitrary permissions fix afterwards
+afterwards : sonradan, sonra   
+
+-----
+
+-----
