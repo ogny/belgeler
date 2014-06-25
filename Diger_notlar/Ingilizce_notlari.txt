@@ -31,5 +31,21 @@ run arbitrary permissions fix afterwards
 afterwards : sonradan, sonra   
 
 -----
+We can now use projects to separate home chores from the party preparation.
+chore:  (US) küçük iş, güç iş, zevksiz iş
+
+-----
+Task 7 is not worded correctly
+worded : kaleme alınmış
+
+-----
+I did get hung up for a while on roles and then decided to just work on
+straightforward playbooks
+straightforward : dobra dobra söyleyen, doğru sözlü, dürüst, açık sözlü
+
+-----
+
+
+
 
 -----
