@@ -1,5 +1,4 @@
-## Taskd server ile taskwarrior cli ve Mirakel Android App.'in sync  
-eden kurulum
+## Taskd server ile taskwarrior cli ve Android App.'i sync kurulumu
 ### Client Platform  
 `Ubuntu 14.04 trusty 3.13.0-29-generic x86_64`  
 ### Server  Platform  
