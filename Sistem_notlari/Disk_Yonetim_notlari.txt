@@ -69,27 +69,47 @@ mount /dev/sdX1 /var
 ```
 
 * Dizinde bulunan alt dizinleri oz yinelemeli buyukten kucuge siralama
+```
 du -s * | sort -nr | head -10
+```
 
 * partition table'i /dev/sda'dan /dev/sdb'ye kopylama
+```
 sfdisk -d /dev/sda | sfdisk /dev/sdb
+```
 
 * Disk doldugunda yapilacaklar (BSD)
 ev dizini olarak 3 ayri yer mevcut, her ucune de bakip gereksiz dosyalar (eski yedek dosyalari vd.) silinir.  
+```
 /usr/local -  /home/ - /root
-Ek olarak bakilacak: 
 /usr/local/www
 /usr/local/share/doc
 /usr/local/vpopmail/
 /usr/local/vpopmail/doc
+```
 
 * Sanal sunucuya  disk eklendiginde scsi bus'ları rescan ettirmek;
+```
 for i in /sys/class/scsi_host/*; do echo "- - -" > $i/scan; done
+```
 
 * Debian makinaya sd card mount etme;
+```
 blkid ile /dev altinda goruluyor mu bakilir;
+```
 /dev/mmc gibi bir yere baglaniyor, buradan mount edilebilir.
 
-Diski yeniden boyutlandirmak
+* Diski yeniden boyutlandirmak
+```
 e2fsck -f /dev/sdxx
 resize2fs /dev/sdxx
+```
+
+* diske random 1gb dosya yazma
+```
+dd if=/dev/zero of=/<disk_yolu>/<dosya_adi> count=1000 bs=1M
+```
+* dd ile dosya yazarken yazma istatistiklerini gorme;
+```
+kill -USR1 <process_id>
+```

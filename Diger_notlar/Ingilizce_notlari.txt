@@ -7,7 +7,7 @@ the latter :)
 latter : ikisinden sonuncusu
 
 -----
- NOTE: your shell may have its own version of true, which usually s̲u̲p̲e̲r̲s̲e̲d̲e̲s
+your shell may have its own version of true, which usually s̲u̲p̲e̲r̲s̲e̲d̲e̲s
 the version described here.
 supersede : yerini almak, yerine geçmek, yerine başkasını koymak, yerine başka
 bir şey koyarak iptal etmek ilga etmek, yürürlükten kaldırmak
@@ -44,6 +44,11 @@ straightforward playbooks
 straightforward : dobra dobra söyleyen, doğru sözlü, dürüst, açık sözlü
 
 -----
+check for server certificate r̲e̲v̲o̲c̲a̲t̲i̲o̲n̲
+revocation : iptal etme
+* fesih ,feshetme, ilga, lağvetme
+
+
 
 
 
