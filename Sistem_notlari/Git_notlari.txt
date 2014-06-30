@@ -7,15 +7,39 @@ git push origin master
 * bare repo'da ilk commit'te duzeltme  
 git push --set-upstream origin master  
 
-* Branch'larla calisirken rebase kullan;  
+### Branch'larla calisma;
+* bulundugun branch'i gorme;
+```
+git branch -v
+```
+* Yeni bir branch acip ona gecmenin kisayolu
+```
+git checkout -b <branch_adi>
+```
+* branch'i silme;
+```
+git checkout -d <branch_adi>
+```
+* commit log'larinin anlasilabilir olmasi icin rebase kullan.
+```
 git pull -rebase  
 git push  
 conflict olusursa;  
 git rebase --continue  
-
-fatal: The current branch master has multiple upstream branches, refusing to
-push.  
+```
+* Hata olusursa
+`fatal: The current branch master has multiple upstream branches, refusing to
+push.`  
+```
 git config remote.origin.push HEAD  
+```
+#### Remote branch'lar
+* yerelde olusturdugumuz serverconfig branch'ini sunucuya bu branch olarak
+yuklemek icin;
+```
+git push origin serverconfig:serverconfig
+```
+
 
 
 ### git-flow kullanimi

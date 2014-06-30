@@ -55,3 +55,5 @@ Ctrl-k S, -> Ş
 Ctrl-k u: -> ü
 Ctrl-k U: -> Ü
 
+* Buffer'larla calisma
+
