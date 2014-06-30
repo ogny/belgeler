@@ -1,3 +1,0 @@
-ab
-stress
-sysbench
