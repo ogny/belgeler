@@ -48,9 +48,24 @@ check for server certificate r̲e̲v̲o̲c̲a̲t̲i̲o̲n̲
 revocation : iptal etme
 * fesih ,feshetme, ilga, lağvetme
 
+-----
+The rudiments and background which addresses fundamental skills, basic
+information, and problems in systems administration
+* rudiment; temel, ilke, esas, prensip, başlangıç
 
+-----
+Unix systems have robust process separation, which keeps most userland
+software isolated from each other
+* robust : sağlam, sağlıklı
+-----
+Exercise Discretion
+* discretion : takdir, uygun görme, muhakeme, karar verme hakkı, karar
+* verme yetisi
 
+-----
 
-
-
+-----
+-----
+-----
+-----
 -----

@@ -49,3 +49,5 @@ eklenecek](https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/plugi
 * A task may have any number of tags, which are just single words associated with the task
 * The long report shows tags
 `$ task long`
+* task'lari aktive etmek;
+`task start-stop` yonetilir, `task active` ile takip edilir.

@@ -56,4 +56,28 @@ Ctrl-k u: -> ü
 Ctrl-k U: -> Ü
 
 * Buffer'larla calisma
+Bu alanda sik kullanilan cesitli eklentiler mevcut, bunlardan Unite.vim ile
+calisacagim.
+`:Unite-vertical file buffer` ile nerdtree'deki gibi dosyalari ve buffer'lari goruntuleyebiliyoruz.
 
+
+### eklentiler 
+* Kisa Kisa kullandigim eklentileri tanitmak istiyorum.
+
+bclose.vim
+goyo.vim
+L9
+neocomplete.vim
+neomru.vim
+neosnippet.vim
+nginx.vim
+vim-easymotion
+vim-json
+vimroom
+vim-surround
+vim-tmux-navigator
+vim-zenroom2
+
+
+#### Notlar;
+unite vimproc ve neobundle'dan henuz verim alamadigimdan listeden cikarttim.
