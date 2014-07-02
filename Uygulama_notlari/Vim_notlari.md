@@ -60,6 +60,9 @@ Bu alanda sik kullanilan cesitli eklentiler mevcut, bunlardan Unite.vim ile
 calisacagim.
 `:Unite-vertical file buffer` ile nerdtree'deki gibi dosyalari ve buffer'lari goruntuleyebiliyoruz.
 
+* satirlari sutuna cevirme;
+`:%s/\n/`
+
 
 ### eklentiler 
 * Kisa Kisa kullandigim eklentileri tanitmak istiyorum.
@@ -81,3 +84,4 @@ vim-zenroom2
 
 #### Notlar;
 unite vimproc ve neobundle'dan henuz verim alamadigimdan listeden cikarttim.
+
