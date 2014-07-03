@@ -63,6 +63,9 @@ calisacagim.
 * satirlari sutuna cevirme;
 `:%s/\n/`
 
+* tab duzenlemeleri;
+* vertical help icin :vertical yaz.
+
 
 ### eklentiler 
 * Kisa Kisa kullandigim eklentileri tanitmak istiyorum.
@@ -80,8 +83,8 @@ vimroom
 vim-surround
 vim-tmux-navigator
 vim-zenroom2
-
+vim-buffergator
 
 #### Notlar;
-unite vimproc ve neobundle'dan henuz verim alamadigimdan listeden cikarttim.
+* unite vimproc ve neobundle'dan henuz verim alamadigimdan listeden cikarttim.
 

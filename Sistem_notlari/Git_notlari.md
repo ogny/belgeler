@@ -66,3 +66,5 @@ git config remote.origin.push HEAD
 ```
 * refs/heads/master 'daki gecisleri gormek icin;
 `git reflog`
+
+*  git-blame - Show what revision and author last modified each line of a  file
