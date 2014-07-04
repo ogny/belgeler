@@ -21,6 +21,10 @@ git checkout -b <branch_adi>
 * branch'i silme;
 ```
 git branch -d <branch_adi>
+
+* yerel ve uzak branch'lari gorme;
+```
+git branch -a
 ```
 ### rebase kullanimi
 * iki branch'in var fix_dali ve master_dali. fix_dalinda guncelleme yaptin,
@@ -57,6 +61,7 @@ git branch --set-upstream-to=origin/<uzak_branch> <lokal_branch>
 ### git-flow kullanimi
 * Kurulum ve kullanim icin [nvie'nin
 sayfasindan](https://github.com/nvie/gitflow) notlar cikartilacak
+* Not: git-flow en onemli konular arasinda, flow cikartilacak
 
 #### Cesitli konular;
 `fatal: The current branch master has multiple upstream branches, refusing to
