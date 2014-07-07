@@ -22,3 +22,7 @@ Configuration Item: APT::Install-Suggests.
 gpg --keyserver keys.gnupg.net --recv-key 89DF5277
 gpg -a --export 89DF5277 | apt-key add - 
 ```
+* Yuklenen paketleri tarih sirasina gore listeleme;
+```
+grep install /var/log/dpkg.log
+```

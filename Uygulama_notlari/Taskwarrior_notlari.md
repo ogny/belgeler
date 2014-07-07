@@ -45,6 +45,12 @@ eklenecek](https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/plugi
 * Belli bir projede calismak icin;
 `task pro:<proje_adi> li`
 
+* belli bir gorevi belli tarihlerde tekrar etmek (recurrence)
+```
+$ task 7 modify due:eom recur:monthly
+Task 7 is now a recurring task.
+```
+
 ### Tags
 * A task may have any number of tags, which are just single words associated with the task
 * The long report shows tags
