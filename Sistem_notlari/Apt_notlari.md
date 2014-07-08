@@ -26,3 +26,4 @@ gpg -a --export 89DF5277 | apt-key add -
 ```
 grep install /var/log/dpkg.log
 ```
+* Paket kaldirma: dpkg -r ile  kaldiramadiginda purge (-P) parametresini kullan.

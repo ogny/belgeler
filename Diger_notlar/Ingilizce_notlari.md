@@ -5,8 +5,6 @@ trail : iz, izlemek, peşten sürükleyen şey, kuyruk
 -----
 the latter :)
 latter : ikisinden sonuncusu
-
------
 your shell may have its own version of true, which usually s̲u̲p̲e̲r̲s̲e̲d̲e̲s
 the version described here.
 supersede : yerini almak, yerine geçmek, yerine başkasını koymak, yerine başka
@@ -63,9 +61,15 @@ Exercise Discretion
 * verme yetisi
 
 -----
+All the examples are written as shell scripts, with some Perl thrown in, but any properly named executable scripts will work fine
+thrown in: birbirine geçirmek, eklemek
 
 -----
+When running the playbook, which runs top to bottom, hosts with failed tasks are taken out of the rotation for the entire playbook.
+take out:  götürmek, eşlik etmek
+
 -----
+
 -----
 -----
 -----
