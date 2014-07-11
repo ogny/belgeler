@@ -77,6 +77,7 @@ neocomplete.vim
 neomru.vim
 neosnippet.vim
 nginx.vim
+nerdtree
 vim-easymotion
 vim-json
 vimroom
@@ -84,6 +85,12 @@ vim-surround
 vim-tmux-navigator
 vim-zenroom2
 vim-buffergator
+
+### Eklenti Notlari:
+#### NERDtree: 
+
+* 
+
 
 #### Notlar;
 * unite vimproc ve neobundle'dan henuz verim alamadigimdan listeden cikarttim.

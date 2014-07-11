@@ -148,6 +148,10 @@ Enabling pipelining reduces the number of SSH operations required to execute
 a module on the remote server. This can result
 in a significant performance improvement when enabled, however when using
 
+### Calismalar
+Ansible agent'larina key-based authentication ile root olarak baglanacak.
+
+
 ## IRC'den notlar
 brucelee let's say i want to have a playbook that would connect to DB server as
 	 long as the database is runing on the DB server, so it would first log into the
