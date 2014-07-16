@@ -15,8 +15,11 @@ sudo apt-get install virtualbox vagrant
 ** makinelere farkli ip'ler atama
 ** guest'in port'larini host'a yonlendirme (ssh-http vd.)
 
-vagrant up ciktisinda bir not;
+* yeni bir vagrant box kullanilmak istendiginde asagidaki uyari geliyor.
 ==> default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
 ==> default: to force provisioning. Provisioners marked to run always will still run.
-
- 
+```
+mv .vagrant/machines/default/virtualbox ~/
+```
+` vagrant init <box_adi>`
+` vagrant up`

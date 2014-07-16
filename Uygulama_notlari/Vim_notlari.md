@@ -8,6 +8,7 @@ Degistirecegin yeri secip visual mode'a gec
 * imlecin bir altindaki satirla bulundugu satiri birlestirme; 
 `J`	
 
+* normal modda `e` kelimenin son karakterine goturur. 
 * Pencere acikken buffer'i kapatma
 `:Bclose`
 
@@ -22,9 +23,6 @@ Degistirecegin yeri secip visual mode'a gec
 * buffer'lar arasi gezinme;
 :bn, :bp
 
-* kolon yapisi;
-vim-transpose ile cevrilebiliyor. manuel'i var.
-
 * bos satirlari silme;
 :g/^$/d
 
@@ -37,6 +35,9 @@ vim-transpose ile cevrilebiliyor. manuel'i var.
  %       = for every line
  norm    = type the following commands
  A*      = append '*' to the end of current line
+
+* Bir kisayola iki kisayol ait komut atama; kisayol tuslari arasina \| eklenir.
+`:nnoremap f }) \| zz`
 
 
 * Vimdiff'teyken gorunumu dikey-yatay olarak degistirmek;
@@ -86,12 +87,7 @@ vim-tmux-navigator
 vim-zenroom2
 vim-buffergator
 
-### Eklenti Notlari:
-#### NERDtree: 
 
-* 
-
-
-#### Notlar;
+#### Eklenti Notlari;
 * unite vimproc ve neobundle'dan henuz verim alamadigimdan listeden cikarttim.
 
