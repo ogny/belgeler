@@ -85,6 +85,9 @@ Reload systemd manager configuration. This will reload all unit files and
 recreate the entire dependency tree. While the daemon is reloaded, all sockets
 systemd listens on on behalf of user configuration will stay accessible.
 
+### Notlar
+Opensuse sunucularda (3.1.10-1.29)
+systemd-cgtop komutu yok
 
 
 
