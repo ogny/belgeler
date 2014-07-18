@@ -69,7 +69,17 @@ When running the playbook, which runs top to bottom, hosts with failed tasks are
 take out:  götürmek, eşlik etmek
 
 -----
+Along with a unit file foo.service a directory foo.service.wants/ may exist.
+along with ... : ...le beraber, ...in beraberinde, ...le birlikte
 
 -----
+When used in conjunction with the dot command...
+in conjunction with : ile birlikte
+
 -----
+This command is intended to be used
+intend : niyet etmek , amaçlamak, hedeflemek
+
 -----
+All in all : Bir bütün olarak ele alındığında
+

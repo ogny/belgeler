@@ -55,3 +55,41 @@ systemd-analyze plot > plot.svg
 * [ ] screen ve tmux X'i restart ettigimde oluyordu:
 sudo echo "session required pam_systemd.so" >>  /etc/pam.d/slim
 * [ ] umask 0000 yaptigini yaz
+
+systemd.socket
+Socket units may be used to implement on-demand starting of services, as  well
+as parallelized starting of services
+Socket files must include a [Socket] section
+
+### Systemctl
+* reload
+ Asks all units listed on the command line to reload their configuration. Note that this will reload the service-specific configuration, not the unit configuration file of systemd. If you want systemd to reload the configuration file of a unit use the daemon-reload command. In other words: for the example case of Apache, this will reload Apache's httpd.conf in the web server, not the apache.service systemd unit file.
+ This command should not be confused with the daemon-reload or load commands.
+* status
+tum unit'lerin durumu gorulebilir.
+* show
+unit'ler hakkinda detayli bilgi verir.
+* reset-failed
+Reset the 'failed' state of the specified units, or if no unit name is passed
+of all units. When a unit fails in some way (i.e. process exiting with non-zero
+error code, terminating abnormally or timing out) it will automatically enter the 'failed' state and its exit code and status is recorded for introspection by the
+administrator until the service is restarted or reset with this command.
+* list-unit-files
+* mask
+Mask one or more unit files, as specified on the command line. This will link these units to /dev/null, making it impossible to start them. This is a stronger version of disable, since it prohibits all kinds of activation of the unit, including manual activation. Use this option with care.
+* unmask [NAME...]
+Unmask one or more unit files, as specified on the command line. This will undo the effect of mask.
+
+* daemon-reload
+Reload systemd manager configuration. This will reload all unit files and
+recreate the entire dependency tree. While the daemon is reloaded, all sockets
+systemd listens on on behalf of user configuration will stay accessible.
+
+
+
+
+
+
+
+
+

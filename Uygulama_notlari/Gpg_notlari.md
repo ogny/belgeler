@@ -11,3 +11,5 @@ gpg --list-secret-keys
 * ~/.zshrc'ye eklenecek;  
 ** export GPGKEY=<Buraya key id'niz gelecek>  
 ** export GPG_TTY=$(tty)   
+* gpg-agent'ta herhangi bir sorun olustugunda PID'den oldurup yeni bir terminal
+actiginda sorun kalkiyor
