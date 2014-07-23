@@ -46,5 +46,7 @@ dump ve restore
 mysql -u root -p < dosya.sql
 mysqldump -u root -p veritabani > veritabaniadi.sql
 
-
-linux ilk kurulumda default InnoDB engine geliyor
+* linux ilk kurulumda default InnoDB engine geliyor
+* verilmis izinleri geri alma;
+`REVOKE ALL PRIVILEGES, GRANT OPTION FROM user [, user]…`
+`REVOKE ALL PRIVILEGES ON phpmyadmin.* FROM 'phpmyadmin'@'localhost';`
