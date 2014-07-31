@@ -88,11 +88,3 @@ systemd listens on on behalf of user configuration will stay accessible.
 ### Notlar
 Opensuse sunucularda (3.1.10-1.29)
 systemd-cgtop komutu yok
-
-
-
-
-
-
-
-
