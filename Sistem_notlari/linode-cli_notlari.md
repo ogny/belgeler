@@ -1,9 +1,11 @@
 #### Kurulum
 ```
-wget https://97.107.139.216/linode.gpg
+wget --no-check-certificate https://97.107.139.216/linode.gpg
+echo "deb http://apt.linode.com/ stable main" \
+> /etc/apt/sources.list.d/linode.list
 apt-key add linode.gpg && \
 apt-get update && \
-apt-get install linode-cli && \
+apt-get install linode-cli
 ```
 
 #### Kullanim

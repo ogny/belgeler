@@ -111,4 +111,5 @@ modprobe -l -t drivers/net -a \*
 * dizinde herkese yazma hakki verildiyse herhangi bir kullanici o dizindeki bir
 dosyayi silebilir.
 
-
+* buyuk dosyayi bolme;
+split -b 10MB dosya_adi 

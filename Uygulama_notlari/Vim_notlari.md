@@ -91,3 +91,6 @@ vim-buffergator
 #### Eklenti Notlari;
 * unite vimproc ve neobundle'dan henuz verim alamadigimdan listeden cikarttim.
 
+* Aramada  regex pattern'lerini kullanma;
+\<aranacak_pattern\>
+
