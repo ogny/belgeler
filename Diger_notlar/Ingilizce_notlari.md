@@ -2,8 +2,8 @@ Delete all t̲r̲a̲i̲l̲i̲n̲g̲ whitespace (at the end of each line) with:
 trail : iz, izlemek, peşten sürükleyen şey, kuyruk
 
 
-the *latter*  
-latter : ikisinden sonuncusu
+the **latter**  
+* latter : ikisinden sonuncusu
 your shell may have its own version of true, which usually s̲u̲p̲e̲r̲s̲e̲d̲e̲s
 the version described here.
 supersede : yerini almak, yerine geçmek, yerine başkasını koymak, yerine başka
