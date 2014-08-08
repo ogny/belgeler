@@ -55,31 +55,36 @@ information, and problems in systems administration
 Unix systems have robust process separation, which keeps most userland
 software isolated from each other
 * robust : sağlam, sağlıklı
+
 -----
 Exercise Discretion
 * discretion : takdir, uygun görme, muhakeme, karar verme hakkı, karar
-* verme yetisi
+verme yetisi
 
 -----
 All the examples are written as shell scripts, with some Perl thrown in, but any properly named executable scripts will work fine
-thrown in: birbirine geçirmek, eklemek
+* thrown in: birbirine geçirmek, eklemek
 
 -----
 When running the playbook, which runs top to bottom, hosts with failed tasks are taken out of the rotation for the entire playbook.
-take out:  götürmek, eşlik etmek
+* take out:  götürmek, eşlik etmek
 
 -----
 Along with a unit file foo.service a directory foo.service.wants/ may exist.
-along with ... : ...le beraber, ...in beraberinde, ...le birlikte
+* along with ... : ...le beraber, ...in beraberinde, ...le birlikte
 
 -----
 When used in conjunction with the dot command...
-in conjunction with : ile birlikte
+* in conjunction with : ile birlikte
 
 -----
 This command is intended to be used
-intend : niyet etmek , amaçlamak, hedeflemek
+* intend : niyet etmek , amaçlamak, hedeflemek
 
 -----
 All in all : Bir bütün olarak ele alındığında
+
+---
+This should not be overly confusing.
+* overly: aşırı derecede, fazlasiyla
 
