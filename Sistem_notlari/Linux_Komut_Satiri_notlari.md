@@ -113,3 +113,12 @@ dosyayi silebilir.
 
 * buyuk dosyayi bolme;
 split -b 10MB dosya_adi 
+
+* iso'yu flash disk'e yazma (partition'a degil diskin tamamina yazilir.)
+```
+sudo dd bs=4M if=/path/to/iso of=/dev/sdb oflag=direct && sudo sync
+```
+* Hata: * Error: Problem adding (is pinentry installed?); giving up
+```
+eval $(gpg-agent --daemon --pinentry-program /usr/bin/pinentry-curses)
+```

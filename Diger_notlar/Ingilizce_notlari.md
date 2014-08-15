@@ -86,3 +86,10 @@ All in all : Bir bütün olarak ele alındığında
 This should not be overly confusing.
 * overly: aşırı derecede, fazlasiyla
 
+here is my first trial to come up with the top ten commands of database
+management 
+* come up with: bir teori ortaya atmak
+
+Thou shalt always build systems to resilience/cope with failures
+* resilience: elastikiyet
+* cope: çaresini bulmak

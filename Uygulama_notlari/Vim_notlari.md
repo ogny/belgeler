@@ -1,4 +1,4 @@
-* buyuk kucuk harf donusturme;
+* BUYUK Kucuk harf donusturme;
 Degistirecegin yeri secip visual mode'a gec
 `U Uppercase u Lowercase`
 
@@ -67,6 +67,11 @@ calisacagim.
 * tab duzenlemeleri;
 * vertical help icin :vertical yaz.
 
+* Aramada  regex pattern'lerini kullanma;
+\<aranacak_pattern\>
+
+* satir sonlarindaki ^M  karakterleri kaldirma.
+`%s/\r/\r/g`
 
 ### eklentiler 
 * Kisa Kisa kullandigim eklentileri tanitmak istiyorum.
@@ -91,6 +96,5 @@ vim-buffergator
 #### Eklenti Notlari;
 * unite vimproc ve neobundle'dan henuz verim alamadigimdan listeden cikarttim.
 
-* Aramada  regex pattern'lerini kullanma;
-\<aranacak_pattern\>
+* nerdtree
 
