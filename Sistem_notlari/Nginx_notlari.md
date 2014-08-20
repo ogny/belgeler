@@ -102,3 +102,8 @@ server {
 server_name ~^www\.(?<domain>.*)$; return 301
 $scheme://$domain$request_uri; 
 }
+
+* set $variable value;
+Context:    server, location, if
+Sets a value for the specified variable. The value can contain text, variables,
+and their combination.
