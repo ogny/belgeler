@@ -122,3 +122,12 @@ sudo dd bs=4M if=/path/to/iso of=/dev/sdb oflag=direct && sudo sync
 ```
 eval $(gpg-agent --daemon --pinentry-program /usr/bin/pinentry-curses)
 ```
+* son kolona gore siralama;
+```
+perl -e "print sort {(split '@', \$a)[-1] <=> (split '@', \$b)[-1]} <>" dosya.adi
+```
+* ps ciktisini memory-cpu'ya gore siralayip degisiklikleri izleme;
+```
+watch --differences -n 2  'ps -e -o pid,cmd,pmem,pcpu --sort=-pmem,-pcpu | head -15'
+```
+

@@ -7,3 +7,8 @@ rsync -avzuhe "ssh -l kullanici" IP_ADRESI:/etc/nginx/ etc/nginx/ --exclude='sit
 * yedek almak icin;
  -a --verbose --recursive --links --perms --executability --owner --group
  --time
+
+* linklenmis dosyalarin gonderilmesi
+ssh ile uzak sunucuya rsync'le dosya gonderilirken -l secenegi kullanilamiyor,
+hata veriyor.
+
