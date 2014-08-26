@@ -28,8 +28,6 @@ second end-point wishes to close the connection totally, it sends a FIN
 packet back to the originally closing end-point, and the other end-point
 replies with a FIN/ACK packet. Once this whole procedure is done, the
 connection is torn down properly.
-=======
 
 * iptables was and is specifically built  to work on the headers of the
 Internet and the Transport layers
-
