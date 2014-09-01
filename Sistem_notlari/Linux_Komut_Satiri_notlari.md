@@ -131,3 +131,11 @@ perl -e "print sort {(split '@', \$a)[-1] <=> (split '@', \$b)[-1]} <>" dosya.ad
 watch --differences -n 2  'ps -e -o pid,cmd,pmem,pcpu --sort=-pmem,-pcpu | head -15'
 ```
 
+* acik kalmis bir oturumu oldurme;
+w komut ciktisi ile acik oturumlar bulunur; ornegin;
+ 16:03:00 up  6:52,  2 users,  load average: 0,18, 0,37, 0,40
+ USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+ orkung   tty1                      09:12    6:50m  6.96s  0.00s xinit /home/orkung/.xinitrc -- /etc/X11/xinit/xserverrc :0 -auth
+ /tmp/serverauth.ACk3tKw1Kx
+ orkung   pts/2    :0               15:41    4.00s  0.00s  0.00s tmux new-session
+** ps -dN|grep pts/2 ile orkung'nin tmux oturum PID'i ogrenilir, kill ile oldurulur.

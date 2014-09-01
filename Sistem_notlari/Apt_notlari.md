@@ -9,11 +9,11 @@ apt-cache policy
 * apt-listchanges — Show new changelog entries from Debian package archives 
 
 # Apt-get
---no-install-recommends                                                    
+--no-install-recommends  
 Do not consider recommended packages as a dependency for installing.   
-Configuration Item: APT::Install-Recommends.                                      
-                                                                                  
---install-suggests                                                         
+Configuration Item: APT::Install-Recommends.  
+
+--install-suggests  
 Consider suggested packages as a dependency for installing.            
 Configuration Item: APT::Install-Suggests. 
 
@@ -27,3 +27,11 @@ gpg -a --export 89DF5277 | apt-key add -
 grep install /var/log/dpkg.log
 ```
 * Paket kaldirma: dpkg -r ile  kaldiramadiginda purge (-P) parametresini kullan.
+
+* spesifik repo'dan paket kurma;
+aptitude install -t <repo_adi> <paket_adi>
+
+* sistemde sadece belli bir paketi update etme:
+https://help.ubuntu.com/community/PinningHowto
+https://help.ubuntu.com/community/UbuntuBackports
+
