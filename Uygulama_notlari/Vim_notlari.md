@@ -98,3 +98,5 @@ vim-buffergator
 
 * nerdtree
 
+* easymotion
+backward search: <header><header>b
