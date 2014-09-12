@@ -139,3 +139,8 @@ w komut ciktisi ile acik oturumlar bulunur; ornegin;
  /tmp/serverauth.ACk3tKw1Kx
  orkung   pts/2    :0               15:41    4.00s  0.00s  0.00s tmux new-session
 ** ps -dN|grep pts/2 ile orkung'nin tmux oturum PID'i ogrenilir, kill ile oldurulur.
+
+* default web tarayiciyi degistirme;
+```
+sudo update-alternatives --config x-www-browser 
+```

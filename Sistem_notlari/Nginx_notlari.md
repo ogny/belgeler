@@ -29,8 +29,6 @@ sudo sysctl -p
 Add the following line:
 worker_rlimit_nofile 9000;
 
-sudo service nginx restart
-
 * HttpProxyModule 
 proxy_buffer directive'leri onemli degil. arkadaki sunucudan kucuk bir response almaya bakiyor, 8k | 16k kullaniliyor.
 
@@ -107,3 +105,12 @@ $scheme://$domain$request_uri;
 Context:    server, location, if
 Sets a value for the specified variable. The value can contain text, variables,
 and their combination.
+
+### Modules
+#### http_map_module
+Creates a new variable whose value depends on values of one or more of the
+source variables specified in the first parameter.
+Parameters inside the map block specify a mapping between source and resulting
+values.
+
+#### http_rewrite_module
