@@ -114,3 +114,12 @@ Parameters inside the map block specify a mapping between source and resulting
 values.
 
 #### http_rewrite_module
+
+* dizindeki dosyalari index'siz siralama (Apache'deki option -indexes)
+
+
+location /path_of_your_directory{ 
+   ... ( some other lines )
+   autoindex on;
+   ... ( some other lines )
+}

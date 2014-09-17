@@ -2,3 +2,7 @@
 ```
 wget --no-check-certificate https://97.107.139.216/linode.gpg
 ```
+* indirilecek url'leri dosyadan okumak icin
+```
+wget -i mylist.txt
+```

@@ -1,0 +1,3 @@
+* belli bir sn'den baslatma;
+avplay -ss <saniye>
+* vidyo hakkinda bilgi vidyoyu baslattiginda konsola yaziliyor
