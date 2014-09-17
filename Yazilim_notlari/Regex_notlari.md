@@ -40,9 +40,9 @@ unique meaning and are NOT used as literals in the search expression, for
 example, the character ^ (circumflex or caret) is a metacharacter.
 
 Köşeli parantezler arasindaki metacharacter'ler;
-* tire: aralik belirler; Or: [A-z0-9] tum alfanumerik karakterleri temsil eder.
+* tire: aralik belirler; Or: [A-z0-9] tum alfanumerik karakterlerle eşleşir.
 ** ^ (circumflex or caret) tanimi olumsuzlar; Or:  [^Ff] Buyuk ve Kucuk f
-disindaki her karakteri secer.
+disindaki her karakterle eşleşir.
 
 Positioning (or Anchors)
 * ^ koseli parantezlerin disindaysa kendinden sonra gelen ilk karakterden
@@ -61,8 +61,16 @@ yakalar. mesela cep telefon numarani ele alalim; (simdilik bosluktan kacmayi
 bilmedigimden araya tire koyuyorum) 532-416-29-51
 [0-5]{3}-[1-4]{3}-[2-9]{2}-[1-5]{2}
 * {n,m} kendinden onceki karakter veya karakter araligi en az n kere
-* tekrarlayabilir ama m'den fazla kere tekrarlayamaz.
+tekrarlayabilir ama m'den fazla kere tekrarlayamaz.
+* {n,} kendinden onceki karakter veya karakter araligi en az n kere
+olmak üzere sonsuz kez tekrarlayabilir.
 
+### capture groups backreferences
+Only parentheses can be used for grouping. Square brackets define a character class, and curly braces are used by a quantifier with specific limits.
+
+"(sens|respons)e and \1ibility)
+Next comes "\1". This means: use the content of the first subpattern as part of the search pattern. Because this is followed by 'ibility' the regex matches either 'sensibility' or 'responsibility' whatever was found at the beginning of the string. So 'sense and sensibility' or 'response and responsibility' would have a successful match but never 'sense and responsibility'. 
+    
 
 
 
