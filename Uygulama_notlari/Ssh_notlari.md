@@ -27,3 +27,6 @@ ssh-copy-id -i dosya_adi.pub "kullanici@12.12.12.12 -p2222"
 ```
 ssh-keygen -R <IP_address>
 ```
+* ozel anahtar passphrase degistirme;
+```
+ssh-keygen -f <Ozel_anahtar> -p
