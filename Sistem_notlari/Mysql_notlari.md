@@ -1,3 +1,14 @@
+### Kurulum
+```
+apt-get install mysql-server
+```
+* veri tabanina yeni tablo ve deger girme;
+` mysql 5.5 surumunde "The used command is not allowed with this MySQL version"
+diyor, cozum asagidaki gibi prompt'u baslatmakta;`
+```
+mysql --local-infile=1 -uroot -p
+```
+
 * Bir kullaniciya root haklari vermek ;
 UPDATE mysql.user SET Grant_priv='Y', Super_priv='Y' WHERE User='me';
 

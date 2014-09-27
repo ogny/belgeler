@@ -35,3 +35,7 @@ aptitude install -t <repo_adi> <paket_adi>
 https://help.ubuntu.com/community/PinningHowto
 https://help.ubuntu.com/community/UbuntuBackports
 
+* herhangi bir guvenilir anahtlari kaldirma;
+```
+apt-key del <key_id>
+```

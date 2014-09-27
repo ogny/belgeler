@@ -78,5 +78,4 @@ vagrant up --provider=lxc
 # Yapilandirma:
 vagrant up --provider=virtualbox
 
-# Kaynaklar:
-* https://github.com/fgrehm/vagrant-lxc
+[Kaynak](https://github.com/fgrehm/vagrant-lxc)
