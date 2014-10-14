@@ -57,3 +57,12 @@ Task 7 is now a recurring task.
 `$ task long`
 * task'lari aktive etmek;
 `task start-stop` yonetilir, `task active` ile takip edilir.
+
+### Tutorial
+* yaptigin bir isi de eklemek istersen log'u kullan, boylelikle 2 is yapmana
+(kaydi girme ve done etme) gerek kalmaz
+
+* Annotations are little notes that can be added to a task.  There can be any
+number, and each has a time stamp.
+
+

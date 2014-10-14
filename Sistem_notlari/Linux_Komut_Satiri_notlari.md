@@ -144,3 +144,16 @@ w komut ciktisi ile acik oturumlar bulunur; ornegin;
 ```
 sudo update-alternatives --config x-www-browser 
 ```
+* agdaki tum makina sayisini bul
+```
+seq 1 255 |parallel -j0 --eta ping -c 1 192.168.1.{} 2>&1 |grep '64 bytes' |wc -l
+```
+
+* dosyalari uzantilarina gore bul ve kopyala;
+```
+find /share/media/mp3/ -type f -name "*.mp3" -print0 | xargs -0 -r -I file cp
+-v -p file --target-directory=/bakup/iscsi/mp3
+
+```
+
+

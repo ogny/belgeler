@@ -61,3 +61,16 @@ mysqldump -u root -p veritabani > veritabaniadi.sql
 * verilmis izinleri geri alma;
 `REVOKE ALL PRIVILEGES, GRANT OPTION FROM user [, user]…`
 `REVOKE ALL PRIVILEGES ON phpmyadmin.* FROM 'phpmyadmin'@'localhost';`
+
+* Replication'da master-slave yapmak
+my.cnf'ye READ_ONLY=true eklenir.
+mysql restart edilir
+Kontrol amacli mysql prompt'unda;
+```
+SHOW GLOBAL VARIABLES LIKE "%READ_ONLY%";
+```
+* Mysql root parola sifirlama;
+```
+dpkg-reconfigure mysql-server-5.5
+```
+

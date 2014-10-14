@@ -1,4 +1,4 @@
-* mp4-mp3 donusturme;
+*live:yasinarrslan mp4-mp3 donusturme;
 ffmpeg -i k.mp4 -q:a 0 -map a k.mp3
 	* mp4-mp3 belli bir araligi donusturme;
 ffmpeg -ss 00:00 -i k.mp4 -q:a 0  -map a -t 00:54 k.mp3
@@ -22,3 +22,6 @@ ffmpeg'le vidyonun icerigine bakildiginda, son kisminda hakkinda bilgi veriyor;
       creation_time   : 2013-11-11 11:17:49
     Stream #0:1(eng): Video: h264 (High) (avc1 / 0x31637661),         yuv420p, 720x1280, 7346 kb/s, 25.25 fps, 25 tbr, 48k tbn, 96k tbc
 
+* mp4 header bilgisini dosyanin en sonunda tuttugundan, player dosyanin tamami
+yuklenmeden dosyanin mp4 olup olmadigini anlayamiyor.
+Ornek uygulama: ffmpeg -i dosya.mp4 -c:v copy -c:a copy -movflags faststart dosya..mp4

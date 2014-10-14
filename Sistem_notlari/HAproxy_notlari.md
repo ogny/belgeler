@@ -120,3 +120,35 @@ Cozum: Alright, I don't know what has happened but I changed this line option ht
 HEAD /check.txt HTTP/1.0 for this one option httpchk HEAD / HTTP/1.0 and start
 the server after starting HAProxy. Then it works as expected.
 [Kaynak:](http://serverfault.com/questions/433936/haproxy-503-service-unavailable-for-webserver-running-on-a-kvm-virtual-machine)
+
+* check option
+
+the interval and timers using the "inter", "rise" and "fall"
+parameters. The request method is define in the backend using the "httpchk",
+"smtpchk", "mysql-check", "pgsql-check" and "ssl-hello-chk" options
+fall <count>
+The "fall" parameter states that a server will be considered as dead after
+<count> consecutive unsuccessful health checks
+rise <count>
+The "rise" parameter states that a server will be considered as operational
+after <count> consecutive successful health checks.
+Yapilandirmada check fastinter 1000 yeterli. ekstra fall ve rise belirtmeye
+gerek yok
+
+### haproxy failover case studies;
+* Single Backup server: backend sunuculara erisemiyorsa, ilk yazilan backup sunucuya gider
+* Multiple backup servers: allbackups secenegi ile ayni yuku tum backup
+sunuculara dagitir.
+* production sunucularin tamaminin kapasitelerinin yetersiz kalacagi durumda
+tum trafigi backup sunuculara yonlendirebiliyoruz (sitedeki acl ornegi)
+* tum ozellikler birarada kullanilabilir.
+#### onemli notlar: 
+* tum sunucularda health check acik olmali
+* backup sunucularda persistency olursa prod sunuculara geri donemez.
+
+
+
+
+[Kaynak:](http://blog.haproxy.com/2013/12/23/failover-and-worst-case-management-with-haproxy/)
+
+
