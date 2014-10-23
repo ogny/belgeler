@@ -1,20 +1,5 @@
 #### Komutlar
 
-* icinde mail gecen .php uzantili calistirilabilir dosyalarin tespiti   
-```
-find . -executable -type f  -name "*.php" |egrep mail
-```
-
-* config disindaki dizinlerde jpg dosya var mi arat.
-```
-find . \( -path -o -path ./.config \) -prune -o -name "*.jpg"  -print
-```
-
-* Dosya ve dizin haklarinin web sunucunun erismesi icin ayarlanmasi
-```
-find * -type d -exec chmod 755 {} \;
-find * -type f -exec chmod 644 {} \;
-```
 
 * Komuttan sonra gelecek ozel karakterleri yorumlama. Ornegin; -var- diye bir dizin var ve silmek istiyoruz.
 ```
@@ -148,12 +133,4 @@ sudo update-alternatives --config x-www-browser
 ```
 seq 1 255 |parallel -j0 --eta ping -c 1 192.168.1.{} 2>&1 |grep '64 bytes' |wc -l
 ```
-
-* dosyalari uzantilarina gore bul ve kopyala;
-```
-find /share/media/mp3/ -type f -name "*.mp3" -print0 | xargs -0 -r -I file cp
--v -p file --target-directory=/bakup/iscsi/mp3
-
-```
-
 

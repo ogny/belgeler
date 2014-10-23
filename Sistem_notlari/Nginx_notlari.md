@@ -123,3 +123,9 @@ location /path_of_your_directory{
    autoindex on;
    ... ( some other lines )
 }
+
+* Hata: a client request body is buffered to a temporary file
+/var/lib/nginx/body/
+Cozum: client_body_buffer_size'i arttirmak.
+bu parametreyi nginx.conf'ta belirtmediginde default olarak 16K degerle
+calisiyor.

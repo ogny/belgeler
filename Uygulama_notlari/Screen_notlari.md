@@ -7,4 +7,8 @@
 * tmux icinde screen'de clear'i calistirmak icin;
 `set -o vi`
 
+* gecerli screenrc'yi atlayarak screen'i default ayarlariyla baslatmak;
+```
+screen -c /etc/screenrc
+```
 
