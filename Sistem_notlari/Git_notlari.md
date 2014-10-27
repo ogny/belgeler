@@ -26,6 +26,7 @@ git branch -d <branch_adi>
 ```
 git branch -a
 ```
+
 ### rebase kullanimi
 * iki branch'in var fix_dali ve master_dali. fix_dalinda guncelleme yaptin,
 * test ettin, artik master_dalina uygulayabilirsin. 
@@ -33,7 +34,8 @@ git branch -a
 git checkout master_dali
 git rebase fix_dali
 ```
-* uzak repo'da ayni dalda baskalariyla calisiyorsan senden onceki rebase'leri cek;
+* uzak repo'da ayni dalda baskalariyla calisiyorsan senden onceki rebase'leri
+cek;
 ```
 git pull --rebase  
 git push origin master 
@@ -43,6 +45,7 @@ git push origin master
 ```
 git rebase --continue  
 ```
+
 #### Uzak branch'lar
 * yerelde olusturdugumuz dali uzak repoda ayni dal olarak yuklemek icin;
 ```
@@ -78,3 +81,6 @@ git config remote.origin.push HEAD
     The latest stash you created is stored in refs/stash
 
 
+* coklu repo guncelleme
+
+for REPO in `ls`; do (cd "$REPO"; git pull); done;

@@ -1,5 +1,6 @@
 ### All about redirection
-[Kaynak:](http://www.linuxdoc.org/HOWTO/Bash-Prog-Intro-HOWTO-3.html)
+* Not: tum betiklerin basinda bunun bir bash programi oldugunu belirten
+#!/bin/bash satirini sola yaslayarak yaz, bosluk oldugunda hata veriyor.
 
 1 stdout 2 stderror'u temsil eder
 
@@ -8,3 +9,8 @@
 rm -f $(find / -name core) &> /dev/null 
 ```
 
+### Functions
+* fonksiyonlara arguman atanarak yapacagin istekleri kisaltabilirsin.
+
+
+[Kaynak:](http://www.linuxdoc.org/HOWTO/Bash-Prog-Intro-HOWTO-3.html)

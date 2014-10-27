@@ -134,3 +134,12 @@ sudo update-alternatives --config x-www-browser
 seq 1 255 |parallel -j0 --eta ping -c 1 192.168.1.{} 2>&1 |grep '64 bytes' |wc -l
 ```
 
+### Chroot
+```
+mount -o bind /dev /mnt/mychroot/dev 
+mount -t proc none /mnt/mychroot/proc
+mount -o bind /sys /mnt/mychroot/sys
+mount -o bind /tmp /mnt/mychroot/tmp
+chroot /mnt/mychroot /bin/bash 
+```
+[Kaynak:Gentoo wiki](http://wiki.gentoo.org/wiki/Chroot)
