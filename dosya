@@ -1,58 +1,0 @@
-MPlayer 1.1-4.8 (C) 2000-2012 MPlayer Team
-
-Playing http://xstream1.somafm.com:8900.
-Resolving xstream1.somafm.com for AF_INET6...
-Resolving xstream1.somafm.com for AF_INET...
-Connecting to server xstream1.somafm.com[216.129.114.88]: 8900...
-
-Name   : Digitalis. Analog rock, digitally-affected, to calm the agitated heart. [SomaFM]
-Genre  : Indie Post Rock
-Website: http://somafm.com
-Public : yes
-Bitrate: 128kbit/s
-Cache size set to 320 KBytes
-Cache fill:  0.00% (0 bytes)   Cache fill:  2.50% (8192 bytes)   Cache fill: 12.50% (40960 bytes)   
-ICY Info: StreamTitle='Lemonade - Neptune';StreamUrl='http://SomaFM.com/digitalis/';
-
-
-Audio only file format detected.
-==========================================================================
-Opening audio decoder: [ffmpeg] FFmpeg/libavcodec audio decoders
-libavcodec version 54.92.100 (external)
-Mismatching header version 54.35.0
-AUDIO: 44100 Hz, 2 ch, floatle, 128.0 kbit/4.54% (ratio: 16000->352800)
-Selected audio codec: [ffmp3float] afm: ffmpeg (FFmpeg MPEG layer-3 audio)
-==========================================================================
-Audio: no sound
-Video: no video
-
-
-Playing http://uwstream3.somafm.com:8900.
-Resolving uwstream3.somafm.com for AF_INET6...
-Resolving uwstream3.somafm.com for AF_INET...
-Connecting to server uwstream3.somafm.com[173.239.76.148]: 8900...
-
-Name   : Digitalis. Analog rock, digitally-affected, to calm the agitated heart. [SomaFM]
-Genre  : Indie Post Rock
-Website: http://somafm.com
-Public : yes
-Bitrate: 128kbit/s
-Cache size set to 320 KBytes
-Cache fill:  0.00% (0 bytes)   Cache fill:  2.50% (8192 bytes)   Cache fill: 12.50% (40960 bytes)   
-ICY Info: StreamTitle='Lemonade - Neptune';StreamUrl='http://SomaFM.com/digitalis/';
-
-
-Audio only file format detected.
-==========================================================================
-Opening audio decoder: [ffmpeg] FFmpeg/libavcodec audio decoders
-AUDIO: 44100 Hz, 2 ch, floatle, 128.0 kbit/4.54% (ratio: 16000->352800)
-Selected audio codec: [ffmp3float] afm: ffmpeg (FFmpeg MPEG layer-3 audio)
-==========================================================================
-Audio: no sound
-Video: no video
-
-
-Playing http://ice.somafm.com/digitalis.
-Resolving ice.somafm.com for AF_INET6...
-Resolving ice.somafm.com for AF_INET...
-Connecting to server ice.somafm.com[216.129.114.89]: 80...
