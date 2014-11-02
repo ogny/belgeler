@@ -90,3 +90,19 @@ for REPO in `ls`; do (cd "$REPO"; git pull); done;
 ```
 git remote set-url origin git@github.com:
 ```
+* yeni acilan repo'nun yerel makinalara eklenmesi
+create a new repository on the command line  
+```
+touch README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/ogny/anlatabildiklerim.git
+git push -u origin master
+```
+or push an existing repository from the command line  
+```
+git remote add origin https://github.com/ogny/anlatabildiklerim.git
+git push -u origin master
+```
+
