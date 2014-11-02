@@ -84,3 +84,9 @@ git config remote.origin.push HEAD
 * coklu repo guncelleme
 
 for REPO in `ls`; do (cd "$REPO"; git pull); done;
+
+### Github
+* yeni eklenen bir repo'nun her commit'te parola sormamasi icin
+```
+git remote set-url origin git@github.com:
+```
