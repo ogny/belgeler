@@ -18,7 +18,7 @@ git branch -v
 ```
 git checkout -b <branch_adi>
 ```
-* branch'i silme;
+* branch'i silme; (eger silmeye izin vermiyorsa -D ile cagir)
 ```
 git branch -d <branch_adi>
 

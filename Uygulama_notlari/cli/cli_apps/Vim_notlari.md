@@ -73,6 +73,13 @@ calisacagim.
 * satir sonlarindaki ^M  karakterleri kaldirma.
 `%s/\r/\r/g`
 
+* json biceminde olup da duz metin gibi gorunen tamponu okunakli hale getirmek
+icin;
+```
+:%!python -m json.tool
+```
+
+
 ### eklentiler 
 * Kisa Kisa kullandigim eklentileri tanitmak istiyorum.
 

@@ -43,4 +43,19 @@ goruyorsun;
 nginx ve php-fpm'i daemonize olarak baslatma, docker file servisi yaziyor. bu
 durum systemd icin gerekli mi?
 
+Docker imajlarinin tutuldugu path: /var/lib/docker/containers
+
+* container'lara ozgu donanim limitleri atamak icin cgroups'u kullaniyor.
+
+
+* Here's a typical Docker build process:
+```
+FROM ubuntu:12.04
+RUN apt-get update && apt-get install -y python python-pip curl
+RUN curl -sSL https://github.com/shykes/helloflask/archive/master.tar.gz | tar
+-xzv
+RUN cd helloflask-master && pip install -r requirements.txt
+```
+[Kaynak:](https://github.com/docker/docker)
+
 

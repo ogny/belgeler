@@ -93,3 +93,5 @@ management
 Thou shalt always build systems to resilience/cope with failures
 * resilience: elastikiyet
 * cope: çaresini bulmak
+* break down: analiz etmek
+* make use of: yararlanmak
