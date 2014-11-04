@@ -40,13 +40,12 @@ goruyorsun;
 * docker push subject/komut ile  docker havuzuna imajini atabiliyorsun.
 
 
-nginx ve php-fpm'i daemonize olarak baslatma, docker file servisi yaziyor. bu
-durum systemd icin gerekli mi?
 
+
+### Diger Bilgiler
 Docker imajlarinin tutuldugu path: /var/lib/docker/containers
 
 * container'lara ozgu donanim limitleri atamak icin cgroups'u kullaniyor.
-
 
 * Here's a typical Docker build process:
 ```
@@ -57,5 +56,20 @@ RUN curl -sSL https://github.com/shykes/helloflask/archive/master.tar.gz | tar
 RUN cd helloflask-master && pip install -r requirements.txt
 ```
 [Kaynak:](https://github.com/docker/docker)
+
+image ID ile container'i yonetiyorsun, 
+container id ile commit ediyorsun ve yeni bir container id ediniyorsun.
+(commit'ten sonra container id degismiyor, yeni image id olusuyor.)
+
+* Docker'daki hazir imajlara guvenme, kendi imajini lxc'deki imajdan 
+kendin olustur (not: systemd de ekle)
+
+### Sorular
+nginx ve php-fpm'i daemonize olarak baslatma, docker file servisi yaziyor. bu
+durum systemd icin gerekli mi?
+
+
+
+
 
 
