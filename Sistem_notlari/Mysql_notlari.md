@@ -74,3 +74,8 @@ SHOW GLOBAL VARIABLES LIKE "%READ_ONLY%";
 dpkg-reconfigure mysql-server-5.5
 ```
 
+* bir tablodaki belli bir sutunun son 10 kaydini azalan sirayla izlemek;
+```
+select ID from  tablo_adi ORDER BY ID DESC LIMIT 10;
+```
+

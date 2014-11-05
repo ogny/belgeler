@@ -1,3 +1,9 @@
+### Kurulum
+```
+curl -sSL https://get.docker.com/ubuntu/ | sudo sh
+```
+[Genis kapsamli cheat sheat](https://github.com/wsargent/docker-cheat-sheet)
+
 ### Tutorial'dan notlar;
 calisilan ortam;
 Versiyonlar:
@@ -41,7 +47,6 @@ goruyorsun;
 
 
 
-
 ### Diger Bilgiler
 Docker imajlarinin tutuldugu path: /var/lib/docker/containers
 
@@ -64,12 +69,19 @@ container id ile commit ediyorsun ve yeni bir container id ediniyorsun.
 * Docker'daki hazir imajlara guvenme, kendi imajini lxc'deki imajdan 
 kendin olustur (not: systemd de ekle)
 
+* sudo docker ps -l ile calisan container'i gorebiliyorsun (-l mutlak kullan)
+
 ### Sorular
-nginx ve php-fpm'i daemonize olarak baslatma, docker file servisi yaziyor. bu
+* nginx ve php-fpm'i daemonize olarak baslatma, docker file servisi yaziyor. bu
 durum systemd icin gerekli mi?
+* docker attach ile calisan container'e  baglanamadim, onun yerine run
+kullaniyorum
+```
+docker run -i -t image_id /bin/bash
 
+* docker only supports amd64
 
-
-
+```
+( docker run ile apt update upgrade yapamadim, dockerfile'a yazip deniyorum)
 
 
