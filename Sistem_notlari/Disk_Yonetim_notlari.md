@@ -113,3 +113,13 @@ dd if=/dev/zero of=/<disk_yolu>/<dosya_adi> count=1000 bs=1M
 ```
 kill -USR1 <process_id>
 ```
+
+* Android cihaz baglama;
+```
+jmtpfs ~/mtp
+```
+    * umount etmek icin;
+```
+fusermount -u ~/mtp
+```
+[Kaynak:Archwiki](https://wiki.archlinux.org/index.php/MTP)

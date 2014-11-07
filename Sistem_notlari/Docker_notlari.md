@@ -84,4 +84,22 @@ docker run -i -t image_id /bin/bash
 ```
 ( docker run ile apt update upgrade yapamadim, dockerfile'a yazip deniyorum)
 
+[zsh completion
+plugin:](https://github.com/AeonAxan/oh-my-zsh/blob/master/plugins/docker/_docker)
+* Bu plugin'i kullanabilmek icin docker.io binary'sini docker'a linkle
+```
+sudo ln -s /usr/bin/docker /usr/bin/docker.io
+```
+
+[sudo'suz kulllanma:](http://www.ludeke.net/2013/12/run-docker-commands-without-sudo.html)
+```
+sudo groupadd docker
+sudo gpasswd -a ${USERNAME} docker
+sudo service docker restart
+```
+
+* container'e girmeden ip adresini ogrenme
+Run'la da olur inspect'le de, her ikisini de gorelim;
+docker inspect -f '{{ .NetworkSettings.IPAddress }}' imaj_adi
+
 
