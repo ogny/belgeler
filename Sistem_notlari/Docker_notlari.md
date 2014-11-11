@@ -45,8 +45,6 @@ goruyorsun;
 * docker inspect ciktisi json olarak cnotainer bilgisini iceriyor;
 * docker push subject/komut ile  docker havuzuna imajini atabiliyorsun.
 
-
-
 ### Diger Bilgiler
 Docker imajlarinin tutuldugu path: /var/lib/docker/containers
 

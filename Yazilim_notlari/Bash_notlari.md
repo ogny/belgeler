@@ -14,3 +14,7 @@ rm -f $(find / -name core) &> /dev/null
 
 
 [Kaynak:](http://www.linuxdoc.org/HOWTO/Bash-Prog-Intro-HOWTO-3.html)
+
+* Basename: return non-directory portion of a pathname
+[Kaynak:](http://pubs.opengroup.org/onlinepubs/007908799/xcu/basename.html)
+
