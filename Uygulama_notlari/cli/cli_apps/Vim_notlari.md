@@ -78,7 +78,10 @@ icin;
 ```
 :%!python -m json.tool
 ```
-
+* .vimrc'yi cagirmadan baslatma
+```
+vim -u NORC
+```
 
 ### eklentiler 
 * Kisa Kisa kullandigim eklentileri tanitmak istiyorum.
@@ -107,3 +110,4 @@ vim-buffergator
 
 * easymotion
 backward search: <header><header>b
+
