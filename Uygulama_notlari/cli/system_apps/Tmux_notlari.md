@@ -40,3 +40,30 @@ prefix+ '
 ```
 set -sg escape-time 0
 ```
+#### Eklentiler;
+[tmux-copycat](https://github.com/tmux-plugins/tmux-copycat)
+
+Search
+prefix + / - regex search (strings work too)
+Example search entries:
+
+foo - searches for string foo
+[0-9]+ - regex search for numbers
+Grep is used for searching.
+Searches are case insensitive.
+
+Predefined searches
+
+prefix + ctrl-f - simple *f*ile search
+prefix + ctrl-g - jumping over *g*it status files (best used after git status command)
+prefix + ctrl-u - *u*rl search (http, ftp and git urls)
+prefix + ctrl-d - number search (mnemonic d, as digit)
+prefix + alt-i - *i*p address search
+These start "copycat mode" and jump to first match.
+
+"Copycat mode" bindings
+
+These are enabled when you search with copycat:
+
+n - jumps to the next match
+N - jumps to the previous match
