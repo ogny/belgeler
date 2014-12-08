@@ -24,3 +24,7 @@ find * -type f -exec chmod 644 {} \;
 find /share/media/mp3/ -type f -name "*.mp3" -print0 | xargs -0 -r -I file cp \
 -v -p file --target-directory=/bakup/iscsi/mp3
 ```
+* dizindeki tum dosyalari ozyinelemeli olmadan bul ve sil
+```
+find ./* -type f  -maxdepth 0 ! -iname ".*" -exec rm -f {} \;
+```

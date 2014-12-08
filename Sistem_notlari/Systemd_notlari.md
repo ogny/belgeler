@@ -101,6 +101,10 @@ Reload systemd manager configuration. This will reload all unit files and
 recreate the entire dependency tree. While the daemon is reloaded, all sockets
 systemd listens on on behalf of user configuration will stay accessible.
 
+```
+systemctl --system daemon-reload
+```
+
 ### Journalctl
 
 
@@ -110,3 +114,5 @@ systemd listens on on behalf of user configuration will stay accessible.
 ```
 systemctl --system daemon-reload
 ```
+
+

@@ -38,3 +38,9 @@ http://www.kodama.gr/2011/08/19/weechat-horizontal-buffers-bar/
 /set logger.level.irc.freenode.#weechat 3
 * tum kanallari loglama
 /set logger.level.irc.freenode 3 
+
+
+* Bitlbee'de skype group chat odalarinin gelmesi icin;
+```
+account skype set auto_join true 
+```

@@ -1,3 +1,9 @@
+* kernel modul'lerini listeleme;
+```
+zcat /proc/config.gz |less
+```
+
+### linode-Cli notlari
 #### Kurulum
 ```
 wget --no-check-certificate https://97.107.139.216/linode.gpg
@@ -15,4 +21,5 @@ apt-get install linode-cli
 linode linode -a list
 linode linode -a show --label <linode_adi>
 ```
+
 

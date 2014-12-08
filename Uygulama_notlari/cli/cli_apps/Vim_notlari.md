@@ -1,4 +1,4 @@
-* BUYUK Kucuk harf donusturme;
+* buyuk kucuk harf donusturme;
 Degistirecegin yeri secip visual mode'a gec
 `U Uppercase u Lowercase`
 
@@ -110,4 +110,22 @@ vim-buffergator
 
 * easymotion
 backward search: <header><header>b
+
+#### Vim help'ten notlar:
+* sadece help penceresini acma;
+help |only
+
+* belli bir basliga direk gitme;
+imleci basliga gotur ve CTRL-]
+geri gelmek icin CTRL-T veya CTRL-O (tekrar bastiginda daha eskiye gider)
+
+* help'te arama yapmak
+:helpgrep ile kelime ara (ignorecase icin \G)
+aranan kelimenin gectigi yerleri gormek icin :cwindow
+
+
+* :global komutu;
+global commands work by first scanning through the [range] lines and
+marking each line where a match occurs (for a multi-line pattern, only the
+start of the match matters).
 

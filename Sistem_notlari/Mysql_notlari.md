@@ -79,3 +79,7 @@ dpkg-reconfigure mysql-server-5.5
 select ID from  tablo_adi ORDER BY ID DESC LIMIT 10;
 ```
 
+* mysql'i izlemek icin mytop;
+```
+mytop -u root --prompt
+```

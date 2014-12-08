@@ -23,6 +23,13 @@ new-session -s session_name
 split-window -h -p 25 vim
 ```
 
+* oturumlar arasinda pane gonderme;
+    * hedef oturuma gec
+    * join-pane -s kaynak_oturum:pane_id'si
+```
+[kaynak](https://forums.pragprog.com/forums/242/topics/10533)
+```
+
 * pencereleri yeniden siralama;
 move-window ile var olmayan bir pencereye atayabiliyoruz.
 swap-window ile varolanlarin siralamasini değiştirebiliyoruz.
@@ -67,3 +74,5 @@ These are enabled when you search with copycat:
 
 n - jumps to the next match
 N - jumps to the previous match
+
+

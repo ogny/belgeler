@@ -3,32 +3,34 @@
 git push origin master
 ```
 
-* git'te her zaman calisan surum tutulur, gelistirme branch'inda da olsan   calismayan surumu push etmezsin.  
+* git'te her zaman calisan surum tutulur, gelistirme dalinda da olsan   calismayan surumu push etmezsin.  
 * bare repo'da ilk commit'te duzeltme  
 ```
 git push --set-upstream origin master  
 ```
 
-### Branch'larla calisma;
-* bulundugun branch'i gorme;
+### dallarla calisma;
+* bulundugun dali gorme;
 ```
 git branch -v
 ```
-* Yeni bir branch acip ona gecmenin kisayolu
+* Yeni bir dal acip ona gecmenin kisayolu
 ```
-git checkout -b <branch_adi>
+git checkout -b <dal_adi>
 ```
-* branch'i silme; (eger silmeye izin vermiyorsa -D ile cagir)
+* dali silme; (eger silmeye izin vermiyorsa -D ile cagir)
 ```
-git branch -d <branch_adi>
+git branch -d <dal_adi>
 
-* yerel ve uzak branch'lari gorme;
+* yerel ve uzak dallari gorme;
 ```
 git branch -a
 ```
 
+* yeni uzak dal acma
+
 ### rebase kullanimi
-* iki branch'in var fix_dali ve master_dali. fix_dalinda guncelleme yaptin,
+* iki dalin var fix_dali ve master_dali. fix_dalinda guncelleme yaptin,
 * test ettin, artik master_dalina uygulayabilirsin. 
 ```
 git checkout master_dali
@@ -46,19 +48,19 @@ git push origin master
 git rebase --continue  
 ```
 
-#### Uzak branch'lar
+#### Uzak dallar
 * yerelde olusturdugumuz dali uzak repoda ayni dal olarak yuklemek icin;
 ```
-git push origin <branch_adi>:<branch_adi>
+git push origin <dal_adi>:<dal_adi>
 ```
-* Uzak repo'daki branch'i silmek;
+* Uzak repo'daki dali silmek;
 ```
-git push origin :<branch_adi>
+git push origin :<dal_adi>
 ```
 
 * Tracking
 ```
-git branch --set-upstream-to=origin/<uzak_branch> <lokal_branch>
+git branch --set-upstream-to=origin/<uzak_dal> <lokal_dal>
 ```
 
 ### git-flow kullanimi

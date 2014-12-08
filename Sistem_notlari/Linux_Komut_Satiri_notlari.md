@@ -143,3 +143,13 @@ mount -o bind /tmp /mnt/mychroot/tmp
 chroot /mnt/mychroot /bin/bash 
 ```
 [Kaynak:Gentoo wiki](http://wiki.gentoo.org/wiki/Chroot)
+
+sistem analiz  komutlari
+```
+iostat -c 1 10
+vmstat 1 20
+free -m
+top -b -n1 | head -5
+ps auxf | sort -nr -k 4 | head -5
+ps auxf | sort -nr -k 3 | head -5
+```

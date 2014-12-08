@@ -8,7 +8,7 @@
 	@reboot                Run at startup
 
 
-	*    *    *    *    *  command to be executed
+	*    *    *    *    *    *  command to be executed
 	*    ┬    ┬    ┬    ┬    ┬
 	*    │    │    │    │    │
 	*    │    │    │    │    │
