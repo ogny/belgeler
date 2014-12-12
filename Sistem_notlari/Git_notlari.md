@@ -108,3 +108,12 @@ git remote add origin https://github.com/ogny/anlatabildiklerim.git
 git push -u origin master
 ```
 
+* son commit'le onceki arasindaki farklari gorme;
+```
+git diff --color HEAD^ HEAD
+```
+```
+git log --color -p
+```
+
+

@@ -129,3 +129,7 @@ global commands work by first scanning through the [range] lines and
 marking each line where a match occurs (for a multi-line pattern, only the
 start of the match matters).
 
+* tum fold'lanan yerleri acma
+```
+set nofoldenable 
+```

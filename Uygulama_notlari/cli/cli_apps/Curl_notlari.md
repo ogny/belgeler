@@ -13,3 +13,7 @@ curl -I -H 'Accept-Encoding: gzip,deflate' http://site/
 ```
 xargs -n 1 curl -O < urls.txt
 ```
+* kullanilmisbir curl, ne oldugu incelenecek
+```
+curl -o /dev/null -s -w %{time_connect}:%{time_starttransfer}:%{time_total}\\n http://domain.tld
+```

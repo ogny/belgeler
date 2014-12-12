@@ -133,6 +133,10 @@ sudo update-alternatives --config x-www-browser
 ```
 seq 1 255 |parallel -j0 --eta ping -c 1 192.168.1.{} 2>&1 |grep '64 bytes' |wc -l
 ```
+* tum makinalarin mac adreslerini bulma;
+```
+arp -a -n
+```
 
 ### Chroot
 ```
