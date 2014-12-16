@@ -18,7 +18,12 @@ server degistirme ^x
 
 * Bir kanala otomatik giris yapmak;
 /set irc.server.freenode.autojoin ""
-http://www.kodama.gr/2011/08/19/weechat-horizontal-buffers-bar/
+
+* buffers.pl ile bolmek icin; 
+```
+/set weechat.bar.buffers.position bottom
+```
+[Kaynak:](http://www.kodama.gr/2011/08/19/weechat-horizontal-buffers-bar/)
 *̶ ̶h̶t̶t̶p̶:̶/̶/̶p̶a̶s̶c̶a̶l̶p̶o̶i̶t̶r̶a̶s̶.̶c̶o̶m̶/̶m̶y̶-̶w̶e̶e̶c̶h̶a̶t̶-̶c̶o̶n̶f̶i̶g̶u̶r̶a̶t̶i̶o̶n̶/̶ ̶
 
 ### Loglama seviyeleri
