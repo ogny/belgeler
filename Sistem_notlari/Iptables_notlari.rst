@@ -63,7 +63,7 @@ Superuser_:
 
 neden external hyperlinks olarak gormuyor bunu Superuser_.
 
-.. _Superuser: http://superuser.com/questions/698081/how-to-block-incoming-traffic-on-a-virtual-interface/
+.. _Superuser: http://www.superuser.com/questions/698081/how-to-block-incoming-traffic-on-a-virtual-interface/
 
 External hyperlinks, like Python_.
 
