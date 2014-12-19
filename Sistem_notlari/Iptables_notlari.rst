@@ -50,14 +50,19 @@ Internet and the Transport layers
     iptables -A INPUT -p tcp --dport 80 -j ACCEPT
     iptables -A INPUT -p tcp --dport 443 -j ACCEPT
 
-.. _Kaynak:Superuser: http://superuser.com/questions/769814/how-to-block-all-ports-except-80-443-with-iptables
+Superuser_:
+
+.. _Superuser: http://superuser.com/questions/769814/how-to-block-all-ports-except-80-443-with-iptables
 
 * eth0'a gelen trafik engellensin, istina; eth0:0'a gelen trafik kabul edilsin.
 
 .. code:: sh
+
    iptables -A INPUT -i eth0 -d xx:yy:zz:vv -j ACCEPT
    iptables -A INPUT -i eth0 -j DROP
 
-.. _Kaynak:Superuser: http://superuser.com/questions/698081/how-to-block-incoming-traffic-on-a-virtual-interface
+Superuser_:
+
+.. _Superuser: http://superuser.com/questions/698081/how-to-block-incoming-traffic-on-a-virtual-interface
 
 
