@@ -52,7 +52,7 @@ Internet and the Transport layers
 
 Superuser_:
 
-.. _Superuser: http://superuser.com/questions/769814/how-to-block-all-ports-except-80-443-with-iptables
+.. _Superuser: http://superuser.com/questions/769814/how-to-block-all-ports-except-80-443-with-iptables/
 
 * eth0'a gelen trafik engellensin, istina; eth0:0'a gelen trafik kabul edilsin.
 
@@ -63,7 +63,7 @@ Superuser_:
 
 Superuser_:
 
-.. _Superuser: http://superuser.com/questions/698081/how-to-block-incoming-traffic-on-a-virtual-interface
+.. _Superuser: http://superuser.com/questions/698081/how-to-block-incoming-traffic-on-a-virtual-interface/
 
 External hyperlinks, like Python_.
 
