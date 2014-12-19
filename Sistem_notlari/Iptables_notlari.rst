@@ -61,7 +61,7 @@ Superuser_:
    iptables -A INPUT -i eth0 -d xx:yy:zz:vv -j ACCEPT
    iptables -A INPUT -i eth0 -j DROP
 
-Superuser_:
+neden external hyperlinks olarak gormuyor bunu Superuser_.
 
 .. _Superuser: http://superuser.com/questions/698081/how-to-block-incoming-traffic-on-a-virtual-interface/
 
