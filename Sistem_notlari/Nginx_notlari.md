@@ -130,5 +130,21 @@ Cozum: client_body_buffer_size'i arttirmak.
 bu parametreyi nginx.conf'ta belirtmediginde default olarak 16K degerle
 calisiyor.
 
+* Ubuntu PPA For Ubuntu 10.04 and newer:
+```
+sudo -s
+nginx=stable # use nginx=development for latest development version
+```
+add-apt-repository ppa:nginx/$nginx
+apt-get update 
+apt-get install nginx
+```
+If you get an error about add-apt-repository not existing, you will want to
+install python-software-properties. For other Debian/Ubuntu based
+distributions, you can try the lucid variant of the PPA which is the most
+likely to work on older package sets.
+
+(Kaynak:)[http://wiki.nginx.org/Install]
+
 
 

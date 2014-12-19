@@ -133,3 +133,13 @@ start of the match matters).
 ```
 set nofoldenable 
 ```
+
+* Regex karakterleri
+\r break line
+\s white space
+
+* her dolu satirin altina bos bir satir ekle;
+```
+:%s/.*\n.*\n.*\n/\0\r/g
+```
+
