@@ -51,7 +51,6 @@ Internet and the Transport layers
     iptables -A INPUT -p tcp --dport 443 -j ACCEPT
 
 Superuser_:
-
 .. _Superuser: http://superuser.com/questions/769814/how-to-block-all-ports-except-80-443-with-iptables
 
 * eth0'a gelen trafik engellensin, istina; eth0:0'a gelen trafik kabul edilsin.
@@ -62,7 +61,8 @@ Superuser_:
    iptables -A INPUT -i eth0 -j DROP
 
 Superuser_:
-
 .. _Superuser: http://superuser.com/questions/698081/how-to-block-incoming-traffic-on-a-virtual-interface
 
+External hyperlinks, like Python_.
+.. _Python: http://www.python.org/
 
