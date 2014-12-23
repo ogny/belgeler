@@ -154,15 +154,15 @@ oldugunda slave uyanmiyor.
 * Master'da;
 
     * auto_increment_increment and auto_increment_offset 
-    Thye are intended for use with master-to-master replication, and can be used to
+    They are intended for use with master-to-master replication, and can be used to
     control the operation of AUTO_INCREMENT columns.
 
 * Slave'de;
 
-   * --slave-parallel-workers
-   * --slave-pending-jobs-size-max=#
-   * --slave_compressed_protocol={0|1}
-   * --slave-skip-errors=[err_code1,err_code2,...|all|ddl_exist_errors]
+   ** --slave-parallel-workers
+   ** --slave-pending-jobs-size-max=#
+   ** --slave_compressed_protocol={0|1}
+   ** --slave-skip-errors=[err_code1,err_code2,...|all|ddl_exist_errors]
 
 
 
