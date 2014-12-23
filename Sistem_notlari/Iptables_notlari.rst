@@ -62,3 +62,15 @@ Internet and the Transport layers
 `Kaynak:Superuser <http://www.superuser.com/questions/698081/how-to-block-incoming-traffic-on-a-virtual-interface/>`_.
 
 
+
+**Nat table**
+
+* it should only be used to translate the packet's source field or destination field.
+* The actual targets that do these kind of things are:
+  ** DNAT : DMZ'e alma ornek gosterilebilir. Public IP'den gelen paketleri
+  belli bir hedefe yonlendirme.
+  ** SNAT : 
+  ** MASQUERADE
+  ** REDIRECT
+   
+
