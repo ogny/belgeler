@@ -32,6 +32,7 @@ log-slave-updates = ON
 
 5.1
 log-slave-updates = 1
+
 `Kaynak: <http://michaelhallsmoore.com/blog/MySQL-Chained-Replication-Do-Not-Forget-log-slave-updates>`_
 
 How to identify Replication Delay
@@ -42,6 +43,7 @@ hand, SQL_THREAD reads events from a relay log stored locally on the
 replication slave (the file that was written by IO thread) and then applies
 them as fast as possible. Whenever replication delays, it’s important to
 discover first whether it’s delaying on slave IO_THREAD or slave SQL_THREAD.
+
 `Kaynak: <http://www.percona.com/blog/2014/05/02/how-to-identify-and-cure-mysql-replication-slave-lag>`_
 
  when the slave SQL_THREAD is the source of replication delays it is probably
@@ -58,6 +60,16 @@ bekleyen binlog'lar varsa bu değer ne kadar geride olduğunu tam olarak
 SHOW SLAVE STATUS ciktisindaki Read_Master_Log_Pos & Exec_Master_Log_Pos
 arasinda fark varsa bu SQL_THREAD'ten kaynaklanan  bir gecikme demek, sql
 sorgularini slave islerken yasanan bir gecikme.
+
+
+Replication Master Options and Variables 
+=========================================
+
+
+
+
+Replication Slave Options and Variables 
+=========================================
 
 * startup options for controlling replication slave servers.
 
@@ -82,6 +94,46 @@ sorgularini slave islerken yasanan bir gecikme.
     this can be useful to ensure that the slave accepts updates only from its
     master server and not from clients
 
+    *  --replicate-do-table=db_name.tbl_name
+    To specify more than one table, use this option multiple times, once for
+    each table. This works for both cross-database updates and default database
+    updates,
+
+    *  --replicate-ignore-table=db_name.tbl_name
+    Creates a replication filter by telling the slave SQL thread not to
+    replicate any statement that updates the specified table, even if any other
+    tables might be updated by the same statement.
+
+    * relay_log_recovery
+    Enables automatic relay log recovery immediately following server startup.
+    The recovery process creates a new relay log file, initializes the SQL
+    thread position to this new relay log, and initializes the I/O thread to
+    the SQL thread position. Reading of the relay log from the master then
+    continues. 
+
+    When relay_log_recovery is enabled and the slave has stopped due to errors
+    encountered while running in multi-threaded mode, you cannot execute CHANGE
+    MASTER TO if there are any gaps in the log. 
+      
+    * sync_relay_log
+    If the value of this variable is greater than 0, the MySQL server
+    synchronizes its relay log to disk (using fdatasync()) after every
+    sync_relay_log events are written to the relay log.
+    Setting sync_relay_log to 0 causes no synchronization to be done to disk;
+    in this case, the server relies on the operating system to flush the relay
+    log's contents from time to time as for any other file.
+
+    Prior to MySQL 5.6.6, 0 was the default for this variable. In MySQL 5.6. and
+    later, the default is 10000.
+    
+    A value of 1 is the safest choice because in the event of a crash you lose at
+    most one event from the relay log. However, it is also the slowest choice
+    (unless the disk has a battery-backed cache, which makes synchronization very
+    fast).
+
+    *  sync_relay_log_info
+
+
 * Row-based replication.  
 
     Tells the slave SQL thread not to update any tables in
@@ -94,7 +146,26 @@ tables are modified locally, so to avoid conflicts they are not updated with
 data coming from the master.
 slave-net-timeout degiskeni default 1 saat, bu sure icerisinde kesinti
 oldugunda slave uyanmiyor.
+
 `Kaynak: <http://www.danielschneller.com/2006/10/mysql-replication-timeout-trap.html>`_
+
+* replication'da kullanilabilecek diger onemli parameterler;
+
+* Master'da;
+
+    * auto_increment_increment and auto_increment_offset 
+    Thye are intended for use with master-to-master replication, and can be used to
+    control the operation of AUTO_INCREMENT columns.
+
+* Slave'de;
+
+   * --slave-parallel-workers
+   * --slave-pending-jobs-size-max=#
+   * --slave_compressed_protocol={0|1}
+   * --slave-skip-errors=[err_code1,err_code2,...|all|ddl_exist_errors]
+
+
+
 
 
 
