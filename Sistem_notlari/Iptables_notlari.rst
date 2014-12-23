@@ -44,7 +44,7 @@ Internet and the Transport layers
 
 * x portu haric Tum portlari erisime kapatma 
 
-..  code:: sh
+.. code:: sh
 
     # Exceptions to default policy
     iptables -A INPUT -p tcp --dport 80 -j ACCEPT
@@ -60,7 +60,6 @@ Internet and the Transport layers
    iptables -A INPUT -i eth0 -j DROP
 
 `Kaynak:Superuser <http://www.superuser.com/questions/698081/how-to-block-incoming-traffic-on-a-virtual-interface/>`_.
-
 
 
 **Nat table**
