@@ -160,8 +160,11 @@ oldugunda slave uyanmiyor.
 * Slave'de;
 
    ** --slave-parallel-workers
+
    ** --slave-pending-jobs-size-max=#
+
    ** --slave_compressed_protocol={0|1}
+
    ** --slave-skip-errors=[err_code1,err_code2,...|all|ddl_exist_errors]
 
 
