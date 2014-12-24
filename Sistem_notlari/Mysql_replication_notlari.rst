@@ -2,6 +2,18 @@
 Mysql Replication
 ==================
 
+* By default, MySQL binary logging and replication is statement-based: when the
+  master server commits a change, it writes the SQL statement into its binary
+  log, and any slaves that replicate it execute the same SQL statement into
+  their own database.
+
+* In Mixed Mode replication, most queries are replicated by statement. But
+  transactions MySQL knows are non-deterministic are replicated by row.
+
+
+
+`Kaynak:wingtiplabs <http://mysql.wingtiplabs.com/documentation/row639ae/configure-row-based-or-mixed-mode-replication>`_
+
 * Binary logging must be enabled on the master because the binary log is the
 basis for sending data changes from the master to its slaves.
 Mysql'de 3 tip replication built-in yapilabiliyor
@@ -61,16 +73,6 @@ SHOW SLAVE STATUS ciktisindaki Read_Master_Log_Pos & Exec_Master_Log_Pos
 arasinda fark varsa bu SQL_THREAD'ten kaynaklanan  bir gecikme demek, sql
 sorgularini slave islerken yasanan bir gecikme.
 
-
-Replication Master Options and Variables 
-=========================================
-
-
-
-
-Replication Slave Options and Variables 
-=========================================
-
 * startup options for controlling replication slave servers.
 
     * --log-slave-updates: 
@@ -94,46 +96,6 @@ Replication Slave Options and Variables
     this can be useful to ensure that the slave accepts updates only from its
     master server and not from clients
 
-    *  --replicate-do-table=db_name.tbl_name
-    To specify more than one table, use this option multiple times, once for
-    each table. This works for both cross-database updates and default database
-    updates,
-
-    *  --replicate-ignore-table=db_name.tbl_name
-    Creates a replication filter by telling the slave SQL thread not to
-    replicate any statement that updates the specified table, even if any other
-    tables might be updated by the same statement.
-
-    * relay_log_recovery
-    Enables automatic relay log recovery immediately following server startup.
-    The recovery process creates a new relay log file, initializes the SQL
-    thread position to this new relay log, and initializes the I/O thread to
-    the SQL thread position. Reading of the relay log from the master then
-    continues. 
-
-    When relay_log_recovery is enabled and the slave has stopped due to errors
-    encountered while running in multi-threaded mode, you cannot execute CHANGE
-    MASTER TO if there are any gaps in the log. 
-      
-    * sync_relay_log
-    If the value of this variable is greater than 0, the MySQL server
-    synchronizes its relay log to disk (using fdatasync()) after every
-    sync_relay_log events are written to the relay log.
-    Setting sync_relay_log to 0 causes no synchronization to be done to disk;
-    in this case, the server relies on the operating system to flush the relay
-    log's contents from time to time as for any other file.
-
-    Prior to MySQL 5.6.6, 0 was the default for this variable. In MySQL 5.6. and
-    later, the default is 10000.
-    
-    A value of 1 is the safest choice because in the event of a crash you lose at
-    most one event from the relay log. However, it is also the slowest choice
-    (unless the disk has a battery-backed cache, which makes synchronization very
-    fast).
-
-    *  sync_relay_log_info
-
-
 * Row-based replication.  
 
     Tells the slave SQL thread not to update any tables in
@@ -147,18 +109,62 @@ data coming from the master.
 slave-net-timeout degiskeni default 1 saat, bu sure icerisinde kesinti
 oldugunda slave uyanmiyor.
 
-`Kaynak:danielschneller.com <http://www.danielschneller.com/2006/10/mysql-replication-timeout-trap.html>`_
+`Kaynak: <http://www.danielschneller.com/2006/10/mysql-replication-timeout-trap.html>`_
 
-* replication'da kullanilabilecek diger onemli parameterler;
 
-- Master'da;
-    * auto_increment_increment and auto_increment_offset 
-    They are intended for use with master-to-master replication, and can be used to
-    control the operation of AUTO_INCREMENT columns.
+Advantages and Disadvantages of Statement-Based and Row-Based Replication
+==========================================================================
 
-- Slave'de;
-   * --slave-parallel-workers
-   * --slave-pending-jobs-size-max=#
-   * --slave_compressed_protocol={0|1}
-   * --slave-skip-errors=[err_code1,err_code2,...|all|ddl_exist_errors]
+For most users, the mixed replication format should provide the best combination of data integrity and performance.
+
+Disadvantages of statement-based replication
+------------------------------------------------
+
+Any nondeterministic behavior is difficult to replicate Examples of such DML (Data Modification Language) statements.
+
+* DELETE and UPDATE statements that use a LIMIT clause without an ORDER BY are nondeterministic.
+
+* INSERT ... SELECT requires a greater number of row-level locks than with
+row-based replication.
+
+* UPDATE statements that require a table scan (because no index is used in the
+WHERE clause) must lock a greater number of rows than with row-based
+replication.
+
+* For InnoDB: An INSERT statement that uses AUTO_INCREMENT blocks other
+nonconflicting INSERT statements.
+
+* For complex statements, the statement must be evaluated and executed on the
+slave before the rows are updated or inserted. With row-based replication, the
+slave only has to modify the affected rows, not execute the full statement.
+
+* Table definitions must be (nearly) identical on master and slave.
+
+Advantages of Row-Based Replication
+------------------------------------------------
+
+* All changes can be replicated. This is the safest form of replication.
+
+* In MySQL 5.1.14 and later, the mysql database is not replicated. The mysql
+  database is instead seen as a node-specific database. Row-based replication
+  is not supported on tables in this database. Instead, statements that would
+  normally update this information—such as GRANT, REVOKE and the manipulation
+  of triggers, stored routines (including stored procedures), and views—are all
+  replicated to slaves using statement-based replication.
+
+( Buradan row-statement beraber replice etmenin neden uygun cozum oldugu
+anlasiliyor.)
+
+Disadvantages of Row-Based Replication
+------------------------------------------------
+
+* You cannot examine the logs to see what statements were executed, nor can you
+  see on the slave what statements were received from the master and executed.
+
+However, beginning with MySQL 5.1.29, you can see what data was changed using
+mysql binlog with the options --base64-output=DECODE-ROWS and --verbose.
+
+
+
+
 
