@@ -83,3 +83,17 @@ select ID from  tablo_adi ORDER BY ID DESC LIMIT 10;
 ```
 mytop -u root --prompt
 ```
+
+* Mysql prompt'ta utf-8 yapistirdigin karakterleri ekrana basmiyorsa;
+```
+mysql --default-character-set=utf8 -u root -p veritabani_adi < dosya.sql
+```
+* tabloya girdigin degerleri degistirmek istiyorsun, silmene gerek yok; `INSERT
+INTO` yerine  `REPLACE INTO` kullan
+```
+
+* Transaction'lar
+
+In MySQL, transactions begin with the statement BEGIN WORK and end with either
+a COMMIT or a ROLLBACK statement. The SQL commands between the beginning and
+ending statements form the bulk of the transaction.
