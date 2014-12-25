@@ -55,5 +55,10 @@ different persistence options, so we'll examine both one after the other.
     
 
 
+* redis-cli'de acik baglantilari listeleme
+
+.. code:: sh
+
+        CLIENT LIST
 
 
