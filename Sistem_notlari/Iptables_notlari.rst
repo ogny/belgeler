@@ -64,16 +64,16 @@ Internet and the Transport layers
 
 **Nat table**
 
-* it should only be used to translate the packet's source field or destination field.
-* The actual targets that do these kind of things are:
+- it should only be used to translate the packet's source field or destination field.
+- The actual targets that do these kind of things are:
 
-  ** DNAT : DMZ'e alma ornek gosterilebilir. Public IP'den gelen paketleri
+  * DNAT : DMZ'e alma ornek gosterilebilir. Public IP'den gelen paketleri
   belli bir hedefe yonlendirme.
 
-  ** SNAT : 
+  * SNAT : 
 
-  ** MASQUERADE
+  * MASQUERADE
 
-  ** REDIRECT
+  * REDIRECT
    
 
