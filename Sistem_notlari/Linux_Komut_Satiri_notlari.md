@@ -173,3 +173,7 @@ ciktisina bak;
 strace -pPID
 ```
 
+* sistemde default editor neyse onu sudoyla acan komut;
+```
+sudoedit DOSYA
+```
