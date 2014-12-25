@@ -67,8 +67,7 @@ Internet and the Transport layers
 - it should only be used to translate the packet's source field or destination field.
 - The actual targets that do these kind of things are:
 
-  * DNAT : DMZ'e alma ornek gosterilebilir. Public IP'den gelen paketleri belli 
-bir hedefe yonlendirme.
+  * DNAT : DMZ'e alma ornek gosterilebilir. Public IP'den gelen paketleri belli bir hedefe yonlendirme.
 
   * SNAT : 
 
