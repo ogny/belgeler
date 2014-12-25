@@ -68,8 +68,11 @@ Internet and the Transport layers
 * The actual targets that do these kind of things are:
   ** DNAT : DMZ'e alma ornek gosterilebilir. Public IP'den gelen paketleri
   belli bir hedefe yonlendirme.
+
   ** SNAT : 
+
   ** MASQUERADE
+
   ** REDIRECT
    
 
