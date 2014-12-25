@@ -161,3 +161,15 @@ ps auxf | sort -nr -k 3 | head -5
 ```
 date +%s
 ```
+
+* Tersi;
+```
+date -d @EPOCH_TIME +"%d-%m-%Y %T %z
+```
+
+* Belli bir pid'de sorun oldugunu dusunursen strace ile pid'de yapilan isin
+ciktisina bak;
+```
+strace -pPID
+```
+
