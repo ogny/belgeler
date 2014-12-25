@@ -157,3 +157,7 @@ top -b -n1 | head -5
 ps auxf | sort -nr -k 4 | head -5
 ps auxf | sort -nr -k 3 | head -5
 ```
+* Unix time'i (epoch) gormek icin;
+```
+date +%s
+```

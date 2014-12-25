@@ -83,3 +83,6 @@ select ID from  tablo_adi ORDER BY ID DESC LIMIT 10;
 ```
 mytop -u root --prompt
 ```
+
+* TIMESTAMP
+
