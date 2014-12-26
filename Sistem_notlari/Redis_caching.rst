@@ -6,10 +6,6 @@ Redis Caching Duzenleme
 :categories: redis
 :tags: server
 
-
-
-
-
 **simple write operation:**
 
 1. The client sends a write command to the database (data is in client's memory).
@@ -55,10 +51,11 @@ different persistence options, so we'll examine both one after the other.
     
 
 
-* redis-cli'de acik baglantilari listeleme
+* redis-cli komutlari;
 
 .. code:: sh
 
         CLIENT LIST
-
+        KEYS * (ciktiya gore sorgu ozellestirilebilir.)
+        GET session
 
