@@ -1,6 +1,5 @@
-Delete all t̲r̲a̲i̲l̲i̲n̲g̲ whitespace (at the end of each line) with:
-trail : iz, izlemek, peşten sürükleyen şey, kuyruk
-
+Delete all *t̲r̲a̲i̲l̲i̲n̲g̲* whitespace (at the end of each line) with:
+**trail** : iz, izlemek, peşten sürükleyen şey, kuyruk
 
 the _latter_  
 * latter : ikisinden sonuncusu
@@ -95,3 +94,7 @@ Thou shalt always build systems to resilience/cope with failures
 * cope: çaresini bulmak
 * break down: analiz etmek
 * make use of: yararlanmak
+
+**intuitive**
+sezgizel
+
