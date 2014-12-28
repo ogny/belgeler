@@ -26,6 +26,6 @@ Ornek komut ciktisi;
 
 
 * An inode is what the Linux file system uses to identify each file. When a file
-system is created (using the mkfs command), the file system is created with a
-fixed number of inodes. If all these inodes become used, a file system cannot
-store any more files even though there may be free disk space
+  system is created (using the mkfs command), the file system is created with a
+  fixed number of inodes. If all these inodes become used, a file system cannot
+  store any more files even though there may be free disk space
