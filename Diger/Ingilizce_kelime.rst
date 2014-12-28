@@ -37,15 +37,13 @@ invert-revert (verse'in tersi)
 **worded** : kaleme alınmış
 
 - I did get hung up for a while on roles and then decided to just work on
-
-- straightforward playbooks
+  straightforward playbooks
 
 **straightforward** : dobra dobra söyleyen, doğru sözlü, dürüst, açık sözlü
 
 - check for server certificate r̲e̲v̲o̲c̲a̲t̲i̲o̲n̲
-**revocation** : iptal etme
 
-fesih ,feshetme, ilga, lağvetme
+**revocation** : iptal etme fesih ,feshetme, ilga, lağvetme
 
 - The rudiments and background which addresses fundamental skills, basic
 information, and problems in systems administration
@@ -53,20 +51,21 @@ information, and problems in systems administration
 **rudiment; temel, ilke, esas, prensip, başlangıç
 
 - Unix systems have robust process separation, which keeps most userland
-software isolated from each other
+  software isolated from each other
 
 **robust** : sağlam, sağlıklı
 
 - Exercise Discretion
    
-**discretion** : takdir, uygun görme, muhakeme, karar verme hakkı, karar
-verme yetisi
+**discretion** : takdir, uygun görme, muhakeme, karar verme hakkı, karar verme yetisi
 
-- All the examples are written as shell scripts, with some Perl thrown in, but any properly named executable scripts will work fine
+- All the examples are written as shell scripts, with some Perl thrown in, but
+  any properly named executable scripts will work fine
 
 **thrown in**: birbirine geçirmek, eklemek
 
-- When running the playbook, which runs top to bottom, hosts with failed tasks are taken out of the rotation for the entire playbook.
+- When running the playbook, which runs top to bottom, hosts with failed tasks
+  are taken out of the rotation for the entire playbook.
    
 **take out**:  götürmek, eşlik etmek
 
@@ -104,4 +103,15 @@ management
 **make use of**: yararlanmak
 
 **intuitive** : sezgizel
+
+**compliance**: uyma, itaat.
+
+- It uses several techniques to reduce fragmentation, involving segmenting the
+  filesystem into independently-managed groups, temporarily reserving large
+  chunks of contiguous space for files, and starting the search for new blocks
+  to be added to a file from the current end of the file, rather than from the
+  start of the filesystem. 
+
+**contiguous** : ortak sınırı olan yan yana olan bitişik komşu sınırdaş
+
 
