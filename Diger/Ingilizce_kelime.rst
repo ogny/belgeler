@@ -1,12 +1,8 @@
 Delete all trailing [*]_ whitespace (at the end of each line) with:
 
-**latter** : ikisinden sonuncusu
 
-- your shell may have its own version of true, which usually *s̲u̲p̲e̲r̲s̲e̲d̲e̲s*
+your shell may have its own version of true, which usually supersedes [*]_
 the version described here.
-
-**supersede** : yerini almak, yerine geçmek, yerine başkasını koymak, yerine başka
-bir şey koyarak iptal etmek ilga etmek, yürürlükten kaldırmak
 
 - This is a bit of a n̲i̲c̲h̲e̲ case but can come in handy
 
@@ -112,5 +108,9 @@ management
 
 **contiguous** : ortak sınırı olan yan yana olan bitişik komşu sınırdaş
 
+**latter** : ikisinden sonuncusu
 
 .. [*] trail: iz, izlemek, peşten sürükleyen şey, kuyruk
+.. [*] supersede: yerini almak, yerine geçmek, yerine başkasını koymak, yerine başka
+       bir şey koyarak iptal etmek ilga etmek, yürürlükten kaldırmak
+
