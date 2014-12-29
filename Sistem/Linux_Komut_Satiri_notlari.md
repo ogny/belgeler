@@ -177,3 +177,6 @@ strace -pPID
 ```
 sudoedit DOSYA
 ```
+
+* terminalden bosluk iceren dizin olusturmak icin dizin adini tirnak icinde
+  yaziyoruz.
