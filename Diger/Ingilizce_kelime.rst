@@ -1,4 +1,4 @@
-Delete all trailing[*] whitespace (at the end of each line) with:
+Delete all trailing [*]_ whitespace (at the end of each line) with:
 
 **latter** : ikisinden sonuncusu
 
