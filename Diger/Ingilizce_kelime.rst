@@ -1,6 +1,4 @@
-- Delete all *t̲r̲a̲i̲l̲i̲n̲g̲* whitespace (at the end of each line) with:
-
-**trail** : iz, izlemek, peşten sürükleyen şey, kuyruk
+Delete all trailing[*] whitespace (at the end of each line) with:
 
 **latter** : ikisinden sonuncusu
 
@@ -115,3 +113,4 @@ management
 **contiguous** : ortak sınırı olan yan yana olan bitişik komşu sınırdaş
 
 
+.. [*] trail: iz, izlemek, peşten sürükleyen şey, kuyruk

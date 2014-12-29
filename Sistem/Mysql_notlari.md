@@ -99,3 +99,8 @@ INTO` yerine  `REPLACE INTO` kullan
 In MySQL, transactions begin with the statement BEGIN WORK and end with either
 a COMMIT or a ROLLBACK statement. The SQL commands between the beginning and
 ending statements form the bulk of the transaction.
+
+* NULL kayitlari yakalama;
+```
+select * from tablo_adi where kolon_adi IS NULL;
+```
