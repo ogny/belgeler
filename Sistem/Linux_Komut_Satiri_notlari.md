@@ -180,3 +180,9 @@ sudoedit DOSYA
 
 * terminalden bosluk iceren dizin olusturmak icin dizin adini tirnak icinde
   yaziyoruz.
+
+* ps ciktisinda komutun yaptigi isin tamamini processid'den de gorebiliriz;
+
+```
+cat /proc/<PID>/cmdline 
+```
