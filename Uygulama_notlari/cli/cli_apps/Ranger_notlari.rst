@@ -1,6 +1,17 @@
-Kisayollar;
+==============
+Ranger Calisma
+==============
+
+* kisayollar icin 1?
+
+Kisayollar
+----------
+
+* Toplu silme;
+  space ile silinecek dizin/dosyalari secip :delete ile sil
+
 yon:
-G ve gg calisiyor.
+G ve gg
 <c-u> move up=0.5    pages=True
 <c-d> move down=0.5  pages=True 
 
@@ -36,4 +47,5 @@ pp paste
 ya copy mode=add
 yr copy mode=remove
 yy copy
+
 

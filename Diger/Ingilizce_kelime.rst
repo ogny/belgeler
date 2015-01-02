@@ -1,23 +1,29 @@
-Delete all trailing [*]_ whitespace (at the end of each line) with:
+- Delete all trailing [*]_ whitespace (at the end of each line) with:
 
-
-your shell may have its own version of true, which usually supersedes [*]_
+- your shell may have its own version of true, which usually supersedes [*]_
 the version described here.
 
-- This is a bit of a n̲i̲c̲h̲e̲ case but can come in handy
-
-**niche** : mihrap, niş
+- This is a bit of a n̲i̲c̲h̲e̲ [*]_ case but can come in handy
  
 - Should you want to i̲n̲v̲e̲r̲t̲ the architecture of Ansible
-invert-revert (verse'in tersi)
+invert-revert [*]_  
 
-**revert** : dönmek, geri dönen kimse, geri gitmek
+- Ansible playbook output is v̲a̲s̲t̲l̲y̲ [*]_ upgraded
 
-- Ansible playbook output is v̲a̲s̲t̲l̲y̲ upgraded
+- Skip ahead to "Loops" chapter to decipher [*]_ all this
 
-**vast** : geniş, engin, vasi, çok büyük
+- Replacing the literal ("hard-wired") constants [*]_ by variables is a step in that
+  direction
 
 - run arbitrary permissions fix afterwards
+
+- Virtually the entire repertoire of UNIX commands, utilities, and tools is available for invocation [*]_ by a shell script. 
+
+- Doublecheck if in right directory before messing [*]_ with log file.
+
+- # A tab precedes [*]_ this comment.
+
+- The comma operator can also concatenate [*]_ strings
 
 **afterwards** : sonradan, sonra   
 
@@ -113,4 +119,12 @@ management
 .. [*] trail: iz, izlemek, peşten sürükleyen şey, kuyruk
 .. [*] supersede: yerini almak, yerine geçmek, yerine başkasını koymak, yerine başka
        bir şey koyarak iptal etmek ilga etmek, yürürlükten kaldırmak
-
+.. [*] niche: mihrap, niş
+.. [*] revert: dönmek, geri dönen kimse, geri gitmek (verse'in tersi)
+.. [*] vast: geniş, engin, vasi, çok büyük
+.. [*] invocation of an article : bir maddeye atıf
+.. [*] decipher: şifre çözmek, yorumlamak
+.. [*] mess : karışıklık, düzensizlik, bozmak
+.. [*] constant : değişmez
+.. [*] precede : önünden yürümek, önce vuku bulmak 
+.. [*] concatenate : bitiştirmek, sıralamak, bağlamak, birleştirmek
