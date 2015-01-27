@@ -13,3 +13,9 @@
 cut -d\  -f17- /var/log/php5-fpm.log |sort |uniq -c |sort -nr| head -n 10
 cut -d\  -f9- /var/log/nginx-error-web.log |sort |uniq -c |sort -nr| head -n 10
 ```
+
+*. netstat'ta portu acik uygulamalari siralama;
+
+```
+netstat -anpt | grep apache2 |grep ESTABLISHED | awk '{ print $5 }' | cut -d: -f1 | sort -u
+```

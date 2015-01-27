@@ -186,3 +186,9 @@ sudoedit DOSYA
 ```
 cat /proc/<PID>/cmdline 
 ```
+* belli bir portu aktif olarak dinleyen uygulamalar;
+
+```
+netstat -anpt | grep ESTABLISHED | awk '{ print $7 }' | cut -d/ -f2 | sort -u
+```
+

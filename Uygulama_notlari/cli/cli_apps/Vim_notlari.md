@@ -130,6 +130,7 @@ marking each line where a match occurs (for a multi-line pattern, only the
 start of the match matters).
 
 * tum fold'lanan yerleri acma
+
 ```
 set nofoldenable 
 ```
@@ -143,3 +144,6 @@ set nofoldenable
 :%s/.*\n.*\n.*\n/\0\r/g
 ```
 
+```
+http://vim.wikia.com/wiki/Working_with_CSV_files
+```

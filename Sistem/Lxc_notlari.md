@@ -7,6 +7,11 @@ sudo service network-manager restart
 Not: restart sonrasi br0 interface'inin varolup olmadigini gormek icin
 /sbin/ifconfig ciktisina bak. interface yoksa makinayi reboot et.
 
+* ubuntu lxc kurulumunda libvirt-bin gelmiyor, halbu ki cgroup-lite onun
+  bagimliligi. Ancak kurduktan sonra  ubuntu'da lxc ile baglantili 2 interface cikiyor;
+  10.0.3.0/24 dev lxcbr0  proto kernel  scope link  src 10.0.3.1 
+  192.168.122.0/24 dev virbr0  proto kernel  scope link  src 192.168.122.1 
+  ikisini de ben olusturmadim, bu konuyu aksam inceleyecegim.
 
 ### Kullanim
 # Tum komutlar icin temel syntax;
