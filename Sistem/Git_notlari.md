@@ -78,9 +78,11 @@ git config remote.origin.push HEAD
 `git reflog`
 
 *  git-blame - Show what revision and author last modified each line of a  file
+
 #### stash (kelime anlami, zulalamak_
     Calling git stash without any arguments is equivalent to git stash save
     The latest stash you created is stored in refs/stash
+
 
 
 * coklu repo guncelleme

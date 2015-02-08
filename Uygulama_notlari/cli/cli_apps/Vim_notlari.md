@@ -147,3 +147,19 @@ set nofoldenable
 ```
 http://vim.wikia.com/wiki/Working_with_CSV_files
 ```
+
+```
+Python Mode
+```
+
+#. herhangi bir komutun uzerinde K 'ya bastiginda dokumanini acar.
+
+#. <leader> r ile calistirip ciktisini yeni buffer'a doker
+
+
+```
+Neosnippet ile python snippet'lerini kullanma
+```
+
+
+

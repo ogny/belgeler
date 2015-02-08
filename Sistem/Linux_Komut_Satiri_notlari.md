@@ -192,3 +192,19 @@ cat /proc/<PID>/cmdline
 netstat -anpt | grep ESTABLISHED | awk '{ print $7 }' | cut -d/ -f2 | sort -u
 ```
 
+* Default printer'i bulma;
+
+```
+lpstat -p -d
+```
+
+* Default printer'a is gonderm
+
+```
+lpr -P <printer_adi> <dosya(lar)>
+```
+
+```
+convert 2015-02-06-152435_1366x768_scrot.png -quality 100 -alpha off -density \
+600 -set units PixelsPerInch 1366x768px-noalpha.pdf
+```

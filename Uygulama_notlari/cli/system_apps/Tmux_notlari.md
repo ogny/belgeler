@@ -75,4 +75,8 @@ These are enabled when you search with copycat:
 n - jumps to the next match
 N - jumps to the previous match
 
+* List window
 
+```
+^b w
+```
