@@ -74,11 +74,45 @@ Failover
    the old primary that it is no longer the primary. This is sometimes known as
    STONITH (Shoot The Other Node In The Head
 
+Uygulama
+-----------
+
+#. TCP connection'und SSL tanimlanmasi
+
+    #. postgresql.conf'ta SSL  ayarlardi duzenlenir
+
+#. /var/lib/pgsql/9.4/data/ altinda duzenlenecekler;
+
+Master (islerin tamami icin link mevcut)
+------
+
+#. replicator kullanicisi olusturulur
+
+#. 
+
+`<https://gist.github.com/greinacker/4968619#file-user-sh>`_
+
+
+
+    #. postgresql.conf buradaki gibi duzenlenir.
+
+
+
+    #. pg_hba.conf
+
+#. Hata log'lari;
+
+    $HOME/pgstartup.log yaziyor sonra rotasyon basliyor 
+    $HOME/9.4/data/pg_log altinda tutuluyor.
+
+
+
 
 Kaynaklar:
 -----------
 
 #. `<http://www.postgresql.org/docs/9.3/>`_
 
-#.  
+#. `<http://www.rassoc.com/gregr/weblog/2013/02/16/zero-to-postgresql-streaming-replication-in-10-mins/>`_ 
 
+#. `<http://www.postgresql.org/docs/9.1/static/ssl-tcp.html>`_

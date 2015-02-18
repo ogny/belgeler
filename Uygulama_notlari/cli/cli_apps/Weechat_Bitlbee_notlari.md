@@ -1,4 +1,5 @@
 
+/set buffers.color.current_bg darkgray
 /set weechat.bar.status.color_bg black
 /set weechat.bar.status.items off
 /set weechat.bar.title.hidden on
@@ -49,3 +50,4 @@ server degistirme ^x
 ```
 account skype set auto_join true 
 ```
+

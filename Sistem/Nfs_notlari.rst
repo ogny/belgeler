@@ -1,5 +1,18 @@
-> By using smb in stead of nfs my disk spins up less often. But it still
-> spins up with no apparent reason (no computer in the network is on)
+=================
+Nfs Notlar
+=================
+
+:date: Çrş 18 Şub 2015 15:07:20 EET
+:comments: true
+:categories: 
+:tags: 
+:Author: Orkun Gunay
+
+Teori
+-----
+
+By using smb in stead of nfs my disk spins up less often. But it still
+spins up with no apparent reason (no computer in the network is on)
 that's tipical of linux. Some measures can be taken to alliviate the problem, 
 but they are not 100% effective.
 
@@ -17,4 +30,30 @@ operations.
 Unless... (this is becaming a class!) that in the client you mounted the nfs 
 share in "soft" mode (not "hard" -- but then you could have data loss...
 
+#. client kurulum
+
+..code:: sh
+
+    yum install nfs-utils nfs-utils-lib
+
+#. duzenlemeler /etc altinda exports ve fstab (emrah.com'da)
+
+#. Servisleri baslatma, paylasimi check etme
+
+..code:: sh
+
+    service  nfs start
+    service  rpcbind start
+    showmount -e localhost
+
+#. NOT: NFS server duzenlemeleri /etc/sysconfig/nfs'ten 
+
+Kaynaklar;
+----------
+
+#. `<http://www.jamescoyle.net/how-to/1019-view-available-exports-on-an-nfs-server>`_
+
+#. `<http://www.faqs.org/docs/Linux-HOWTO/NFS-HOWTO.html#CLIENT>`_
+
+#. `<http://www.tecmint.com/how-to-setup-nfs-server-in-linux/>`_
 
