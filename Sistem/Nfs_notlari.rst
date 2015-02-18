@@ -36,6 +36,8 @@ share in "soft" mode (not "hard" -- but then you could have data loss...
 
     yum install nfs-utils nfs-utils-lib
 
+    chkconfig --level 35 nfs on
+
 #. duzenlemeler /etc altinda exports ve fstab (emrah.com'da)
 
 #. Servisleri baslatma, paylasimi check etme
@@ -43,8 +45,11 @@ share in "soft" mode (not "hard" -- but then you could have data loss...
 ..code:: sh
 
     service  nfs start
+
     service  rpcbind start
+
     showmount -e localhost
+
 
 #. NOT: NFS server duzenlemeleri /etc/sysconfig/nfs'ten 
 
