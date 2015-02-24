@@ -8,6 +8,61 @@
 :tags: 
 :Author: Orkun Gunay
 
+======
+Pratik
+======
+
+Reverse Gecisler;
+==================
+
+new master'dan slave'e
+----------------------
+
+#. recovery.done recovery.conf ismiyle yedeklenir.
+
+.. code-block:: sh
+
+   mv /var/lib/pgsql/9.4/data/recovery.conf ~/
+
+#. data dizinini silinir.
+
+.. code-block:: sh
+
+   rm -rf /var/lib/pgsql/9.4/data
+
+#. Master'dan backup alinir;
+
+.. code-block:: sh
+
+   su - postgres -s /bin/bash --command='/usr/bin/pg_basebackup -h \
+   <Master IP> -D /var/lib/pgsql/9.4/data -P -U replicator \
+   --xlog-method=stream'
+
+#. posgresql.conf'ta hot_standby acilir
+
+#. recovery.conf data dizinine geri tasinir.
+
+#. servis yeniden baslatilir
+
+.. code-block:: sh
+
+   service postgresql-9.4 start
+
+#. Replication'un baslayip baslamadigi kontrol edilir;
+
+.. code-block:: sh
+
+    ps -ef |grep receiver
+
+#. servis yeniden baslatilir
+
+.. code-block:: sh
+
+   service postgresql-9.4 restart
+
+Teori
+=====
+
 Log-Shipping Standby Servers
 ----------------------------
 
@@ -106,6 +161,11 @@ Master (islerin tamami icin link mevcut)
     $HOME/9.4/data/pg_log altinda tutuluyor.
 
 
+CHEF Provisioning
+-----------------
+
+#. 
+
 
 
 Kaynaklar:
@@ -116,3 +176,5 @@ Kaynaklar:
 #. `<http://www.rassoc.com/gregr/weblog/2013/02/16/zero-to-postgresql-streaming-replication-in-10-mins/>`_ 
 
 #. `<http://www.postgresql.org/docs/9.1/static/ssl-tcp.html>`_
+
+#. `<https://github.com/hw-cookbooks/postgresql>`_

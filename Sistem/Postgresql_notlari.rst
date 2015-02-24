@@ -1,3 +1,14 @@
+==================
+Postgresql calisma
+==================
+
+:date: Sal 24 Şub 2015 17:20:20 EET
+:comments: true
+:categories: 
+:tags: 
+:Author: Orkun Gunay
+
+
 * veri tabani kullanicisiyla baglanmadiginda aldigin hata
 pdns=> DROP DATABASE pdns;
 ERROR:  must be owner of database pdns

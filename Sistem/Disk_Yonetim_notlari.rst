@@ -1,21 +1,37 @@
-#### Diski bagli oldugu partition'dan cikartip /var altindaki
+=================
+Disk yonetim komutlari
+=================
+
+:date: Cum 20 Şub 2015 13:54:54 EET
+:comments: true
+:categories: 
+:tags: 
+:Author: Orkun Gunay
+
+Disk Baglama
+============
+
+#. Diski bagli oldugu partition'dan cikartip /var altindaki
 icerikle yeni bir diske tasima;
 
-* disk'te partition olusturulur
-```
-parted --list
-parted /dev/sdX
-mklabel gpt
-mkpart primary 0% 100%
-quit
-```
+    #. disk'te partition olusturulur
 
-* Partition ext4 olarak bicimlendirilir.
-```
-mkfs.ext4 /dev/sdX1
-```
+    ..code:: sh 
 
-* Partition acilista sunucuya baglanacak sekilde eklenir.
+    parted --list
+    parted /dev/sdX
+    mklabel gpt
+    mkpart primary 0% 100%
+    quit
+
+#. Partition ext4 olarak bicimlendirilir.
+
+    ..code:: sh 
+
+    mkfs.ext4 /dev/sdX1
+
+#. Partition acilista sunucuya baglanacak sekilde eklenir.
+
 ls -alh /dev/disk/by-uuid
 vim /etc/fstab
 UUID= ...       /var    ext4    0 2
@@ -115,11 +131,24 @@ kill -USR1 <process_id>
 ```
 
 * Android cihaz baglama;
-```
-jmtpfs ~/mtp
-```
-    * umount etmek icin;
-```
-fusermount -u ~/mtp
-```
-[Kaynak:Archwiki](https://wiki.archlinux.org/index.php/MTP)
+
+    ..code:: sh 
+
+    jmtpfs ~/mtp
+
+* umount etmek icin;
+
+    ..code:: sh 
+
+    fusermount -u ~/mtp
+
+`Kaynak:Archwiki<https://wiki.archlinux.org/index.php/MTP>`_
+
+#. bagli diskleri gorme;
+
+    ..code:: sh 
+
+    cat /proc/mounts
+    
+    cat /proc/self/mounts
+

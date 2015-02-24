@@ -30,7 +30,8 @@ operations.
 Unless... (this is becaming a class!) that in the client you mounted the nfs 
 share in "soft" mode (not "hard" -- but then you could have data loss...
 
-#. client kurulum
+client kurulum
+-----------------
 
 ..code:: sh
 
@@ -50,6 +51,14 @@ share in "soft" mode (not "hard" -- but then you could have data loss...
 
     showmount -e localhost
 
+server'da yapilandirma;
+-----------------------
+
+exports dosyasi duzeni;
+
+..code:: sh
+
+    directory machine1(option11,option12) machine2(option21,option22)
 
 #. NOT: NFS server duzenlemeleri /etc/sysconfig/nfs'ten 
 
