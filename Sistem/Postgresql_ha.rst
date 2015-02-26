@@ -1,6 +1,6 @@
-=================
-``Postgresql HA``
-=================
+===============
+ Postgresql HA
+===============
 
 :date: Paz 15 Şub 2015 20:21:10 EET
 :comments: true
