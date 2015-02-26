@@ -8,21 +8,110 @@
 :tags: 
 :Author: Orkun Gunay
 
-======
-Pratik
-======
+#. Calismaya baslamadan once iptables kurallarinin silindigig ve selinux'un
+   kapatildigi kontrol edilmeli. (kalici olarak /etc/sysconfig altindan
+   duzenlenmeli.)
+
+.. code-block:: sh
+
+    iptables -L
+
+    setenforce 0
+
+
+REPMGR ile
+==========
+
+#. pgdg repo eklenir (Kaynaklardaki unixmen linkinden)
+
+Gerekli paketlerin kurulur:: 
+
+    yum install -y repmgr postgresql94-server postgresql94-contrib screen rsync
+
+#. standby node'lar icin repmgr.conf'da belirlenenen isimler standby node'larin
+   hosts dosyasina yazilir.
+
+#. repo'dan kurulan paketin binary dosya yolu pgsql bash_profile'ina eklenir ve
+   dosya source edilir.;
+
+.. code-block:: sh
+
+   export PATH=$PATH:/usr/pgsql-9.4/bin/
+
+   source ~/.bash_profile
+
+#. repmgr.conf dosyasi repmgr diziniyle birlikte olusturulur. 
+   
+.. code-block:: sh
+
+   su - postgres -s /bin/bash --command='mkdir -p /var/lib/pgsql/repmgr/ \
+   ; vi /var/lib/pgsql/repmgr/repmgr.conf'
+
+
+#. Servisi postgres kullanicisiyla yeniden baslatma;
+
+.. code-block:: sh
+
+   pg_ctl -D /var/lib/pgsql/9.4/data start
+
+#. Log'larin izlenmesi;
+
+.. code-block:: sh
+
+   su - postgres -s /bin/bash --command='tailf $HOME/repmgr/repmgrd.log'
+
+Uzerinde calisilanlar;
+----------------------
+
+#. repmgr'in autofailover_quick_setup dokumaninda postgresql.conf'a asagidaki
+   parametrenin girilmesi oneriliyor.
+
+.. code-block:: sh
+
+    shared_preload_libraries = 'repmgr_funcs'  
+   
+Failover
+---------
+
+#. Standby'lardan bir tanesini yeni master yaptigimizda diger standby'lar onu
+   otomatik olarak bulup izliyor. (2'den 3'e test edildi.)
+
+#. Dokumanda diger standby sunuculara yeni master'i takip etmeleri icin
+   asagidaki komutun girilmesi gerektigi yaziyor. Ancak testlerde buna gerek
+   olmadigini gordum. node3 yeni master node2'yi otomatik takip etmeye
+   basladi. 
+
+.. code-block:: sh
+
+    repmgr -f  $HOME/repmgr/repmgr.conf --verbose standby follow
+
+
+
+=====================
+Manuel yoldan cluster
+=====================
 
 Reverse Gecisler;
-==================
+-----------------
 
-new master'dan slave'e
-----------------------
+Old master ayaga kaldirilinca new master'dan slave'e gecis;
+-----------------------------------------------------------
+
+#. trigger dosyasi silinir.
+
+#. Servis kapatilir, kapanmiyorsa postgres kulllanicisinin pid'i oldurulur.
+
+.. code-block:: sh
+
+   service postgresql-9.4 stop
+
+   killall -u postgres
 
 #. recovery.done recovery.conf ismiyle yedeklenir.
 
 .. code-block:: sh
 
-   mv /var/lib/pgsql/9.4/data/recovery.conf ~/
+   mv /var/lib/pgsql/9.4/data/recovery.done ~/recovery.conf
 
 #. data dizinini silinir.
 
@@ -60,6 +149,8 @@ new master'dan slave'e
 
    service postgresql-9.4 restart
 
+
+=====
 Teori
 =====
 
@@ -143,9 +234,7 @@ Master (islerin tamami icin link mevcut)
 
 #. replicator kullanicisi olusturulur
 
-#. 
-
-`<https://gist.github.com/greinacker/4968619#file-user-sh>`_
+#.  `<https://gist.github.com/greinacker/4968619#file-user-sh>`_
 
 
 
@@ -171,6 +260,10 @@ CHEF Provisioning
 Kaynaklar:
 -----------
 
+#. `Kurulum icin;<http://www.unixmen.com/postgresql-9-4-released-install-centos-7/>`_
+
+#. `Repmgr:<https://raw.githubusercontent.com/2ndQuadrant/repmgr/master/QUICKSTART.md>`_
+
 #. `<http://www.postgresql.org/docs/9.3/>`_
 
 #. `<http://www.rassoc.com/gregr/weblog/2013/02/16/zero-to-postgresql-streaming-replication-in-10-mins/>`_ 
@@ -178,3 +271,4 @@ Kaynaklar:
 #. `<http://www.postgresql.org/docs/9.1/static/ssl-tcp.html>`_
 
 #. `<https://github.com/hw-cookbooks/postgresql>`_
+
