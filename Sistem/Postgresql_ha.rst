@@ -34,7 +34,7 @@ Gerekli paketlerin kurulur::
 #. repo'dan kurulan paketin binary dosya yolu pgsql bash_profile'ina eklenir ve
    dosya source edilir.;
 
-.. code-block:: sh
+..code:: sh
 
    export PATH=$PATH:/usr/pgsql-9.4/bin/
 
@@ -42,7 +42,7 @@ Gerekli paketlerin kurulur::
 
 #. repmgr.conf dosyasi repmgr diziniyle birlikte olusturulur. 
    
-.. code-block:: sh
+..code-block:: sh
 
    su - postgres -s /bin/bash --command='mkdir -p /var/lib/pgsql/repmgr/ \
    ; vi /var/lib/pgsql/repmgr/repmgr.conf'
