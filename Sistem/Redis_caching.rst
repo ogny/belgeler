@@ -6,6 +6,13 @@ Redis Caching Duzenleme
 :categories: redis
 :tags: server
 
+#. redis teki UnicodeDecodeError: 'utf8' codec can't decode byte 0x80 in position
+0: invalid start byte hatası icin;
+
+sysctl vm.overcommit_memory=1
+config set stop-writes-on-bgsave-error no
+
+
 **simple write operation:**
 
 1. The client sends a write command to the database (data is in client's memory).

@@ -1,6 +1,6 @@
-===============
- Postgresql HA
-===============
+=================
+``Postgresql HA``
+=================
 
 :date: Paz 15 Şub 2015 20:21:10 EET
 :comments: true
@@ -24,7 +24,9 @@ REPMGR ile
 
 #. pgdg repo eklenir (Kaynaklardaki unixmen linkinden)
 
-Gerekli paketlerin kurulur:: 
+Gerekli paketlerin kurulur
+
+.. code-block:: sh
 
     yum install -y repmgr postgresql94-server postgresql94-contrib screen rsync
 
@@ -34,7 +36,7 @@ Gerekli paketlerin kurulur::
 #. repo'dan kurulan paketin binary dosya yolu pgsql bash_profile'ina eklenir ve
    dosya source edilir.;
 
-..code:: sh
+.. code-block:: sh
 
    export PATH=$PATH:/usr/pgsql-9.4/bin/
 
@@ -42,17 +44,37 @@ Gerekli paketlerin kurulur::
 
 #. repmgr.conf dosyasi repmgr diziniyle birlikte olusturulur. 
    
-..code-block:: sh
+.. code-block:: sh
 
    su - postgres -s /bin/bash --command='mkdir -p /var/lib/pgsql/repmgr/ \
    ; vi /var/lib/pgsql/repmgr/repmgr.conf'
 
 
+#. repmgr_funcs'i calistirma (master'da);
+
+.. code-block:: sh
+
+    psql -f /usr/pgsql-9.4/share/contrib/repmgr_funcs.sql repmgr
+
+#. witness initialize
+
+.. code-block:: sh
+
+   repmgr -f repmgr/repmgr.conf -D $PGDATA -d repmgr -U repmgr -h \
+   <master_ip> witness create
+
+#. repmgrd calistirma (standby ve witness'ta)
+
+.. code-block:: sh
+
+   repmgrd -f $HOME/repmgr/repmgr.conf --daemonize -> \ 
+   $PGDATA/pg_log/repmgr.log 2>&1
+
 #. Servisi postgres kullanicisiyla yeniden baslatma;
 
 .. code-block:: sh
 
-   pg_ctl -D /var/lib/pgsql/9.4/data start
+   pg_ctl -D $PGDATA restart
 
 #. Log'larin izlenmesi;
 
@@ -86,12 +108,10 @@ Failover
     repmgr -f  $HOME/repmgr/repmgr.conf --verbose standby follow
 
 
-
-=====================
 Manuel yoldan cluster
 =====================
 
-Reverse Gecisler;
+Reverse Gecisler
 -----------------
 
 Old master ayaga kaldirilinca new master'dan slave'e gecis;
@@ -150,7 +170,6 @@ Old master ayaga kaldirilinca new master'dan slave'e gecis;
    service postgresql-9.4 restart
 
 
-=====
 Teori
 =====
 
@@ -230,17 +249,13 @@ Uygulama
 #. /var/lib/pgsql/9.4/data/ altinda duzenlenecekler;
 
 Master (islerin tamami icin link mevcut)
-------
+----------------------------------------
 
 #. replicator kullanicisi olusturulur
 
 #.  `<https://gist.github.com/greinacker/4968619#file-user-sh>`_
 
-
-
     #. postgresql.conf buradaki gibi duzenlenir.
-
-
 
     #. pg_hba.conf
 
@@ -257,18 +272,19 @@ CHEF Provisioning
 
 
 
+
 Kaynaklar:
 -----------
 
-#. `Kurulum icin;<http://www.unixmen.com/postgresql-9-4-released-install-centos-7/>`_
+#. `Paketlerin kurulumu icin; <http://www.unixmen.com/postgresql-9-4-released-install-centos-7/>`_
 
-#. `Repmgr:<https://raw.githubusercontent.com/2ndQuadrant/repmgr/master/QUICKSTART.md>`_
+#. `Repmgr Autofailover: <https://raw.githubusercontent.com/2ndQuadrant/repmgr/master/autofailover_quick_setup.rst>`_
 
-#. `<http://www.postgresql.org/docs/9.3/>`_
+#. `Repmgr Quickstart: <https://raw.githubusercontent.com/2ndQuadrant/repmgr/master/QUICKSTART.md>`_
 
-#. `<http://www.rassoc.com/gregr/weblog/2013/02/16/zero-to-postgresql-streaming-replication-in-10-mins/>`_ 
+#. `manuel streaming raplication: <http://www.rassoc.com/gregr/weblog/2013/02/16/zero-to-postgresql-streaming-replication-in-10-mins/>`_ 
 
-#. `<http://www.postgresql.org/docs/9.1/static/ssl-tcp.html>`_
+#. `ssl ile replication: <http://www.postgresql.org/docs/9.1/static/ssl-tcp.html>`_
 
-#. `<https://github.com/hw-cookbooks/postgresql>`_
+#. `Chef postgresql cookbook'u: <https://github.com/hw-cookbooks/postgresql>`_
 

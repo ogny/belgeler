@@ -17,3 +17,9 @@ xargs -n 1 curl -O < urls.txt
 ```
 curl -o /dev/null -s -w %{time_connect}:%{time_starttransfer}:%{time_total}\\n http://domain.tld
 ```
+
+* tek dosya indirme;
+
+```
+curl -O <url_adresi>
+```

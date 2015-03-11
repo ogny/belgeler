@@ -4,6 +4,10 @@
  ^A Tab
  ^A C
 `
+* boluneni geri kapama
+C-a X
+
+
 * tmux icinde screen'de clear'i calistirmak icin;
 `set -o vi`
 

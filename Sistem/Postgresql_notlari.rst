@@ -23,3 +23,13 @@ CREATE DATABASE db_adi;
 GRANT ALL PRIVILEGES ON DATABASE db_adi to kullanici_adi;
 
 * auto-increment'i arastir.
+
+
+#. Drop all tables in postgresql?
+
+drop schema public cascade;
+create schema public;
+
+http://stackoverflow.com/questions/3327312/drop-all-tables-in-postgresql
+
+DROP TABLE -- remove a table

@@ -41,3 +41,4 @@ Rsync Calismasi
     rsync --remove-source-files --compress-level=1 \
     -av  kaynak_makina:/*.dosya_uzantisi hedef_makina:/dizin
 
+#. inplace eklenecek
