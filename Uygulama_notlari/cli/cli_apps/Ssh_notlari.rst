@@ -1,16 +1,10 @@
-* Uzak sunucudaki dosyanin sonuna yerel dosyadan ekleme
+* Uzak sunucudaki dosyanin sonuna yerel dosyadan ekleme::
 
-.. code:: sh
+    ssh user@remoteserver "/sbin/cat >>remotefile" <localfile
 
-        ssh user@remoteserver "/sbin/cat >>remotefile" <localfile
+* Sorun: Terminale devamli asagidaki uyari basiliyorsa::
 
-* Sorun: Terminale devamli asagidaki uyari basiliyorsa;
-
-fatal: Read from socket failed: Connection reset by peer [preauth]
-
-.. code:: sh
-
-           fatal: Read from socket failed: Connection reset by peer [preauth]
+    fatal: Read from socket failed: Connection reset by peer [preauth]
 
 * Cozum: ssh_config dosyandaki Cipher'deki comment'i kaldir;
 
