@@ -24,9 +24,21 @@ lvm2
 http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=1006371
 
 * VolGroup00 yerine VolGroup-lv_root yaz.
-* vgdisplay VolGroup | grep "Free" ile kalan bos yeri bul.
-* lvextend -L+<Bos_yer>G /dev/VolGroup/lv_root
-* resize2fs -p /dev/VolGroup/lv_root
 
+#. bos alani hesaplama::
 
+    vgdisplay VolGroup | grep "Free" 
 
+#. Bos alani ekleme::
+
+    lvextend -L+<Bos_yer>G /dev/VolGroup/lv_root
+
+#. Partition eklenen diski genisletme::
+
+    resize2fs -p /dev/VolGroup/lv_root
+
+* lv_home'dan lv_root'a transfer (Centos default kurulumda 50G disindaki alani /home'a bagliyor)
+
+http://serverfault.com/questions/524962/how-to-integrate-home-back-into-main-partition-then-grow-partition*
+
+Yukaridaki son iki adim eklenir.

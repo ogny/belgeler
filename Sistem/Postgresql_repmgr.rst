@@ -4,111 +4,115 @@ Repmgr ile PG Ha
 
 Centos 6.6'da adim adim yapilan tum islemler
 
-rpm -Uvh http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-centos94-9.4-1.noarch.rpm
+#. Gerekli paketlerin kurulumu:: 
 
-yum install -y postgresql94-server postgresql94-contrib screen rsync \
-keepalived repmgr 
+    rpm -Uvh \
+    http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-centos94-9.4-1.noarch.rpm
 
-bash_profile ekleme
+    yum install -y postgresql94-server postgresql94-contrib screen rsync \
+    keepalived repmgr 
 
-#. Sadece master'de;
+#. bash_profile'e pathe ekleme.
 
-service postgresql-9.4 initdb
+#. Sadece master'de::
 
-    postgres ile
+    service postgresql-9.4 initdb
 
-ssh-keygen -t rsa
+postgres ile::
 
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+    ssh-keygen -t rsa
+    
+    cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+    
+    chmod go-rwx ~/.ssh/*
 
-chmod go-rwx ~/.ssh/*
+root ile::
 
-    root ile
+    rsync -avz ~postgres/.ssh/ <node_ip>:~postgres/.ssh/
 
-rsync -avz ~postgres/.ssh/ <node_ip>:~postgres/.ssh/
+#. tum node'larda repmgr.conf olusturulur. (sample'dan)::
 
-pg_hba ve postgres.conf editlenir (autofailover'den);
+    mkdir $HOME/repmgr
 
-pg_hba'daki kullanicilar olusturulur (autofailover'den);
+#. pg_hba ve postgres.conf editlenir (autofailover'den);
 
-psql -f /usr/pgsql-9.4/share/contrib/repmgr_funcs.sql repmgr
+#. pg_hba'daki kullanicilar olusturulur (autofailover'den)::
 
-db ve kullanicisi olusturulur, funcs calistirilir.
+    psql -f /usr/pgsql-9.4/share/contrib/repmgr_funcs.sql repmgr
+
+#. db ve kullanicisi olusturulur, funcs calistirilir.
 
 #. master clone'lanir, (autofailover'den, verbose mode'da)
    
-#. standby db'ler baslatilir. 
+#. standby db'ler baslatilir:: 
    
-pg_ctl -D $PGDATA start
+    pg_ctl -D $PGDATA start
 
-#. tum node'larda repmgr.conf olusturulur. (sample'dan)
 
-mkdir $HOME/repmgr
+#. pg_bindir ve logfile'i degistir
+#. conn_info'nun sonuna dbname=repmgr user=repmgr koymayi unutma
+#. promote_command'ta repmgr.conf path'ini belirt
 
-pg_bindir ve logfile'i degistir
-conn_info'nun sonuna dbname=repmgr user=repmgr koymayi unutma
-promote_command'ta repmgr.conf path'ini belirt
+#. node'lar role'lerine gore register edilir::
 
-#. node'lar role'lerine gore register edilir.
+    repmgr -f $HOME/repmgr/repmgr.conf --verbose master register
+    repmgr -f $HOME/repmgr/repmgr.conf --verbose standby register
 
-repmgr -f $HOME/repmgr/repmgr.conf --verbose master register
-repmgr -f $HOME/repmgr/repmgr.conf --verbose standby register
+#. node2'de::
 
-#. node2'de;
+    repmgr -d repmgr -U repmgr --verbose standby clone <master_ip>
 
-repmgr -d repmgr -U repmgr --verbose standby clone <master_ip>
+    pg_ctl start -m fast
 
-pg_ctl start -m fast
+#. node3'de::
 
-#. node3'de;
+    repmgr -d repmgr -U repmgr --verbose standby clone <master_ip>
 
-repmgr -d repmgr -U repmgr --verbose standby clone <master_ip>
+    pg_ctl start -m fast
 
-pg_ctl start -m fast
+#. Cluster'in durumunu takip etme::
 
-Cluster'in durumunu takip etme;
-
-repmgr cluster show -f repmgr/repmgr.conf
+    repmgr cluster show -f repmgr/repmgr.conf
 
 
 Geri donus
 ==========
 
 node2'yi master'dan slave'e cekmek;
-----------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. node1 standby'a cekilir;
+#. node1 standby'a cekilir::
 
-repmgr -d repmgr  -U repmgr --verbose --force standby clone <node2_ip>
+    repmgr -d repmgr  -U repmgr --verbose --force standby clone <node2_ip>
 
-#. node1'i ac, node2'yi durdur, node1'i promote et.
+#. node1'i ac, node2'yi durdur, node1'i promote et::
 
-repmgr standby promote -f $HOME/repmgr/repmgr.conf
+    repmgr standby promote -f $HOME/repmgr/repmgr.conf
 
-#. node3'u node1'e follow ettir;
+#. node3'u node1'e follow ettir::
 
-repmgr -f $HOME/repmgr/repmgr.conf standby follow
+    repmgr -f $HOME/repmgr/repmgr.conf standby follow
 
-#. node2'den node1'i klonla, node2'yi baslat
+#. node2'den node1'i klonla, node2'yi baslat::
 
-repmgr -d repmgr  -U repmgr --verbose --force standby clone <node1_ip>
+    repmgr -d repmgr  -U repmgr --verbose --force standby clone <node1_ip>
 
 #. replication'u kontrol et
 
-#. Repmgrd calistirma;
+#. Repmgrd calistirma::
 
-repmgrd -f repmgr/repmgr.conf --daemonize -> $PGDATA/pg_log/repmgr.log 2>&1
+    repmgrd -f repmgr/repmgr.conf --daemonize -> $PGDATA/pg_log/repmgr.log 2>&1
 
 
-
-#. uzerinde calisilacaklar;
+uzerinde calisilacaklar
+=======================
 
 repl_status monitoring'i kullanmadim, ayrica log'da bazi hatalar da gordum,
 vakit oldugunda ona donmek istiyorum.
 
 
-=================
 #. olusan hatalar
+=================
 
 1) node2 acilmiyor, hata;
    postgresql invalid resource manager ID in primary checkpoint record could
@@ -132,12 +136,6 @@ could not receive data from WAL stream: ERROR:  requested starting point
 0/6E000000 is ahead of the WAL flush position of this server 0/5A018508
 
 son master olan makinadan clone alinip yeniden baslatilir
-
-Ekler;
-
-test verisi olusturma;
-
-create table <tablo_adi> as select s, md5(random()::text) from generate_Series(1,5) s;
 
 5) slave yine ileride, yeni master'dan klon'ladim
 
@@ -168,4 +166,13 @@ started streaming WAL from primary at 0/85000000 on timeline 1
 master'da replikasyonun tutuldugu db'ye gecip
 DELETE FROM repmgr_<cluster_name>.repl_nodes WHERE name = '<node_name>';
 
+8) uzak makinayi promote ederken asagidaki hatayi veriyor::
 
+    [WARNING] reconnect_attemp s/1: Unknown name/value pair!
+
+Ekler;
+======
+
+test verisi olusturma;
+
+create table <tablo_adi> as select s, md5(random()::text) from generate_Series(1,5) s;
