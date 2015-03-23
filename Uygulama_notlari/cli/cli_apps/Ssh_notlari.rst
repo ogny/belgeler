@@ -1,3 +1,7 @@
+===========
+SSH Notlari
+===========
+
 * Uzak sunucudaki dosyanin sonuna yerel dosyadan ekleme::
 
     ssh user@remoteserver "/sbin/cat >>remotefile" <localfile
