@@ -5,3 +5,5 @@
 ao=pulse,alsa,sdl:aalib
 ```
 https://bugs.launchpad.net/ubuntu/+source/mplayer/+bug/550517
+
+* repeat icin -loop <repeat count> sonsuz icin 0

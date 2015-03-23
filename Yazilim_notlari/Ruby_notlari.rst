@@ -2,7 +2,6 @@
 Ruby notlari
 ============
 
-:date: 2015-02-05
 
 Time Module
 -----------

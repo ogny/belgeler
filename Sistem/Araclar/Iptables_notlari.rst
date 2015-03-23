@@ -2,11 +2,9 @@ Iptables Notlari
 ==================
 
 
-* Eklenen bir kurali silme (Ornegin accept kuralini)
+* Eklenen bir kurali silme (Ornegin accept kuralini)::
 
-..  code:: sh
-
-iptables -D INPUT -p  tcp -s IP_Adresi --dport Port_no -j ACCEPT 
+    iptables -D INPUT -p  tcp -s IP_Adresi --dport Port_no -j ACCEPT 
 
 * The TCP protocol looks at data as an continuous data stream with a
 start and a stop signal. The signal that indicates that a new stream is
@@ -42,25 +40,20 @@ connection is torn down properly.
 * iptables was and is specifically built  to work on the headers of the
 Internet and the Transport layers
 
-* x portu haric Tum portlari erisime kapatma 
+* x portu haric Tum portlari erisime kapatma::
 
-.. code:: sh
-
-    # Exceptions to default policy
     iptables -A INPUT -p tcp --dport 80 -j ACCEPT
     iptables -A INPUT -p tcp --dport 443 -j ACCEPT
 
 `Kaynak:Superuser <http://superuser.com/questions/769814/how-to-block-all-ports-except-80-443-with-iptables/>`_.
 
-* eth0'a gelen trafik engellensin, istina; eth0:0'a gelen trafik kabul edilsin.
-
-.. code:: sh
+* eth0'a gelen trafik engellensin, istina; eth0:0'a gelen trafik kabul
+  edilsin.::
 
    iptables -A INPUT -i eth0 -d xx:yy:zz:vv -j ACCEPT
    iptables -A INPUT -i eth0 -j DROP
 
 `Kaynak:Superuser <http://www.superuser.com/questions/698081/how-to-block-incoming-traffic-on-a-virtual-interface/>`_.
-
 
 **Nat table**
 
