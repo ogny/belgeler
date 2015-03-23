@@ -110,6 +110,18 @@ uzerinde calisilacaklar
 repl_status monitoring'i kullanmadim, ayrica log'da bazi hatalar da gordum,
 vakit oldugunda ona donmek istiyorum.
 
+Ekler;
+======
+
+#. test verisi olusturma::
+
+    create table <tablo_adi> as select s, md5(random()::text) from generate_Series(1,5) s;
+    
+#. test verisini silme::
+
+    drop schema public cascade;
+
+    create schema public;
 
 #. olusan hatalar
 =================
@@ -170,9 +182,3 @@ DELETE FROM repmgr_<cluster_name>.repl_nodes WHERE name = '<node_name>';
 
     [WARNING] reconnect_attemp s/1: Unknown name/value pair!
 
-Ekler;
-======
-
-test verisi olusturma;
-
-create table <tablo_adi> as select s, md5(random()::text) from generate_Series(1,5) s;
