@@ -118,9 +118,8 @@ vermeleri uc asamali;
     - Sentinel cikartmak.
     - old master'i veya ulasilamayan slave'leri cikartmak.
 
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Yapilandirma icin gerekenler
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------
 
 virtual-ip (haproxy)
 
