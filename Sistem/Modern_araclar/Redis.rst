@@ -163,6 +163,7 @@ haproxy
     vi /etc/haproxy/haproxy.cfg
 
 defaults'ta degistirilenler::
+
     mode              tcp
     timeout connect   2s
     timeout  client   120s 
@@ -176,6 +177,7 @@ defaults'ta degistirilenler::
     backend redis_backend
     option tcp-check
 haproxy will look for the following strings to determine the master::
+
     tcp-check send PING\r\n
     tcp-check expect string +PONG
     tcp-check send info\ replication\r\n
@@ -183,6 +185,7 @@ haproxy will look for the following strings to determine the master::
     tcp-check send QUIT\r\n
     tcp-check expect string +OK
 these are the ip’s of the two redis nodes::
+
     server redis1 <redis_ip>:6379  check inter 1s
     server redis2 <redis_ip>:6379  check inter 1s
 
