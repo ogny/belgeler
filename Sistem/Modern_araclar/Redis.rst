@@ -39,6 +39,7 @@ Sistem Genel
 
 * sistemde swap olustur ve maxmemory'i sinirlandir.
   degisiklikten sonra redis'i restart et::
+
     ulimit -m <deger> 
     max user processes value = pending signals value
     /etc/security/limits.d/90-nproc.conf
@@ -59,9 +60,8 @@ required for the login process. That is why the hard limit should be set to
 
 * incelenecek::
 
-  # Controls the maximum number of shared memory segments, in pages
-  kernel.shmall = 4294967296
-  fs.file-max = 200000
+    kernel.shmall = 4294967296
+    fs.file-max = 200000
 
 
 Redis Yapilandirma
@@ -124,10 +124,15 @@ Yapilandirma icin gerekenler
 virtual-ip (haproxy)
 Sanal makinalar
 --------------
+
 #. test-ha1
+
 #. test-ha2
+
 #. test-redis1 (sentinel1)
+
 #. test-redis2 (sentinel2)
+
 #. sentinel3
 
 haproxy
@@ -140,46 +145,47 @@ haproxy
     & ~
     EOF
 
-  vi /etc/rsyslog.d/49-haproxy.conf
-  $ModLoad imudp
-  $UDPServerRun 514
-  $UDPServerAddress 127.0.0.1
+    vi /etc/rsyslog.d/49-haproxy.conf
+    $ModLoad imudp
+    $UDPServerRun 514
+    $UDPServerAddress 127.0.0.1
 
-  /etc/init.d/rsyslog restart
+    /etc/init.d/rsyslog restart
 
 * Kurulum - Yapilandirma::
 
-  yum install -y haproxy keepalived
-  echo "net.ipv4.ip_nonlocal_bind=1" | tee -a /etc/sysctl.conf && sysctl -p
+    yum install -y haproxy keepalived
+    echo "net.ipv4.ip_nonlocal_bind=1" | tee -a /etc/sysctl.conf && sysctl -p
 
-  mv /etc/keepalived/keepalived.conf{,.org}
-  mv /etc/haproxy/haproxy.cfg{,.org}
-  
-  vi /etc/haproxy/haproxy.cfg
+    mv /etc/keepalived/keepalived.conf{,.org}
+    mv /etc/haproxy/haproxy.cfg{,.org}
+    
+    vi /etc/haproxy/haproxy.cfg
 
 defaults'ta degistirilenler::
-  mode              tcp
-  timeout connect   2s
-  timeout  client   120s 
-  timeout  server   120s 
-  maxconn           4096
+    mode              tcp
+    timeout connect   2s
+    timeout  client   120s 
+    timeout  server   120s 
+    maxconn           4096
 
-  frontend  redis
-    bind   :6379
-    default_backend redis_backend
+    frontend  redis
+      bind   :6379
+      default_backend redis_backend
 
-  backend redis_backend
-  option tcp-check
+    backend redis_backend
+    option tcp-check
 haproxy will look for the following strings to determine the master::
-  tcp-check send PING\r\n
-  tcp-check expect string +PONG
-  tcp-check send info\ replication\r\n
-  tcp-check expect string role:master
-  tcp-check send QUIT\r\n
-  tcp-check expect string +OK
+    tcp-check send PING\r\n
+    tcp-check expect string +PONG
+    tcp-check send info\ replication\r\n
+    tcp-check expect string role:master
+    tcp-check send QUIT\r\n
+    tcp-check expect string +OK
 these are the ip’s of the two redis nodes::
-  server redis1 <redis_ip>:6379  check inter 1s
-  server redis2 <redis_ip>:6379  check inter 1s
+    server redis1 <redis_ip>:6379  check inter 1s
+    server redis2 <redis_ip>:6379  check inter 1s
 
 * Servis baslatilir::
-  /etc/init.d/haproxy start
+
+    /etc/init.d/haproxy start
