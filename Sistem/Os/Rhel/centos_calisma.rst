@@ -45,4 +45,6 @@ Centos'la calisirken karsilasilan durumlar
 
     /etc/security/limits.d/90-nproc.conf 
 
+#. Centos6'da servisleri listelemek::
 
+   chkconfig --list 

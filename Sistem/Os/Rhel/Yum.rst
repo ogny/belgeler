@@ -14,9 +14,14 @@ Yum
 *  Kurduktan sonra::
 
     yum install yum-utils
-
     yumdownloader <paket_adi>
 
         * Indirilecek dizin belirtilmezse bulunulan dizine indirir.
         
+* Bagimliliklari cozme::
 
+  yum deplist <paket_adi>
+
+yum-utils ile geliyor::
+
+   repoquery --requires --recursive --resolve <paket_adi>
