@@ -16,7 +16,7 @@ Kurulum
     vi  /etc/yum.repos.d/remi.repo
     enabled=1
 
-     yum install -y redis
+    yum install -y redis
 
 
 Yapilandirma
@@ -59,7 +59,7 @@ required for the login process. That is why the hard limit should be set to
 
 * incelenecek::
 
-    # Controls the maximum number of shared memory segments, in pages
+    - Controls the maximum number of shared memory segments, in pages
     kernel.shmall = 4294967296
     fs.file-max = 200000
 
@@ -78,11 +78,11 @@ Sentinel Yapilandirma
 Sentinel'ler dagitik bir sekilde redis master'i izliyor, coktugune karar
 vermeleri uc asamali;
 
-    1. Master'dan cevap alamadiginda **subjectively down** (also known as SDOWN)
-    2. Down olsa bile yeni master'i atamak icin sentinel yeterli cogunlugunun
-       (quorum) onayina ihtiyac var. (ODOWN)
-    3. Quorum saglandiginda, kalan sentinel sayisi kadar sentinel'e authorize
-       olmasi gerekiyor.
+    - Master'dan cevap alamadiginda **subjectively down** (also known as SDOWN)
+    - Down olsa bile yeni master'i atamak icin sentinel yeterli cogunlugunun
+      (quorum) onayina ihtiyac var. (ODOWN)
+    - Quorum saglandiginda, kalan sentinel sayisi kadar sentinel'e authorize
+      olmasi gerekiyor.
 
 #. `parallel-sync` ile ayni anda kac slave'in master'la sync olacagini
    belirliyorsun. bir tanesi sync olurken digerlerini eski data'dan yanit
@@ -115,8 +115,8 @@ vermeleri uc asamali;
 
 #. Case by case anlatilan konular;
 
-    #. Sentinel cikartmak.
-    #. old master'i veya ulasilamayan slave'leri cikartmak.
+    - Sentinel cikartmak.
+    - old master'i veya ulasilamayan slave'leri cikartmak.
 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Yapilandirma icin gerekenler
