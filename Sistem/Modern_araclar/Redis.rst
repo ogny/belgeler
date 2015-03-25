@@ -63,13 +63,6 @@ required for the login process. That is why the hard limit should be set to
     kernel.shmall = 4294967296
     fs.file-max = 200000
 
-
-Redis Yapilandirma
-------------------
-
-(calisiliyor)
-
-
 Sentinel Yapilandirma
 ---------------------
 
@@ -125,11 +118,11 @@ virtual-ip (haproxy)
 
 Sanal makinalar
 --------------
-- test-ha1
-- test-ha2
-- test-redis1 (sentinel1)
-- test-redis2 (sentinel2)
-- sentinel3
+* test-ha1
+* test-ha2
+* test-redis1 (sentinel1)
+* test-redis2 (sentinel2)
+* sentinel3
 
 haproxy
 ~~~~~~~
@@ -182,3 +175,6 @@ these are the ip’s of the two redis nodes::
     
 * Servis baslatilir::
       /etc/init.d/haproxy start
+
+Redis Yapilandirma
+------------------
