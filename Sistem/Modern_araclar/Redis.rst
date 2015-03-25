@@ -16,7 +16,7 @@ Kurulum
     vi  /etc/yum.repos.d/remi.repo
     enabled=1
 
-    yum install -y redis
+     yum install -y redis
 
 
 Yapilandirma
@@ -59,9 +59,16 @@ required for the login process. That is why the hard limit should be set to
 
 * incelenecek::
 
-    - Controls the maximum number of shared memory segments, in pages
+    # Controls the maximum number of shared memory segments, in pages
     kernel.shmall = 4294967296
     fs.file-max = 200000
+
+
+Redis Yapilandirma
+------------------
+
+(calisiliyor)
+
 
 Sentinel Yapilandirma
 ---------------------
@@ -71,11 +78,11 @@ Sentinel Yapilandirma
 Sentinel'ler dagitik bir sekilde redis master'i izliyor, coktugune karar
 vermeleri uc asamali;
 
-    - Master'dan cevap alamadiginda **subjectively down** (also known as SDOWN)
-    - Down olsa bile yeni master'i atamak icin sentinel yeterli cogunlugunun
-      (quorum) onayina ihtiyac var. (ODOWN)
-    - Quorum saglandiginda, kalan sentinel sayisi kadar sentinel'e authorize
-      olmasi gerekiyor.
+    1. Master'dan cevap alamadiginda **subjectively down** (also known as SDOWN)
+    2. Down olsa bile yeni master'i atamak icin sentinel yeterli cogunlugunun
+       (quorum) onayina ihtiyac var. (ODOWN)
+    3. Quorum saglandiginda, kalan sentinel sayisi kadar sentinel'e authorize
+       olmasi gerekiyor.
 
 #. `parallel-sync` ile ayni anda kac slave'in master'la sync olacagini
    belirliyorsun. bir tanesi sync olurken digerlerini eski data'dan yanit
@@ -108,21 +115,22 @@ vermeleri uc asamali;
 
 #. Case by case anlatilan konular;
 
-    - Sentinel cikartmak.
-    - old master'i veya ulasilamayan slave'leri cikartmak.
+    #. Sentinel cikartmak.
+    #. old master'i veya ulasilamayan slave'leri cikartmak.
 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Yapilandirma icin gerekenler
-----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 virtual-ip (haproxy)
 
 Sanal makinalar
 --------------
-* test-ha1
-* test-ha2
-* test-redis1 (sentinel1)
-* test-redis2 (sentinel2)
-* sentinel3
+- test-ha1
+- test-ha2
+- test-redis1 (sentinel1)
+- test-redis2 (sentinel2)
+- sentinel3
 
 haproxy
 ~~~~~~~
@@ -134,22 +142,22 @@ haproxy
     & ~
     EOF
 
-    vi /etc/rsyslog.d/49-haproxy.conf
-    $ModLoad imudp
-    $UDPServerRun 514
-    $UDPServerAddress 127.0.0.1
-    
-    /etc/init.d/rsyslog restart
+vi /etc/rsyslog.d/49-haproxy.conf
+$ModLoad imudp
+$UDPServerRun 514
+$UDPServerAddress 127.0.0.1
+
+/etc/init.d/rsyslog restart
 
 * Kurulum - Yapilandirma::
 
-    yum install -y haproxy keepalived
-    echo "net.ipv4.ip_nonlocal_bind=1" | tee -a /etc/sysctl.conf && sysctl -p
-    
-    mv /etc/keepalived/keepalived.conf{,.org}
-    mv /etc/haproxy/haproxy.cfg{,.org}
-    
-    vi /etc/haproxy/haproxy.cfg
+yum install -y haproxy keepalived
+echo "net.ipv4.ip_nonlocal_bind=1" | tee -a /etc/sysctl.conf && sysctl -p
+
+mv /etc/keepalived/keepalived.conf{,.org}
+mv /etc/haproxy/haproxy.cfg{,.org}
+
+vi /etc/haproxy/haproxy.cfg
 
 defaults'ta degistirilenler::
       mode              tcp
@@ -157,9 +165,11 @@ defaults'ta degistirilenler::
       timeout  client   120s 
       timeout  server   120s 
       maxconn           4096
+    
       frontend  redis
-      bind   :6379
-      default_backend redis_backend
+        bind   :6379
+        default_backend redis_backend
+    
       backend redis_backend
       option tcp-check
 haproxy will look for the following strings to determine the master::
@@ -173,8 +183,5 @@ these are the ip’s of the two redis nodes::
       server redis1 <redis_ip>:6379  check inter 1s
       server redis2 <redis_ip>:6379  check inter 1s
     
-* Servis baslatilir::
+    * Servis baslatilir::
       /etc/init.d/haproxy start
-
-Redis Yapilandirma
-------------------
