@@ -27,7 +27,7 @@ Sistem Genel
 
 * Acilista baslat::
   
-    chkconfig --level 345 redis on
+    chkconfig redis on
 
 * hang olmasin::
 
@@ -64,10 +64,20 @@ required for the login process. That is why the hard limit should be set to
     fs.file-max = 200000
 
 
-Redis Yapilandirma
-------------------
+Yapilandirma
+------------
 
-(calisiliyor)
+* Master ve slave'de beraber::
+
+    vi /etc/redis.conf
+    port 6380
+    bind 127.0.0.1 <gercek_ip>
+
+# Sadece slave'de::
+
+    slaveof <master_ip> 6380
+
+
 
 
 Sentinel Yapilandirma
@@ -96,8 +106,9 @@ vermeleri uc asamali;
 #. sentinel'leri karsilikli olarak yapilandirmaya ihtiyac yok, ayni master'i
    dinleyen sentinel'ler birbirlerini buluyor.
 
-#. Partition kavrami incelenecek : eski master'i isole etmede kullaniliyor.
-   (network Partition olarak geciyor.)
+#. Partition relational db'lerdeki sharding: eski master'i isole etmede, birden
+   cok master icin kullaniliyor, caching yapisinda sorunsuz calisabilir,
+   pratikte old master'dan slave'e donuste karsilasilan bir durum.
 
 #. slave'den master'a geciste tum slave'lerin ayni run id'ye sahip olmasi
    oneriliyor, gecisin statik degil dinamik olmasi icin. 
@@ -155,6 +166,7 @@ haproxy
 * Kurulum - Yapilandirma::
 
     yum install -y haproxy keepalived
+    chkconfig redis on
     echo "net.ipv4.ip_nonlocal_bind=1" | tee -a /etc/sysctl.conf && sysctl -p
 
     mv /etc/keepalived/keepalived.conf{,.org}
@@ -179,16 +191,22 @@ defaults'ta degistirilenler::
 haproxy will look for the following strings to determine the master::
 
     tcp-check send PING\r\n
-    tcp-check expect string +PONG
+    ecp-check expect string +PONG
     tcp-check send info\ replication\r\n
     tcp-check expect string role:master
     tcp-check send QUIT\r\n
     tcp-check expect string +OK
 these are the ip’s of the two redis nodes::
 
-    server redis1 <redis_ip>:6379  check inter 1s
-    server redis2 <redis_ip>:6379  check inter 1s
+    server redis1 <redis_ip>:6380  check inter 1s
+    server redis2 <redis_ip>:6380  check inter 1s
 
 * Servis baslatilir::
 
     /etc/init.d/haproxy start
+
+Sentinel
+--------
+
+    service redis-sentinel start
+    chkconfig redis-sentinel on
