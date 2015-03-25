@@ -135,10 +135,10 @@ haproxy
 
 * logging::
 
-  cat << EOF > /etc/rsyslog.d/49-haproxy.conf
-  local2.* -/var/log/haproxy.log
-  & ~
-  EOF
+    cat << EOF > /etc/rsyslog.d/49-haproxy.conf
+    local2.* -/var/log/haproxy.log
+    & ~
+    EOF
 
   vi /etc/rsyslog.d/49-haproxy.conf
   $ModLoad imudp
