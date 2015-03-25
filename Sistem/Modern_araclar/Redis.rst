@@ -122,16 +122,18 @@ Yapilandirma icin gerekenler
 ============================
 
 virtual-ip (haproxy)
-1	test-ha1
-2	test-ha2
-3	test-redis1 (sentinel1)
-4	test-redis2 (sentinel2)
-5 sentinel3
+Sanal makinalar
+--------------
+#. test-ha1
+#. test-ha2
+#. test-redis1 (sentinel1)
+#. test-redis2 (sentinel2)
+#. sentinel3
 
 haproxy
 ~~~~~~~
 
-#. logging::
+* logging::
 
   cat << EOF > /etc/rsyslog.d/49-haproxy.conf
   local2.* -/var/log/haproxy.log
@@ -145,7 +147,7 @@ haproxy
 
   /etc/init.d/rsyslog restart
 
-#. Kurulum - Yapilandirma::
+* Kurulum - Yapilandirma::
 
   yum install -y haproxy keepalived
   echo "net.ipv4.ip_nonlocal_bind=1" | tee -a /etc/sysctl.conf && sysctl -p
@@ -154,7 +156,8 @@ haproxy
   mv /etc/haproxy/haproxy.cfg{,.org}
   
   vi /etc/haproxy/haproxy.cfg
-# defaults'ta degistirilenler::
+
+defaults'ta degistirilenler::
   mode              tcp
   timeout connect   2s
   timeout  client   120s 
@@ -167,16 +170,16 @@ haproxy
 
   backend redis_backend
   option tcp-check
-#haproxy will look for the following strings to determine the master::
+haproxy will look for the following strings to determine the master::
   tcp-check send PING\r\n
   tcp-check expect string +PONG
   tcp-check send info\ replication\r\n
   tcp-check expect string role:master
   tcp-check send QUIT\r\n
   tcp-check expect string +OK
-#these are the ip’s of the two redis nodes::
+these are the ip’s of the two redis nodes::
   server redis1 <redis_ip>:6379  check inter 1s
   server redis2 <redis_ip>:6379  check inter 1s
 
-#. Servis baslatilir::
+* Servis baslatilir::
   /etc/init.d/haproxy start
