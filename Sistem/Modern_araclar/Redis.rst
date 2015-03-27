@@ -181,7 +181,8 @@ haproxy
 Keepalived
 ~~~~~~~~~~
 
-..
+::
+
     mv /etc/keepalived/keepalived.conf{,.org}
     vi /etc/keepalived/keepalived.conf
 
