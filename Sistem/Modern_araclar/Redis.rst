@@ -66,6 +66,7 @@ Redis Yapilandirma
 -------------------
 
 ::
+
     cp /etc/redis.conf{,.org}
     vi /etc/redis.conf
 
