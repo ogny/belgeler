@@ -219,17 +219,20 @@ Keepalived
             }
 #sadece master'da::
 
-            notify_backup "/var/lib/redis/scripts/stop_redis.sh"
+            notify_backup "/media/sas2tb/ipam/redis/scripts/stop_redis.sh"
     }
 
     
+Betikler
+~~~~~~~~
+
 #. Redis stop betigi::
 
    cat /media/sas2tb/ipam/redis/scripts/stop_redis.sh
    #!/bin/bash
-   kill -15 `ps -ef |grep redis-server | grep -v grep  | awk '{print $2}'`
+   ``kill -15 `ps -ef |grep redis-server | grep -v grep  | awk '{print $2}'```
 
-#. Redis backup betigi (sadece master'da calistirilacak)::
+#. Redis backup betigi::
 
    cat /media/sas2tb/ipam/redis/scripts/redis_backup.sh
    #!/bin/bash
@@ -238,15 +241,24 @@ Keepalived
    BACKUP_DIR=/media/sas2tb/ipam/redis/backups
    BACKUP_PREFIX="redis.dump.rdb"
    DATE=`date +%Y-%m-%d`
-   REDIS_DEST="$BACKUP_DIR/$BACKUP_PREFIX.$DATE"
+   REDIS_DEST="$BACKUP_DIR/$BACKUP_PREFIX.$DATE.gz"
 
    gzip -c $REDIS_SOURCE > $REDIS_DEST
+
+#. Cronjob (sadece master'da calistirilacak)
+
+#  Do BGSAVE::
+
+   0  0 * * *      redis-cli -p 6380 bgsave 
+
+#  Copy::
+
+   15 0 * * *      /media/sas2tb/ipam/redis/scripts/redis_backup.sh
 
 
 TODOS
 ~~~~~
 
-#. Backup cronjob'lari hazirlanacak.
 #. Fault olan master'in manual recover edilme process'leri yazilacak. 
    - Slave olarak devam etmesi (otomatik)
    - Master'a geri dondurulmesi
@@ -254,6 +266,7 @@ TODOS
 #. Sentinel'ler icin authorization'a gerek olup olmadigi incelenecek.
 #. Chef cookbook'lari hazirlanacak.
 #. Yeni eklenecek slave'de yapilacaklar yazilacak (chef cookbook'u ile)
+#. Backup'lar rotate edilecek.
    
 
 Testler
@@ -274,91 +287,6 @@ Testler
     - Yeni eklenecek slave.
         * Yukaridakiler disinda ek bir islem yapmaya gerek yok.
 
-Calisma Notlari
-===============
-
-Redis Persistence
------------------
-
-
-
-
-Sentinel Genel
---------------
-
-* Config dosyasi bulundurmak sart, ornek conf redis ile beraber geliyor.
-
-Sentinel'ler dagitik bir sekilde redis master'i izliyor, coktugune karar
-vermeleri uc asamali;
-
-    1. Master'dan cevap alamadiginda **subjectively down** (also known as SDOWN)
-    2. Down olsa bile yeni master'i atamak icin sentinel yeterli cogunlugunun
-       (quorum) onayina ihtiyac var. (ODOWN)
-    3. Quorum saglandiginda, kalan sentinel sayisi kadar sentinel'e authorize
-       olmasi gerekiyor.
-
-#. `parallel-sync` ile ayni anda kac slave'in master'la sync olacagini
-   belirliyorsun. bir tanesi sync olurken digerlerini eski data'dan yanit
-   verecek sekilde duzenlemek avantaj saglar.
-
-#. Epoch Yapilandirmasi
-
-#. Because every configuration has a different version number, the greater
-   version always wins over smaller versions.
-
-#. sentinel'leri karsilikli olarak yapilandirmaya ihtiyac yok, ayni master'i
-   dinleyen sentinel'ler birbirlerini buluyor.
-
-#. Partition relational db'lerdeki sharding: eski master'i isole etmede, birden
-   cok master icin kullaniliyor, caching yapisinda sorunsuz calisabilir,
-   pratikte old master'dan slave'e donuste karsilasilan bir durum.
-
-#. slave'den master'a geciste tum slave'lerin ayni run id'ye sahip olmasi
-   oneriliyor, gecisin statik degil dinamik olmasi icin. 
-
-#. bir redis instance'inin istemci dogrulamasi gerektirmeden, sadece slave
-   mode'da calismasi icin;
-   in the uncommon case where you need a slave that is accessible without
-   authentication, you can still do it by setting up a slave priority of zero
-   (that will not allow the slave to be promoted to master), and configuring
-   only the masterauth directive for this slave, without the requirepass
-   directive, so that data will be readable by unauthenticated clients.
-
-#. Sentinel ekleme icin sadece aktif master'i monitor edecek sekilde
-   yapilandirmak yeterli. 
-
-#. Case by case anlatilan konular;
-
-    #. Sentinel cikartmak.
-    #. old master'i veya ulasilamayan slave'leri cikartmak.
-
-
-
-Hatalar
-~~~~~~~
-
-
-Calisilacak
-~~~~~~~~~~~~
-
-* sistemde swap olustur ve maxmemory'i sinirlandir.
-  degisiklikten sonra redis'i restart et::
-
-    ulimit -m <deger> 
-    max user processes value = pending signals value
-
-Not: It is not recommend to set the "hard" limit for nofile for the oracle user
-equal to /proc/sys/fs/file-max. If you do that and the user uses up all the
-file handles, then the entire system will run out of file handles. This may
-prevent users logging in as the system cannot open any PAM modules that are
-required for the login process. That is why the hard limit should be set to
-63536 and not 65536.
-
-* incelenecek::
-
-    kernel.shmall = 4294967296
-    fs.file-max = 200000
-
 Kaynaklar
 ~~~~~~~~~
 
@@ -366,7 +294,6 @@ Kaynaklar
    <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/5/html/Tuning_and_Optimizing_Red_Hat_Enterprise_Linux_for_Oracle_9i_and_10g_Databases/chap-Oracle_9i_and_10g_Tuning_Guide-Setting_Shell_Limits_for_the_Oracle_User.html>`_
 #. `Highly Available Redis Cluster
    <http://www.101tech.net/2014/08/08/highly-available-redis-cluster/>`_
-#. `Installing a High Availability Redis service on CentOS 6.X in Windows
-   Azure:
-   <https://robertianhawdon.me.uk/2014/02/11/sysops-installing-a-high-availability-redis-service-on-centos-6-x-in-windows-azure/>`
 #. `Haredis: <https://github.com/falsecz/haredis>`_
+
+
