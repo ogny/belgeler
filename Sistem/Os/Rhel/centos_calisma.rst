@@ -48,3 +48,19 @@ Centos'la calisirken karsilasilan durumlar
 #. Centos6'da servisleri listelemek::
 
    chkconfig --list 
+
+Kullanici yonetimi
+------------------
+
+* Encrypt edilmis parola olusturulur::
+
+    openssl passwd -crypt  <parola>
+
+* Kullaniciya bu parola tanimlanir::
+
+    useradd  -p <encrypted_parola> <kullanici_adi>
+
+
+
+
+

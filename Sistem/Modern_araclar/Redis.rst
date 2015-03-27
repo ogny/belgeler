@@ -2,6 +2,17 @@
 Redis 2.8.19
 ============
 
+Sunucu Ortami
+=============
+
+virtual-ip (haproxy)
+
+#. ha1-redis1-sentinel1
+
+#. ha2-redis2-sentinel2
+
+#. sentinel3
+
 Kurulum
 -------
 
@@ -16,7 +27,7 @@ Kurulum
     vi  /etc/yum.repos.d/remi.repo
     enabled=1
 
-     yum install -y redis
+     yum install -y redis haproxy keepalived screen telnet vim-enhanced
 
 
 Yapilandirma
@@ -37,50 +48,190 @@ Sistem Genel
 
     echo never > /sys/kernel/mm/transparent_hugepage/enabled
 
-* sistemde swap olustur ve maxmemory'i sinirlandir.
-  degisiklikten sonra redis'i restart et::
+* Kaynak kullanimini arttir::
 
-    ulimit -m <deger> 
-    max user processes value = pending signals value
     /etc/security/limits.d/90-nproc.conf
     * soft nproc 64000
 
     /etc/security/limits.conf
     * -       nofile          64000
 
-Not: It is not recommend to set the "hard" limit for nofile for the oracle user
-equal to /proc/sys/fs/file-max. If you do that and the user uses up all the
-file handles, then the entire system will run out of file handles. This may
-prevent users logging in as the system cannot open any PAM modules that are
-required for the login process. That is why the hard limit should be set to
-63536 and not 65536.
+* ``TCP backlog setting of 511 cannot be enforced because
+  /proc/sys/net/core/somaxconn is set to the lower value of 128``::
 
-`Kaynak:redhat
-<https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/5/html/Tuning_and_Optimizing_Red_Hat_Enterprise_Linux_for_Oracle_9i_and_10g_Databases/chap-Oracle_9i_and_10g_Tuning_Guide-Setting_Shell_Limits_for_the_Oracle_User.html>`_
-
-* incelenecek::
-
-    kernel.shmall = 4294967296
-    fs.file-max = 200000
+   echo "net.core.somaxconn=65535"  | tee -a /etc/sysctl.conf && sysctl -p
 
 
-Yapilandirma
-------------
+Redis Yapilandirma
+-------------------
 
 * Master ve slave'de beraber::
 
     vi /etc/redis.conf
     port 6380
-    bind 127.0.0.1 <gercek_ip>
+    bind 0.0.0.0 
 
-# Sadece slave'de::
+Redis Replication
+------------------
+
+* Sadece slave'de::
 
     slaveof <master_ip> 6380
 
+* Servis baslatilir::
+
+    /etc/init.d/redis start
+
+* Her iki sunucuda role'ler kontrol edilir::
+
+    redis-cli -p 6380 info |grep ^role
 
 
 
-Sentinel Yapilandirma
+Sentinel
+~~~~~~~~
+
+* Tum Sentinel sunucularda::
+
+    /etc/init.d/redis-sentinel start
+    chkconfig redis-sentinel on
+    cp /etc/redis-sentinel.conf{,.org}
+    vi /etc/redis-sentinel.conf
+    sentinel monitor mymaster <master_ip> 6380 2
+
+* Tek oldugu sunucuda::
+
+    /etc/init.d/redis stop
+    chkconfig redis off
+
+
+haproxy
+~~~~~~~
+
+* logging::
+
+    cat << EOF > /etc/rsyslog.d/49-haproxy.conf
+    local2.* -/var/log/haproxy.log
+    & ~
+    EOF
+
+    vi /etc/rsyslog.conf
+    $ModLoad imudp
+    $UDPServerRun 514
+    $UDPServerAddress 127.0.0.1
+
+    /etc/init.d/rsyslog restart
+
+* Kurulum - Yapilandirma::
+
+    chkconfig redis on
+    echo "net.ipv4.ip_nonlocal_bind=1" | tee -a /etc/sysctl.conf && sysctl -p
+
+    mv /etc/haproxy/haproxy.cfg{,.org}
+    vi /etc/haproxy/haproxy.cfg
+
+::
+    
+    global
+         log   127.0.0.1   local2  notice
+         maxconn   4096
+         chroot   /var/lib/haproxy
+         user  nobody
+         group  nobody
+         daemon
+    
+    defaults
+        log  global
+        mode  tcp
+        retries   3
+        option  redispatch
+        maxconn   2000
+        timeout  connect   2s
+        timeout  client   120s
+        timeout  server   120s
+    
+    frontend  redis_master
+        bind   :6379
+        default_backend redis_backend
+    
+    backend redis_backend
+    option tcp-check
+
+#haproxy will look for the following strings to determine the master::
+
+    tcp-check send PING\r\n
+    ecp-check expect string +PONG
+    tcp-check send info\ replication\r\n
+    tcp-check expect string role:master
+    tcp-check send QUIT\r\n
+    tcp-check expect string +OK
+these are the ip’s of the two redis nodes::
+
+    server redis1 <redis_ip>:6380  check inter 1s
+    server redis2 <redis_ip>:6380  check inter 1s
+
+* Servis baslatilir::
+
+    /etc/init.d/haproxy start
+
+Keepalived
+~~~~~~~~~~
+
+::
+    mv /etc/keepalived/keepalived.conf{,.org}
+    vi /etc/keepalived/keepalived.conf
+
+
+    vrrp_script chk_haproxy {
+    script "killall -0 haproxy" # verify the pid existance
+    interval 2 # check every 2 seconds
+    weight 2 # add 2 points of prio if OK
+    }
+    
+    vrrp_instance VI_1 {
+            interface eth0 # interface to monitor
+            state MASTER # other is BACKUP
+            virtual_router_id 51 # Assign one ID for this route
+            priority 101 # 101 on master, 100 on backup
+            virtual_ipaddress {
+            <Virtual_IP>
+            }
+            track_script {
+            chk_haproxy
+            }
+    }
+
+TODOS
+~~~~~
+
+#. Fault olan master'in manual recover edilme process'leri yazilacak. 
+   - Slave olarak devam etmesi
+   - Master'a geri dondurulmesi
+#. persistent mode <=> baslar baslamaz tamamini ram'e yazmamasi arastirilacak. 
+#. sentinel'ler icin authorization eklenecek.
+#. chef cookbook'lari hazirlanacak.
+#. yeni eklenecek slave'de yapilacaklar yazilacak (chef cookbook'u ile)
+   
+
+Testler
+~~~~~~~
+
+#. Replication calisiyor mu? redis kapatilinca, 
+    - slave master'a gecti mi?
+    - Yeni master'a yaziliyor mu
+
+#. Auto failover calisiyor mu?
+    - Haproxy kapatilinca VRRP ip'yi dagitiyor mu?
+    - Redis'e erisim/yazma devam ediyor mu?
+
+#. Yeni master'dan replication duzgun calisiyor mu?
+    - Yeni eklenecek slave'e
+    - Recover edilen eski master'a
+
+Calisma Notlari
+===============
+
+Sentinel Genel
 ---------------------
 
 * Config dosyasi bulundurmak sart, ornek conf redis ile beraber geliyor.
@@ -129,84 +280,32 @@ vermeleri uc asamali;
     #. Sentinel cikartmak.
     #. old master'i veya ulasilamayan slave'leri cikartmak.
 
-Yapilandirma icin gerekenler
-============================
 
-virtual-ip (haproxy)
-Sanal makinalar
---------------
 
-#. test-ha1
-
-#. test-ha2
-
-#. test-redis1 (sentinel1)
-
-#. test-redis2 (sentinel2)
-
-#. sentinel3
-
-haproxy
+Hatalar
 ~~~~~~~
 
-* logging::
 
-    cat << EOF > /etc/rsyslog.d/49-haproxy.conf
-    local2.* -/var/log/haproxy.log
-    & ~
-    EOF
+Calisilacak
+~~~~~~~~~~~~
 
-    vi /etc/rsyslog.d/49-haproxy.conf
-    $ModLoad imudp
-    $UDPServerRun 514
-    $UDPServerAddress 127.0.0.1
+* sistemde swap olustur ve maxmemory'i sinirlandir.
+  degisiklikten sonra redis'i restart et::
 
-    /etc/init.d/rsyslog restart
+    ulimit -m <deger> 
+    max user processes value = pending signals value
 
-* Kurulum - Yapilandirma::
+Not: It is not recommend to set the "hard" limit for nofile for the oracle user
+equal to /proc/sys/fs/file-max. If you do that and the user uses up all the
+file handles, then the entire system will run out of file handles. This may
+prevent users logging in as the system cannot open any PAM modules that are
+required for the login process. That is why the hard limit should be set to
+63536 and not 65536.
 
-    yum install -y haproxy keepalived
-    chkconfig redis on
-    echo "net.ipv4.ip_nonlocal_bind=1" | tee -a /etc/sysctl.conf && sysctl -p
+`Kaynak:redhat
+<https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/5/html/Tuning_and_Optimizing_Red_Hat_Enterprise_Linux_for_Oracle_9i_and_10g_Databases/chap-Oracle_9i_and_10g_Tuning_Guide-Setting_Shell_Limits_for_the_Oracle_User.html>`_
 
-    mv /etc/keepalived/keepalived.conf{,.org}
-    mv /etc/haproxy/haproxy.cfg{,.org}
-    
-    vi /etc/haproxy/haproxy.cfg
+* incelenecek::
 
-defaults'ta degistirilenler::
-
-    mode              tcp
-    timeout connect   2s
-    timeout  client   120s 
-    timeout  server   120s 
-    maxconn           4096
-
-    frontend  redis
-      bind   :6379
-      default_backend redis_backend
-
-    backend redis_backend
-    option tcp-check
-haproxy will look for the following strings to determine the master::
-
-    tcp-check send PING\r\n
-    ecp-check expect string +PONG
-    tcp-check send info\ replication\r\n
-    tcp-check expect string role:master
-    tcp-check send QUIT\r\n
-    tcp-check expect string +OK
-these are the ip’s of the two redis nodes::
-
-    server redis1 <redis_ip>:6380  check inter 1s
-    server redis2 <redis_ip>:6380  check inter 1s
-
-* Servis baslatilir::
-
-    /etc/init.d/haproxy start
-
-Sentinel
---------
-
-    service redis-sentinel start
-    chkconfig redis-sentinel on
+    kernel.shmall = 4294967296
+    fs.file-max = 200000
