@@ -308,10 +308,18 @@ prevent users logging in as the system cannot open any PAM modules that are
 required for the login process. That is why the hard limit should be set to
 63536 and not 65536.
 
-`Kaynak:redhat
-<https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/5/html/Tuning_and_Optimizing_Red_Hat_Enterprise_Linux_for_Oracle_9i_and_10g_Databases/chap-Oracle_9i_and_10g_Tuning_Guide-Setting_Shell_Limits_for_the_Oracle_User.html>`_
-
 * incelenecek::
 
     kernel.shmall = 4294967296
     fs.file-max = 200000
+
+Kaynaklar
+~~~~~~~~~
+
+#. `redhat
+   <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/5/html/Tuning_and_Optimizing_Red_Hat_Enterprise_Linux_for_Oracle_9i_and_10g_Databases/chap-Oracle_9i_and_10g_Tuning_Guide-Setting_Shell_Limits_for_the_Oracle_User.html>`_
+#. `Highly Available Redis Cluster
+   <http://www.101tech.net/2014/08/08/highly-available-redis-cluster/>`_
+#. `Installing a High Availability Redis service on CentOS 6.X in Windows
+   Azure:
+   <https://robertianhawdon.me.uk/2014/02/11/sysops-installing-a-high-availability-redis-service-on-centos-6-x-in-windows-azure/>`
