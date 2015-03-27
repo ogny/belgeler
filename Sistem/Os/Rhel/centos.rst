@@ -60,7 +60,10 @@ Kullanici yonetimi
 
     useradd  -p <encrypted_parola> <kullanici_adi>
 
+* Cron::
 
+  crontab -e ile olusturulur.
+  kullanicinin /var/spool/cron dizini altinda tutuluyor.
 
 
 

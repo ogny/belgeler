@@ -33,22 +33,20 @@ share in "soft" mode (not "hard" -- but then you could have data loss...
 client kurulum
 -----------------
 
-..code:: sh
+.::
 
-    yum install nfs-utils nfs-utils-lib
+    yum install -y nfs-utils nfs-utils-lib
 
-    chkconfig --level 35 nfs on
+    chkconfig nfs on
 
 #. duzenlemeler /etc altinda exports ve fstab (emrah.com'da)
 
 #. Servisleri baslatma, paylasimi check etme
 
-..code:: sh
-
-    service  nfs start
+.:: 
 
     service  rpcbind start
-
+    service  nfs start
     showmount -e localhost
 
 server'da yapilandirma;

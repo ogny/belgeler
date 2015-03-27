@@ -27,7 +27,7 @@ Kurulum
     vi  /etc/yum.repos.d/remi.repo
     enabled=1
 
-     yum install -y redis haproxy keepalived screen telnet vim-enhanced
+     yum install -y redis haproxy keepalived screen telnet vim-enhanced nfs-utils nfs-utils-lib
 
 
 Yapilandirma
@@ -61,6 +61,20 @@ Sistem Genel
 
    echo "net.core.somaxconn=65535"  | tee -a /etc/sysctl.conf && sysctl -p
 
+* NFS erisimi saglanir::
+
+    mkdir -p /media/sas2tb/ipam/redis/backups /media/sas600gb
+    chkconfig nfs on
+    service  rpcbind start
+    service  nfs start
+    mount -t nfs -rw <nfs_server_ip>:/media/sas2tb/ipam/redis/
+    /media/sas2tb/ipam/redis/
+#fstab'a eklenecek::
+
+    <nfs_server_ip>:/media/sas600gb /media/sas600gb
+    rw,sync,no_root_squash,no_subtree_check,noatime 0 0
+    <nfs_server_ip>:/media/sas2tb/ipam/redis/ /media/sas2tb/ipam/redis/
+    rw,sync,no_root_squash,no_subtree_check,noatime 0 0
 
 Redis Yapilandirma
 -------------------
@@ -68,11 +82,10 @@ Redis Yapilandirma
 ::
 
     cp /etc/redis.conf{,.org}
-    vi /etc/redis.conf
+    vim /etc/redis.conf
 
-* Master ve slave'de beraber::
 
-#. Default conf'ta degistirilecek 
+#. Master ve slave'de beraber default conf'ta degistirilecek::
 
     port 6380
     bind 0.0.0.0 
@@ -100,7 +113,7 @@ Sentinel
 
     chkconfig redis-sentinel on
     cp /etc/redis-sentinel.conf{,.org}
-    vi /etc/redis-sentinel.conf
+    vim /etc/redis-sentinel.conf
     sentinel monitor mymaster <master_ip> 6380 2
     /etc/init.d/redis-sentinel start
 
@@ -120,7 +133,7 @@ haproxy
     & ~
     EOF
 
-    vi /etc/rsyslog.conf
+    vim /etc/rsyslog.conf
     $ModLoad imudp
     $UDPServerRun 514
     $UDPServerAddress 127.0.0.1
@@ -130,10 +143,9 @@ haproxy
 * Kurulum - Yapilandirma::
 
     chkconfig redis on
-    echo "net.ipv4.ip_nonlocal_bind=1" | tee -a /etc/sysctl.conf && sysctl -p
 
     mv /etc/haproxy/haproxy.cfg{,.org}
-    vi /etc/haproxy/haproxy.cfg
+    vim /etc/haproxy/haproxy.cfg
 
 ::
     
@@ -183,10 +195,10 @@ Keepalived
 ~~~~~~~~~~
 
 ::
+    echo "net.ipv4.ip_nonlocal_bind=1" | tee -a /etc/sysctl.conf && sysctl -p
 
     mv /etc/keepalived/keepalived.conf{,.org}
-    vi /etc/keepalived/keepalived.conf
-
+    vim /etc/keepalived/keepalived.conf
 
     vrrp_script chk_haproxy {
     script "killall -0 haproxy" # verify the pid existance
@@ -205,18 +217,43 @@ Keepalived
             track_script {
             chk_haproxy
             }
+#sadece master'da::
+
+            notify_backup "/var/lib/redis/scripts/stop_redis.sh"
     }
+
+    
+#. Redis stop betigi::
+
+   cat /media/sas2tb/ipam/redis/scripts/stop_redis.sh
+   #!/bin/bash
+   kill -15 `ps -ef |grep redis-server | grep -v grep  | awk '{print $2}'`
+
+#. Redis backup betigi (sadece master'da calistirilacak)::
+
+   cat /media/sas2tb/ipam/redis/scripts/redis_backup.sh
+   #!/bin/bash
+
+   REDIS_SOURCE=/var/lib/redis/dump.rdb
+   BACKUP_DIR=/media/sas2tb/ipam/redis/backups
+   BACKUP_PREFIX="redis.dump.rdb"
+   DATE=`date +%Y-%m-%d`
+   REDIS_DEST="$BACKUP_DIR/$BACKUP_PREFIX.$DATE"
+
+   gzip -c $REDIS_SOURCE > $REDIS_DEST
+
 
 TODOS
 ~~~~~
 
+#. Backup cronjob'lari hazirlanacak.
 #. Fault olan master'in manual recover edilme process'leri yazilacak. 
-   - Slave olarak devam etmesi
+   - Slave olarak devam etmesi (otomatik)
    - Master'a geri dondurulmesi
-#. persistent mode <=> baslar baslamaz tamamini ram'e yazmamasi arastirilacak. 
-#. sentinel'ler icin authorization eklenecek.
-#. chef cookbook'lari hazirlanacak.
-#. yeni eklenecek slave'de yapilacaklar yazilacak (chef cookbook'u ile)
+#. Persistent mode <=> baslar baslamaz tamamini ram'e yazmamasi arastirilacak. 
+#. Sentinel'ler icin authorization'a gerek olup olmadigi incelenecek.
+#. Chef cookbook'lari hazirlanacak.
+#. Yeni eklenecek slave'de yapilacaklar yazilacak (chef cookbook'u ile)
    
 
 Testler
@@ -231,14 +268,23 @@ Testler
     - Redis'e erisim/yazma devam ediyor mu?
 
 #. Yeni master'dan replication duzgun calisiyor mu?
-    - Yeni eklenecek slave'e
-    - Recover edilen eski master'a
+    - eski master recover edildiginde:
+        * Coken redis'i yeniden baslatmak yeterli, sentinel yeni master'i bulup
+          eski master'i slave mode'a alip resync yapiyor.
+    - Yeni eklenecek slave.
+        * Yukaridakiler disinda ek bir islem yapmaya gerek yok.
 
 Calisma Notlari
 ===============
 
+Redis Persistence
+-----------------
+
+
+
+
 Sentinel Genel
----------------------
+--------------
 
 * Config dosyasi bulundurmak sart, ornek conf redis ile beraber geliyor.
 
@@ -323,3 +369,4 @@ Kaynaklar
 #. `Installing a High Availability Redis service on CentOS 6.X in Windows
    Azure:
    <https://robertianhawdon.me.uk/2014/02/11/sysops-installing-a-high-availability-redis-service-on-centos-6-x-in-windows-azure/>`
+#. `Haredis: <https://github.com/falsecz/haredis>`_
