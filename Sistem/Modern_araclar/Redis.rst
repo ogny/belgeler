@@ -65,16 +65,21 @@ Sistem Genel
 Redis Yapilandirma
 -------------------
 
+::
+    cp /etc/redis.conf{,.org}
+    vi /etc/redis.conf
+
 * Master ve slave'de beraber::
 
-    vi /etc/redis.conf
+#. Default conf'ta degistirilecek 
+
     port 6380
     bind 0.0.0.0 
 
 Redis Replication
 ------------------
 
-* Sadece slave'de::
+* Sadece slave'e eklenecek::
 
     slaveof <master_ip> 6380
 
@@ -87,19 +92,18 @@ Redis Replication
     redis-cli -p 6380 info |grep ^role
 
 
-
 Sentinel
 ~~~~~~~~
 
 * Tum Sentinel sunucularda::
 
-    /etc/init.d/redis-sentinel start
     chkconfig redis-sentinel on
     cp /etc/redis-sentinel.conf{,.org}
     vi /etc/redis-sentinel.conf
     sentinel monitor mymaster <master_ip> 6380 2
+    /etc/init.d/redis-sentinel start
 
-* Tek oldugu sunucuda::
+* standalone sunucuda::
 
     /etc/init.d/redis stop
     chkconfig redis off
@@ -165,7 +169,7 @@ haproxy
     tcp-check expect string role:master
     tcp-check send QUIT\r\n
     tcp-check expect string +OK
-these are the ip’s of the two redis nodes::
+#these are the ip’s of the two redis nodes::
 
     server redis1 <redis_ip>:6380  check inter 1s
     server redis2 <redis_ip>:6380  check inter 1s
@@ -177,7 +181,7 @@ these are the ip’s of the two redis nodes::
 Keepalived
 ~~~~~~~~~~
 
-::
+..
     mv /etc/keepalived/keepalived.conf{,.org}
     vi /etc/keepalived/keepalived.conf
 
