@@ -59,11 +59,3 @@ Kullanici yonetimi
 * Kullaniciya bu parola tanimlanir::
 
     useradd  -p <encrypted_parola> <kullanici_adi>
-
-* Cron::
-
-  crontab -e ile olusturulur.
-  kullanicinin /var/spool/cron dizini altinda tutuluyor.
-
-
-

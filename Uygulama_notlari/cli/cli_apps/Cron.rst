@@ -1,5 +1,6 @@
-Cron'lar crontab -e ile olusturulur.
-Centos'ta kullanicinin /var/spool/cron dizini altinda tutuluyor.
+crontab -e ile olusturulan cron'larin tutuldugu dizin::
+
+    /var/spool/cron
 
 Entry                         Description                 Equivalent To
 @yearly (or @annually) Run once a year, midnight, Jan. 1st        0 0 1 1 *

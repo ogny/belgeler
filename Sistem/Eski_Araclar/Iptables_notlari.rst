@@ -68,4 +68,6 @@ Internet and the Transport layers
 
   * REDIRECT
    
+* Tum aktif kurallari listeleme::
 
+    iptables -L -n -v

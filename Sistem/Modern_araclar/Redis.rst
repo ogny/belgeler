@@ -90,6 +90,11 @@ Redis Yapilandirma
     port 6380
     bind 0.0.0.0 
 
+
+#. Guvenlik::
+
+
+
 Redis Replication
 ------------------
 

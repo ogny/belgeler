@@ -1,5 +1,22 @@
-Rabbitmq installation
-===========================
+Rabbitmq 
+=========
+
+
+* environment variables define ports, file locations and names (taken from the
+shell, or set in the rabbitmq-env.conf file) . Its location is not configurable
+
+* config file(s) : /etc/rabbitmq/rabbitmq.config
+
+Highly Available Queues
+~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+
+#. Notlar: 
 
 **Access Control**
 
