@@ -2,6 +2,12 @@ Rabbitmq
 =========
 
 
+#. Kurulum::
+
+   yum install -y erlang rabbitmq-server
+
+
+
 * environment variables define ports, file locations and names (taken from the
 shell, or set in the rabbitmq-env.conf file) . Its location is not configurable
 
@@ -13,6 +19,11 @@ Highly Available Queues
 
 
 
+
+Queues have mirroring enabled via policy.
+
+Note that setting or modifying a "nodes" policy can cause the existing master
+to go away if it is not listed in the new policy.
 
 
 
