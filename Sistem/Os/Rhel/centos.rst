@@ -10,7 +10,7 @@ Centos'la calisirken karsilasilan durumlar
 
 #. default gelmeyen paketler::
 
-        yum install -y vim-enhanced screen man
+        yum install -y vim-enhanced screen man man-pages
 
 #. yum update/upgrade farki: Upgrade will delete obsolete packages, while
    update will preserve them.

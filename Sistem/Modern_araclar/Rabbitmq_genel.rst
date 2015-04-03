@@ -13,9 +13,24 @@ shell, or set in the rabbitmq-env.conf file) . Its location is not configurable
 
 * config file(s) : /etc/rabbitmq/rabbitmq.config
 
-Highly Available Queues
-~~~~~~~~~~~~~~~~~~~~~~
+HA Failover Cluster (master-master)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Teori
+-----
+
+#. RabbitMQ supports clustering by default, but queues aren't replicated and
+   are bound to the node on which they're created.
+
+#. Queues have mirroring enabled via policy. Policies can change at any time;
+   it is valid to create a non-mirrored queue, and then make it mirrored at
+   some later point (and vice versa). There is a difference between a
+   non-mirrored queue and a mirrored queue which does not have any slaves 
+
+
+#. You could use an active/passive pair of nodes such that should one node
+   fail, the passive node will be able to come up and take over from the failed
+   node. This can even be combined with clustering. 
 
 
 
