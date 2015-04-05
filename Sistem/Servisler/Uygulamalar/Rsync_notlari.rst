@@ -38,3 +38,11 @@ Rsync Calismasi
 #. progress bar::
 
     --progress 
+
+#. Rsync kesildikten sonra kopyalamanin kaldigi yerden devam etmesi::
+
+    rsync --append --progress --partial -azvv <yerel_dizin> \
+    <kullanici_adi>@<uzak_sunucu>:<uzak_dizin>
+
+#.  Append'de dosyanin boyutuna bakiyor, gonderilecek yerdekiyle esit veya
+    ondan kucukse gondermeyi atliyor. 
