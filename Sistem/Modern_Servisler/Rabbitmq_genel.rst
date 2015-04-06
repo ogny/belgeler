@@ -1,5 +1,5 @@
-Rabbitmq 
-=========
+Rabbitmq  3.5.1 HA Cluster
+==========================
 
 #. Kurulum::
 
@@ -13,18 +13,40 @@ Rabbitmq
 
    ulimit -n 63536
    echo "fs.file-max = 65536" | tee -a /etc/sysctl.conf && sysctl -p
-   /etc/security/limits.conf:
-   oracle           soft    nofile          63536
-   oracle           hard    nofile          63536
+   vi /etc/security/limits.conf
+   *    soft    nofile          63536
+   *    hard    nofile          63536
    vi /etc/security/limits.d/90-nproc.conf
-   * soft nproc 63536
+   *    soft    nproc           63536
     
-
-
-
-
 #. Cluster'a dahil edilecek makinalar hosts dosyasina eklenir.
-#. Web Management Console'u baslatma ve erisim::
+#. Master node'tan erlang.cookie digerlerine transfer edilir::  
+
+    scp /var/lib/rabbitmq/.erlang.cookie \
+    root@<node_hostname>:/var/lib/rabbitmq/
+
+#. Rabbitmq tum node'larda baslatilir::
+
+    rabbitmq-server -detached 
+
+#. Cluster olusturma (Master-slave1-slave2)
+
+    - Slave'lerde teker teker uygulanir::
+
+    rabbitmqctl stop_app
+    rabbitmqctl join_cluster rabbit@master
+    rabbitmqctl start_app
+    rabbitmqctl cluster_status
+
+#. Set the HA Policy: The following command will sync all the queues across all
+   nodes::
+
+   rabbitmqctl set_policy ha-all "" \
+   '{"ha-mode":"all","ha-sync-mode":"automatic"}'
+
+
+
+#. Web Management Console'u baslatma ve erisim (master'da)::
 
     rabbitmq-plugins enable rabbitmq_management
     http://<ip_adresi>:15672    
@@ -32,6 +54,10 @@ Rabbitmq
     rabbitmqctl add_user test test
     rabbitmqctl set_user_tags test administrator
     rabbitmqctl set_permissions -p / test ".*" ".*" ".*"
+
+#. Web Management Console'da Slave'leri izleyebilmek icin(slave'lerde)::
+
+    rabbitmq-plugins enable rabbitmq_management_agent
 
 #. Kullanim; baslatma, durdurma::
 
@@ -44,7 +70,6 @@ Rabbitmq
     rabbitmqctl start_app
         This command instructs the RabbitMQ node to start the RabbitMQ
         application.
-    
     rabbitmqctl force_boot
          This will force the node not to wait for other nodes next time it
          is started.
@@ -59,12 +84,12 @@ Rabbitmq
     1883, 8883 (if MQTT is enabled)
     
 
+Cases
+-----
 
-HA Failover Cluster (master-master)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-
+#. Butun cluster cokerse son coken node master yapilmali, cunku en guncel olan
+   o; When the entire cluster is brought down, the last node to go down must be
+   the first node to be brought online. (fifo)
 
 NOT
 ~~~
@@ -114,8 +139,6 @@ NOT
     close_connection 
     trace_on
 
-
-
  #. Servis baslatma::
 
     start_app stops the Rabbit application inside the Erlang VM but the VM has
@@ -145,9 +168,6 @@ NOT
 
     /etc/rabbitmq/rabbitmq-env.config
 
-
-
-
 Teori
 -----
 
@@ -163,10 +183,7 @@ Teori
    fail, the passive node will be able to come up and take over from the failed
    node. This can even be combined with clustering. 
 
-
-
-
-Queues have mirroring enabled via policy.
+#. Queues have mirroring enabled via policy.
 
 Note that setting or modifying a "nodes" policy can cause the existing master
 to go away if it is not listed in the new policy.
