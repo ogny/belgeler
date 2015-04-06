@@ -2,9 +2,19 @@ Rabbitmq
 =========
 
 
-#. Kurulum::
+#. Kurulum, baslatma::
 
-   yum install -y erlang rabbitmq-server
+   rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+   yum install -y erlang 
+   curl -L -O http://www.rabbitmq.com/releases/rabbitmq-server/current/rabbitmq-server-3.5.1-1.noarch.rpm
+   yum install -y rabbitmq-server-3.5.1-1.noarch.rpm
+   /etc/init.d/rabbitmq-server start
+   chkconfig rabbitmq-server on.
+
+#. Web Management Console'u baslatma ve erisim::
+
+    rabbitmq-plugins enable rabbitmq_management
+    http://<ip_adresi>:15672    
 
 
 
@@ -16,6 +26,8 @@ shell, or set in the rabbitmq-env.conf file) . Its location is not configurable
 HA Failover Cluster (master-master)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+
 Teori
 -----
 
@@ -26,7 +38,6 @@ Teori
    it is valid to create a non-mirrored queue, and then make it mirrored at
    some later point (and vice versa). There is a difference between a
    non-mirrored queue and a mirrored queue which does not have any slaves 
-
 
 #. You could use an active/passive pair of nodes such that should one node
    fail, the passive node will be able to come up and take over from the failed
