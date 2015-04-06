@@ -20,6 +20,13 @@ Rabbitmq  3.5.1 HA Cluster
    *    soft    nproc           63536
     
 #. Cluster'a dahil edilecek makinalar hosts dosyasina eklenir.
+
+#. Calisacak port 5673 olarak degistirilir::
+
+   cat << EOF >  /etc/rabbitmq/rabbitmq-env.conf
+   NODE_PORT=5673
+   EOF
+
 #. Master node'tan erlang.cookie digerlerine transfer edilir::  
 
     scp /var/lib/rabbitmq/.erlang.cookie \
@@ -27,7 +34,7 @@ Rabbitmq  3.5.1 HA Cluster
 
 #. Rabbitmq tum node'larda baslatilir::
 
-    rabbitmq-server -detached 
+    RABBITMQ_NODE_PORT=5673 RABBITMQ_NODENAME=<node_name> rabbitmq-server -detached
 
 #. Cluster olusturma (Master-slave1-slave2)
 
@@ -44,7 +51,11 @@ Rabbitmq  3.5.1 HA Cluster
    rabbitmqctl set_policy ha-all "" \
    '{"ha-mode":"all","ha-sync-mode":"automatic"}'
 
+#. Loadbalancing with HAproxy  
 
+#. Rabbitmq port degistirmek icin default config'ten yararlanilir ::
+
+   /usr/share/doc/rabbitmq-server-3.5.1/rabbitmq.config.example
 
 #. Web Management Console'u baslatma ve erisim (master'da)::
 
@@ -83,6 +94,55 @@ Rabbitmq  3.5.1 HA Cluster
     61613, 61614 (if STOMP is enabled)
     1883, 8883 (if MQTT is enabled)
     
+
+haproxy
+~~~~~~~
+
+* logging::
+
+    cat << EOF > /etc/rsyslog.d/49-haproxy.conf
+    local2.* -/var/log/haproxy.log
+    & ~
+    EOF
+
+    vim /etc/rsyslog.conf
+    $ModLoad imudp
+    $UDPServerRun 514
+    $UDPServerAddress 127.0.0.1
+
+    /etc/init.d/rsyslog restart
+
+* Kurulum - Yapilandirma::
+
+    mv /etc/haproxy/haproxy.cfg{,.org}
+    vi /etc/haproxy/haproxy.cfg
+
+
+* Servis baslatilir::
+
+    /etc/init.d/haproxy start
+
+Keepalived
+~~~~~~~~~~
+
+::
+    echo "net.ipv4.ip_nonlocal_bind=1" | tee -a /etc/sysctl.conf && sysctl -p
+
+    vim /etc/keepalived/keepalived.conf
+
+#. Asagidaki satirlar degistirilecek::
+
+    vrrp_script chk_haproxy {
+    script "killall -0 haproxy" # verify the pid existance
+    }
+
+    vrrp_instance VI_1 {
+            state MASTER # other is BACKUP
+            priority 101 # 101 on master, 100 on backup
+            track_script {
+            chk_haproxy
+            }
+    }
 
 Cases
 -----
