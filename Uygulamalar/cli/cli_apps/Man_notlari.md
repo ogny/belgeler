@@ -1,3 +1,8 @@
+export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\"" 
+source et
+set modifiable
+:g/^$/d
+ 
 Öncelikle name sekmesi altında programın adı ve kabaca ne işe yaradığı
 yazar.
 

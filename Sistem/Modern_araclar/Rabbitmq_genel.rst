@@ -1,7 +1,6 @@
 Rabbitmq 
 =========
 
-
 #. Kurulum::
 
    rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
@@ -16,8 +15,11 @@ Rabbitmq
     rabbitmq-plugins enable rabbitmq_management
     http://<ip_adresi>:15672    
 
-#.  Baslatma::
+    rabbitmqctl add_user test test
+    rabbitmqctl set_user_tags test administrator
+    rabbitmqctl set_permissions -p / test ".*" ".*" ".*"
 
+#.  Baslatma::
 
     rabbitmq-server -detached
 
@@ -31,7 +33,7 @@ HA Failover Cluster (master-master)
 NOT
 ~~~
 
-Cluster Yonetimi::
+#. Cluster Yonetimi::
 
     After executing the cluster command, whenever the RabbitMQ application is
     started on the current node it will attempt to connect to the nodes that
@@ -50,12 +52,29 @@ Cluster Yonetimi::
     ilk node'un hostname'inden turetilir, ancak bu komutla degistirilebilir.
     federation and shovel plugin'leri mesajlari kaydetmek icin bilirler.
 
-Kullanici Yonetimi::
+#. Kullanici Yonetimi::
 
     rabbitmqctl RabbitMQ'nun internal db'sini yonetiyor, baska yontemlerle
     olusturulan kullanicilardan habersizdir.
 
-#. Kullanima dair::
+#. Parametre Yonetimi::
+
+    Each parameter consists of a component name, a name and a value, and is
+    associated with a virtual host. The component name and name are strings, and
+    the value is an Erlang term.
+
+#. Policy Management:: 
+
+    Policies are used to control and modify the behaviour of
+    queues and exchanges on a cluster-wide basis. Policies apply within a given
+    vhost, and consist of a name, pattern, definition and an optional priority.
+
+ #. Server Status komutlari::
+
+    list_queues, list_exchanges and list_bindings
+
+
+ #. Servis baslatma::
 
     start_app stops the Rabbit application inside the Erlang VM but the VM has
     to be running for that to work.
@@ -67,7 +86,7 @@ Kullanici Yonetimi::
 
     reset'lemek icin once durdurmus olman lazim (e.g. with stop_app)
 
-#. Servis olarak yonetme:: 
+ #. Servis olarak yonetme:: 
 
     "-detached" tells Erlang to fork the process. 
     "&" tells the shell to fork the process. 
