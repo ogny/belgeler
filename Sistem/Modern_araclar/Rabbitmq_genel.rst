@@ -37,8 +37,8 @@ Cluster Yonetimi::
     started on the current node it will attempt to connect to the nodes that
     were in the cluster when the node went down.
 
-To leave a cluster, reset the node. You can also remove nodes
-remotely with the `forget_cluster_node` command.
+    To leave a cluster, reset the node. You can also remove nodes
+    remotely with the ``forget_cluster_node`` command.
 
 
 #. Kullanima dair::
