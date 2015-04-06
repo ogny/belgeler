@@ -40,6 +40,20 @@ Cluster Yonetimi::
     To leave a cluster, reset the node. You can also remove nodes
     remotely with the forget_cluster_node  command.
 
+    cluster_status Displays all the nodes in the cluster grouped by node type
+
+    update_cluster_nodes (daha once cluster'a dahil olan bir node'un dustugu
+    durumda yeni cluster'a tekrar sokmak icin)
+
+
+    set_cluster_name {name}  herhangi bir atama yapilmadiginda cluster'in adi
+    ilk node'un hostname'inden turetilir, ancak bu komutla degistirilebilir.
+    federation and shovel plugin'leri mesajlari kaydetmek icin bilirler.
+
+Kullanici Yonetimi::
+
+    rabbitmqctl RabbitMQ'nun internal db'sini yonetiyor, baska yontemlerle
+    olusturulan kullanicilardan habersizdir.
 
 #. Kullanima dair::
 

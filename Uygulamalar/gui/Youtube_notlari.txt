@@ -1,0 +1,1 @@
+* vidyo oynarken rakamlarla katlayarak gecis yapabiliyoruz, 2,3,4'e basarak

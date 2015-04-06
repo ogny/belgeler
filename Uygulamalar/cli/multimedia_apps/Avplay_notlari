@@ -1,0 +1,28 @@
+* belli bir sn'den baslatma;
+avplay -ss <saniye>
+* vidyo hakkinda bilgi vidyoyu baslattiginda konsola yaziliyor
+Command-line options
+In addition to the generic options that apply to all applications of the Libav project (see Libav ), the following are accepted:
+
+Option	Importance
+-x BREITE	Force display width
+-y HÖHE	Force display height
+-an	Disable sound
+-vn	Disable image
+-ss POSITION	Jump to the beginning POSITION (in seconds)
+-t DAUER	Play DURATION second picture / sound
+-f FORMAT	Force FORMAT
+-nodisp	Turn off graphical display
+A complete listing provides the manpage to avplay.
+
+Commands during playback
+Button	Action
+Q ,  Esc	End
+F	Fullscreen on / off
+P ,          	Break
+A	Changing the Audio Channel
+V	Change video channel
+T	Change subtitle channel
+← /  →	10 seconds jump back / forward
+↑ /  ↓	1 minute jump back / forward
+* [Kaynak](http://wiki.ubuntuusers.de/avplay)
