@@ -38,7 +38,7 @@ Cluster Yonetimi::
     were in the cluster when the node went down.
 
     To leave a cluster, reset the node. You can also remove nodes
-    remotely with the *forget_cluster_node* command.
+    remotely with the forget_cluster_node  command.
 
 
 #. Kullanima dair::
