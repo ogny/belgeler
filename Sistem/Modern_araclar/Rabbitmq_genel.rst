@@ -2,29 +2,74 @@ Rabbitmq
 =========
 
 
-#. Kurulum, baslatma::
+#. Kurulum::
 
    rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
    yum install -y erlang 
    curl -L -O http://www.rabbitmq.com/releases/rabbitmq-server/current/rabbitmq-server-3.5.1-1.noarch.rpm
    yum install -y rabbitmq-server-3.5.1-1.noarch.rpm
-   /etc/init.d/rabbitmq-server start
-   chkconfig rabbitmq-server on.
+   chkconfig rabbitmq-server on
 
+#. Cluster'a dahil edilecek makinalar hosts dosyasina eklenir.
 #. Web Management Console'u baslatma ve erisim::
 
     rabbitmq-plugins enable rabbitmq_management
     http://<ip_adresi>:15672    
 
+#.  Baslatma::
 
 
-* environment variables define ports, file locations and names (taken from the
-shell, or set in the rabbitmq-env.conf file) . Its location is not configurable
+    rabbitmq-server -detached
 
-* config file(s) : /etc/rabbitmq/rabbitmq.config
 
 HA Failover Cluster (master-master)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+NOT
+~~~
+
+Cluster Yonetimi::
+
+    After executing the cluster command, whenever the RabbitMQ application is
+    started on the current node it will attempt to connect to the nodes that
+    were in the cluster when the node went down.
+
+    To leave a cluster, reset the node. You can also remove nodes
+    remotely with the `forget_cluster_node` command.
+
+
+#. Kullanima dair::
+
+    start_app stops the Rabbit application inside the Erlang VM but the VM has
+    to be running for that to work.
+    stop_app will stop the rabbit app, but not the Erlang VM
+    rabbitmq-server takes care of preparing the env parameters and starting the
+    Erlang VM to then run RabbitMQ on it.
+
+    RABBITMQ_NODE_PORT 5672
+
+    reset'lemek icin once durdurmus olman lazim (e.g. with stop_app)
+
+#. Servis olarak yonetme:: 
+
+    "-detached" tells Erlang to fork the process. 
+    "&" tells the shell to fork the process. 
+    The only difference is that you get a PID file with "&", which then lets 
+    you use "rabbitmqctl wait" to make sure you know when the server has 
+    finished starting. That's what the init.s scripts for our .deb and RPM 
+    packages do. 
+    Start the server process in the background. Note that this will cause the pid
+    not to be written to the pid file.
+
+#. environment variables define ports, file locations and names (taken from the
+   shell, or set in the rabbitmq-env.conf file) . Its location is not
+   configurable::
+
+    /etc/rabbitmq/rabbitmq.config
+
 
 
 
@@ -52,8 +97,6 @@ Note that setting or modifying a "nodes" policy can cause the existing master
 to go away if it is not listed in the new policy.
 
 
-
-#. Notlar: 
 
 **Access Control**
 
