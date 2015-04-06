@@ -9,6 +9,20 @@ Rabbitmq
    yum install -y rabbitmq-server-3.5.1-1.noarch.rpm
    chkconfig rabbitmq-server on
 
+#. Sistem Yapilandirma::
+
+   ulimit -n 63536
+   echo "fs.file-max = 65536" | tee -a /etc/sysctl.conf && sysctl -p
+   /etc/security/limits.conf:
+   oracle           soft    nofile          63536
+   oracle           hard    nofile          63536
+   vi /etc/security/limits.d/90-nproc.conf
+   * soft nproc 63536
+    
+
+
+
+
 #. Cluster'a dahil edilecek makinalar hosts dosyasina eklenir.
 #. Web Management Console'u baslatma ve erisim::
 
@@ -19,9 +33,31 @@ Rabbitmq
     rabbitmqctl set_user_tags test administrator
     rabbitmqctl set_permissions -p / test ".*" ".*" ".*"
 
-#.  Baslatma::
+#. Kullanim; baslatma, durdurma::
 
     rabbitmq-server -detached
+    rabbitmqctl stop
+        This command instructs the RabbitMQ node to terminate.
+    rabbitmqctl stop_app
+        This command instructs the RabbitMQ node to stop the RabbitMQ
+        application.
+    rabbitmqctl start_app
+        This command instructs the RabbitMQ node to start the RabbitMQ
+        application.
+    
+    rabbitmqctl force_boot
+         This will force the node not to wait for other nodes next time it
+         is started.
+
+
+#. Guvenlik, Acilacak portlar::
+
+    4369 (epmd), 25672 (Erlang distribution)
+    5672, 5671 (AMQP 0-9-1 without and with TLS)
+    15672 (if management plugin is enabled)
+    61613, 61614 (if STOMP is enabled)
+    1883, 8883 (if MQTT is enabled)
+    
 
 
 HA Failover Cluster (master-master)
@@ -71,7 +107,13 @@ NOT
 
  #. Server Status komutlari::
 
-    list_queues, list_exchanges and list_bindings
+    list_queues, list_exchanges, list_bindings, list_connections
+
+#. Miscellaneous::
+
+    close_connection 
+    trace_on
+
 
 
  #. Servis baslatma::
@@ -101,7 +143,7 @@ NOT
    shell, or set in the rabbitmq-env.conf file) . Its location is not
    configurable::
 
-    /etc/rabbitmq/rabbitmq.config
+    /etc/rabbitmq/rabbitmq-env.config
 
 
 
