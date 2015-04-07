@@ -134,7 +134,7 @@ haproxy
 * logging::
 
     cat << EOF > /etc/rsyslog.d/49-haproxy.conf
-    local2.* -/var/log/haproxy.log
+    local1.* -/var/log/haproxy.log
     & ~
     EOF
 
@@ -152,10 +152,12 @@ haproxy
     mv /etc/haproxy/haproxy.cfg{,.org}
     vim /etc/haproxy/haproxy.cfg
 
+
+
 ::
     
     global
-         log   127.0.0.1   local2  notice
+         log   127.0.0.1   local1  notice
          maxconn   4096
          chroot   /var/lib/haproxy
          user  nobody
@@ -189,8 +191,8 @@ haproxy
     tcp-check expect string +OK
 #these are the ip’s of the two redis nodes::
 
-    server redis1 <redis_ip>:6380  check inter 1s
-    server redis2 <redis_ip>:6380  check inter 1s
+    server redis1 127.0.0.1:6380  check inter 1s
+    server redis2 127.0.0.1:6380  check inter 1s
 
 * Servis baslatilir::
 

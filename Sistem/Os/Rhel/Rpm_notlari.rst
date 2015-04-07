@@ -9,14 +9,23 @@ Rpm Centos Calisma
 :Author: Orkun Gunay
 
 
-#. kurulu paketlerde arama yapmak
+#. kurulu paketlerde arama yapmak::
 
-   ..code:: sh
+    rpm -qa |grep <paket_adi>
 
-    rpm -qa |grep paket_adi
+#. paket hakkinda bilgi almak (apt-show)::
 
-#. paket hakkinda bilgi almak (apt-show)
+    rpm -qi <paket_adi>
 
-   ..code:: sh
+#. paket kaldirma::
 
-    rpm -qi paket_adi
+    rpm -e  <paket_adi>
+
+#. paket kurarken birbirine bagimliliklari olanlari ayni satirda yaz::
+
+    rpm -ivh <paket_adi1> <paket_adi2>
+
+#. paket kurarken conflict'leri dikkate almamak icin::
+
+    --force Same as using --replacepkgs, --replacefiles, and --oldpackage.
+

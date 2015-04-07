@@ -6,18 +6,29 @@ Rabbitmq  3.5.1 HA Cluster
    rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
    yum install -y erlang 
    curl -L -O http://www.rabbitmq.com/releases/rabbitmq-server/current/rabbitmq-server-3.5.1-1.noarch.rpm
-   yum install -y rabbitmq-server-3.5.1-1.noarch.rpm
+   yum install -y rabbitmq-server-3.5.1-1.noarch.rpm haproxy keepalived screen
    chkconfig rabbitmq-server on
+   chkconfig haproxy on
+   chkconfig keepalived on
 
 #. Sistem Yapilandirma::
 
    ulimit -n 63536
-   echo "fs.file-max = 65536" | tee -a /etc/sysctl.conf && sysctl -p
    vi /etc/security/limits.conf
-   *    soft    nofile          63536
-   *    hard    nofile          63536
+   *    - nofile          63536
    vi /etc/security/limits.d/90-nproc.conf
-   *    soft    nproc           63536
+   *    - nproc           63536
+
+    vi /etc/sysctl.conf 
+    fs.file-max=65536
+    net.ipv4.tcp_tw_recycle=1
+    net.core.netdev_max_backlog=50000
+    net.ipv4.tcp_max_syn_backlog=30000
+    net.ipv4.tcp_max_tw_buckets=2000000
+    net.ipv4.tcp_tw_reuse=1
+    net.ipv4.tcp_fin_timeout=10
+
+    sysctl -p
     
 #. Cluster'a dahil edilecek makinalar hosts dosyasina eklenir.
 
@@ -25,6 +36,7 @@ Rabbitmq  3.5.1 HA Cluster
 
    cat << EOF >  /etc/rabbitmq/rabbitmq-env.conf
    NODE_PORT=5673
+   NODE_IP_ADDRESS=0.0.0.0
    EOF
 
 #. Master node'tan erlang.cookie digerlerine transfer edilir::  
@@ -34,7 +46,7 @@ Rabbitmq  3.5.1 HA Cluster
 
 #. Rabbitmq tum node'larda baslatilir::
 
-    RABBITMQ_NODE_PORT=5673 RABBITMQ_NODENAME=<node_name> rabbitmq-server -detached
+    rabbitmq-server -detached
 
 #. Cluster olusturma (Master-slave1-slave2)
 
@@ -51,9 +63,7 @@ Rabbitmq  3.5.1 HA Cluster
    rabbitmqctl set_policy ha-all "" \
    '{"ha-mode":"all","ha-sync-mode":"automatic"}'
 
-#. Loadbalancing with HAproxy  
-
-#. Rabbitmq port degistirmek icin default config'ten yararlanilir ::
+#. default config (ornek icin)::
 
    /usr/share/doc/rabbitmq-server-3.5.1/rabbitmq.config.example
 
@@ -70,42 +80,17 @@ Rabbitmq  3.5.1 HA Cluster
 
     rabbitmq-plugins enable rabbitmq_management_agent
 
-#. Kullanim; baslatma, durdurma::
-
-    rabbitmq-server -detached
-    rabbitmqctl stop
-        This command instructs the RabbitMQ node to terminate.
-    rabbitmqctl stop_app
-        This command instructs the RabbitMQ node to stop the RabbitMQ
-        application.
-    rabbitmqctl start_app
-        This command instructs the RabbitMQ node to start the RabbitMQ
-        application.
-    rabbitmqctl force_boot
-         This will force the node not to wait for other nodes next time it
-         is started.
-
-
-#. Guvenlik, Acilacak portlar::
-
-    4369 (epmd), 25672 (Erlang distribution)
-    5672, 5671 (AMQP 0-9-1 without and with TLS)
-    15672 (if management plugin is enabled)
-    61613, 61614 (if STOMP is enabled)
-    1883, 8883 (if MQTT is enabled)
-    
-
 haproxy
 ~~~~~~~
 
 * logging::
 
-    cat << EOF > /etc/rsyslog.d/49-haproxy.conf
-    local2.* -/var/log/haproxy.log
-    & ~
-    EOF
+cat << EOF > /etc/rsyslog.d/49-haproxy.conf
+local1.* -/var/log/haproxy.log
+& ~
+EOF
 
-    vim /etc/rsyslog.conf
+    vi /etc/rsyslog.conf
     $ModLoad imudp
     $UDPServerRun 514
     $UDPServerAddress 127.0.0.1
@@ -117,9 +102,46 @@ haproxy
     mv /etc/haproxy/haproxy.cfg{,.org}
     vi /etc/haproxy/haproxy.cfg
 
+global
+    log 127.0.0.1   local1
+    maxconn 63536
+    user haproxy
+    group haproxy
+    daemon
 
-* Servis baslatilir::
+defaults
+    log     global
+    mode    tcp
+    option  tcplog
+    retries 3
+    option redispatch
+    option  dontlognull
+    maxconn 63536
+    timeout connect 5000
+    timeout client 50000
+    timeout server 50000
 
+listen stats :1936
+    mode http
+    stats enable
+    stats hide-version
+    stats realm Haproxy\ Statistics
+    stats uri /
+    stats auth Username:Password
+
+listen rabbitmq :5672
+    mode            tcp
+    balance         roundrobin
+    timeout client  3h
+    timeout server  3h
+    option          clitcpka
+    server          <sunucu_adi> <ip_adresi>:5673  check inter 5s rise 2 fall 3
+    server          <sunucu_adi> <ip_adresi>:5673  check inter 5s rise 2 fall 3
+    server          <sunucu_adi> <ip_adresi>:5673  check inter 5s rise 2 fall 3
+
+* Test edilir, sorun yoksa Servis baslatilir::
+
+    /usr/sbin/haproxy -c -q -f /etc/haproxy/haproxy.cfg
     /etc/init.d/haproxy start
 
 Keepalived
@@ -143,6 +165,33 @@ Keepalived
             chk_haproxy
             }
     }
+
+NOTLAR
+======
+
+#. Kullanim; baslatma, durdurma::
+
+    rabbitmq-server -detached
+    rabbitmqctl stop
+        This command instructs the RabbitMQ node to terminate.
+    rabbitmqctl stop_app
+        This command instructs the RabbitMQ node to stop the RabbitMQ
+        application.
+    rabbitmqctl start_app
+        This command instructs the RabbitMQ node to start the RabbitMQ
+        application.
+    rabbitmqctl force_boot
+         This will force the node not to wait for other nodes next time it
+         is started.
+
+#. Guvenlik, Acilacak portlar::
+
+    4369 (epmd), 25672 (Erlang distribution)
+    5672, 5671 (AMQP 0-9-1 without and with TLS)
+    15672 (if management plugin is enabled)
+    61613, 61614 (if STOMP is enabled)
+    1883, 8883 (if MQTT is enabled)
+
 
 Cases
 -----
@@ -274,6 +323,9 @@ to go away if it is not listed in the new policy.
 Keepalived
 ----------
 
+ - so for creating a service registry, you're probably best off with a lookup
+   service in e.g. ZooKeeper -- but the broker is a "known point" and so, I
+   would rather connect to the HAProxy by IP
 
-
+Haproxy stats eklenecek
 
