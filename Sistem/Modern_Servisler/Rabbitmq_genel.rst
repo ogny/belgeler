@@ -3,13 +3,13 @@ Rabbitmq  3.5.1 HA Cluster
 
 #. Kurulum::
 
-   rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
-   yum install -y erlang 
-   curl -L -O http://www.rabbitmq.com/releases/rabbitmq-server/current/rabbitmq-server-3.5.1-1.noarch.rpm
-   yum install -y rabbitmq-server-3.5.1-1.noarch.rpm haproxy keepalived screen
-   chkconfig rabbitmq-server on
-   chkconfig haproxy on
-   chkconfig keepalived on
+    rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+    curl -L -O http://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm
+    curl -L -O http://www.rabbitmq.com/releases/rabbitmq-server/current/rabbitmq-server-3.5.1-1.noarch.rpm
+    yum install -y erlang-solutions-1.0-1.noarch.rpm rabbitmq-server-3.5.1-1.noarch.rpm haproxy keepalived screen erlang
+    chkconfig rabbitmq-server on
+    chkconfig haproxy on
+    chkconfig keepalived on
 
 #. Sistem Yapilandirma::
 
@@ -20,6 +20,7 @@ Rabbitmq  3.5.1 HA Cluster
    *    - nproc           63536
 
     vi /etc/sysctl.conf 
+    net.ipv4.ip_nonlocal_bind=1
     fs.file-max=65536
     net.ipv4.tcp_tw_recycle=1
     net.core.netdev_max_backlog=50000
@@ -39,14 +40,17 @@ Rabbitmq  3.5.1 HA Cluster
    NODE_IP_ADDRESS=0.0.0.0
    EOF
 
-#. Master node'tan erlang.cookie digerlerine transfer edilir::  
-
-    scp /var/lib/rabbitmq/.erlang.cookie \
-    root@<node_hostname>:/var/lib/rabbitmq/
-
-#. Rabbitmq tum node'larda baslatilir::
+#. Rabbitmq master'da baslatilir::
 
     rabbitmq-server -detached
+
+#. Master node'taki erlang.cookie editlenip digerlerinde bu dosya elle
+   olusturulur, sunucu sayisi fazla ise scp ile transfer edilir::  
+
+   cat /var/lib/rabbitmq/.erlang.cookie ; echo
+
+   scp /var/lib/rabbitmq/.erlang.cookie \
+   root@<node_hostname>:/var/lib/rabbitmq/
 
 #. Cluster olusturma (Master-slave1-slave2)
 
@@ -60,8 +64,19 @@ Rabbitmq  3.5.1 HA Cluster
 #. Set the HA Policy: The following command will sync all the queues across all
    nodes::
 
-   rabbitmqctl set_policy ha-all "" \
+   rabbitmqctl set_policy ha-all "/testvhost" \
    '{"ha-mode":"all","ha-sync-mode":"automatic"}'
+
+#. Add users and vhosts::
+
+   rabbitmqctl add_user testuser testpass
+   rabbitmqctl set_user_tags testuser administrator
+   rabbitmqctl add_vhost /testvhost
+   rabbitmqctl set_permissions -p /testvhost testuser ".*" ".*" ".*"
+
+#. Test etmek icin::
+
+   rabbitmqctl list_permissions -p /testvhost
 
 #. default config (ornek icin)::
 
@@ -72,9 +87,9 @@ Rabbitmq  3.5.1 HA Cluster
     rabbitmq-plugins enable rabbitmq_management
     http://<ip_adresi>:15672    
 
-    rabbitmqctl add_user test test
-    rabbitmqctl set_user_tags test administrator
-    rabbitmqctl set_permissions -p / test ".*" ".*" ".*"
+    rabbitmqctl add_user ipam Ip@mm9
+    rabbitmqctl set_user_tags ipam administrator
+    rabbitmqctl set_permissions -p / ipam ".*" ".*" ".*"
 
 #. Web Management Console'da Slave'leri izleyebilmek icin(slave'lerde)::
 
@@ -85,10 +100,10 @@ haproxy
 
 * logging::
 
-cat << EOF > /etc/rsyslog.d/49-haproxy.conf
-local1.* -/var/log/haproxy.log
-& ~
-EOF
+    cat << EOF > /etc/rsyslog.d/49-haproxy.conf
+    local1.* -/var/log/haproxy.log
+    & ~
+    EOF
 
     vi /etc/rsyslog.conf
     $ModLoad imudp
@@ -102,34 +117,35 @@ EOF
     mv /etc/haproxy/haproxy.cfg{,.org}
     vi /etc/haproxy/haproxy.cfg
 
-global
-    log 127.0.0.1   local1
-    maxconn 63536
-    user haproxy
-    group haproxy
-    daemon
-
-defaults
-    log     global
-    mode    tcp
-    option  tcplog
-    retries 3
-    option redispatch
-    option  dontlognull
-    maxconn 63536
-    timeout connect 5000
-    timeout client 50000
-    timeout server 50000
-
-listen stats :1936
-    mode http
-    stats enable
-    stats hide-version
-    stats realm Haproxy\ Statistics
-    stats uri /
-    stats auth Username:Password
-
-listen rabbitmq :5672
+    global
+        log 127.0.0.1   local1
+        maxconn 63536
+        user haproxy
+        group haproxy
+        daemon
+    
+    defaults
+        log     global
+        mode    tcp
+        option  tcplog
+        retries 3
+        option redispatch
+        option  dontlognull
+        maxconn 63536
+        timeout connect 5000
+        timeout client 50000
+        timeout server 50000
+    
+    listen stats :1936
+        mode http
+        option contstats
+        stats enable
+        stats hide-version
+        stats realm Haproxy\ Statistics
+        stats uri /
+        stats auth Username:Password
+    
+    listen rabbitmq :5672
     mode            tcp
     balance         roundrobin
     timeout client  3h
@@ -148,9 +164,9 @@ Keepalived
 ~~~~~~~~~~
 
 ::
-    echo "net.ipv4.ip_nonlocal_bind=1" | tee -a /etc/sysctl.conf && sysctl -p
 
-    vim /etc/keepalived/keepalived.conf
+    mv /etc/keepalived/keepalived.conf{,.org}
+    vi /etc/keepalived/keepalived.conf
 
 #. Asagidaki satirlar degistirilecek::
 
@@ -165,6 +181,8 @@ Keepalived
             chk_haproxy
             }
     }
+
+    /etc/init.d/keepalived start
 
 NOTLAR
 ======
@@ -327,5 +345,4 @@ Keepalived
    service in e.g. ZooKeeper -- but the broker is a "known point" and so, I
    would rather connect to the HAProxy by IP
 
-Haproxy stats eklenecek
 
