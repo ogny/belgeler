@@ -12,11 +12,15 @@ Centos 6.6'da adim adim yapilan tum islemler
     yum install -y postgresql94-server postgresql94-contrib screen rsync \
     keepalived repmgr 
 
-#. bash_profile'e pathe ekleme.
+#. bash_profile'e path ekleme::
+
+    su - postgres
+    echo "export PATH=$PATH:/usr/pgsql-9.4/bin/" >> ~/.bash_profile
+    source ~/.bash_profile
 
 #. Sadece master'de::
 
-    service postgresql-9.4 initdb
+    pg_ctl initdb
 
 postgres ile::
 
@@ -30,9 +34,14 @@ root ile::
 
     rsync -avz ~postgres/.ssh/ <node_ip>:~postgres/.ssh/
 
-#. tum node'larda repmgr.conf olusturulur. (sample'dan)::
+#. tum node'larda repmgr.conf olusturulur. (sample'dan) ::
 
     mkdir $HOME/repmgr
+
+unutma::
+#. pg_bindir ve logfile'i degistir
+#. conn_info'nun sonuna dbname=repmgr user=repmgr koymayi unutma
+#. promote_command'ta repmgr.conf path'ini belirt
 
 #. pg_hba ve postgres.conf editlenir (autofailover'den);
 
@@ -46,12 +55,7 @@ root ile::
    
 #. standby db'ler baslatilir:: 
    
-    pg_ctl -D $PGDATA start
-
-
-#. pg_bindir ve logfile'i degistir
-#. conn_info'nun sonuna dbname=repmgr user=repmgr koymayi unutma
-#. promote_command'ta repmgr.conf path'ini belirt
+    pg_ctl start -m fast
 
 #. node'lar role'lerine gore register edilir::
 

@@ -4,9 +4,18 @@ Rabbitmq  3.5.1 HA Cluster
 #. Kurulum::
 
     rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
-    curl -L -O http://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm
+    rpm --import http://packages.erlang-solutions.com/rpm/erlang_solutions.asc
+    vi /etc/yum.repos.d/erlang_solutions.repo
+    [erlang-solutions]
+    name=Centos $releasever - $basearch - Erlang Solutions
+    baseurl=http://packages.erlang-solutions.com/rpm/centos/$releasever/$basearch
+    gpgcheck=1
+    gpgkey=http://packages.erlang-solutions.com/rpm/erlang_solutions.asc
+    enabled=1
+
+    yum install -y erlang haproxy keepalived screen 
     curl -L -O http://www.rabbitmq.com/releases/rabbitmq-server/current/rabbitmq-server-3.5.1-1.noarch.rpm
-    yum install -y erlang-solutions-1.0-1.noarch.rpm rabbitmq-server-3.5.1-1.noarch.rpm haproxy keepalived screen erlang
+    yum install -y rabbitmq-server-3.5.1-1.noarch.rpm 
     chkconfig rabbitmq-server on
     chkconfig haproxy on
     chkconfig keepalived on
@@ -64,8 +73,7 @@ Rabbitmq  3.5.1 HA Cluster
 #. Set the HA Policy: The following command will sync all the queues across all
    nodes::
 
-   rabbitmqctl set_policy ha-all "/testvhost" \
-   '{"ha-mode":"all","ha-sync-mode":"automatic"}'
+   rabbitmqctl set_policy ha-all "" '{"ha-mode":"all","ha-sync-mode":"automatic"}'
 
 #. Add users and vhosts::
 
@@ -117,43 +125,43 @@ haproxy
     mv /etc/haproxy/haproxy.cfg{,.org}
     vi /etc/haproxy/haproxy.cfg
 
-    global
-        log 127.0.0.1   local1
-        maxconn 63536
-        user haproxy
-        group haproxy
-        daemon
-    
-    defaults
-        log     global
-        mode    tcp
-        option  tcplog
-        retries 3
-        option redispatch
-        option  dontlognull
-        maxconn 63536
-        timeout connect 5000
-        timeout client 50000
-        timeout server 50000
-    
-    listen stats :1936
-        mode http
-        option contstats
-        stats enable
-        stats hide-version
-        stats realm Haproxy\ Statistics
-        stats uri /
-        stats auth Username:Password
-    
-    listen rabbitmq :5672
-    mode            tcp
-    balance         roundrobin
-    timeout client  3h
-    timeout server  3h
-    option          clitcpka
-    server          <sunucu_adi> <ip_adresi>:5673  check inter 5s rise 2 fall 3
-    server          <sunucu_adi> <ip_adresi>:5673  check inter 5s rise 2 fall 3
-    server          <sunucu_adi> <ip_adresi>:5673  check inter 5s rise 2 fall 3
+global
+    log 127.0.0.1   local1
+    maxconn 63536
+    user haproxy
+    group haproxy
+    daemon
+
+defaults
+    log     global
+    mode    tcp
+    option  tcplog
+    retries 3
+    option redispatch
+    option  dontlognull
+    maxconn 63536
+    timeout connect 5000
+    timeout client 50000
+    timeout server 50000
+
+listen stats :1936
+    mode http
+    option contstats
+    stats enable
+    stats hide-version
+    stats realm Haproxy\ Statistics
+    stats uri /
+    stats auth Username:Password
+
+listen rabbitmq :5672
+mode            tcp
+balance         roundrobin
+timeout client  3h
+timeout server  3h
+option          clitcpka
+server          <sunucu_adi> <ip_adresi>:5673  check inter 5s rise 2 fall 3
+server          <sunucu_adi> <ip_adresi>:5673  check inter 5s rise 2 fall 3
+server          <sunucu_adi> <ip_adresi>:5673  check inter 5s rise 2 fall 3
 
 * Test edilir, sorun yoksa Servis baslatilir::
 
@@ -172,11 +180,19 @@ Keepalived
 
     vrrp_script chk_haproxy {
     script "killall -0 haproxy" # verify the pid existance
+    interval 2 # check every 2 seconds
+    weight 2 # add 2 points of prio if OK
+
     }
 
     vrrp_instance VI_1 {
+            interface eth0 # interface to monitor
             state MASTER # other is BACKUP
+            virtual_router_id 51 # Assign one ID for this route
             priority 101 # 101 on master, 100 on backup
+            virtual_ipaddress {
+            195.175.250.55
+            }
             track_script {
             chk_haproxy
             }

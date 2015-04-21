@@ -51,3 +51,10 @@ SSH Notlari
 Choose keyfile Enter the old passphrase and the new passphrase (enter nothing). 
 
 `Kaynak:stackoverflow <http://stackoverflow.com/questions/112396/how-do-i-remove-the-passphrase-for-the-ssh-key-without-having-to-create-a-new-ke>`_
+
+* know_hosts'a ekli pubkey'i silme
+```
+ssh-keygen -f "/root/.ssh/known_hosts" -R  <ip_adresi>
+```
+
+

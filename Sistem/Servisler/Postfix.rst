@@ -1,12 +1,15 @@
 Queue 
 ~~~~~
 
-#. Kontrol::
+#. Kuyrugu izleme::
 
+    postqueue -p
+    showq - list the Postfix mail queue
+
+#. Kuyrugu temizleme::
 
     postqueue -f : Flush the queue: attempt to deliver all queued mail.
     FILES /var/spool/postfix, mail queue
-    showq - list the Postfix mail queue
 
 #. Goruntuleme::
 

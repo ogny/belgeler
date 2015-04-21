@@ -268,11 +268,6 @@ Master (islerin tamami icin link mevcut)
 CHEF Provisioning
 -----------------
 
-#. 
-
-
-
-
 Kaynaklar:
 -----------
 

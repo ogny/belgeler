@@ -29,3 +29,6 @@ Rpm Centos Calisma
 
     --force Same as using --replacepkgs, --replacefiles, and --oldpackage.
 
+#. lokal'de bulunan bir paketin dependency check'i::
+
+    rpm -qpR  <paket_adi>
