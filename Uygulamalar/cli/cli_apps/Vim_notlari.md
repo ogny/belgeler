@@ -162,4 +162,4 @@ Neosnippet ile python snippet'lerini kullanma
 ```
 
 
-
+#. buffergator `<leader> b` ile left sidebar'da listeliyorsun
