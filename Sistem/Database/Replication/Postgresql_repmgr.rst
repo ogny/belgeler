@@ -9,8 +9,7 @@ Centos 6.6'da adim adim yapilan tum islemler
     rpm -Uvh \
     http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-centos94-9.4-1.noarch.rpm
 
-    yum install -y postgresql94-server postgresql94-contrib screen rsync \
-    keepalived repmgr 
+    yum install -y postgresql94-server postgresql94-contrib postgresql94-devel screen rsync libxslt-devel libxml2-devel keepalived repmgr 
 
 #. bash_profile'e path ekleme::
 
@@ -20,7 +19,8 @@ Centos 6.6'da adim adim yapilan tum islemler
 
 #. Sadece master'de::
 
-    pg_ctl initdb
+   initdb -D /var/lib/pgsql/9.4/data -A trust -U postgres
+#  pg_ctl initdb
 
 postgres ile::
 
@@ -37,6 +37,8 @@ root ile::
 #. tum node'larda repmgr.conf olusturulur. (sample'dan) ::
 
     mkdir $HOME/repmgr
+    vi $HOME/repmgr/repmgr.conf
+
 
 unutma::
 #. pg_bindir ve logfile'i degistir
