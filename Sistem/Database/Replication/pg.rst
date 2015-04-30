@@ -52,7 +52,7 @@ Master'de
   mkdir $HOME/repmgr
   vi $HOME/repmgr/repmgr.conf
 
-    cluster=ipamulus
+    cluster=ulus
     node=1 
     node_name=node1
     conninfo='host=195.175.250.23 user=postgres dbname=ttipam'
@@ -61,6 +61,8 @@ Master'de
     ssh_options=-o "StrictHostKeyChecking no"
     failover=manual
     logfile='/var/lib/pgsql/9.4/data/pg_log/repmgr.log'
+    loglevel=DEBUG
+    logfacility=STDERR
 
   ==> (GERCEK MASTER'da YAPMANA GEREK YOK)
   vi $PGDATA/pg_hba.conf 
@@ -106,19 +108,19 @@ Master'de
 #. Cluster'in durumunu takip etme::
 
     repmgr cluster show -f repmgr/repmgr.conf
-    SELECT * from repmgr_ipamulus.repl_nodes
+    SELECT * from repmgr_ulus.repl_nodes
 
 Slave'de 
 ~~~~~~~~~
-::
 
+::
   mkdir $HOME/repmgr
   vi $HOME/repmgr/repmgr.conf
 
     cluster=ipamulus
     node=2
     node_name=node2
-    conninfo='host=195.175.250.24.user=postgres dbname=ttipam'
+    conninfo='host=195.175.250.24 user=postgres dbname=ttipam'
     pg_bindir=/usr/pgsql-9.4/bin/
     rsync_options=--archive --checksum --compress --progress --rsh="ssh -o \"StrictHostKeyChecking no\"
     ssh_options=-o "StrictHostKeyChecking no"
@@ -127,7 +129,7 @@ Slave'de
 
 #. repmgr ile master clone'lanir, ve standby db baslatilir::
     
-    repmgr -d repmgr -U postgres --verbose standby clone 195.175.249.111
+    repmgr -d ttipam -U postgres --verbose standby clone 195.175.250.23
     pg_ctl start -m fast
 
 
@@ -175,14 +177,13 @@ Yapilandirma
     }
     vrrp_script chk_postgres {
     script "/var/lib/pgsql/scripts/check_postgres.sh"
-        interval 2
-        fall 2       # MASTER'da require 2 failures for KO
-        rise 2       # MASTER'da require 2 successes for OK
+        interval 1
+        fall 10
     }
-    vrrp_instance VI_1 {
-        state MASTER # Standby'da BACKUP
+    vrrp_instance VI_0 {
+        state BACKUP # Standby'da BACKUP
         interface eth0
-        virtual_router_id 51
+        virtual_router_id 40
         priority 101 # MASTER'daki deger BACKUP'lardan buyuk olacak
         advert_int 1
         nopreempt # Sadece MASTER'da
@@ -192,7 +193,6 @@ Yapilandirma
         track_script {
             chk_postgres
         }
-        # Sadece MASTER'DA
         notify_fault "/var/lib/pgsql/scripts/promote.sh"
     }
 
@@ -218,7 +218,7 @@ Geri Donus;
 -----------
 
 #. Master standby'a cekilir:: 
-
+ 
     repmgr -d ttipam -U postgres --verbose --force standby clone 195.175.250.24
 
 #. node1'i ac, node2'yi durdur, node1'i promote et
@@ -239,3 +239,28 @@ node2::
 #. Her iki node'da cluster'in durumu kontrol edilir::
 
    repmgr -f $HOME/repmgr/repmgr.conf cluster show
+
+#. Elle yapilacaklar;
+   
+ulus'u cluster'i fatih'e atama::
+
+   repmgr -f $HOME/repmgr/repmgr.conf standby promote
+
+master'i takip ettirme::
+
+   repmgr -f $HOME/repmgr/repmgr.conf standby follow
+
+--------    
+Hatalar;
+--------    
+
+#. cluster'in yapisi bozuldugunda, master'da cluster'i sil, master node'u yeniden
+   kaydet master'i standby'a clone'la, slave node'u yeniden kaydet ::
+
+    psql -d ttipam
+    DROP SCHEMA IF EXISTS repmgr_fatih CASCADE;
+    \q
+
+    SELECT * from repmgr_fatih.repl_nodes;
+
+

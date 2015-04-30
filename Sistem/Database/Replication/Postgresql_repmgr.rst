@@ -188,3 +188,15 @@ DELETE FROM repmgr_<cluster_name>.repl_nodes WHERE name = '<node_name>';
 
     [WARNING] reconnect_attemp s/1: Unknown name/value pair!
 
+
+promote script'inde follow'lar
+sleep 5
+
+runuser -l postgres -c "ssh -o StrictHostKeyChecking=no -f 195.175.249.108
+'/usr/pgsql-9.4/bin/repmgr -f /var/lib/pgsql/repmgr/repmgr.conf standby
+follow'"
+runuser -l postgres -c "ssh -o StrictHostKeyChecking=no -f 195.175.250.47
+'/usr/pgsql-9.4/bin/repmgr -f /var/lib/pgsql/repmgr/repmgr.conf standby
+follow'"
+runuser -l postgres -c "ssh -o StrictHostKeyChecking=no -f 195.175.250.49
+'/usr/pgsql-9.4/bin/repmgr -f /var/lib/pgsql/repmgr/repmgr.conf standby follow'

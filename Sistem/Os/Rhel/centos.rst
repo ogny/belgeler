@@ -52,3 +52,10 @@ Kullanici yonetimi
     useradd  -p <encrypted_parola> <kullanici_adi>
 
 #. Man kurulumu
+
+#. Timezone'u degistirme::
+
+    mv /etc/localtime /etc/localtime.bak
+    ln -s /usr/share/zoneinfo/Europe/Istanbul /etc/localtime
+
+
