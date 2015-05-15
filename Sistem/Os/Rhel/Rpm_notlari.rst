@@ -32,3 +32,5 @@ Rpm Centos Calisma
 #. lokal'de bulunan bir paketin dependency check'i::
 
     rpm -qpR  <paket_adi>
+
+

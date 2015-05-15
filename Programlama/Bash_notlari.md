@@ -18,3 +18,11 @@ rm -f $(find / -name core) &> /dev/null
 * Basename: return non-directory portion of a pathname
 [Kaynak:](http://pubs.opengroup.org/onlinepubs/007908799/xcu/basename.html)
 
+* How to escape single-quotes within single-quoted strings?
+
+```
+alias llz=$'ls -alh |awk \'{print$9}\''
+```
+
+[Kaynak:](http://stackoverflow.com/questions/1250079/how-to-escape-single-quotes-within-single-quoted-strings)
+
