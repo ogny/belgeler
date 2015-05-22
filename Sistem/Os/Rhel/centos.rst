@@ -58,4 +58,7 @@ Kullanici yonetimi
     mv /etc/localtime /etc/localtime.bak
     ln -s /usr/share/zoneinfo/Europe/Istanbul /etc/localtime
 
+#. kullanciyi sudo ile yetkilendirme
 
+[kullanicinin sudo 
+yetkilendirmesi](http://www.cyberciti.biz/faq/linux-sudo-allows-people-in-group-admin/)
