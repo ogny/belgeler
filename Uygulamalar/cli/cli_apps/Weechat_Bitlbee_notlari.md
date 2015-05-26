@@ -1,5 +1,6 @@
-
 /set buffers.color.current_bg darkgray
+/set weechat.bar.nicklist.color_bg darkgray
+/set weechat.bar.nicklist.color_fg gray
 /set weechat.bar.status.color_bg black
 /set weechat.bar.status.items off
 /set weechat.bar.title.hidden on
@@ -45,9 +46,12 @@ server degistirme ^x
 * tum kanallari loglama
 /set logger.level.irc.freenode 3 
 
+##### tum log'u kapatma
+
+/set logger.file.auto_log off
+/set weechat.plugin.autoload "*,!logger,!tcl,!lua,!ruby,!xfer"
 
 * Bitlbee'de skype group chat odalarinin gelmesi icin;
 ```
 account skype set auto_join true 
 ```
-

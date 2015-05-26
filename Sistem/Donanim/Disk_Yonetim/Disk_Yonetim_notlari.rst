@@ -152,3 +152,10 @@ kill -USR1 <process_id>
     
     cat /proc/self/mounts
 
+#. Diskleri göremediği durumda (partition table bozuksa)::
+
+   Ubuntu'da fixparts kullanilabilir.
+
+   http://superuser.com/questions/744916/ubuntu-14-04-installer-doesnt-show-existing-partitions
+
+   
