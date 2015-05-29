@@ -1,8 +1,23 @@
+### Komut ornekleri 
+
+* zamana gore arama kosullari
+    - `-mtime` ile belli bir zaman araligi arat.
+        +30: 30 gunden daha eski
+        -30: 30 gunden daha yeni
+        30: tam olarak 30 gun once olusturulmus
+    - `-newer` <dosya_adi> belirtilen dosyadan daha yeni
+
+* dosya buyuklugune gore arama kosullari
+    - `-size` +<buyukluk>k ile kilobayt cinsinden arat.
+
+
 * ozyinelemeli olmayan arama;··
 [Kaynak](http://stackoverflow.com/questions/3925337/find-without-recursion)··
 -maxdepth parametresi ile··
+```
 find DirsRoot/* -maxdepth 0 -type f #This does not show hidden files··
 find DirsRoot/ -maxdepth 1 -type f #This does show hidden files··
+```
 
 * icinde mail gecen .php uzantili calistirilabilir dosyalarin tespiti   
 ```
@@ -28,3 +43,10 @@ find /share/media/mp3/ -type f -name "*.mp3" -print0 | xargs -0 -r -I file cp \
 ```
 find ./* -type f  -maxdepth 0 ! -iname ".*" -exec rm -f {} \;
 ```
+
+### Kaynaklar:
+
+* [UsingFind](http://mywiki.wooledge.org/UsingFind)
+
+
+

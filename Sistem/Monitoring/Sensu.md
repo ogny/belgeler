@@ -16,6 +16,8 @@
 /opt/sensu/embedded/bin/gem install redis
 ```
 
+* Handler'lar sensu-server'da /etc/sensu/conf.d/handlers/ altinda tanimlanir.
+
 #. As you may have realized, the Sensu check specification is compatible with
    Nagios, so you can use Nagios plugins with Sensu.
 
@@ -26,3 +28,5 @@ Kaynaklar
 #. [official doc](http://sensuapp.org/docs/0.12/checks)
 
 *
+
+

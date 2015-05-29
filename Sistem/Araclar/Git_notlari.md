@@ -113,6 +113,7 @@ git push -u origin master
 * son commit'le onceki arasindaki farklari gorme;
 ```
 git diff --color HEAD^ HEAD
+git log -p <dosya_adi>
 ```
 ```
 git log --color -p

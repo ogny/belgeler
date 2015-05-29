@@ -25,3 +25,9 @@ Yum
 yum-utils ile geliyor::
 
    repoquery --requires --recursive --resolve <paket_adi>
+
+* Hata::
+    There are unfinished transactions remaining. You might consider running
+    yum-complete-transaction first to finish them
+
+    yum-complete-transaction --cleanup-only
