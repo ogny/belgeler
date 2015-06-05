@@ -45,6 +45,10 @@
 
     set -sg escape-time 0
 
+* ayni window'da acik pane'lerde ayni komutu calistirma::
+
+    :setw synchronize-panes 
+
 Eklentiler
 ----------
 
@@ -74,5 +78,4 @@ These are enabled when you search with copycat:
 
 n - jumps to the next match
 N - jumps to the previous match
-
 
