@@ -57,4 +57,9 @@ Choose keyfile Enter the old passphrase and the new passphrase (enter nothing).
 ssh-keygen -f "/root/.ssh/known_hosts" -R  <ip_adresi>
 ```
 
+* uzak makinada komut calistirmak
+```
+ssh -t <uzak_makina> "komut"
+```
+
 

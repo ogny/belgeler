@@ -1,7 +1,70 @@
-### Kurulum
+#### Kurulum
+
+##### ubuntu icin, indirdiginde kurulum icin gerekenleri terminale dokuyor;
+
 ```
-curl -sSL https://get.docker.com/ubuntu/ | sudo sh
+curl -SL https://get.docker.com/ubuntu/ 
 ```
+
+##### Centos (epel repodan)
+```
+rpm -iUvh
+http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+yum update -y
+yum install docker-io
+```
+kurulan paket ve bagimliliklar
+```
+docker-io.x86_64 0:1.5.0-1.el6 
+libcgroup
+lua-alt-getopt
+lua-filesystem
+lua-lxc
+lxc
+lxc-libs          
+xz
+```
+
+* Kurulabilecek diger paketler: (incelenecek)
+```
+docker-1.5-5.el6.x86_64.rpm                                                               
+docker-io-devel-1.5.0-1.el6.x86_64.rpm                                                    
+docker-io-fish-completion-1.5.0-1.el6.x86_64.rpm                                          
+docker-io-logrotate-1.5.0-1.el6.x86_64.rpm                                                
+docker-io-vim-1.5.0-1.el6.x86_64.rpm                                                      
+docker-io-zsh-completion-1.5.0-1.el6.x86_64.rpm                                           
+docker-registry-0.9.0-1.el6.noarch.rpm                                                    
+```
+
+* Ubuntu docker info ciktisinda;
+Storage Driver: aufs
+Root Dir: /var/lib/docker/aufs
+Backing Filesystem: extfs
+
+* Centos
+Storage Driver: devicemapper
+
+
+###### docker-run  parametreleri
+
+* -entrypoint Dockerfile'daki parametreleri override eder 
+
+* --name="" kullanilmazsa daemon bir random string atiyor. amac link'leri
+  anlayabilmek
+
+* -i ile container attach edilmese de tty'de acilir.
+
+
+
+###### Kisayollar
+
+* Container'i detach etme CTRL-P CTRL-Q.
+
+Not: kisayollar tmux icinde screen'de de calisiyor.
+
+###### aufs notlari;
+
+
 [Genis kapsamli cheat sheat](https://github.com/wsargent/docker-cheat-sheet)
 
 ### Tutorial'dan notlar;
@@ -21,7 +84,6 @@ docker pull learn/tutorial
 * cektiginde bir komut calistir;
 ```
 docker run learn/tutorial echo "hello world"
-```
 docker run learn/tutorial apt-get install -y ping
 ```
 
@@ -69,7 +131,11 @@ kendin olustur (not: systemd de ekle)
 
 * sudo docker ps -l ile calisan container'i gorebiliyorsun (-l mutlak kullan)
 
-### Sorular
+##### Sorular
+
+
+
+
 * nginx ve php-fpm'i daemonize olarak baslatma, docker file servisi yaziyor. bu
 durum systemd icin gerekli mi?
 * docker attach ile calisan container'e  baglanamadim, onun yerine run
@@ -99,5 +165,6 @@ sudo service docker restart
 * container'e girmeden ip adresini ogrenme
 Run'la da olur inspect'le de, her ikisini de gorelim;
 docker inspect -f '{{ .NetworkSettings.IPAddress }}' imaj_adi
+
 
 

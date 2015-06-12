@@ -26,7 +26,7 @@ Relay izinleri
 
     yum install -y cyrus-sasl-plain
 
-- Genewl ayarlar::
+- Genel ayarlar::
 
     vi /etc/postfix/main.cf
     mynetworks_style = subnet
@@ -66,3 +66,7 @@ Relay izinleri
    /etc/postfix altinda sasl_passwd disindaki dosyalarin haklari postfix'in
    olsun
 
+Kaynaklar
+~~~~~~~~~
+
+`semi-legitimate <http://semi-legitimate.com/blog/item/how-to-rewrite-outgoing-address-in-postfix>`_
