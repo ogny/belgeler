@@ -208,3 +208,14 @@ lpr -P <printer_adi> <dosya(lar)>
 convert 2015-02-06-152435_1366x768_scrot.png -quality 100 -alpha off -density \
 600 -set units PixelsPerInch 1366x768px-noalpha.pdf
 ```
+
+* Centos locale tanimlama
+```
+localedef -v -c -i en_US -f UTF-8 en_US.UTF-8
+```
+* belli bir aga ulasimi engelleme
+```
+ip route add blackhole <ip/subnet>
+```
+
+

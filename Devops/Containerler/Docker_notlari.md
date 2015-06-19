@@ -27,14 +27,58 @@ xz
 
 * Kurulabilecek diger paketler: (incelenecek)
 ```
-docker-1.5-5.el6.x86_64.rpm                                                               
-docker-io-devel-1.5.0-1.el6.x86_64.rpm                                                    
-docker-io-fish-completion-1.5.0-1.el6.x86_64.rpm                                          
-docker-io-logrotate-1.5.0-1.el6.x86_64.rpm                                                
-docker-io-vim-1.5.0-1.el6.x86_64.rpm                                                      
-docker-io-zsh-completion-1.5.0-1.el6.x86_64.rpm                                           
-docker-registry-0.9.0-1.el6.noarch.rpm                                                    
+docker-1.5-5.el6.x86_64. 
+docker-io-devel-1.5.0-1.el6.x86_64. 
+docker-io-logrotate-1.5.0-1.el6.x86_64. 
+docker-io-vim-1.5.0-1.el6.x86_64. 
+docker-io-zsh-completion-1.5.0-1.el6.x86_64. 
+docker-registry-0.9.0-1.el6.noarch.
 ```
+
+#### Temeller
+
+* docker history ile en guncel versiyonu bul. Not: (imaj adi images ciktisinda
+  repository altinda)
+
+* docker git branch gibi, temel alip yeni imaj olusturuyorsun, ornegin;
+```
+docker run -it --name="mycentos" centos7/mongo:latest /bin/bash 
+```
+
+
+```
+docker images
+docker history <REPOSITORY:TAG>
+```
+* IMAGE ID: imajin temel kimligi, diger hicbir sey olmasa da bununla is
+  gorebiliyorsun.
+* CONTAINER ID: pid gibi, son yapilan isin id'si
+
+* Yapilan bir degisikligi host'ta container'in adiyla veya Container id'siyle
+  gorebilirsin.
+```
+docker diff <name>
+```
+* container'da yaptigin degisikligi commit ettiginde yeni bir image
+  olusturuyor, artik bu imajdan devam edebilirsin, yeni imajdan diledigimiz
+  kadar olusturabiliriz.
+```
+docker commit -m "foo" <MEVCUT Container id veya name> \
+<YENI Container id veya name>
+```
+
+#### Remove all stopped containers.
+
+docker rm $(docker ps -a -q)
+
+##### Docker yonetim komutlari
+
+* docker da bir process oldugundan, istediginde kill et
+```
+docker kill 
+```
+
+
 
 * Ubuntu docker info ciktisinda;
 Storage Driver: aufs
@@ -134,8 +178,6 @@ kendin olustur (not: systemd de ekle)
 ##### Sorular
 
 
-
-
 * nginx ve php-fpm'i daemonize olarak baslatma, docker file servisi yaziyor. bu
 durum systemd icin gerekli mi?
 * docker attach ile calisan container'e  baglanamadim, onun yerine run
@@ -164,7 +206,16 @@ sudo service docker restart
 
 * container'e girmeden ip adresini ogrenme
 Run'la da olur inspect'le de, her ikisini de gorelim;
+```
 docker inspect -f '{{ .NetworkSettings.IPAddress }}' imaj_adi
+```
+
+##### Centos7 icin;
+
+```
+yum install deltarpm
+yum --setopt=deltarpm=0  install <paket_adi>
+```
 
 
 

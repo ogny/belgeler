@@ -33,3 +33,16 @@ create schema public;
 http://stackoverflow.com/questions/3327312/drop-all-tables-in-postgresql
 
 DROP TABLE -- remove a table
+
+#. Dump ::
+
+    pg_dump -U <veri_tabani_sahibi> <veri_tabani_adi> -f dosya.sql
+    pg_dump dbname > outfile
+  
+#. Restore::
+
+   psql -U <veri_tabani_sahibi> <veri_tabani_adi> -f dosya.sql
+   psql dbname < infile
+
+
+

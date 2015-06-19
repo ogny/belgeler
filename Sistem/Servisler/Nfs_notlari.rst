@@ -39,7 +39,6 @@ client kurulum
 
     chkconfig nfs on
 
-#. duzenlemeler /etc altinda exports ve fstab (emrah.com'da)
 
 #. Servisleri baslatma, paylasimi check etme
 
@@ -49,10 +48,24 @@ client kurulum
     service  nfs start
     showmount -e localhost
 
+#. ilk mount elle yapilir, boot ederken mount icin fstab'a yazilir. (boot'ta
+   bir probleme yol acabileceginden kritik makinalara yazmiyorum.)
+
+#. fstab ornegi::
+
+    <nfs_server_ip>:/media/dizin /media/dizin rw,sync,no_root_squash,no_subtree_check,noatime 0 0
+
+
+#. elle baglama::
+
+     mount -t nfs -rw <nfs_server_ip>:/media/dizin /media/dizin
+
 server'da yapilandirma;
 -----------------------
 
-exports dosyasi duzeni;
+#. duzenlemeler /etc altinda exports ve fstab (emrah.com'da)
+
+#. exports dosyasi duzeni;
 
 ..code:: sh
 

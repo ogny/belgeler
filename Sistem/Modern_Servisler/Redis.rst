@@ -63,17 +63,17 @@ Sistem Genel
 
 * NFS erisimi saglanir::
 
-    mkdir -p /media/sas2tb/ipam/redis/backups /media/sas600gb
+    mkdir -p /media/dizin/ipam/redis/backups /media/sas600gb
     chkconfig nfs on
     service  rpcbind start
     service  nfs start
-    mount -t nfs -rw <nfs_server_ip>:/media/sas2tb/ipam/redis/
-    /media/sas2tb/ipam/redis/
+    mount -t nfs -rw <nfs_server_ip>:/media/dizin/ipam/redis/
+    /media/dizin/ipam/redis/
 #fstab'a eklenecek::
 
-    <nfs_server_ip>:/media/sas600gb /media/sas600gb
+    <nfs_server_ip>:/media/sas600gb /media/dizin/
     rw,sync,no_root_squash,no_subtree_check,noatime 0 0
-    <nfs_server_ip>:/media/sas2tb/ipam/redis/ /media/sas2tb/ipam/redis/
+    <nfs_server_ip>:/media/dizin/proje/redis/ /media/dizin/proje/redis/
     rw,sync,no_root_squash,no_subtree_check,noatime 0 0
 
 Redis Yapilandirma
@@ -226,7 +226,7 @@ Keepalived
             }
 #sadece master'da::
 
-            notify_backup "/media/sas2tb/ipam/redis/scripts/stop_redis.sh"
+            notify_backup "/media/dizin/proje/redis/scripts/stop_redis.sh"
     }
 
     
@@ -235,17 +235,17 @@ Betikler
 
 #. Redis stop betigi::
 
-   cat /media/sas2tb/ipam/redis/scripts/stop_redis.sh
+   cat /media/dizin/proje/redis/scripts/stop_redis.sh
    #!/bin/bash
    ``kill -15 `ps -ef |grep redis-server | grep -v grep  | awk '{print $2}'```
 
 #. Redis backup betigi::
 
-   cat /media/sas2tb/ipam/redis/scripts/redis_backup.sh
+   cat /media/dizin/ipam/redis/scripts/redis_backup.sh
    #!/bin/bash
 
    REDIS_SOURCE=/var/lib/redis/dump.rdb
-   BACKUP_DIR=/media/sas2tb/ipam/redis/backups
+   BACKUP_DIR=/media/dizin/ipam/redis/backups
    BACKUP_PREFIX="redis.dump.rdb"
    DATE=`date +%Y-%m-%d`
    REDIS_DEST="$BACKUP_DIR/$BACKUP_PREFIX.$DATE.gz"
@@ -260,7 +260,7 @@ Betikler
 
 #  Copy::
 
-   15 0 * * *      /media/sas2tb/ipam/redis/scripts/redis_backup.sh
+   15 0 * * *      /media/dizin/ipam/redis/scripts/redis_backup.sh
 
 
 TODOS

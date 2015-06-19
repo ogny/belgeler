@@ -1,6 +1,24 @@
 Redis cluster
 =============
 
+Cluster komutlari
+~~~~~~~~~~~~~~~~~
+
+::
+
+    redis-trib.rb del-node     
+    redis-trib.rb check
+
+#. Yapilacak: cluster docker images'ta calistirilip test edilecek.
+
+
+
+Arastirma:
+~~~~~~~~~~
+
+cluster'daki inconsistency
+
+
 * Redis Cluster does not use consistency hashing, but a different form of
   sharding where every key is conceptually part of what we call an hash slot.
 
@@ -18,9 +36,9 @@ Redis cluster
 YAPI
 ----
 
-* Her VM icerisinde bir master bir diger master'in slave node'u barindirilsin. A -> B1
-  gibi. Bu durumda hem node'lardan biri veya VM'in erisilemez oldugu durumda
-  cluster bozulmadan calismaya devam edebilir.
+* Her VM icerisinde bir master bir diger master'in slave node'u barindirilsin.
+  A -> B1 gibi. Bu durumda hem node'lardan biri veya VM'in erisilemez oldugu
+  durumda cluster bozulmadan calismaya devam edebilir.
 
 * Node B1 replicates B, and B fails, the cluster will promote node B1 as the
   new master and will continue to operate correctly.  However note that if
