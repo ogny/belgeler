@@ -31,3 +31,7 @@ yum-utils ile geliyor::
     yum-complete-transaction first to finish them
 
     yum-complete-transaction --cleanup-only
+
+* spesifik bir repo'dan paket sorgulama::
+
+    yum --disablerepo="*" --enablerepo="epel" search <paket_adi>

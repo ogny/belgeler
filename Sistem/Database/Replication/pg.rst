@@ -263,4 +263,7 @@ Hatalar;
 
     SELECT * from repmgr_fatih.repl_nodes;
 
+#. repmgr3'te clone pg_basebackup ile aliniyor, onun erisebilmesi icin pg_hba.conf'ta su satir olmali::
+   host    replication     all             <slave_ip>   trust
+
 

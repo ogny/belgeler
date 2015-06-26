@@ -37,9 +37,10 @@ docker-registry-0.9.0-1.el6.noarch.
 
 #### Temeller
 
+
+* docker hostname'i Container id'den aliyor.
 * docker history ile en guncel versiyonu bul. Not: (imaj adi images ciktisinda
   repository altinda)
-
 * docker git branch gibi, temel alip yeni imaj olusturuyorsun, ornegin;
 ```
 docker run -it --name="mycentos" centos7/mongo:latest /bin/bash 
@@ -67,9 +68,11 @@ docker commit -m "foo" <MEVCUT Container id veya name> \
 <YENI Container id veya name>
 ```
 
-#### Remove all stopped containers.
+#### Remove all untagged containers.
 
-docker rm $(docker ps -a -q)
+```
+docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
+```
 
 ##### Docker yonetim komutlari
 
@@ -217,5 +220,77 @@ yum install deltarpm
 yum --setopt=deltarpm=0  install <paket_adi>
 ```
 
+* Centos'ta tum log'lar /var/log/docker altinda
+
+
+#### Calisma Ortami:
+
+NOT: vmware'deki makinada 2 docker image'i da internete cikamadi, yerel ubuntu
+host'umdan cikti, docker0 interface'i ayni ip blogunu dagitiyor.
+route olmadigi icin bakamadim
+
+* kendi olusturdugum docker container'ini goremiyorum ;)
+```
+ps -l  vermiyor
+images ciktisinda goruyorsun
+```
+
+* Containter'i stop ile durdurmak, icinde calisan process'i oldurmuyor, tekrar
+  run dediginde process calismaya basliyor.
+
+#### Kurulum
+
+```
+yum update -y
+yum install docker-io docker-io-vim-1.5.0-1.el6.x86_64.rpm 
+sudo docker search centos
+sudo docker pull centos
+```
+
+#### Konteyner olusturma (manuel)
+
+```
+sudo docker run -ti centos /bin/bash
+yum install -y screen vim-enhanced
+```
+
+* Host makinada 
+
+```
+sudo docker commit <id> mycentos/base
+sudo docker run -ti mycentos/base /bin/bash
+```
+
+**Not**: container'in id'si prompt'ta mevcut.
+
+#### Calisilacak
+
+* Konteyner olusturma (Chef'le)
+* do'daki debian'da calis
+
+* http://www.jamescoyle.net/how-to/1531-using-dockerfiles-to-build-new-docker-images
+* [Get Started with Docker Formatted Container Images on Red Hat Systems](https://access.redhat.com/articles/881893)
+* https://github.com/veggiemonk/awesome-docker
+* https://www.debian-administration.org/article/696/A_brief_introduction_to_using_docker
+* https://docs.google.com/document/d/1Yb8pVDnibkipHw5lgftGkeN2s8oE0ex0QSl7aI4u89U/edit
+* https://github.com/odewahn/docker-jumpstart/blob/master/public/docker-images.md
+
+* http://nareshv.blogspot.com.tr/ 
+#### Diger Bilgiler
+* Docker imajlarinin tutuldugu path: /var/lib/docker/containers
+* container'lara ozgu donanim limitleri atamak icin cgroups'u kullaniyor.
+* container'e girmeden ip adresini ogrenme. Run'la da olur inspect'le de, her
+  ikisini de gorelim;
+```
+docker inspect -f '{{ .NetworkSettings.IPAddress }}' imaj_adi
+```
+
+```
+for file in *.tar; do eval `echo $file | \
+sed -nr 's;([a-zA-Z0-9\.-]+)_([a-zA-Z0-9-]+)-([a-f0-9]+)\.tar;IMAGE=\1/\2\nVERSION=\3;pg'`; \
+cat $file | docker import - ${IMAGE}:${VERSION}; done   
+```
+to import your containers, just make sure that there's only containers in the
+directory where you run that line or it could get interesting :)
 
 

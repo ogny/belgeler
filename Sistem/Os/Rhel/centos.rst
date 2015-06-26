@@ -62,3 +62,10 @@ Kullanici yonetimi
 
 [kullanicinin sudo 
 yetkilendirmesi](http://www.cyberciti.biz/faq/linux-sudo-allows-people-in-group-admin/)
+
+#. export HOSTNAME= calismiyor, bunun yerine 
+```
+HOSTNAME=<new_hostname>
+export HOSTNAME
+```
+

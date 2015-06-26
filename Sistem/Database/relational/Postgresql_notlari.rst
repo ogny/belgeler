@@ -9,6 +9,13 @@ Postgresql calisma
 :Author: Orkun Gunay
 
 
+
+* WAL backup'lama point-in-time recovery yapma imkani da sagliyor
+
+* pg_basebackup: binary dosya, tum db'leri birarada alabiliyorsun
+
+
+
 * veri tabani kullanicisiyla baglanmadiginda aldigin hata
 pdns=> DROP DATABASE pdns;
 ERROR:  must be owner of database pdns
@@ -44,5 +51,9 @@ DROP TABLE -- remove a table
    psql -U <veri_tabani_sahibi> <veri_tabani_adi> -f dosya.sql
    psql dbname < infile
 
+
+#. kullanicinin parolasini guncelleme ve superuser yetkisi verme::
+   ALTER USER <kullanici_adi> WITH PASSWORD '<newpassword>';
+   ALTER USER <kullanici_adi> WITH SUPERUSER;
 
 

@@ -11,6 +11,8 @@ Centos 6.6'da adim adim yapilan tum islemler
 
     yum install -y postgresql94-server postgresql94-contrib postgresql94-devel screen rsync libxslt-devel libxml2-devel keepalived repmgr 
 
+    Not: repgmr94 pg repo'ya girdi.
+
 #. bash_profile'e path ekleme::
 
     su - postgres

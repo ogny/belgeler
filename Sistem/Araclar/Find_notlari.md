@@ -29,6 +29,11 @@ find . -executable -type f  -name "*.php" |egrep mail
 find . \( -path -o -path ./.config \) -prune -o -name "*.jpg"  -print
 ```
 
+* alt dizin exclude etme
+```
+find . -type d -iname "<aranan_string>" -not -path "*<sub_directory>*"
+```
+
 * Dosya ve dizin haklarinin web sunucunun erismesi icin ayarlanmasi
 ```
 find * -type d -exec chmod 755 {} \;
