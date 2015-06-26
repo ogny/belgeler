@@ -56,11 +56,20 @@ DROP TABLE -- remove a table
    ALTER USER <kullanici_adi> WITH PASSWORD '<newpassword>';
    ALTER USER <kullanici_adi> WITH SUPERUSER;
 
-#. view
+#. Tablo olusturma calismasi::
 
-* If you find yourself routinely joining two sets of data in a similar way a
-  view may ease the process of duplicating that many times.
+    create table employees(
+    id int PRIMARY KEY,
+    last_name varchar NOT NULL,
+    salary int
+    );
+    INSERT INTO employees VALUES (1,'Jones',45000);
+    INSERT INTO employees VALUES (2,'Adams',50000);
+    INSERT INTO employees VALUES (3,'Williams',37000); 
 
+Kaynak
+======
 
-
+`Views <http://postgresguide.com/SQL/views.html>_`
+`CREATE FUNCTION: return types <http://www.postgresqlforbeginners.com/2010/11/create-table-and-constraints.html>_`
 
