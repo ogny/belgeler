@@ -4,6 +4,7 @@ Nodejs
 * Ubuntu'da nodejs paketini kur.
 * Her projede kullanilacak temel komutlari global olarak save et.
   (grunt,bower,karma)
+* Javascript'teki initjs ile package.json yaziyorsun (python'daki setup.py)
 * temel komutlari initialize et, temel file'lari olusun. (bower.json,
   package.json vd.)
 * css ve js'te calisacak kodu class olarak belirterek ekliyorsun.
@@ -15,8 +16,6 @@ best practise'i; proje dizininde kur, gitignore'a yaz.
     - dependency'leri hiyerarsik gostermesi guzel.
     - requirements.txt'yi elle yazmak zorundaydin, burada degilsin. `--save`
       ile verdiginde package.json'a yaziyor.
-
-Javascript'teki initjs ile package.json yaziyorsun (python'daki setup.py)
 
 #### Bower
 
