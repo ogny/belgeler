@@ -8,13 +8,13 @@ Postgresql calisma
 :tags: 
 :Author: Orkun Gunay
 
-
-
 * WAL backup'lama point-in-time recovery yapma imkani da sagliyor
 
 * pg_basebackup: binary dosya, tum db'leri birarada alabiliyorsun
 
+  * pg_ctl'i kullanabilmek icin .bash_profile'a eklenecek path::
 
+    /usr/pgsql-9.4/bin/
 
 * veri tabani kullanicisiyla baglanmadiginda aldigin hata
 pdns=> DROP DATABASE pdns;
@@ -55,5 +55,12 @@ DROP TABLE -- remove a table
 #. kullanicinin parolasini guncelleme ve superuser yetkisi verme::
    ALTER USER <kullanici_adi> WITH PASSWORD '<newpassword>';
    ALTER USER <kullanici_adi> WITH SUPERUSER;
+
+#. view
+
+* If you find yourself routinely joining two sets of data in a similar way a
+  view may ease the process of duplicating that many times.
+
+
 
 

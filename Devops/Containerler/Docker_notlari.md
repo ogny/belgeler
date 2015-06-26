@@ -293,4 +293,8 @@ cat $file | docker import - ${IMAGE}:${VERSION}; done
 to import your containers, just make sure that there's only containers in the
 directory where you run that line or it could get interesting :)
 
+* centos7 docker'da  `pg_ctl status` ciktisi
+```
+pg_ctl: directory "/var/lib/pgsql/9.4/data" is not a database cluster directory
+```
 
