@@ -1,0 +1,19 @@
+CREATE EXTENSION postgres_fdw;
+CREATE SERVER deneme
+FOREIGN DATA WRAPPER postgres_fdw 
+OPTIONS (dbname 'esef', host 'localhost');
+
+CREATE USER MAPPING for CURRENT_USER
+SERVER deneme
+OPTIONS (user 'test', password 'test');
+
+CREATE FOREIGN TABLE calisma_local
+  (
+    ad text,
+    soyad text,
+    sehir text
+  )
+SERVER deneme
+OPTIONS (
+schema_name 'public',
+table_name 'calisma');

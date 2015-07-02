@@ -262,6 +262,14 @@ Betikler
 
    15 0 * * *      /media/dizin/ipam/redis/scripts/redis_backup.sh
 
+#. redis_bulk.sh::
+    Redis bulk/batch operation scripts (rename, delete)
+    # Bulk deletes keys start with "prefix"  
+    EVAL "for i, name in ipairs(redis.call('KEYS', 'prefix*')) do redis.call('DEL', name); end" 0
+     
+    # Bulk renames keys start with "prefix" to "postfix". 
+    # e.g. prefixwithtail -> postfixwithtail
+    EVAL "for i, name in ipairs(redis.call('KEYS', 'prefix*')) do local x = string.gsub(name, 'pre', 'post'); 
 
 TODOS
 ~~~~~
@@ -302,5 +310,4 @@ Kaynaklar
 #. `Highly Available Redis Cluster
    <http://www.101tech.net/2014/08/08/highly-available-redis-cluster/>`_
 #. `Haredis: <https://github.com/falsecz/haredis>`_
-
 

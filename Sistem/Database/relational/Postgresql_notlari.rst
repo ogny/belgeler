@@ -73,3 +73,27 @@ Kaynak
 `Views <http://postgresguide.com/SQL/views.html>_`
 `CREATE FUNCTION: return types <http://www.postgresqlforbeginners.com/2010/11/create-table-and-constraints.html>_`
 
+
+Kullanici haklari 
+~~~~~~~~~~~~~~~~~
+
+Tanimlar
+========
+
+#. Users are the same thing as roles. A user is a role with the LOGIN
+   attribute... roles with the NOLOGIN attribute correspond to what we used to
+   call groups.
+
+#. kullanicinin spesifik db'ye erisimi::
+
+    CREATE USER <kullanici> WITH PASSWORD '';
+
+#. db'lere erisim kapatilip spesifik user icin acilir::
+
+   REVOKE connect ON DATABASE <veri_tabani> FROM PUBLIC;
+   GRANT connect ON DATABASE <veri_tabani> to <kullanici>;
+
+postgres_fdw
+~~~~~~~~~~~~
+
+
