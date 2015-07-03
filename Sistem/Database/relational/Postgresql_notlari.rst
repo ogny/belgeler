@@ -93,7 +93,10 @@ Tanimlar
    REVOKE connect ON DATABASE <veri_tabani> FROM PUBLIC;
    GRANT connect ON DATABASE <veri_tabani> to <kullanici>;
 
-postgres_fdw
-~~~~~~~~~~~~
+#. kullaniciyla ilgili login'de su hatayi alirsan::
+
+    FATAL:  password authentication failed for user "<Kullanici>"
+    DETAIL:  User "<Kullanici>" has an expired password.
+    ALTER ROLE <Kullanici> VALID UNTIL 'infinity';
 
 

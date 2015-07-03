@@ -2,7 +2,7 @@
 Degistirecegin yeri secip visual mode'a gec
 `U Uppercase u Lowercase`
 
-*satir atlama: jump --> j satir sayisi
+* satir atlama: jump --> j satir sayisi
 `5j`	
 
 * imlecin bir altindaki satirla bulundugu satiri birlestirme; 
