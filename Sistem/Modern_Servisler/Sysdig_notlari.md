@@ -3,6 +3,17 @@
 ```
 apt-get install sysdig linux-headers-`uname -r` sysdig-dkms
 ```
+### csysdig
+
+the ncurses user interface for sysdig 
+
+**CONTAINER SUPPORT** Starting csysdig with the -pc command line switch will
+cause many of the views to include additional container information. 
+
+**Keymappings**
+* f5 echo --> e
+* f6 dig  --> d
+
 ### Kullanim;
 
 By default, sysdig prints the information for each captured event on a single
@@ -58,9 +69,9 @@ $ sysdig proc.name=cat and evt.type=open
 $ sysdig -p"%evt.arg.name" proc.name=cat and evt.type=open
 ```
 
-
-
 * [Kaynaklar](https://github.com/draios/sysdig/wiki/Sysdig%20Examples)
 
+Yakalanan hatalar
+-----------------
 
-
+* "Resource temporarily unavailable" is **EAGAIN**, and in this case it means that you cannot accept() at this time, which is natural since the other process already did accept(). EAGAIN is not a fatal error, and in this case can be just ignored. Or, you could handle accept() in the main process, and use a queue to handle connected sockets to worker processes.

@@ -23,7 +23,25 @@ yeni bir partiton olustur.
 
 xfs_growfs -d /mnt/db
 
-`Kaynak:linoxide <http://linoxide.com/file-system/create-mount-extend-xfs-filesystem/>`_
+`Keynak:linoxide <http://linoxide.com/file-system/create-mount-extend-xfs-filesystem/>`_
+
+Case'ler
+--------
+#. Dosyalari goruntulemek istediginde olusan hata: "Structure needs cleaning"
+   fs'i dizinden umount et. mount edemezsen (file system busy now)::
+    umount -f -l /dizin
+
+NFS servisini durdur::
+    service nfs stop
+
+xfs_repair'le check et, sorun yoksa repair et::
+    xfs_repair -n -vv /dev/<disk_yolu>
+    xfs_repair -vv /dev/<disk_yolu>
+
+
+
+
+
 
 
 

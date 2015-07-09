@@ -218,4 +218,13 @@ localedef -v -c -i en_US -f UTF-8 en_US.UTF-8
 ip route add blackhole <ip/subnet>
 ```
 
+* load average:(uptime ciktisi)
+```
+```
+load average is the run-queue utilization averaged over the last minute, the
+last 5 minutes and the last 15 minutes. The run-queue is a list of processes
+waiting for a resource to become available inside the Linux operating system. 
+
+
+
 

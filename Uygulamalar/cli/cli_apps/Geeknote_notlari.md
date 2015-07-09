@@ -6,3 +6,6 @@ and save the buffer. Similar to renaming, any number notes can be moved
 before saving the buffer.
 
 [Kaynak](https://github.com/neilagabriel/vim-geeknote)
+
+* Geeknote strikethrough'un markdown'unu desteklemiyor, direk html tag'ini
+  yazmak gerek; `<s></s>`
