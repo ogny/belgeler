@@ -20,6 +20,7 @@ Bir type'in default action'u neyse, onu recipe'a yazmana gerek yok.
 * chefdk ile chef-zero geliyor, hicbir validation-authentication istemeksizin
   kullanabiliyorsun.
 
+
 * **Resources have a type.** The LWRP’s **resource type** is defined by the
   name of the file within the cookbook. This implicit name follows the formula
   of: **cookbook_resource**. If the default.rb file is used the new resource
