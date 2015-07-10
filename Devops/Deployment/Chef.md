@@ -1,7 +1,24 @@
 ### Best Practises
  
-* Resource'lar isin temeli; kullanabilecegin, olusturulmus kaynaklar- 
-  recipe'ler bunlara gore yaziliyor.
+Amac: farkli type'lardaki resource'lari (dosya, dizin, paket, servis vb.)
+istedigimiz gibi sekillendirme.
+Action'larla resource'lari duzenliyoruz;
+file resource'unun default action type'lari :delete, :create, olarak siralayabiliriz.
+Recipe'lar bir resource'u cagirma ve ona uygulanacak donusumu yazdigimiz rb
+dosyalari.
+Bir type'in default action'u neyse, onu recipe'a yazmana gerek yok.
+
+* Chef resource'a, recipe'a yazdigin komutlari uygularken, yazdigin duzeni
+  esas aliyor.
+
+* cookbook'larin amaci, isleri farkli dosyalarda tutup atomize edebilmek,
+  ornegin webserver'i install etmeyi, acip kapamayi ve serve edilecek icerigi
+  ayni dosyaya yazdik, cookbook iste bunlari duzenlemeyi sagliyor.
+
+* tek dosya uygulamak istedigimizde chef-apply kullandik, cookbook'ta chef-client
+
+* chefdk ile chef-zero geliyor, hicbir validation-authentication istemeksizin
+  kullanabiliyorsun.
 
 * **Resources have a type.** The LWRP’s **resource type** is defined by the
   name of the file within the cookbook. This implicit name follows the formula
@@ -20,11 +37,7 @@
   promotion of the role between different environments. And all this by
   changing the role’s cookbook constrained in the target environment.
 
-
-
-
-
-test cookbook'u olusturdugunda dizin hiyerarsisi;
+* test cookbook'u olusturdugunda dizin hiyerarsisi;
 ``` 
 attributes 
 CHANGELOG.md 
@@ -48,7 +61,9 @@ templates
 knife cookbook create test_coobook -o .
 ```
 
-============
+
+
+
 chef calisma
 ============
 
@@ -91,15 +106,11 @@ chef calisma
 
 #. The run-list lets you specify which recipes to run, and the order in which
    to run them
-
 #. A typical Chef workflow consists of three parts – your workstation, a Chef
    server, and nodes.
-
 #. knife enables you to communicate with the Chef server and download shared
    community cookbooks.
-
 #. workstation'a chefdk'yi kurup knife'i ilk calistirdigimda olusan uyari;
-
 
 ```
    WARNING: No knife configuration file found
@@ -368,4 +379,32 @@ Kaynaklar
 * [bootstrap:](https://learn.chef.io/rhel/bootstrap-your-node/)
 * [BERKSHELF;](<http://berkshelf.com/)
 * [learning chef](http://nathenharvey.com/blog/2012/12/06/learning-chef-part-1/)
+
+
+Chef Sever Installation
+=======================
+
+#. Server Kurulum adimlari tamamlanmadi
+
+    curl -L -O  https://web-dl.packagecloud.io/chef/stable/packages/el/6/chef-server-core-12.0.7-1.el6.x86_64.rpm
+    rpm -Uvh chef-server-core*.rpm
+# warning: chef-server-core-12.0.7-1.el6.x86_64.rpm: Header V4 DSA/SHA1 Signature, key ID 83ef826a: NOKEY::
+
+    chef-server-ctl reconfigure
+    chef-server-ctl user-create <eklenecek> 
+    chef-server-ctl org-create <eklenecek> 
+    chef-server-ctl org-create <eklenecek> 
+    wget https://packagecloud.io/chef/stable/el/6/x86_64/repodata/repomd.xml
+    vi /etc/yum.repos.d/chef-stable.repo
+        enabled=1
+    chef-server-ctl install opscode-manage
+    chef-server-ctl org-list
+    vi /opt/opscode/chef-server-plugin.rb
+    vi /opt/opscode/embedded/cookbooks/yum/providers/repository.rb
+    vi /opt/opscode/embedded/cookbooks/yum/templates/default/repo.erb
+    vi /opt/opscode/embedded/cookbooks/yum/attributes/main.rb
+    vi /opt/opscode/embedded/cookbooks/yum/templates/default/repo.erb
+
+#. [kaynak](https://docs.chef.io/install_server.html)
+
 
