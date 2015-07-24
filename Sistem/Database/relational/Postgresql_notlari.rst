@@ -1,4 +1,4 @@
-==================
+=================
 Postgresql calisma
 ==================
 
@@ -45,6 +45,7 @@ DROP TABLE -- remove a table
 
     pg_dump -U <veri_tabani_sahibi> <veri_tabani_adi> -f dosya.sql
     pg_dump dbname > outfile
+    pg_dumpall --file=dump.sql
   
 #. Restore::
 

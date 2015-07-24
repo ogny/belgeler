@@ -20,6 +20,10 @@ Bir type'in default action'u neyse, onu recipe'a yazmana gerek yok.
 * chefdk ile chef-zero geliyor, hicbir validation-authentication istemeksizin
   kullanabiliyorsun.
 
+* application cookbook'u: 
+
+
+
 
 * **Resources have a type.** The LWRP’s **resource type** is defined by the
   name of the file within the cookbook. This implicit name follows the formula
@@ -262,6 +266,10 @@ completely different configuration for computers in production.
    knife cookbook test COOKBOOK_NAME (options) 
 ```
 
+The attribute precedence order for roles and environments is reversed for
+default and override attributes. The precedence order for default attributes is
+environment, then role. The precedence order for override attributes is role,
+then environment.
 
 Data Bags
 -------------------------

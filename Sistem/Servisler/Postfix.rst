@@ -39,11 +39,12 @@ Relay izinleri
 - Relay hesabin tanimlanmasi::
 
     vi /etc/postfix/main.cf
+    smtp_sasl_mechanism_filter = plain, login
     smtp_sasl_auth_enable = yes
     smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
     smtp_sasl_security_options = noanonymous
     smtp_always_send_ehlo = yes
-    relayhost:<ip>:25
+    relayhost:<ip>
 
     /etc/init.d/postfix restart
     echo "<ip>:25    ipamraporlama@turktelekom.com.tr:Telekom123" >>

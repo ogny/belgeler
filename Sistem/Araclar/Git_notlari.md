@@ -119,4 +119,9 @@ git log -p <dosya_adi>
 git log --color -p
 ```
 
+* repo dizininde remote'a gonderilmesini istemedigimiz degisiklikleri geri
+  alma;
+```
+git clean -df
+```
 

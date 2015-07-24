@@ -1,3 +1,9 @@
+* register
+kopyala-yapistir vim'de aslinda default register'daki degeri alip verme gibi.
+bundan baska istedigin kadar register atayabiliyorsun, default olan
+disindakileri cagirmak icin; `"ayy` `"ap` gibi a'ya atadigini kopyala-yapistir
+yapabilirsin.
+
 * buyuk kucuk harf donusturme;
 Degistirecegin yeri secip visual mode'a gec
 `U Uppercase u Lowercase`
@@ -39,6 +45,11 @@ Degistirecegin yeri secip visual mode'a gec
 * Bir kisayola iki kisayol ait komut atama; kisayol tuslari arasina \| eklenir.
 `:nnoremap f }) \| zz`
 
+* Bookmark yonetimi
+`mx` ile satiri bookmark'la
+`‘x` ile bookmark'ladigin satira geri git.
+buradaki `x` degerini kucuk harf kullanirsan lokal bookmark kullanirsin, buyuk
+harf kullanirsan, farkli bir dosyada da olsan, cagirdiginda bookmark'ladigin satiri acar.
 
 * Vimdiff'teyken gorunumu dikey-yatay olarak degistirmek;
 <C-w>J (or <C-w>K) when you are in vertical split and <C-w>H (<C-w>L) in horizontal
@@ -56,13 +67,17 @@ Ctrl-k S, -> Ş
 Ctrl-k u: -> ü
 Ctrl-k U: -> Ü
 
+* marks ile kaldigin yerden calisma
+
 * Buffer'larla calisma
 Bu alanda sik kullanilan cesitli eklentiler mevcut, bunlardan Unite.vim ile
 calisacagim.
 `:Unite-vertical file buffer` ile nerdtree'deki gibi dosyalari ve buffer'lari goruntuleyebiliyoruz.
 
-* satirlari sutuna cevirme;
-`:%s/\n/`
+* satirlari sutuna cevirme; donusturulecek satira gecip,
+`set relativenumber` ile kac satir oldugunu ogren
+sayiJ ile birlestir.
+
 
 * tab duzenlemeleri;
 * vertical help icin :vertical yaz.
@@ -111,6 +126,13 @@ vim-buffergator
 * easymotion
 backward search: <header><header>b
 
+Ultisnips
+--------
+
+snippet'i devreye almak icin, tab'a basip snippet kisayolunu secip shit+tab
+yap.
+
+
 #### Vim help'ten notlar:
 * sadece help penceresini acma;
 help |only
@@ -152,14 +174,13 @@ http://vim.wikia.com/wiki/Working_with_CSV_files
 Python Mode
 ```
 
-#. herhangi bir komutun uzerinde K 'ya bastiginda dokumanini acar.
+* herhangi bir komutun uzerinde K 'ya bastiginda dokumanini acar.
 
-#. <leader> r ile calistirip ciktisini yeni buffer'a doker
-
-
+* <leader> r ile calistirip ciktisini yeni buffer'a doker
 ```
 Neosnippet ile python snippet'lerini kullanma
 ```
 
+* buffergator `<leader> b` ile left sidebar'da listeliyorsun
 
-#. buffergator `<leader> b` ile left sidebar'da listeliyorsun
+

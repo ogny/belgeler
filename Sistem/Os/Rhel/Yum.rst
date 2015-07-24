@@ -35,3 +35,8 @@ yum-utils ile geliyor::
 * spesifik bir repo'dan paket sorgulama::
 
     yum --disablerepo="*" --enablerepo="epel" search <paket_adi>
+
+* multi architecture'yi iptal etme /etc/yum.conf'a ekle::
+
+  exclude=*.i386 *.i686
+
