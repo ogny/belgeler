@@ -1,24 +1,24 @@
-* Oturumu yeniden adlandirma::
+#. Oturumu yeniden adlandirma::
 
     :rename-session -t eski yeni
 
-* oturumu öldürme::
+#. oturumu öldürme::
 
     :kill-session -t ad
 
-* Reloading tmux config::
+#. Reloading tmux config::
 
     :source-file ~/.tmux.conf
 
-* Yeni oturum acma::
+#. Yeni oturum acma::
 
     new-session -s session_name
 
-* pencerenin %25'i kadar dikey yeni bir pencere açıp vim başlatma::
+#. pencerenin %25'i kadar dikey yeni bir pencere açıp vim başlatma::
 
     split-window -h -p 25 vim
 
-* oturumlar arasinda pane gonderme::
+#. oturumlar arasinda pane gonderme::
 
     hedef oturuma gec
     join-pane -s kaynak_oturum:pane_id'si
@@ -26,7 +26,7 @@
 `kaynak <https://forums.pragprog.com/forums/242/topics/10533>`_
 
 
-* pencereleri yeniden siralama::
+#. pencereleri yeniden siralama::
 
     move-window ile var olmayan bir pencereye atayabiliyoruz.
     swap-window ile varolanlarin siralamasini değiştirebiliyoruz.
@@ -34,20 +34,25 @@
 
 `kaynak <http://superuser.com/questions/343572/how-do-i-reorder-tmux-windows>`_
 
-* iki haneli pencerelere gecme; index modunda gececegimiz pencereyi
+#. iki haneli pencerelere gecme; index modunda gececegimiz pencereyi
   girebiliriz::
 
     prefix+ '
 
 `kaynak <http://stackoverflow.com/questions/25335730/how-do-i-jump-to-double-digit-window-number-in-tmux>`_
 
-* copy mode'u sectigimizde olusan gecikmeyi engelleme::
+#. copy mode'u sectigimizde olusan gecikmeyi engelleme::
 
     set -sg escape-time 0
 
-* ayni window'da acik pane'lerde ayni komutu calistirma::
+#. ayni window'da acik pane'lerde ayni komutu calistirma::
 
     :setw synchronize-panes 
+
+#. Pane'i ayni session'daki baska bir window'a gonderme
+  kaynak pane'e gec, hedef pane'in yolunu goster::  
+  
+    C-b :move-pane -t :3.2 
 
 Eklentiler
 ----------
@@ -65,11 +70,11 @@ Searches are case insensitive.
 
 Predefined searches
 
-prefix + ctrl-f - simple *f*ile search
-prefix + ctrl-g - jumping over *g*it status files (best used after git status command)
-prefix + ctrl-u - *u*rl search (http, ftp and git urls)
+prefix + ctrl-f - simple #.f#.ile search
+prefix + ctrl-g - jumping over #.g#.it status files (best used after git status command)
+prefix + ctrl-u - #.u#.rl search (http, ftp and git urls)
 prefix + ctrl-d - number search (mnemonic d, as digit)
-prefix + alt-i - *i*p address search
+prefix + alt-i - #.i#.p address search
 These start "copycat mode" and jump to first match.
 
 "Copycat mode" bindings

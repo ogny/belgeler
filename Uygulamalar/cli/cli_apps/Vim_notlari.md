@@ -98,39 +98,15 @@ icin;
 vim -u NORC
 ```
 
-### eklentiler 
-* Kisa Kisa kullandigim eklentileri tanitmak istiyorum.
+* .vimrc'yi guncelleme (source etme)
+```
+:so $VIMRC
+```
 
-bclose.vim
-goyo.vim
-L9
-neocomplete.vim
-neomru.vim
-neosnippet.vim
-nginx.vim
-nerdtree
-vim-easymotion
-vim-json
-vimroom
-vim-surround
-vim-tmux-navigator
-vim-zenroom2
-vim-buffergator
-
-
-#### Eklenti Notlari;
-* unite vimproc ve neobundle'dan henuz verim alamadigimdan listeden cikarttim.
-
-* nerdtree
-
-* easymotion
-backward search: <header><header>b
-
-Ultisnips
---------
-
-snippet'i devreye almak icin, tab'a basip snippet kisayolunu secip shit+tab
-yap.
+* SignColumn'u gizleme
+```
+sign unplace *
+```
 
 
 #### Vim help'ten notlar:
@@ -170,9 +146,42 @@ set nofoldenable
 http://vim.wikia.com/wiki/Working_with_CSV_files
 ```
 
-```
+### eklentiler 
+* Kisa Kisa kullandigim eklentileri tanitmak istiyorum.
+
+bclose.vim
+goyo.vim
+L9
+neocomplete.vim
+neomru.vim
+neosnippet.vim
+nginx.vim
+nerdtree
+vim-easymotion
+vim-json
+vimroom
+vim-surround
+vim-tmux-navigator
+vim-zenroom2
+vim-buffergator
+
+
+#### Eklenti Notlari;
+* unite vimproc ve neobundle'dan henuz verim alamadigimdan listeden cikarttim.
+
+* nerdtree
+
+* easymotion
+backward search: <header><header>b
+
+Ultisnips
+---
+
+snippet'i devreye almak icin, tab'a basip snippet kisayolunu secip shit+tab
+yap.
+
 Python Mode
-```
+---
 
 * herhangi bir komutun uzerinde K 'ya bastiginda dokumanini acar.
 
@@ -180,7 +189,11 @@ Python Mode
 ```
 Neosnippet ile python snippet'lerini kullanma
 ```
-
 * buffergator `<leader> b` ile left sidebar'da listeliyorsun
+
+vim-bookmarks
+---
+
+* 0 basarili, 1 basarisiz
 
 
