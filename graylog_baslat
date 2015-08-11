@@ -1,0 +1,1 @@
+ nohup graylog-web-interface/bin/graylog-web-interface -J-Xms128M -J-Xmx512m -Dhttp.port=10100 -Dpidfile.path=run/graylog-web-interface.pid -Dconfig.file=conf/graylog-web-interface.conf &

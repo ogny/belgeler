@@ -1,0 +1,72 @@
+
+Streaming Replication Demo:
+1- su –postgres -> to connect as postgres
+2- psql –p 5432 postgres postgres -> to have a cluster at 5432
+3- vi /opt/PostgreSQL/9.3/data/postgresql.conf -> to open the config file 
+uncomment wal_level, convert it to ‘hot_standby’
+uncomment synchronous_commit -> if you want synchronous replication
+uncomment archive_mode, convert it to ‘on’
+uncomment archive_command, convert it to ’cp %p /home/postgres/arch_dest/%f’
+uncomment max_val_senders, convert it to ‘2’
+uncomment wal_keep_segments, convert it to ‘32’
+save and close
+4- vi /opt/PostgreSQL/9.3/data/pg_hba.conf -> to make entry for replication
+uncomment default replication entries
+if you have an another server where you want to put your standby, add that
+manually eg. host replication postgres 192.168.1.20/32 md5
+save and close
+5- mkdir /home/postgres/arch_dest -> before restarting the server, you should
+verify you have arch_dest directory in home directory, or you should add
+6- pg_ctl –D /opt/PostgreSQL/9.3/data –mf restart -> to restart the server by
+specifying where is the data directory
+7- psql -> connects to the default port, which is 5432
+8- show wal_level -> it should show “hot_standby”
+9- show archive_mode -> it should show “on”
+10- to verify archiving works
+\q -> quit
+ls arch_dest/ -> which should show empty
+psql
+select pg_switch_xlog(); -> to force a switch, therefore to force a checkpoint
+\q
+ls arch_dest/ -> which should now show some file
+11- to take a backup
+psql
+select pg_start_backup(‘ForStandbyLabel’)
+\q
+cp –rp /opt/PostgreSQL/9.3/data /home/postgres/standby -> this will copy base
+backup on the standby
+psql
+select pg_stop_backup(); -> to signal the backup is done
+12- to set up standby
+\q
+ls standby/
+rm standby/postmaster.pid
+vi standby/recovery.conf
+standby_mode=’on’
+primary_conninfo=’host=localhost port=5432 user=postgres’
+trigger_file=’home/postgres/trg1234’ -> to trigger a failover on slave
+vi standby/postgresql.conf
+change port to 5433
+uncomment hot_standby and convert to ‘on’
+comment archive_mode and archive_command
+pg_stl –D standby/start -> to start the standby server
+psql –p 5433
+13- psql –p 5432 -> connect to the master
+14- create user edbstore password “edbstore”;
+15- create database edbstore owner edbstore;
+16- select * from pg_database -> to see the databases in the master
+17- /q
+18- psql –p 5433
+19- select * from pg_database -> to see the new database edbstore is added to
+the slave also
+a. or, create table emp (id numeric);
+b. insert into emp values(1);
+c. table emp;
+d. psql –p 5433
+e. table emp; -> you will see the value ‘1’
+20- Let’s say there is a problem with master;
+a. pg_ctl –mf stop
+b. psql –p 5433
+21- You can’t do anything but reading with slave, you need failover
+a. İf you are already in postgres directory
+b. touch trg1234 -> to invoke a failover

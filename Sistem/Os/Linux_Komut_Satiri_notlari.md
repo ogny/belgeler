@@ -227,4 +227,8 @@ waiting for a resource to become available inside the Linux operating system.
 
 
 
+* sadece dizinleri sirala
 
+```
+tree -dfi -L 1 "$(pwd)"
+```

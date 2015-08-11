@@ -26,6 +26,25 @@ Bir type'in default action'u neyse, onu recipe'a yazmana gerek yok.
   of: **cookbook_resource**. If the default.rb file is used the new resource
   will be named cookbook.
 
+
+Role olusturma;
+----------------
+kaynak: essential_roles
+
+* roller json dosyalari.
+* each role must have a name,
+* rollere node'lar gibi run_list yazilabilir
+* mevcut attribute'leri override edebilir.
+ornek json (syntax off)
+    name: webserver
+    default_attributes:
+        apache:
+            greeting: webinar
+    run_list: recipe[apache]
+
+* ruby'de lokal variable pipe'ler arasinda tanimlaniyor.
+
+* pass data bags as variables into a template
 * When you start writing your first roles, you tend to define them as a
   run-list with a collection of attributes. Mostly because that’s the
   documentation about, but it’s not necessary a good practice, depending very
@@ -370,6 +389,8 @@ Templates:
 * erb dosyalariyla calisma
 
 
+
+
 BERKSHELF
 ----------
 
@@ -419,7 +440,10 @@ i = 1
 print "#{i}" # simple example
 ```
 
-The double quotes in this recipe specifies that string interpolation should be performed. String interpolation enables you to replace placeholders within a string with the values they represent. Placeholders can be variables or any block of Ruby code.
+The double quotes in this recipe specifies that string interpolation should be
+performed. String interpolation enables you to replace placeholders within a
+string with the values they represent. Placeholders can be variables or any
+block of Ruby code.
 Ornegin;
 ```
 # Write the home page.
@@ -428,4 +452,43 @@ file "#{node['awesome_customers']['document_root']}/index.php" do
 
 
 
+
+
+Resource ornekleri
+---
+
+* dosya yaratma;
+file (cookbook disindan bir dosya yaratacaksan) content parametresi ile icerigi
+ekliyorsun.
+cookbook_file to copy a file from a cookbook’s /files directory. 
+template to create a file based on a template in a cookbook’s /templates directory. 
+remote_file to transfer a file to a node from a remote location.
+
+Attributes 
+---
+
+The chef-client uses six types of attributes to determine the value that is
+applied to a node during the chef-client run 
+
+
+* Precedence
+Attributes are always applied by the chef-client in the following order:
+A default attribute located in a cookbook attribute file
+A default attribute located in a recipe
+A default attribute located in an environment
+A default attribute located in role
+A force_default attribute located in a cookbook attribute file
+A force_default attribute located in a recipe
+A normal attribute located in a cookbook attribute file
+A normal attribute located in a recipe
+An override attribute located in a cookbook attribute file
+An override attribute located in a recipe
+An override attribute located in a role
+An override attribute located in an environment
+A force_override attribute located in a cookbook attribute file
+A force_override attribute located in a recipe
+An automatic attribute identified by Ohai at the start of the chef-client run
+where the last attribute in the list is the one that is applied to the node.
+
+* bu dosyayi incelemeyi unutma: ~/Git_Repolari/is/chef-repo/cookbooks/application_python/templates/default/celeryconfig.py.erb
 
