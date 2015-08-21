@@ -1,4 +1,5 @@
 belgeler
 ========
 
-sistem yonetiminde tuttugum ipuclari
+devops & sistem yonetiminde tuttugum ipuclari
+

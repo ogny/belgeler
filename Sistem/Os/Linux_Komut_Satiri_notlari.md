@@ -232,3 +232,8 @@ waiting for a resource to become available inside the Linux operating system.
 ```
 tree -dfi -L 1 "$(pwd)"
 ```
+
+* kullaniciya ait tum process'leri oldurme
+```
+pkill -9 -u `id -u username`
+```

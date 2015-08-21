@@ -80,9 +80,11 @@ git config remote.origin.push HEAD
 *  git-blame - Show what revision and author last modified each line of a  file
 
 #### stash (kelime anlami, zulalamak_
-    Calling git stash without any arguments is equivalent to git stash save
-    The latest stash you created is stored in refs/stash
+Calling git stash without any arguments is equivalent to git stash save
+The latest stash you created is stored in refs/stash
 
+stash ile degisiklikleri zulaliyosun.
+stash apply ile restore ediyosun.
 
 
 * coklu repo guncelleme
@@ -125,3 +127,8 @@ git log --color -p
 git clean -df
 ```
 
+* pretty log format
+```
+git log --pretty=format:user:%aN%n%ct --reverse \ 
+--raw --encoding=UTF-8 --no-renames --no-merge
+```

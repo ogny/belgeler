@@ -1,4 +1,3 @@
-===================
 Cassandra Yonetimi
 ===================
 
@@ -14,6 +13,11 @@ nohup java -jar cyanite/target/cyanite-0.1.3-standalone.jar &
 * Spark'i yeniden baslatmak icin ipam-ulus-db-2'ye baglanip;
 
 ```
-/opt/local/spark/sbin/stop-all.sh
-/opt/local/spark/sbin/start-all.sh
+/data/spark/sbin/stop-all.sh
+/data/spark/sbin/start-all.sh
+```
+* servisin duzgun calisip calismadigi kontrol edili;
+
+```
+nodetool status
 ```

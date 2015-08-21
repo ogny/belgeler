@@ -46,3 +46,5 @@ Rsync Calismasi
 
 #.  Append'de dosyanin boyutuna bakiyor, gonderilecek yerdekiyle esit veya
     ondan kucukse gondermeyi atliyor. 
+
+#. debug etmek icin --debug=all4

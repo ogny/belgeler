@@ -48,8 +48,19 @@ nohup /opt/sensu/bin/sensu-api  &
 
 * checks/'e yeni eklenen json'larin calismama sebebi grubunun sensu
   olmamasiydi.
+
 * sensu donus'lerde 2'ye (critical) mail donduruyor. ( bu konu biraz daha
   incelenecek)
+
+* Sensu-server'i elle debug modda baslatmak istersen;
+```
+/opt/sensu/embedded/bin/ruby /opt/sensu/bin/sensu-server -b -c \
+/etc/sensu/config.json -d /etc/sensu/conf.d -e /etc/sensu/extensions -p \
+/var/run/sensu/sensu-server.pid -l /var/log/sensu/sensu-server.log -L debug
+```
+
+* sensu-community-plugins'te olmayan bir plugin'in calismasi icin, subscribe
+  edilen sunuculara da yuklenmesi gerekiyor.
 
 #### Redis
 
@@ -67,5 +78,4 @@ Kaynaklar
 ---------
 
 * [official doc](http://sensuapp.org/docs/0.12/checks)
-
 

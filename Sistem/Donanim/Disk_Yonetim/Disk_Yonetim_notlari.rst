@@ -158,4 +158,5 @@ kill -USR1 <process_id>
 
    http://superuser.com/questions/744916/ubuntu-14-04-installer-doesnt-show-existing-partitions
 
-   
+#. Disk I/O ve load average   
+`Kaynak:blog<https://prutser.wordpress.com/2012/05/05/understanding-linux-load-average-part-2/>`_
