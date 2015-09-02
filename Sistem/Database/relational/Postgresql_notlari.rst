@@ -100,4 +100,11 @@ Tanimlar
     DETAIL:  User "<Kullanici>" has an expired password.
     ALTER ROLE <Kullanici> VALID UNTIL 'infinity';
 
+WAL - Continous Archiving
+========
+
+
+
+`Kaynak: depesz <http://www.depesz.com/2011/07/14/write-ahead-log-understanding-postgresql-conf-checkpoint_segments-checkpoint_timeout-checkpoint_warning/>`_
+
 
