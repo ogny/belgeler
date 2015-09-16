@@ -9,3 +9,10 @@ before saving the buffer.
 
 * Geeknote strikethrough'un markdown'unu desteklemiyor, direk html tag'ini
   yazmak gerek; `<s></s>`
+
+* Tagging: calisma yontemi; hicbir sey silinmeyecek , tag'lar sabit kalacak,
+  isi bitine task gereksiz workspace'ine tasinacak. Tagging kritik bir konu.
+  `geeknote tag-list`
+  `gecr not_adi --tags "atanacak_tag_1,atanacak_tag_2`
+
+

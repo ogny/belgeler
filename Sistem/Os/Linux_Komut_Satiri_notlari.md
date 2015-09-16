@@ -167,6 +167,11 @@ date +%s
 date -d @EPOCH_TIME +"%d-%m-%Y %T %z
 ```
 
+* terminal'de epoch timestamp'i convert etme;
+```
+ date -d @<timestamp>
+```
+
 * Belli bir pid'de sorun oldugunu dusunursen strace ile pid'de yapilan isin
 ciktisina bak;
 ```
@@ -236,4 +241,9 @@ tree -dfi -L 1 "$(pwd)"
 * kullaniciya ait tum process'leri oldurme
 ```
 pkill -9 -u `id -u username`
+```
+
+* aktif baglantilari yapan uygulamalar
+```
+netstat -anpt | grep ESTABLISHED | awk '{ print $7 }' | cut -d/ -f2 | sort -u
 ```
