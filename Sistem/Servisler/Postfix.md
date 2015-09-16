@@ -94,7 +94,7 @@ submission inet n       -       n       -       -       smtpd
   -o smtpd_sasl_tls_security_options=noanonymous
 ```
 
-#. sasldb2'de tutulacak kullaniciyi olusturma ve olustugunu gorme;
+* sasldb2'de tutulacak kullaniciyi olusturma ve olustugunu gorme;
 ```
 saslpasswd2 -c -u <hostname_veya_domain> <kullanici_adi>
 sasldblistusers2
