@@ -1,20 +1,20 @@
 Queue 
 ---
 
-#. Kuyrugu izleme
+* Kuyrugu izleme
 ```
 postqueue -p
 showq - list the Postfix mail queue
 ```
 
-#. Kuyrugu temizleme
+* Kuyrugu temizleme
 ```
 postqueue -f : Flush the queue: attempt to deliver all queued mail.
 FILES /var/spool/postfix, mail queue
 postsuper -d ALL
 ```
 
-#. Goruntuleme
+* Goruntuleme
 ```
 postcat -vq <queue_id> |less
 ```
@@ -22,7 +22,7 @@ postcat -vq <queue_id> |less
 Relay izinleri 
 ---
 
-#. erisim izni olan makinede gerekli paketler kurulur
+* erisim izni olan makinede gerekli paketler kurulur
 ```
 yum install -y cyrus-sasl-plain
 ```
@@ -49,9 +49,9 @@ echo "<ip>:25    <kullanici_adi>:<parola>" >> /etc/postfix/sasl_passwd
 postmap hash:/etc/postfix/sasl_passwd
 ```
 
-#. Yerel sunucudan izinli sunucuya erismek icin
+* Yerel sunucudan izinli sunucuya erismek icin
 ```
-i /etc/postfix/transport
+vi /etc/postfix/transport
        smtp:<relay_ip>
 
 vi /etc/postfix/main.cf
@@ -70,7 +70,7 @@ yum install -y cyrus-sasl cyrus-sasl-plain
 /etc/postfix/main.cf
 smtpd_sasl_path = sasl2/smtpd.conf
 smtpd_sasl_auth_enable = yes
-smtpd_sasl_local_domain = example.tld
+smtpd_sasl_local_domain = <hostname_veya_domain>
 smtpd_sasl_security_options = noanonymous
 broken_sasl_auth_clients = yes
 smtpd_recipient_restrictions = permit_mynetworks,
@@ -96,7 +96,7 @@ submission inet n       -       n       -       -       smtpd
 
 #. sasldb2'de tutulacak kullaniciyi olusturma ve olustugunu gorme;
 ```
-saslpasswd2 -c -u <domain_veya_hostname> <kullanici_adi>
+saslpasswd2 -c -u <hostname_veya_domain> <kullanici_adi>
 sasldblistusers2
 ```
 
@@ -135,7 +135,7 @@ server.sendmail("<kimden_kisminda_gorulen_adres>", "<gonderilecek_adres>", msg)
 ```
 
 Kaynaklar
-~~~~~~~~~
+---
 
 * [how-to-rewrite-outgoing-address-in-postfix](http://semi-legitimate.com/blog/item/how-to-rewrite-outgoing-address-in-postfix)
 * [Authenticated SMTP with Postfix on CentOS](http://blog.penumbra.be/2010/04/authenticated-smtp-postfix/)
