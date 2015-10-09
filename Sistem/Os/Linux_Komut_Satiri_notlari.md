@@ -99,10 +99,6 @@ dosyayi silebilir.
 * buyuk dosyayi bolme;
 split -b 10MB dosya_adi 
 
-* iso'yu flash disk'e yazma (partition'a degil diskin tamamina yazilir.)
-```
-sudo dd bs=4M if=/path/to/iso of=/dev/sdb oflag=direct && sudo sync
-```
 * Hata: * Error: Problem adding (is pinentry installed?); giving up
 ```
 eval $(gpg-agent --daemon --pinentry-program /usr/bin/pinentry-curses)
@@ -246,4 +242,14 @@ pkill -9 -u `id -u username`
 * aktif baglantilari yapan uygulamalar
 ```
 netstat -anpt | grep ESTABLISHED | awk '{ print $7 }' | cut -d/ -f2 | sort -u
+```
+
+* iso'yu cd'ye vey flash disk'e yazma (partition'a degil diskin tamamina yazilir.)
+```
+sudo wodim -eject -tao speed=4 dev=/dev/sr<number> ~/path_to.iso
+sudo dd bs=4M if=/path/to/iso of=/dev/sdb oflag=direct && sudo sync
+```
+* uzak sunucudaki udp port'unun acik olup olmadigini gorme
+```
+nc -uzv <ip> <port>
 ```

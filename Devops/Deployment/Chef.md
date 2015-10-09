@@ -492,4 +492,6 @@ where the last attribute in the list is the one that is applied to the node.
 
 * bu dosyayi incelemeyi unutma: ~/Git_Repolari/is/chef-repo/cookbooks/application_python/templates/default/celeryconfig.py.erb
 
-
+* client'ta `chef-client` calistirdiginda hostname'i localhost olarak
+  gormesinin sebebi hosts dosyasinda localhost'un oncelikli yazmasindan
+  kaynaklaniyor. once hostname'i eklersen sorun duzeliyor.

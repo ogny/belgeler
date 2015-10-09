@@ -53,7 +53,7 @@ client kurulum
 
 #. fstab ornegi::
 
-    <nfs_server_ip>:/media/dizin /media/dizin rw,sync,no_root_squash,no_subtree_check,noatime 0 0
+    <nfs_server_ip>:/dizin /dizin fs     rw,hard,intr    0 0n
 
 
 #. elle baglama::

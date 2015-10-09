@@ -1,3 +1,44 @@
+yontem; hicbir sey silinmeyecek, isi biten note "tamamlanan" notebook'una tasinacak. 
+
+### Alias'lar
+bash/zsh profile'a eklenecek;
+```
+alias gecr='geeknote create --title $1'
+alias geed='geeknote edit --note $1'
+alias gefs='geeknote find --notebooks "kisisel" --search $1'
+```
+
+### Komutlar
+* `geeknote tag-list`
+
+* yeni note olustururken tag'lama:
+```
+gecr <not_adi> --tags "<tag_1>,<tag_2>"
+```
+
+* varolan note'in taglarini degistirme
+```
+geed <not_adi> --tags "<tag_1>,<tag_2>"
+```
+
+* note'u tamamlanan notebook'una tasima
+```
+geed <not_adi> --notebook "tamamlanan"
+```
+
+### Arama
+* tag'a gore
+```
+geeknote find --search "<text_to_find>" --tags "<tag_1>,<tag_2>"
+```
+* find by default title'a gore arama yapiyor, --content-search ile arama
+  yapilacaksa direk `show` kullanmak daha pratik.
+```
+geeknote show <*text to search and show*>
+```
+
+### Misc
+
 Use ` :GeeknoteSaveAsNote  `
 acik sayfanin ilk satirini baslik olarak kaydediyor
 * To move a note into a different notebook, simply move the note's text
@@ -10,9 +51,5 @@ before saving the buffer.
 * Geeknote strikethrough'un markdown'unu desteklemiyor, direk html tag'ini
   yazmak gerek; `<s></s>`
 
-* Tagging: calisma yontemi; hicbir sey silinmeyecek , tag'lar sabit kalacak,
-  isi bitine task gereksiz workspace'ine tasinacak. Tagging kritik bir konu.
-  `geeknote tag-list`
-  `gecr not_adi --tags "atanacak_tag_1,atanacak_tag_2`
 
 

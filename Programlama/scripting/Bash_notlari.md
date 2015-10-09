@@ -26,3 +26,23 @@ alias llz=$'ls -alh |awk \'{print$9}\''
 
 [Kaynak:](http://stackoverflow.com/questions/1250079/how-to-escape-single-quotes-within-single-quoted-strings)
 
+* 10'luk tabanda islem yapmak (09 - 1 icin mesela)
+```
+b=10#$(date +%m)
+```
+
+* regex kullanma ornegi;
+```
+#!/bin/bash
+b=10#$(date +%m)
+((b=b-1))
+c='^test2014'$b'.*02$'
+echo "$c"
+```
+
+* degisken atamada bosluk birakilmayacak;
+```
+a="$b"
+b=10#$(date +%m)
+c=5
+```

@@ -33,4 +33,5 @@ acisindan uygun
 #. 5.5.0'da interface eklerken interface'in turunun VMXNET50 olmasina dikkat
    et.
 
-
+#. FHBA ile bagli disk'lerin sanal makinelere eklenememesinin sebebi,
+   disk'lerin vmware uyumlu fs ile bicimlendirilmemesinden.

@@ -8,6 +8,11 @@ Postgresql calisma
 :tags: 
 :Author: Orkun Gunay
 
+* Guncel surum kurulumu:
+
+  yum install \
+  http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-redhat94-9.4-1.noarch.rpm
+
 * WAL backup'lama point-in-time recovery yapma imkani da sagliyor
 
 * pg_basebackup: binary dosya, tum db'leri birarada alabiliyorsun
@@ -45,7 +50,8 @@ DROP TABLE -- remove a table
 
     pg_dump -U <veri_tabani_sahibi> <veri_tabani_adi> -f dosya.sql
     pg_dump dbname > outfile
-    pg_dumpall --file=dump.sql
+    PGUSER=postgres pg_dumpall -h <uzak_sunucu> > db.out
+    psql -f db.out postgres
   
 #. Restore::
 
