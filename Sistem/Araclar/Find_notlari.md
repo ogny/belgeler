@@ -10,6 +10,12 @@
 * dosya buyuklugune gore arama kosullari
     - `-size` +<buyukluk>k ile kilobayt cinsinden arat.
 
+* (veya) or operatoru; birden cok farkli aranacak degeri birarada
+  sorgulatabilirsin.
+
+```
+find . -name '*.csv' -o -name '*.txt' |wc -l
+```
 
 * ozyinelemeli olmayan arama;··
 [Kaynak](http://stackoverflow.com/questions/3925337/find-without-recursion)··
@@ -48,10 +54,16 @@ find /share/media/mp3/ -type f -name "*.mp3" -print0 | xargs -0 -r -I file cp \
 ```
 find ./* -type f  -maxdepth 0 ! -iname ".*" -exec rm -f {} \;
 ```
+* boyle de bulup sikistiriyor
+```
+find /home/egem/ptt_quota/ -type f -mtime 10 -name '*.txt' -print | tar jcvf
+backup-2015-10-16.tar.bz2 -T -
+```
+
+
 
 ### Kaynaklar:
 
 * [UsingFind](http://mywiki.wooledge.org/UsingFind)
-
 
 

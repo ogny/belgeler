@@ -133,7 +133,8 @@ kill -USR1 <process_id>
 * Android cihaz baglama;
 
     ..code:: sh 
-
+    apt-get install mtp-tools jmtpfs
+    mkdir ~/mtp ; chmod 777 ~/mtp
     jmtpfs ~/mtp
 
 * umount etmek icin;
@@ -143,6 +144,7 @@ kill -USR1 <process_id>
     fusermount -u ~/mtp
 
 `Kaynak:Archwiki<https://wiki.archlinux.org/index.php/MTP>`_
+`Kaynak:Debian Wiki<https://wiki.debian.org/mtp>`_
 
 #. bagli diskleri gorme;
 

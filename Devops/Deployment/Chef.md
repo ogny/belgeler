@@ -449,11 +449,6 @@ Ornegin;
 # Write the home page.
 file "#{node['awesome_customers']['document_root']}/index.php" do
 ```
-
-
-
-
-
 Resource ornekleri
 ---
 
@@ -489,8 +484,6 @@ A force_override attribute located in a cookbook attribute file
 A force_override attribute located in a recipe
 An automatic attribute identified by Ohai at the start of the chef-client run
 where the last attribute in the list is the one that is applied to the node.
-
-* bu dosyayi incelemeyi unutma: ~/Git_Repolari/is/chef-repo/cookbooks/application_python/templates/default/celeryconfig.py.erb
 
 * client'ta `chef-client` calistirdiginda hostname'i localhost olarak
   gormesinin sebebi hosts dosyasinda localhost'un oncelikli yazmasindan

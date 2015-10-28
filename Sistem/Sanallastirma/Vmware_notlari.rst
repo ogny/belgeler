@@ -30,8 +30,18 @@ acisindan uygun
   arttirabiliyoruz, sunucuyu kapatip bunun icin settings'ten ilgili diski secip
   bar'dan arttiriyoruz.
 
-#. 5.5.0'da interface eklerken interface'in turunun VMXNET50 olmasina dikkat
-   et.
-
 #. FHBA ile bagli disk'lerin sanal makinelere eklenememesinin sebebi,
    disk'lerin vmware uyumlu fs ile bicimlendirilmemesinden.
+
+#. vmkfstools'tan alinan hata: The system cannot find the file specified
+   hosted olarak bicimlenmis sanal disklerin non-vmfs olmasindan kaynaklaniyor.
+   hosted sanal diskler -s00x.vmdk uzantilidir. Cozum: multiextent modul
+   acilir, vmkfstool ile clone'anir, eski imaj silinir. multiextent mod kapatilir.
+
+..code:: sh
+
+    vmkload_mod  multiextent 
+    vmkfstools -i <eski_imaj> <yeni_imaj>
+    vmkfstools -U <eski_imaj> 
+    vmkload_mod -u multiextent
+

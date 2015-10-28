@@ -1,12 +1,30 @@
-=================
 disk genisletme
-=================
+---
 
-:date: Çrş 04 Mar 2015 19:07:58 EET
-:comments: true
-:categories: 
-:tags: 
-:Author: Orkun Gunay
+* parted ile disk'in label/flag/fstype'i belirlenir;
+
+```
+parted /dev/sdX
+mklabel msdos
+mkpart primary ext4 0% 100%
+set 1 lvm on
+quit
+mkfs.ext4 /dev/sdX1
+fdisk -l /dev/sdX1
+```
+* physical volume olusturulur, volume group'a eklenir
+```
+pvcreate /dev/sdX1
+vgextend VolGroup /dev/sdX1
+```
+
+* Volume group'taki bos alan bulunup VG o kadar buyultulur, kontrol edilir
+```
+vgdisplay VolGroup | grep "Free"
+lvextend -L+#G /dev/ /dev/VolGroup/lv_root
+resize2fs -p /dev/VolGroup/lv_root
+df -h /
+```
 
 ext4
 ----
@@ -15,6 +33,9 @@ diski umount et
 partition table'ini parted'la silip yeniden olustur
 e2fsck -f -p /dev/sdb1 
 resize2fs -p /dev/sdb1 <yeni_boyut>
+
+
+Varolan bir partition'u lvm grubuna dahil etme;
 
 lvm2
 ----

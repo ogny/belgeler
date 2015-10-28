@@ -63,12 +63,6 @@ String formatting [*]_
     on-the-fly yazabilirsin.
 
 
-
-
-
-
-    
-
 Docstring Conventions [*]_
 
 #. 

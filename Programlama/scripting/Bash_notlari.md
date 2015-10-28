@@ -46,3 +46,11 @@ a="$b"
 b=10#$(date +%m)
 c=5
 ```
+* sikistirma ve acma icin for donguleri
+```
+for i in *.csv; do tar jcvf $i.tar.bz2 $i; done
+for i in *.tar.gz; do tar -zxvf $i; done
+```
+* [Kaynak](http://stackoverflow.com/questions/15936003/for-each-dir-create-a-tar-file)
+
+

@@ -96,8 +96,11 @@ modprobe -l -t drivers/net -a \*
 * dizinde herkese yazma hakki verildiyse herhangi bir kullanici o dizindeki bir
 dosyayi silebilir.
 
-* buyuk dosyayi bolme;
+* buyuk dosyayi bolme, birlestirme;
+```
 split -b 10MB dosya_adi 
+cat dosya_adi* > birlestirilmis_dosya_adi
+```
 
 * Hata: * Error: Problem adding (is pinentry installed?); giving up
 ```

@@ -21,6 +21,7 @@ git checkout -b <dal_adi>
 * dali silme; (eger silmeye izin vermiyorsa -D ile cagir)
 ```
 git branch -d <dal_adi>
+```
 
 * yerel ve uzak dallari gorme;
 ```
@@ -86,7 +87,6 @@ The latest stash you created is stored in refs/stash
 stash ile degisiklikleri zulaliyosun.
 stash apply ile restore ediyosun.
 
-
 * coklu repo guncelleme
 
 for REPO in `ls`; do (cd "$REPO"; git pull); done;
@@ -132,3 +132,12 @@ git clean -df
 git log --pretty=format:user:%aN%n%ct --reverse \ 
 --raw --encoding=UTF-8 --no-renames --no-merge
 ```
+
+* tum degistirilmis dosya/dizinleri ekleyemediginde, sorun yeni eklenen bir
+  dizindeki .git dizininden kaynaklanabilir.
+```
+rm -rf subfolder/.git
+git add -A
+```
+
+
