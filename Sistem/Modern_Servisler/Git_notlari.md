@@ -139,5 +139,6 @@ git log --pretty=format:user:%aN%n%ct --reverse \
 rm -rf subfolder/.git
 git add -A
 ```
+[kaynak:StackOverFlow](http://stackoverflow.com/questions/7726131/git-add-a-is-not-adding-all-modified-files-in-directories)
 
 
