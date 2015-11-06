@@ -141,4 +141,5 @@ git add -A
 ```
 [kaynak:StackOverFlow](http://stackoverflow.com/questions/7726131/git-add-a-is-not-adding-all-modified-files-in-directories)
 
-
+* temizlenen repolarla çalışırken öncesinde `git clean -fd` çalıştırın pyc
+  dosyalarından dolayı silinmemiş gibi görünüyor

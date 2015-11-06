@@ -113,4 +113,6 @@ WAL - Continous Archiving
 
 `Kaynak: depesz <http://www.depesz.com/2011/07/14/write-ahead-log-understanding-postgresql-conf-checkpoint_segments-checkpoint_timeout-checkpoint_warning/>`_
 
+#. network'ten gz dump'i import etme::
 
+    ssh <kullanici>@<sunucu_ip> "gunzip -c dosya.sql.gz" | psql <import_edilecek_veri_tabani>

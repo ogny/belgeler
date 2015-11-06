@@ -60,7 +60,10 @@ find /home/egem/ptt_quota/ -type f -mtime 10 -name '*.txt' -print | tar jcvf
 backup-2015-10-16.tar.bz2 -T -
 ```
 
-
+* buyukluge gore siralama;
+```
+find -maxdepth 0 
+```
 
 ### Kaynaklar:
 

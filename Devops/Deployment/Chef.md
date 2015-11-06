@@ -488,3 +488,12 @@ where the last attribute in the list is the one that is applied to the node.
 * client'ta `chef-client` calistirdiginda hostname'i localhost olarak
   gormesinin sebebi hosts dosyasinda localhost'un oncelikli yazmasindan
   kaynaklaniyor. once hostname'i eklersen sorun duzeliyor.
+
+icok sayida makinada birden chef-client'i calistirmak icin sunucularin chef'e
+kayitli node name'leri bir dosyaya yazdirilir, chef-client calistirili.
+```
+knife search node name:\* |grep 'Node Name:' |awk '{print$3}'|egrep "<string>" >
+~/dosya
+knife ssh -m "$(cat dosya)" 'chef-client' -x root
+```
+* 

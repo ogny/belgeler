@@ -52,7 +52,7 @@ postmap hash:/etc/postfix/sasl_passwd
 * Yerel sunucudan izinli sunucuya erismek icin
 ```
 vi /etc/postfix/transport
-       smtp:<relay_ip>
+*       smtp:<relay_ip>
 
 vi /etc/postfix/main.cf
 mynetworks = 127.0.0.0/8, <yerel_ag>/24
