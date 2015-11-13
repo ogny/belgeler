@@ -36,11 +36,14 @@ Degistirecegin yeri secip visual mode'a gec
 :%norm A  
 
 * her satirin sonundaki boslugu sil
-:%s/\s\+$//
+`:%s/\s\+$//`
 
  %       = for every line
  norm    = type the following commands
  A*      = append '*' to the end of current line
+
+* bosluklardan kesip yeni sutunlar yapma;
+`:%s/ /\r/g`
 
 * Bir kisayola iki kisayol ait komut atama; kisayol tuslari arasina \| eklenir.
 `:nnoremap f }) \| zz`
@@ -108,6 +111,10 @@ vim -u NORC
 sign unplace *
 ```
 
+* find'la birden cok dosyayi bulup vim'le acmak icin en pratik yol
+```
+vim $(find . -type f -iname "*.uzanti")
+```
 
 #### Vim help'ten notlar:
 * sadece help penceresini acma;
@@ -195,5 +202,4 @@ vim-bookmarks
 ---
 
 * 0 basarili, 1 basarisiz
-
 

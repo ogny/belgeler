@@ -87,6 +87,7 @@ mount /dev/sdX1 /var
 * Dizinde bulunan alt dizinleri oz yinelemeli buyukten kucuge siralama
 ```
 du -s * | sort -nr | head -10
+du --max-depth=1 /tmp/* | sort -r -k1,1n
 ```
 
 * partition table'i /dev/sda'dan /dev/sdb'ye kopylama

@@ -31,4 +31,6 @@ Eklentilere ozel yapilandirma
 
    ~/.config/google-chrome/Default/Local Extension Settings/oiaejidbmkiecgbjeifoejpgmdaleoha
 
+* chrome app'larini burada tutuyor::
 
+    .local/share/applications

@@ -1,48 +1,88 @@
-=================
-Repmgr ile PG Ha
-=================
+### Repmgr ile PG HA
 
-Centos 6.6'da adim adim yapilan tum islemler
+#### Sistem yapilandirma;
 
-#. Gerekli paketlerin kurulumu:: 
+```
+rpm -Uvh \
+http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-centos94-9.4-1.noarch.rpm
+yum install -y postgresql94-server postgresql94-contrib \
+postgresql94-devel libxslt-devel libxml2-devel repmgr94 
+chkconfig keepalived on
+chkconfig postgresql-9.4 on
+su - postgres
+echo "export PATH=$PATH:/usr/pgsql-9.4/bin" >> ~/.bash_profile
+source ~/.bash_profile
+```
 
-    rpm -Uvh \
-    http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-centos94-9.4-1.noarch.rpm
+* master'de db olustur, baslat ve surumleri test et
 
-    yum install -y postgresql94-server postgresql94-contrib postgresql94-devel screen rsync libxslt-devel libxml2-devel keepalived repmgr 
+```
+initdb -D $PGDATA -A trust -U postgres
+pg_ctl -D $PGDATA -l logfile start
+psql --version
+psql -U postgres -c "select version();"
+repmgr --version
+repmgrd --version
+```
 
-    Not: repgmr94 pg repo'ya girdi.
+#### Repmgr yapilandirma
 
-#. bash_profile'e path ekleme::
+##### Master Server
 
-    su - postgres
-    echo "export PATH=$PATH:/usr/pgsql-9.4/bin/" >> ~/.bash_profile
-    source ~/.bash_profile
+```
+cp /etc/repmgr/9.4/repmgr.conf /etc/repmgr/repmgr.conf
+vi $PGDATA/postgresql.conf
+    listen_addresses='*'
+    hot_standby = on
+    wal_level = 'hot_standby'
+    max_wal_senders = 10
+# repmgrd kullanilacaksa
+    shared_preload_libraries = 'repmgr_funcs'
+# zorunlu degil
+    archive_mode = on
+    archive_command = 'cd .'
+# durum degisiyor, kapatilabilir.
+wal_keep_segments = 500
+```
 
-#. Sadece master'de::
+*  monitoring and replication data'nin tutulmasi icin kullanici ve veri tabani
+   olusmasi gerekiyor.
+```
+psql -U postgres -c "createuser -s repmgr"
+psql -U postgres -c "createdb repmgr -O repmgr"
+```
 
-   initdb -D /var/lib/pgsql/9.4/data -A trust -U postgres
-#  pg_ctl initdb
+* repmgr.conf (master/standby)
 
-postgres ile::
+```
+cluster=test
+node=1
+node_name=node1
+conninfo='host=<IP> user=repmgr dbname=repmgr'
+pg_bindir=/usr/pgsql-9.4/bin
+use_replication_slots=1
+pg_basebackup_options='--xlog-method=s'
+```
 
-    ssh-keygen -t rsa
-    
-    cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-    
-    chmod go-rwx ~/.ssh/*
+* Node'lari master/standby olarak kaydet ve kontrol et
 
-root ile::
-
-    rsync -avz ~postgres/.ssh/ <node_ip>:~postgres/.ssh/
-
-#. tum node'larda repmgr.conf olusturulur. (sample'dan) ::
-
-    mkdir $HOME/repmgr
-    vi $HOME/repmgr/repmgr.conf
+```
+repmgr master register
+repmgr standby register
+repmgr cluster show
+```
 
 
-unutma::
+
+
+Not:  
+---
+* `wal_keep_segments` 9.4'ten itibaren mecburi degil; replication slots can be
+  used instead (see below).
+
+* Not: standby sunuculardan read-only sorgu yapabilmek icin maksimum "WAL senders"
+  degeri toplam standby sunucu sayisindan fazla olmali.
+
 #. pg_bindir ve logfile'i degistir
 #. conn_info'nun sonuna dbname=repmgr user=repmgr koymayi unutma
 #. promote_command'ta repmgr.conf path'ini belirt
@@ -202,3 +242,5 @@ runuser -l postgres -c "ssh -o StrictHostKeyChecking=no -f 195.175.250.47
 follow'"
 runuser -l postgres -c "ssh -o StrictHostKeyChecking=no -f 195.175.250.49
 '/usr/pgsql-9.4/bin/repmgr -f /var/lib/pgsql/repmgr/repmgr.conf standby follow'
+
+        

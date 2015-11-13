@@ -53,7 +53,7 @@ client kurulum
 
 #. fstab ornegi::
 
-    <nfs_server_ip>:/dizin /dizin fs     rw,hard,intr    0 0n
+    <nfs_server_ip>:/dizin /dizin nfs     rw,hard,intr    0 0
 
 
 #. elle baglama::

@@ -97,7 +97,11 @@ submission inet n       -       n       -       -       smtpd
 * sasldb2'de tutulacak kullaniciyi olusturma ve olustugunu gorme;
 ```
 saslpasswd2 -c -u <hostname_veya_domain> <kullanici_adi>
-sasldblistusers2
+sasldblistusers2 
+```
+* yanlis olusturulani silmek icin;
+```
+saslpasswd2 -d <kullanici_adi>
 ```
 
 * smtpd'nin kullanacagi dogrulama yontemini belirleme;

@@ -45,3 +45,6 @@ acisindan uygun
     vmkfstools -U <eski_imaj> 
     vmkload_mod -u multiextent
 
+* vmdk'nin tipini belirt
+..code:: sh
+-d thin
