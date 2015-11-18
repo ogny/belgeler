@@ -19,5 +19,8 @@ owerrite files
 attach files
 job name'de Background Execution olarak gorunuyor
 
+##### Veri tabani sunucusunu lokal'den uzak sunucuya tasima
+
+
 
 

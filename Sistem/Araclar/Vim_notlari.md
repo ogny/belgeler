@@ -148,6 +148,11 @@ set nofoldenable
 ```
 :%s/.*\n.*\n.*\n/\0\r/g
 ```
+* her satir sonuna bir bos satir ekle
+```
+:%s/\(.*\n\)\{1\}/&\
+```
+
 
 ```
 http://vim.wikia.com/wiki/Working_with_CSV_files
@@ -202,4 +207,5 @@ vim-bookmarks
 ---
 
 * 0 basarili, 1 basarisiz
+
 

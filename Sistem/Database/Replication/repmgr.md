@@ -1,5 +1,7 @@
 ### Repmgr ile PG HA
 
+* Centos 6.7'da test edilmistir.
+
 #### Sistem yapilandirma;
 
 ```
@@ -15,7 +17,6 @@ source ~/.bash_profile
 ```
 
 * master'de db olustur, baslat ve surumleri test et
-
 ```
 initdb -D $PGDATA -A trust -U postgres
 pg_ctl -D $PGDATA -l logfile start
@@ -41,48 +42,57 @@ vi $PGDATA/postgresql.conf
 # zorunlu degil
     archive_mode = on
     archive_command = 'cd .'
-# durum degisiyor, kapatilabilir.
-wal_keep_segments = 500
+# wal_keep_segments kullanma
+vi $PGDATA/pg_hba.conf
+host    repmgr          repmgr  <IP_blogu>/24         trust
+host    replication     repmgr  <IP_blogu>/24         trust
 ```
 
-*  monitoring and replication data'nin tutulmasi icin kullanici ve veri tabani
-   olusmasi gerekiyor.
+* monitoring and replication data'nin tutulmasi icin kullanici ve veri tabani
+  olusmasi gerekiyor.
 ```
 psql -U postgres -c "createuser -s repmgr"
 psql -U postgres -c "createdb repmgr -O repmgr"
 ```
 
 * repmgr.conf (master/standby)
-
 ```
 cluster=test
 node=1
 node_name=node1
-conninfo='host=<IP> user=repmgr dbname=repmgr'
+conninfo='host=<IP>> user=repmgr dbname=repmgr'
 pg_bindir=/usr/pgsql-9.4/bin
 use_replication_slots=1
-pg_basebackup_options='--xlog-method=s'
+pg_basebackup_options='--xlog-method=stream'
 ```
 
 * Node'lari master/standby olarak kaydet ve kontrol et
-
 ```
 repmgr master register
 repmgr standby register
 repmgr cluster show
 ```
 
-
-
-
 Not:  
 ---
-* `wal_keep_segments` 9.4'ten itibaren mecburi degil; replication slots can be
-  used instead (see below).
+* `wal_keep_segments` 9.4'ten itibaren mecburi degil; replication slots yerine
+  kullaniliyor. Standby sunuculardan biri giderse, onun replication slot'u
+  silinmeden WAL dosyalari silinmez. silmenin yolu; 
+.
 
 * Not: standby sunuculardan read-only sorgu yapabilmek icin maksimum "WAL senders"
   degeri toplam standby sunucu sayisindan fazla olmali.
 
+repmgr 2'den yukseltme 
+---
+
+* bu yontemi izlemek icin oncelikle calisan repmgr'in duzgun olup olmadigindan
+  emin olmam gerekiyor.
+
+
+
+Not-Eski:  
+---
 #. pg_bindir ve logfile'i degistir
 #. conn_info'nun sonuna dbname=repmgr user=repmgr koymayi unutma
 #. promote_command'ta repmgr.conf path'ini belirt

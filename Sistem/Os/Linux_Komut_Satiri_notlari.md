@@ -256,3 +256,8 @@ sudo dd bs=4M if=/path/to/iso of=/dev/sdb oflag=direct && sudo sync
 ```
 nc -uzv <ip> <port>
 ```
+
+* dosyanin modification date'ini duzenleme;
+```
+touch -t yilaygunsaat oldfile
+```
