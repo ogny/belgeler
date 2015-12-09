@@ -62,6 +62,8 @@ nohup /opt/sensu/bin/sensu-api  &
 * sensu-community-plugins'te olmayan bir plugin'in calismasi icin, subscribe
   edilen sunuculara da yuklenmesi gerekiyor.
 
+* metric'leri toplarken json dosyalarinda type:metric diye eklemeyi unutma
+
 #### Redis
 
 * redis monitoring icin client'lara redis gem'ini yukle

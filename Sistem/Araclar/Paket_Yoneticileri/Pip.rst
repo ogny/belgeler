@@ -12,9 +12,8 @@ Centos 6.6 kurulum
    `InsecurePlatformWarning`
 ..code:: sh
 
-    pip install requests[security]
-
-   `Pip untrusted host`
+   pip install requests[security]
+   Pip untrusted host
 
 [global]
 index-url = http://osrepo.xxx.in/pypi/simple
@@ -30,4 +29,7 @@ timeout = 120
 # remove "somepackage" plus its dependencies:
 `pip-autoremove somepackage -y`
 
+#. `pip search` ile gordugun bir paketi `install` ile kuramadiginda `-vvv` ile hatayi gor::
 
+  DistributionNotFound: No matching distribution found for <paket_adi>
+  pip buraya bakiyor; http://pypi.python.org/simple/<paket_adi>

@@ -21,6 +21,10 @@ Postgresql calisma
 
     /usr/pgsql-9.4/bin/
 
+* pg_config'i bulamiyorsa::
+
+  ln -s /usr/pgsql-9.4/bin/pg_config /usr/local/sbin/pg_config
+
 * veri tabani kullanicisiyla baglanmadiginda aldigin hata
 pdns=> DROP DATABASE pdns;
 ERROR:  must be owner of database pdns
@@ -46,17 +50,17 @@ http://stackoverflow.com/questions/3327312/drop-all-tables-in-postgresql
 
 DROP TABLE -- remove a table
 
-#. Dump ::
+#. Dump and restore::
+    pg_dump "veri_tabani_adi" > "dosya_adi.sql"
+    psql "veri_tabani_adi" < "dosya_adi.sql"
 
-    pg_dump -U <veri_tabani_sahibi> <veri_tabani_adi> -f dosya.sql
-    pg_dump dbname > outfile
-    PGUSER=postgres pg_dumpall -h <uzak_sunucu> > db.out
-    psql -f db.out postgres
-  
 #. Restore::
 
+   pg_dump dbname > outfile
+   PGUSER=postgres pg_dumpall -h <uzak_sunucu> > db.out
    psql -U <veri_tabani_sahibi> <veri_tabani_adi> -f dosya.sql
    psql dbname < infile
+   pg_restore -d db.out
 
 
 #. kullanicinin parolasini guncelleme ve superuser yetkisi verme::

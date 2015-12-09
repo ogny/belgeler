@@ -21,6 +21,11 @@ gecr <not_adi> --tags "<tag_1>,<tag_2>"
 geed <not_adi> --tags "<tag_1>,<tag_2>"
 ```
 
+* note'u spesifik notebook'ta, tag'la olusturma 
+```
+gecr <not_adi> --notebook <notebook_adi> --tags "<tag_1>"
+```
+
 * note'u tamamlanan notebook'una tasima
 ```
 geed <not_adi> --notebook "tamamlanan"

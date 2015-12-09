@@ -59,6 +59,10 @@ find ./* -type f  -maxdepth 0 ! -iname ".*" -exec rm -f {} \;
 find /home/egem/ptt_quota/ -type f -mtime 10 -name '*.txt' -print | tar jcvf
 backup-2015-10-16.tar.bz2 -T -
 ```
+* belli bir araliktaki dosyalari bulma;
+```
+find <dizin> -newermt "nov 10, 2015" -not -newermt  "nov 11, 2015"
+```
 
 * buyukluge gore siralama;
 ```

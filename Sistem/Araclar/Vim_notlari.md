@@ -114,6 +114,7 @@ sign unplace *
 * find'la birden cok dosyayi bulup vim'le acmak icin en pratik yol
 ```
 vim $(find . -type f -iname "*.uzanti")
+vim $(find . -type f)
 ```
 
 #### Vim help'ten notlar:

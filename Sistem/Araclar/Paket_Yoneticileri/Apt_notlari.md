@@ -3,8 +3,18 @@ sudo aptitude hold paket_adı veya sudo apt-mark hold paket_adı 
 Sistemde askıya alınmış paket olup olmadığını kontrol etmek için;
 sudo aptitude search "~ahold"
 
-paketlerin surumlerini repo'dakilerle kurulu olanlar arasindak kiyaslama;
-apt-cache policy 
+#### paketle ilgili bilgi
+* repo'lardaki paketle ilgili kisa bilgi. (kac repo'da varsa hepsini
+  gorebiliyorsun)
+```
+apt-cache policy <paket_adi>
+```
+
+* paket hakkinda bilgi, detayli bilgi
+```
+apt-cache show <paket_adi>
+apt-cache showpkg <paket_adi>
+```
 
 * apt-listchanges — Show new changelog entries from Debian package archives 
 
@@ -26,10 +36,19 @@ gpg -a --export 89DF5277 | apt-key add -
 ```
 grep install /var/log/dpkg.log
 ```
-* Paket kaldirma: dpkg -r ile  kaldiramadiginda purge (-P) parametresini kullan.
+* Paket kaldirma: `dpkg -r` ile  kaldiramadiginda purge (-P) parametresini kullan.
 
 * spesifik repo'dan paket kurma;
+```
 aptitude install -t <repo_adi> <paket_adi>
+```
+
+* repo adindan emin degilsin ama o repodaki paketi kurmak istiyorsan, apt-cache
+  showpkg ile paket surumunu al,
+```
+apt-cache showpkg <paket_adi>
+apt-get install <paket_adi>=<surum>
+```
 
 * sistemde sadece belli bir paketi update etme:
 https://help.ubuntu.com/community/PinningHowto

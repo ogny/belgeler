@@ -34,3 +34,8 @@ Eklentilere ozel yapilandirma
 * chrome app'larini burada tutuyor::
 
     .local/share/applications
+
+* socks proxy kullanma::
+
+    ssh -ND  8080 ogny
+    /opt/google/chrome/chrome --incognito --proxy-server="socks://localhost:8080"

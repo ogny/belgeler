@@ -67,7 +67,19 @@ TYPE="Ethernet"
 UUID="7d29d87f-52bb-4dc6-88ca-d0857c7d7fd9"
 SLAVE="yes"
 MASTER="bond0"
+# cat /etc/sysconfig/network-scripts/ifcfg-bond0
+ifcfg-bond0
+DEVICE=bond0
+IPADDR=<IP_Adresi>
+NETMASK=255.255.255.0
+ONBOOT=yes
+BOOTPROTO=none
+USERCTL=no
+BONDING_OPTS="mode=1 miimon=100"
 ```
+echo "alias bond0 bonding" > /etc/modprobe.d/bonding.conf
+```
+
 * After all the network scripts are configured, restart the network service via
 the command:
 ```

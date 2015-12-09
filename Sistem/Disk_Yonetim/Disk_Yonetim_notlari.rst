@@ -32,6 +32,7 @@ icerikle yeni bir diske tasima;
 
 #. Partition acilista sunucuya baglanacak sekilde eklenir.
 
+```
 ls -alh /dev/disk/by-uuid
 vim /etc/fstab
 UUID= ...       /var    ext4    0 2
@@ -115,6 +116,7 @@ for i in /sys/class/scsi_host/*; do echo "- - -" > $i/scan; done
 blkid ile /dev altinda goruluyor mu bakilir;
 ```
 /dev/mmc gibi bir yere baglaniyor, buradan mount edilebilir.
+```
 
 * Diski yeniden boyutlandirmak
 ```

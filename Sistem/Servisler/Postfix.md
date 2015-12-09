@@ -104,7 +104,7 @@ sasldblistusers2
 saslpasswd2 -d <kullanici_adi>
 ```
 
-* smtpd'nin kullanacagi dogrulama yontemini belirleme;
+* smtpd'nin kullanacagi dogrulama yontemini belirleme; (bunu yapma)
 ```
 etc/sasl2/smtpd.conf:
     pwcheck_method: auxprop
@@ -122,7 +122,7 @@ chmod 660 /etc/sasldb2
 * Servisleri yeniden baslatip test etme 
 
 ```
-/etc/init.d/sasld restart
+/etc/init.d/saslauthd restart
 /etc/init.d/postfix restart
 ```
 
