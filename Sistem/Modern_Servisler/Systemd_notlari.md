@@ -63,6 +63,8 @@ configured in a unit file home-lennart.automount.
 systemd-cat
 Connect a pipeline or program's output with the journal
 
+* journalctl -u .service
+
 systemd-analyze
 systemd-analyze blame
 systemd-analyze plot > plot.svg

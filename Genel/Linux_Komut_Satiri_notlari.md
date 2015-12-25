@@ -261,3 +261,20 @@ nc -uzv <ip> <port>
 ```
 touch -t yilaygunsaat oldfile
 ```
+* ekran karti ozellikleri
+```
+lspci -knn|grep -iA2 vga
+```
+
+* kullaniciyi gruba ekleme
+```
+sudo gpasswd -a <kullanici> <grup>
+```
+
+* dmesg log'unda tarih gorme; (centos6.6)
+```
+vi /etc/rsyslog.conf
+kern.* /var/log/kern.log
+/etc/init.d/rsyslog restart
+tailf /var/log/kern.log
+```

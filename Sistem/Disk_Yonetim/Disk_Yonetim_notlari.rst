@@ -8,6 +8,10 @@ Disk yonetim komutlari
 :tags: 
 :Author: Orkun Gunay
 
+* partition'lar hakkinda bilgi::
+    lsblk -o name,mountpoint,label,size,uuid
+
+
 Disk Baglama
 ============
 
@@ -29,6 +33,7 @@ icerikle yeni bir diske tasima;
     ..code:: sh 
 
     mkfs.ext4 /dev/sdX1
+    mke2fs -t ext4  /dev/sdX1
 
 #. Partition acilista sunucuya baglanacak sekilde eklenir.
 
@@ -165,3 +170,9 @@ kill -USR1 <process_id>
 
 #. Disk I/O ve load average   
 `Kaynak:blog<https://prutser.wordpress.com/2012/05/05/understanding-linux-load-average-part-2/>`_
+
+#. Promise SAN Lun
+
+* LUN; genel olarak bir storage ünitesi üzerinde bir ya da daha fazla sunucunun kullanımına sunulan disk alanına denir. Storage üniteleri üzerinde takılan diskler ile raid vs. işlemler tamamlandıktan sonra ortaya çıkan kullanılabilir disk alanı üzerinde LUN’lar oluşturulur. Daha sonra bu LUN bir (ya da birkaç) sunucuya atanarak kullanılır. Sunucu atanan LUN’u kendi local disklerini formatlar gibi formatlar ve üzerine data yazıp okur. Kısaca sunucu kendi lokalindeki bir storage ünitesini değil de farklı bir lokasyondaki (SAN-NAS-DAS) storage ünitesini kullanıyorsa bu birim LUN olarak adlandırılır.Aşağıdaki örnek daha açıklyıcı olacaktır.
+
+

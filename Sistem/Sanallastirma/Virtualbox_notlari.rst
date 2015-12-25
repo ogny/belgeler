@@ -16,7 +16,8 @@ to
 SHUTDOWN_USERS=all
 [Kaynak:](https://www.virtualbox.org/ticket/12264)
 
-#. Guest'i VBoxheadless olarak baslatma: 
+#. Guest'i VBoxheadless olarak baslatma::
+    VBoxHeadless --startvm mswin7
 [Kaynak:](https://www.howtoforge.com/vboxheadless-running-virtual-machines-with-virtualbox-4.3-on-a-headless-ubuntu-14.04-lts-server)
 
 #. Guest icin static ip atama;

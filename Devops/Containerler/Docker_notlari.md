@@ -1,5 +1,7 @@
 #### Kurulum
 
+* [Debian icin](https://docs.docker.com/engine/installation/debian/)
+
 ##### ubuntu icin, indirdiginde kurulum icin gerekenleri terminale dokuyor;
 
 ```

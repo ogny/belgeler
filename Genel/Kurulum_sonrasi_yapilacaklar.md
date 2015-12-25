@@ -1,17 +1,56 @@
 ### Genel
 #### Oncelikle yapilacaklar
-* apt-get install sudo
-* user'a passwordless sudo yap `visudo`
 ```
-orkung ALL=(ALL) NOPASSWD: ALL
+apt install -y --force-yes sudo
+sudo apt purge nano
 ```
+* user'a passwordless sudo yap `visudo` (kurulumdan sonra kaldirilacak)
+`orkung ALL=(ALL) NOPASSWD: ALL`
 * root ve user'in default login shell'ini zsh yap. Kullaniciya gec.
+* kulllanicinin cache dizinini tmpfs yap
+* recommended ve suggested paketleri kurma
 ```
-sudo apt install zsh tmux vim-nox 
-vim /etc/passwd
+echo 'APT::Install-Recommends "0";
+APT::Install-Suggests "0";' | sudo tee /etc/apt/apt.conf.d/80recommends
+sudo apt install zsh tmux vim-gtk git apt-transport-https
+rm -rf ~/.cache
+mkdir  ~/.cache
+sudo mount -t tmpfs -o  size=1G,nr_inodes=10k,noatime,mode=777,uid=orkung,gid=orkung tmpfs ~/.cache
+```
+* /etc/fstab'a noatime eklenecek.
+```
+sudo vim /etc/fstab
+# cache tmfps 
+tmpfs           /home/orkung/.cache        tmpfs            size=1G,nr_inodes=10k,noatime,mode=777,uid=orkung,gid=orkung        0  0
+sudo vim /etc/passwd
+sudo vim /etc/modprobe.d/blacklist.conf
+# speaker modulu iptal
+blacklist pcspkr
+sudo vim /etc/dhcp/dhclient.conf
+prepend domain-name-servers 208.67.220.220, 8.8.4.4;
+timeout 10;
 su - orkung
-mkdir -p ~/Git_Repolari/kisisel/public/
-mkdir -p ~/Git_Repolari/kisisel/private/
+mkdir -p ~/Git_Repolari/{kisisel,diger,is}
+mkdir -p ~/Git_Repolari/kisisel/{public,diger}
+git clone https://github.com/ogny/nixfiles.git ~/Git_Repolari/kisisel/public/
+git clone https://github.com/ogny/belgeler.git ~/Git_Repolari/kisisel/public/
+git clone https://github.com/ogny/ogny.github.io.git ~/Git_Repolari/kisisel/public/
+git clone git@bitbucket.org:ogny/server-side.git ~/Git_Repolari/kisisel/private/
+curl -kL https://raw.github.com/cstrap/monaco-font/master/install-font-ubuntu.sh | bash
+wget -O- https://code.bitlbee.org/debian/release.key | sudo apt-key add -
+wget -O- https://jgeboski.github.io/obs.key | sudo apt-key add -
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+sudo apt -y --force-yes install deb-multimedia-keyring
+ln -s ~/Git_Repolari/kisisel/public/nixfiles/dotfiles/* ~/
+ln -s ~/Git_Repolari/kisisel/public/nixfiles/.config/VirtualBox.xml ~/.config/VirtualBox/
+ln -s ~/Git_Repolari/kisisel/private/server-side/conf/user/* ~/
+ln -s ~/Git_Repolari/kisisel/public/nixfiles/Xfiles/* ~/
+ln -s ~/Git_Repolari/kisisel/public/nixfiles/bin ~/
+ln -s ~/Git_Repolari/kisisel/private/server-side/conf/user/.pip ~/
+sudo ln -s ~/Git_Repolari/kisisel/private/server-side/conf/system/hosts /etc/
+sudo ln -s ~/Git_Repolari/kisisel/private/server-side/conf/system/vpnc_default.conf \
+/etc/vpnc/default.conf
+sudo ln -s ~/Git_Repolari/kisisel/private/server-side/conf/system/autofs/* /etc/
 ```
 * sudo vim /etc/apt/sources.list 
 ```
@@ -25,63 +64,116 @@ deb-src http://security.debian.org/ jessie/updates main contrib non-free
 deb http://httpredir.debian.org/debian jessie-backports main contrib non-free
 deb-src http://httpredir.debian.org/debian jessie-backports main contrib non-free
 # Multimedia repo
-deb http://www.deb-multimedia.org jessie main non-free
-deb-src http://www.deb-multimedia.org jessie main non-free
+deb http://www.deb-multimedia.org jessie main contrib non-free
+deb-src http://www.deb-multimedia.org jessie main contrib non-free
 ```
 * Uygulama Repo'lari
 ```
+echo "deb http://download.opensuse.org/repositories/home:/jgeboski/jessie ./" \
+| sudo tee /etc/apt/sources.list.d/jgeboski.list"
 echo "deb http://code.bitlbee.org/debian/master/jessie/amd64 ./" \
 | sudo tee /etc/apt/sources.list.d/bitlbee.list
 echo "deb http://downloads.hipchat.com/linux/apt stable main" \
 | sudo tee /etc/apt/sources.list.d/hipchat.list
 echo "deb http://dl.google.com/linux/chrome/deb/ stable main" \
 | sudo tee /etc/apt/sources.list.d/google_chrome.list
+echo "deb https://apt.dockerproject.org/repo debian-jessie main \
+| sudo tee /etc/apt/sources.list.d/docker.list
 ```
 * X kurulumu bittiginde startx ile login ol
 ```
-sudo apt install --install-recommends xorg
-sudo apt install -t jessie-backports --install-recommends i3 
+sudo apt install -y --force-yes --install-recommends xorg
+sudo apt install -y --force-yes -t jessie-backports --install-recommends i3  i3-wm-dbg
+ln -s ~/Git_Repolari/kisisel/public/nixfiles/Xfiles/.i3_ofis ~/.i3
+sudo cat << EOF >>  /usr/share/X11/xorg.conf.d/50-synaptics.conf
+Section "InputClass"
+  Identifier "touchpad catchall"
+  Driver "synaptics"
+  MatchIsTouchpad "on"
+  MatchDevicePath "/dev/input/event*"
 
+  Option "TapButton1" "1"
+
+EndSection
+EOF
 ```
 * Guncelleme
 ```
 sudo apt update && \
-sudo apt-get -dy dist-upgrade && \
+sudo apt -dy dist-upgrade && \
 sudo apt-get autoclean && \
-sudo apt dist-upgrade && \
-sudo apt-get autoremove
+sudo apt-get autoremove -y && \
+sudo apt -y dist-upgrade 
 ```
 * Silinecekler
 ```
 sudo apt purge nfs-common rpcbind installation-report \
-reportbug nano tasksel tasksel-data task-english os-prober
+reportbug tasksel tasksel-data task-english os-prober
 ```
+* Gerekli paketler
 ```
-sudo apt install -t jessie-backports --install-recommends owncloud-client
-sudo apt install --install-recommends linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,') \
-virtualbox virtualbox-qt
-sudo apt install ack dkms google-chrome-stable hipchat git git-flow git-extras \
-wicd wicd-daemon wicd-curses ranger whois dosfstools dnsutils dos2unix \
-apt-listchanges curl pandoc dstat mtr-tiny sshuttle ca-certificates rfkill \
-coreutils gnupg sshpass apache2-utils autofs acct scrot feh redshift \
-suckless-tools unclutter numlockx xtrlock dunst xbindkeys openvpn tpp
+\curl -sSL https://get.rvm.io | bash -s stable --ruby
+sudo dpkg --add-architecture i386 && sudo apt update
+sudo apt install -y --force-yes -t jessie-backports --install-recommends \
+owncloud-client sysdig sysdig-dkms
+sudo apt install -y --force-yes --install-recommends \
+linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,')  virtualbox virtualbox-qt 
+sudo apt install -y --force-yes --install-recommends openvpn sysdig sysdig-dkms
+sudo apt install -y --force-yes -t deb-multimedia mplayer ffmpeg wine wine32
+sudo apt install -y --force-yes google-chrome-stable hipchat weechat sqlitebrowser \
+weechat-plugins bitlbee bitlbee-facebook weechat-scripts alsa-base alsa-utils \
+pulseaudio pulseaudio-utils pavucontrol ttf-dejavu-core ttf-dejavu-extra scrot \
+feh redshift unclutter numlockx xtrlock xbindkeys screenfetch i3status wodim \
+ack ranger dos2unix jmtpfs pandoc suckless-tools tpp bzip2 zip rpm2cpio \
+unzip diffutils patch tree ncdu postgresql-client postgresql postgresql-contrib \ 
+git-flow git-extras tig virtualenvwrapper python-pip python-lxml python-dev \
+docker-engine dkms acct ca-certificates apt-listchanges  bundler \
+dstat coreutils gnupg parted autofs htop dosfstools parallel sysstat ccrypt \
+cryptsetup pwgen dbus-x11 wicd wicd-daemon wicd-curses whois cisco-vpnc \
+mtr-tiny sshpass sshuttle curl lftp rfkill resolvconf apache2-utils rdesktop \
+dnsutils iftop pptp-linux nuttcp
+sudo pip install cheat geeknote python-gist pika howdoi
+sudo gem install ncurses-ruby 
+sudo systemctl start pulseaudio
+sudo systemctl start alsa-state.service
+mkdir ~/projects ~/.virtualenvs
+ln -s ~/Git_Repolari/kisisel/public/nixfiles/other_dotfiles/.virtualenvs/* ~/.virtualenvs/
+source /usr/local/bin/virtualenvwrapper.sh
 ```
 * Manuel
   - rxvt-unicode-256color_9.19-1.1_amd64.deb
-  - pfSense-udp-1194-tyildiz-config.zip
-  - 1a23_setup_sst53.exe
-  - chefdk.tar.bz2
+  - 1a23_setup_sst53.exe (wine ile kurulum)
+  - chefdk.tar.bz2 --> /opt altina 
   - lokal_user_chefdk_for_jekyll.tar.bz2
   - diger_git_repolari.tar.bz2
-
-#### Networking 
-* wicd'te kullandigin baglanti> sag ok >"automatically connect to this network"
-sudo apt-get install tig ranger whois dosfstools dnsutils dos2unix ffmpeg  
-
-* Wine32 kurulumu
+  - chrome eklentisi "modern new tab page"
+  - vim.tar.bz2
+  - ~/.rvm alti alinacak
+  - ~/.config/google-chrome alinacak
 ```
-sudo dpkg --add-architecture i386 && sudo apt update
-sudo apt install wine
+ln -s ~/Git_Repolari/kisisel/public/nixfiles/other_dotfiles/.vim/UltiSnips ~./vim/
+sudo ln -s bin/ps_mem.py /usr/local/bin/
+sudo resolvconf --disable-updates
+vimsed github repo
+```
+
+### Duzenleme
+* wicd'te kullandigin baglanti> sag ok >"automatically connect to this network"
+* kullanicidan parolasiz root yetkisini kaldir. ornegin `shuttle` icin ver `visudo`
+```
+
+```
+
+#### Ev dizinini şifreleme Dizini açma  
+* şifreli dizin üzerinde çalışma  
+```
+cryptsetup luksOpen /dev/sda2 map1 /dev/mapper/map1 
+mount /dev/mapper/map1 /mnt 
+cryptsetup luksOpen /dev/sda2 map1  
+```
+  
+#### Diger Notlar
+```
 sudo apt install \
       wine-development/jessie-backports \
       wine32-development/jessie-backports \
@@ -92,155 +184,4 @@ sudo apt install \
 ```
 * i386 paketlerini kaldirmak istersen link; 
 [How to setup, and remove, multiarch in Debian Jessie](http://www.sharons.org.uk/amd64.html)
-  
-### Paket Yöneticisi Ayarları:  
-Ref.1 Kurulum sonrası ilk ayarlar. (Backports ve Multimedia depolari eklenecek)  
-  
-* Sistem güncelleme ve yeni paketlerin kurulumu:  
-Ref.1 Güncelleme - İlk aşamada yüklenecek paketler   
-Eklenenler: cryptsetup encfs  
-Default paketlerden silinecekler.   
-  
-/etc/passwd   
-/etc/adduser.conf  
-cp /etc/ssh/sshd_config{,.bck}
-  
-* Root parolasını değiştirme  
-passwd  
-cp /etc/passwd{,.bck}
-  
-  
-### Kullanıcı Oluşturma:  
-Kullanıcıyı oluştururken istediğimiz gruplara eklemek için;  
-vim /etc/adduser.conf  
-DSHELL=/bin/zsh  
-EXTRA_GROUPS="dialout cdrom floppy audio video plugdev users sudo fuse netdev"  
-ADD_EXTRA_GROUPS=1  
-adduser orkung  
-cp /etc/adduser.conf{,.bck}
-* centos'ta
-useradd -md /home/kullanici_adi kullanici_adi
-passwd kullanici_adi
-#### Ev dizinini şifreleme Dizini açma  
-* şifreli dizin üzerinde çalışma  
-cryptsetup luksOpen /dev/sda2 map1  
-/dev/mapper/map1  
-mount  /dev/mapper/map1 /mnt  
-cryptsetup luksOpen /dev/sda2 map1  
-  
-Kullanıcıya giriş yapılacak açık anahtar yüklenir.  
-ssh-copy-id -i açık_anahtar kullanıcı_adı@IP_adresi  
-  
-SSH servisi yapılandırma dosyasına göre çalışması için yeniden başlatılır.   
-/etc/init.d/ssh restart  
-cp /etc/ssh/sshd_config{,.bck}
-  
-#### Kullanıcı Ayarları:  
-su -l orkung
-mkdir -p ~/Git_Repolari/kisisel/public
-cd ~/Git_Repolari/kisisel/public
-git clone https://github.com/ogny/nixfiles.git
-cd system_configuration  
-rsync -avh --exclude .git --exclude X11 --exclude etc --exclude .gitconfig ./ ~/  
-  
-#### Masaüstü ortamı  
-* X11 kurulumu   
-* i3wm kurulumu ( -t wheezy-backports i3 )
-  
-# Uygulamalar  
-*  weechat'i emrah'tan al.  
-*  bitlbee i emrah'tan al.  
-*  pulseaudio emrah'tan ref.'te  
-#### Repo'lardan kurulacak paketler  
-```  
-sudo apt-get install tig ranger whois dosfstools dnsutils dos2unix ffmpeg  
-apt-listchanges wicd-curses wireless-tools parted curl systemd pandoc rtmpdump  
-dstat mtr-tiny sshuttle ca-certificates lxc lxctl debootstrap rfkill  
-coreutils gnupg pass sshpass git-flow git-extras apache2-utils python-pelican
-autofs smartmontools ack-grep acct
-* istege bagli; html2text transmission-cli gawk nodejs-legacy npm
-* X11 kuruluysa yukaridakilere ek olarak;  
-sudo apt-get install chromium scrot feh zathura redshift suckless-tools wodim  
-fontconfig-infinality pepperflashplugin-nonfree unclutter numlockx imagemagick xautolock i3status dunst compton j4-dmenu-desktop && sudo
-dpkg-reconfigure x11-common 
-```  
-* ubuntu kurulduysa 
-    ** kaldirilacaklar;
-       whoopsie  apport oneconf python3-apport python3-problem-report libcups2
-       gnome-keyring
-    ** kurulacaklar; 
-       python-software-properties
-       acpi
-Not: Ubuntu server security updates'i otomatik yapmak icin popcorn kullaniyor,
-incelenecek
-  
-* makinanin dis ip'den cikisi varsa nagios-nrpe-server (--with-recommends ile)  
-* pass ve gnupg organize et (http://www.passwordstore.org/)  
-
-* ascii screen saver;
-```
-cd /tmp
-wget http://www.robobunny.com/projects/asciiquarium/asciiquarium.tar.gz
-tar -zxvf asciiquarium.tar.gz
-cd asciiquarium_1.1/
-sudo su
-cp asciiquarium /usr/local/bin
-chmod 0755 /usr/local/bin/asciiquarium
-perl -MCPAN -e shell
-install Term::Animation
-```
-
-#### task sync ozelligiyle kullanilacaksa  
-```  
-sudo apt-get install cmake uuid-dev libgnutls-dev build-essential -y  
-```  
-#### Samba ile agdaki bir diske erisilecekse;
-```  
-sudo apt-get install cifs-utils
-vim ~/.smbcredentials 
-username=<samba_username>
-password=<samba_password>
-:wq
-sudo vim /etc/fstab 
-//<ag_cihazi>/<dizin>     /<baglanacak_dizin>           cifs uid=<linux_username>,credentials=/home/<linux_username>/.smbcredentials,iocharset=utf8,sec=ntlm 0       0
-:wq
-sudo mount -a
-```  
-
-#### akilli telefon baglama
-```
-mtpfs libfuse-dev libmad0-dev jmtpfs
-  
-#### github'tan kurulacak uygulamalar  
-
-* cheat
-* dircolors-solarized
-* fasd
-* geeknote
-* j4-dmenu-desktop
-* monaco-font
-* tmux-colors-solarized
-* turkish-deasciifier
-* wped
-* zsh-syntax-highlighting
-
-Bu belgede herhangi bir amaçla kurulan Debian işletim sisteminde, kurulumdan  
-sonra yapılacak ilk işlemler adım adım belirtilecektir. Bu belgenin  
-hazırlanmasında temel alınan aşağıdaki belgeler, belirtilen belge numarasına  
-göre referans gösterilecek, referans belgelerinde olmayan işlemler, işlem  
-sırasına göre eklenecektir.  Tüm işlemler Digital Ocean'ın Wheezy x86_64  
-droplet imajı üzerinde test edilmistir.  Sisteme sonradan eklenen veya üzerinde  
-değişiklik yapılan tüm yapılandırma dosyaları git repo'suna eklenir.   
-Git repo'sunda her seferinde kullanıcı adı, parola girmemek için;  
-git remote set-url origin repo_adı   
-  
-* Referanslar:  
-1) http://emrah.com/notlar/debian_kurulum_notlari_jessie.txt  
-2) http://www.serdaraytekin.com/docs/os/debian/debian-apt-pinning.html  
-3) http://www.serdaraytekin.com/docs/os/debian/debian-cron-update.html  
-4) http://emrah.com/notlar/ssh_notlari.txt  
-5) http://emrah.com/notlar/vim_notlari.txt  
-6) http://www.serdaraytekin.com/docs/os/debian/sss/  
-  
- pip install cheat
-`gem install ncurses-ruby`
+* default kurulumla geliyorlar mi test et `tree, curl, mlocate`
