@@ -62,6 +62,20 @@ String formatting [*]_
     direk bulabiliyorsun. sirali yazmak istiyorsan std. kutuphanede yok,
     on-the-fly yazabilirsin.
 
+#. ftp'ye baglanma
+
+..code:: python
+
+  import ftplib
+  ftp = ftplib.FTP()
+  ftp.connect('<ip_adresi>', 21)
+  '220 (vsFTPd 2.2.2)'
+  ftp.login('<kullanici_adi>', '<parola>')
+  '230 Login successful.'
+  ftp.voidcmd('TYPE I')
+  '200 Switching to Binary mode.'
+  ftp.size('dosya_adi')
+
 
 Docstring Conventions [*]_
 

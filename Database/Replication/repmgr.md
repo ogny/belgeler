@@ -24,7 +24,6 @@ pg_ctl -D $PGDATA -l logfile -w start
 psql --version
 psql -U postgres -c "select version();"
 repmgr --version
-repmgrd --version
 ```
 
 #### Repmgr yapilandirma
@@ -51,6 +50,7 @@ host    replication     repmgr_usr  <IP_blogu>/24         trust
 ```
 createuser -s repmgr_usr
 createdb repmgr_db -O repmgr_usr
+psql -f /usr/pgsql-9.4/share/contrib/repmgr_funcs.sql repmgr_db
 ```
 
 * repmgr.conf (master/standby) (root ile)
@@ -74,15 +74,23 @@ repmgr -f /etc/repmgr/9.4/repmgr.conf standby register
 repmgr -f /etc/repmgr/9.4/repmgr.conf cluster show
 ```
 
+
+
 #. Repmgrd ile replication'u yonetme:
 ```  
 nohup repmgrd -f /etc/repmgr/10.4/repmgr.conf --daemonize  --monitoring-history --verbose &
 ```  
 
-#. hata: pg_ctl: server does not shut down 
+#### hatalar 
+
+* `pg_ctl -w stop` ile kapatmak istediginde; server does not shut down donuyorsa
 ```
 pg_ctl  -D $PGDATA -m immediate stop
 ```
+* Standby master'i klonladiktan sonra acilmiyor; 'FATAL:  could not open
+  relation mapping file "global/pg_filenode.map": No such file or directory'
+  diyor, ancak dosya orada mevcut, haklariyla ilgili bir sorun yok. Buradaki ilginclik su, aslinda postgre'nin bir calisan servisi halihazirda mevcut. oldurmek istediginde ise postmaster.pid yok diyor. Bu durumda pid'in varligini kontrol ederek postgre'yi kaldirip indirmek saglikli bir metod degil.
+
 
 
 Not:  
@@ -167,7 +175,10 @@ node2'yi master'dan slave'e cekmek;
 
     repmgr -d repmgr  -U repmgr --verbose --force standby clone <node1_ip>
 
-#. replication'u kontrol et
+#. replication'u kontrol et::
+
+    select * from pg_stat_replication;
+
 
 
 uzerinde calisilacaklar
@@ -251,4 +262,5 @@ DELETE FROM repmgr_<cluster_name>.repl_nodes WHERE name = '<node_name>';
 
 promote script'inde follow'lar
 sleep 5
+
 

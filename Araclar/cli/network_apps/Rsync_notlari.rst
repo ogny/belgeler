@@ -52,4 +52,6 @@ Rsync Calismasi
 #. mv ile alinan `preserving permissions for ... Operation not permitted` hatasindan kurtulmak::
   rsync -avh --no-owner --no-group --remove-source-files "$backupfile" "$destination"
 
+#. rsync ile silme::
+    rsync -d --delete <bos_dizin>/ <silinecek_dizin>/
 

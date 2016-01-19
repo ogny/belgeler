@@ -21,7 +21,7 @@ vgextend VolGroup /dev/sdX1
 * Volume group'taki bos alan bulunup VG o kadar buyultulur, kontrol edilir
 ```
 vgdisplay VolGroup | grep "Free"
-lvextend -L+#G /dev/ /dev/VolGroup/lv_root
+lvextend --extents +100%FREE /dev/VolGroup/lv_root
 resize2fs -p /dev/VolGroup/lv_root
 df -h /
 ```

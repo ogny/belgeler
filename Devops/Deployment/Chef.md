@@ -496,4 +496,14 @@ knife search node name:\* |grep 'Node Name:' |awk '{print$3}'|egrep "<string>" >
 ~/dosya
 knife ssh -m "$(cat dosya)" 'chef-client' -x root
 ```
-* 
+* array'dan arama
+```
+all_array=($(cat <dosya>))
+for i in "${all_array[@]}"
+do
+    knife node show $i |grep 'Run List:'
+done
+```
+
+* chef server process'leri kapatma; `chef-server-ctl stop`
+

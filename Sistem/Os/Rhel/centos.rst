@@ -13,6 +13,9 @@ basıp editleyin. en sona text yazıp enter'a basın.
 
 :date: 2015-01-19
 
+
+#. crontab icin `cronie` paketi kurulur.
+
 #. chef'le paket kurdugumda asagidaki uyariyi verdi, google'la::
 
         restore selinux security context

@@ -53,4 +53,6 @@ for i in *.tar.gz; do tar -zxvf $i; done
 ```
 * [Kaynak](http://stackoverflow.com/questions/15936003/for-each-dir-create-a-tar-file)
 
+* [Check if a directory exists in a shell script](http://stackoverflow.com/questions/59838/check-if-a-directory-exists-in-a-shell-script)
 
+* `!` Ozel karakterini kullanmak icin `set -o histexpand`

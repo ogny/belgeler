@@ -1,3 +1,102 @@
+### TANIMLAR:
+
+* Docker images: 
+read-only template. konteyner olusturmakta kullaniliyor. Docker images are the
+**build** component of Docker.
+
+* Docker registries:
+imajlarin yuklenip indirildigi alan. Docker registries are the **distribution**
+component of Docker.
+
+* Docker containers
+Tipki bir dizinmis gibi dusun. calistirilacak her sey icinde. imajdan
+olusturuluyor. Docker containers are the **run** component of Docker.
+
+#### Buraya kadar ne ogrendik?
+
+1. You can build Docker images that hold your applications.
+2. You can create Docker containers from those Docker images to run your
+   applications.
+3. You can share those Docker images via
+   [Docker Hub](https://hub.docker.com) or your own registry.
+
+Docker images are then built from these base images using a simple, descriptive
+set of steps we call *instructions*. Each instruction creates a new layer in our
+image. Instructions include actions like:
+
+* Run a command.
+* Add a file or directory.
+* Create an environment variable.
+* What process to run when launching a container from this image.
+
+These instructions are stored in a file called a `Dockerfile`. Docker reads this
+`Dockerfile` when you request a build of an image, executes the instructions, and
+returns a final image.
+
+#### Temeller
+
+* container sadece sen bir komut calistiginda aktif, degilse kapaniyor; run -it ile interaktif kullaniyoruz. Kapandiktan sonra, yapilan degisiklikler commit edilmediyse, ucuyor.
+So what happened to our container after that? Well Docker containers
+only run as long as the command you specify is active. Here, as soon as
+`Hello world` was echoed, the container stopped.
+* docker hostname'i Container id'den aliyor.
+* docker history ile en guncel versiyonu bul. Not: (imaj adi images ciktisinda
+  repository altinda)
+```
+docker images
+docker history <REPOSITORY:TAG>
+```
+* IMAGE ID: imajin temel kimligi, diger hicbir sey olmasa da bununla is
+  gorebiliyorsun.
+* CONTAINER ID: pid gibi, son yapilan isin id'si
+* Yapilan bir degisikligi host'ta container'in adiyla veya Container id'siyle
+  gorebilirsin.
+```
+docker diff <name>
+```
+* container'da yaptigin degisikligi commit ettiginde yeni bir image
+  olusturuyor, artik bu imajdan devam edebilirsin, yeni imajdan diledigimiz
+  kadar olusturabiliriz.
+```
+docker commit -m "foo" <MEVCUT Container id veya name> \
+<YENI Container id veya name>
+```
+* ps parametreleri;
+  - `-l` son olusturulan.
+  - `-a` simdiye kadar olusturulmus tum container'lar.
+
+* bir docker imajindan istedigin sayida yeni docker container'i ayni anda aktif kullanabiliyorsun. bir nevi klonlamak gibi. (cluster vb. yapilar icin inanilmaz bir kolaylik)
+
+* docker container'a login olurken image adini yaziyoruz, bunun disinda her seyi container_id ile yapiyoruz, 
+
+* `docker image history`, image building'le ilgili bir olay. container tarafini baglamiyor.
+
+* bir container'i kapattiginda `docker stop` , tekrar ihtiyac duyulursa, yeni bir container olusturmak yerine  `docker start takma_ad` ile tekrar calistirabilirsin.
+
+* imaj olusturma (build): Yapi: INSTRUCTION arguments
+  - DockerFile'a tanimlanan her instruction birbirinden bagimsiz calisir ve
+    yeni bir imaj olusumuna sebep olur. `RUN cd /tmp` gibi bir instruction'un
+    hicbir etkisi olmayacaktir.
+
+  - ENV instruction'u variable'lar icin kullanabilirsin, kullanilabilir env. variable instruction'lari;
+`ADD`
+`COPY`
+`ENV`
+`EXPOSE`
+`LABEL`
+`USER`
+`WORKDIR`
+`VOLUME`
+`STOPSIGNAL`
+
+
+
+#### sorunlar:
+  konetyniri baslattigimda ftp server acilmiyor (chkconfig on)
+
+
+
+
 #### Kurulum
 
 * [Debian icin](https://docs.docker.com/engine/installation/debian/)
@@ -37,38 +136,6 @@ docker-io-zsh-completion-1.5.0-1.el6.x86_64.
 docker-registry-0.9.0-1.el6.noarch.
 ```
 
-#### Temeller
-
-
-* docker hostname'i Container id'den aliyor.
-* docker history ile en guncel versiyonu bul. Not: (imaj adi images ciktisinda
-  repository altinda)
-* docker git branch gibi, temel alip yeni imaj olusturuyorsun, ornegin;
-```
-docker run -it --name="mycentos" centos7/mongo:latest /bin/bash 
-```
-
-
-```
-docker images
-docker history <REPOSITORY:TAG>
-```
-* IMAGE ID: imajin temel kimligi, diger hicbir sey olmasa da bununla is
-  gorebiliyorsun.
-* CONTAINER ID: pid gibi, son yapilan isin id'si
-
-* Yapilan bir degisikligi host'ta container'in adiyla veya Container id'siyle
-  gorebilirsin.
-```
-docker diff <name>
-```
-* container'da yaptigin degisikligi commit ettiginde yeni bir image
-  olusturuyor, artik bu imajdan devam edebilirsin, yeni imajdan diledigimiz
-  kadar olusturabiliriz.
-```
-docker commit -m "foo" <MEVCUT Container id veya name> \
-<YENI Container id veya name>
-```
 
 #### Remove all untagged containers.
 
@@ -82,8 +149,6 @@ docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
 ```
 docker kill 
 ```
-
-
 
 * Ubuntu docker info ciktisinda;
 Storage Driver: aufs
@@ -177,8 +242,6 @@ container id ile commit ediyorsun ve yeni bir container id ediniyorsun.
 
 * Docker'daki hazir imajlara guvenme, kendi imajini lxc'deki imajdan 
 kendin olustur (not: systemd de ekle)
-
-* sudo docker ps -l ile calisan container'i gorebiliyorsun (-l mutlak kullan)
 
 ##### Sorular
 
@@ -300,4 +363,4 @@ directory where you run that line or it could get interesting :)
 pg_ctl: directory "/var/lib/pgsql/9.4/data" is not a database cluster directory
 ```
 
-
+RUN echo '' >> /etc/sudoers && echo 'jenkins ALL=(ALL NOPASSWD: ALL' >> /etc/sudoers)'

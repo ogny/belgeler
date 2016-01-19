@@ -82,3 +82,5 @@ Rpm Centos Calisma
 #. paketleri boyutlarina gore siralama::
 
     rpm -qa --queryformat="%{NAME} %{SIZE}\n" | sort -k 2 -n
+
+#. `yum reinstall <paket_adi>`

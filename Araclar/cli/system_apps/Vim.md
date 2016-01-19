@@ -48,11 +48,20 @@ Degistirecegin yeri secip visual mode'a gec
 * Bir kisayola iki kisayol ait komut atama; kisayol tuslari arasina \| eklenir.
 `:nnoremap f }) \| zz`
 
-* Bookmark yonetimi
-`mx` ile satiri bookmark'la
-`‘x` ile bookmark'ladigin satira geri git.
-buradaki `x` degerini kucuk harf kullanirsan lokal bookmark kullanirsin, buyuk
-harf kullanirsan, farkli bir dosyada da olsan, cagirdiginda bookmark'ladigin satiri acar.
+* mark yonetimi
+`mx` ile satiri mark'la
+`'x` ile bookmark'ladigin satira geri git.
+buradaki `x` degerini kucuk harf kullanirsan lokal mark kullanirsin, buyuk
+harf kullanirsan, farkli bir dosyada da olsan, cagirdiginda mark'ladigin satiri acar.
+
+* bookmark yonetimi (kendi tus duzenime gore)
+  - imlecin bulundugu satiri isaretleme; `\m`
+  - isarete not ekleme ; `\i`
+  - isaretler arasinda gezinmek; `\n`
+  - tum isaretleri bir tamponda gorme; `\a`
+  - bulundugun tampondaki isaretleri silme; `\c`
+  - tum isaretleri silme `\x`
+
 
 * Vimdiff'teyken gorunumu dikey-yatay olarak degistirmek;
 <C-w>J (or <C-w>K) when you are in vertical split and <C-w>H (<C-w>L) in horizontal
@@ -70,7 +79,6 @@ Ctrl-k S, -> Ş
 Ctrl-k u: -> ü
 Ctrl-k U: -> Ü
 
-* marks ile kaldigin yerden calisma
 
 * Buffer'larla calisma
 Bu alanda sik kullanilan cesitli eklentiler mevcut, bunlardan Unite.vim ile
@@ -88,8 +96,12 @@ sayiJ ile birlestir.
 * Aramada  regex pattern'lerini kullanma;
 \<aranacak_pattern\>
 
-* satir sonlarindaki ^M  karakterleri kaldirma.
-`%s/\r/\r/g`
+* satir sonlarindaki `^M` `^L`  karakterleri silme.
+```
+%s/\r/\r/g
+:%s/^L//g
+```
+
 
 * json biceminde olup da duz metin gibi gorunen tamponu okunakli hale getirmek
 icin;
@@ -153,11 +165,16 @@ set nofoldenable
 ```
 :%s/\(.*\n\)\{1\}/&\
 ```
+* tablo olusturma
 
 
 ```
 http://vim.wikia.com/wiki/Working_with_CSV_files
 ```
+
+* sayfadaki yerel link'i yeni buffer'da acma: `gf`
+* sayfadaki url'i tarayicida acma: `gx`
+
 
 ### eklentiler 
 * Kisa Kisa kullandigim eklentileri tanitmak istiyorum.
@@ -215,3 +232,4 @@ vim-bookmarks
 :syn match Concealed '^.\{satir_sayisi\}' conceal
 :set conceallevel=2
 ```
+

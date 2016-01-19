@@ -1,41 +1,30 @@
-Postgresql calisma
-==================
-
-:date: Sal 24 Şub 2015 17:20:20 EET
-:comments: true
-:categories: 
-:tags: 
-:Author: Orkun Gunay
-
-* Guncel surum kurulumu:
-
-  yum install \
-  http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-redhat94-9.4-1.noarch.rpm
-
+* Guncel surum: 
+```
+yum install \
+http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-redhat94-9.4-1.noarch.rpm
+```
 * WAL backup'lama point-in-time recovery yapma imkani da sagliyor
-
 * pg_basebackup: binary dosya, tum db'leri birarada alabiliyorsun
-
-  * pg_ctl'i kullanabilmek icin .bash_profile'a eklenecek path::
-
-    /usr/pgsql-9.4/bin/
-
+* pg_ctl'i kullanabilmek icin .bash_profile'a eklenecek path: 
+`/usr/pgsql-9.4/bin/`
 * pg_config'i bulamiyorsa::
-
-  ln -s /usr/pgsql-9.4/bin/pg_config /usr/local/sbin/pg_config
-
+`ln -s /usr/pgsql-9.4/bin/pg_config /usr/local/sbin/pg_config`
 * veri tabani kullanicisiyla baglanmadiginda aldigin hata
 pdns=> DROP DATABASE pdns;
 ERROR:  must be owner of database pdns
 
-* aktif olarak kullanilan bir veritabanini silme
+### Db silme
 ```
-select pg_terminate_backend(pid) from pg_stat_activity where datname='<db_adi>';
-DROP DATABASE "<db_adi>"
+dropdb <db_adi>
+psql -U postgres -c "drop database <db_adi>"
 ```
-* cozum;
-# psql -U postgres -c "drop database pdns"
-DROP DATABASE
+* error: database is being accessed by other users
+```
+select pg_terminate_backend(pid) 
+from pg_stat_activity 
+where datname='<db_adi>';
+DROP DATABASE "<db_adi>";
+```
 
 * yeni veri tabani - kullanici ekleme
 ```
@@ -54,32 +43,34 @@ GRANT ALL PRIVILEGES ON DATABASE <db_adi> to <kullanici_adi>;
 
 #. Drop all tables in postgresql?
 
+```
 drop schema public cascade;
-  create schema public;
+create schema public;
+```
+[kaynak](http://stackoverflow.com/questions/3327312/drop-all-tables-in-postgresql)
 
-  http://stackoverflow.com/questions/3327312/drop-all-tables-in-postgresql
+`DROP TABLE` : remove a table
+#. Dump and restore:
+```
+pg_dump "veri_tabani" > "dosya.sql"
+psql "veri_tabani" < "dosya.sql"
+```
+#. Restore:
+```
+PGUSER=postgres pg_dumpall -h <uzak_sunucu> > db.out
+psql -U <veri_tabani_sahibi> <veri_tabani_adi> -f dosya.sql
+psql dbname < infile
+pg_restore -U <veri_tabani_sahibi> -d db.out -v
+```
 
-  DROP TABLE -- remove a table
+#. kullanicinin parolasini guncelleme ve superuser yetkisi verme::
+```
+ALTER USER <kullanici_adi> WITH PASSWORD '<newpassword>';
+ALTER USER <kullanici_adi> WITH SUPERUSER;
+```
 
-  #. Dump and restore::
-      pg_dump "veri_tabani" > "dosya.sql"
-      psql "veri_tabani" < "dosya.sql"
-
-  #. Restore::
-
-     pg_dump dbname > outfile
-     PGUSER=postgres pg_dumpall -h <uzak_sunucu> > db.out
-     psql -U <veri_tabani_sahibi> <veri_tabani_adi> -f dosya.sql
-     psql dbname < infile
-     pg_restore -d db.out
-
-
-  #. kullanicinin parolasini guncelleme ve superuser yetkisi verme::
-     ALTER USER <kullanici_adi> WITH PASSWORD '<newpassword>';
-     ALTER USER <kullanici_adi> WITH SUPERUSER;
-
-  #. Tablo olusturma calismasi::
-
+#. Tablo olusturma calismasi::
+```
 create table employees(
 id int PRIMARY KEY,
 last_name varchar NOT NULL,
@@ -88,14 +79,15 @@ salary int
 INSERT INTO employees VALUES (1,'Jones',45000);
 INSERT INTO employees VALUES (2,'Adams',50000);
 INSERT INTO employees VALUES (3,'Williams',37000); 
+```
 
 #. farkli bir port / disk'ten baslatma::
     
-  pg_ctl -D <dizin> -o "-F -p <port>" -w start 
+pg_ctl -D <dizin> -o "-F -p <port>" -w start 
 
 #. Debian'da::
 
-  pg_ctl -D <dizin>  -o '--config-file=/etc/postgresql/9.3/main/postgresql.conf' -w start 
+pg_ctl -D <dizin>  -o '--config-file=/etc/postgresql/9.3/main/postgresql.conf' -w start 
 
 Kaynak
 ======
@@ -104,8 +96,7 @@ Kaynak
 `CREATE FUNCTION: return types <http://www.postgresqlforbeginners.com/2010/11/create-table-and-constraints.html>_`
 
 
-Kullanici haklari 
-~~~~~~~~~~~~~~~~~
+#### Kullanici haklari 
 
 Tanimlar
 ========
@@ -139,3 +130,4 @@ WAL - Continous Archiving
 #. network'ten gz dump'i import etme::
 
     ssh <kullanici>@<sunucu_ip> "gunzip -c dosya.sql.gz" | psql <import_edilecek_veri_tabani>
+

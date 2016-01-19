@@ -22,12 +22,12 @@ apt-cache showpkg <paket_adi>
 * apt-listchanges — Show new changelog entries from Debian package archives 
 
 # Apt-get
---no-install-recommends  
-Do not consider recommended packages as a dependency for installing.   
-Configuration Item: APT::Install-Recommends.  
+--no-install-recommends
+Do not consider recommended packages as a dependency for installing.
+Configuration Item: APT::Install-Recommends.
 
---install-suggests  
-Consider suggested packages as a dependency for installing.            
+--install-suggests
+Consider suggested packages as a dependency for installing.
 Configuration Item: APT::Install-Suggests. 
 
 ### dotdeb.org repository'sinden paket kurmadan once;

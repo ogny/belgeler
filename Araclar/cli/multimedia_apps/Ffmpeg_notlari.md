@@ -1,13 +1,21 @@
-*live:yasinarrslan mp4-mp3 donusturme;
+* mp4-mp3 donusturme;
+```
 ffmpeg -i k.mp4 -q:a 0 -map a k.mp3
-	* mp4-mp3 belli bir araligi donusturme;
+```
+* mp4-mp3 belli bir araligi donusturme;
+```
 ffmpeg -ss 00:00 -i k.mp4 -q:a 0  -map a -t 00:54 k.mp3
+```
 
 * ekranda oynayan görüntüyü kaydetme
+```
 ffmpeg -f x11grab -r 25 -s 1024x768 -i :0.0 /tmp/outputFile.mpg
+```
 
 * herhangi bir formattaki yayini alip oynatma
+```
 ffmpeg -i sample.mp4 -vcodec copy -acodec copy output.mp4
+```
 (use 'copy' to bypass audio encoding)
 
 ffmpeg'le vidyonun icerigine bakildiginda, son kisminda hakkinda bilgi veriyor;
@@ -24,4 +32,6 @@ ffmpeg'le vidyonun icerigine bakildiginda, son kisminda hakkinda bilgi veriyor;
 
 * mp4 header bilgisini dosyanin en sonunda tuttugundan, player dosyanin tamami
 yuklenmeden dosyanin mp4 olup olmadigini anlayamiyor.
-Ornek uygulama: ffmpeg -i dosya.mp4 -c:v copy -c:a copy -movflags faststart dosya..mp4
+```
+ffmpeg -i dosya.mp4 -c:v copy -c:a copy -movflags faststart dosya..mp4
+```
