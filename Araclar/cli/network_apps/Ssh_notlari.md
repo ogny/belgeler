@@ -58,7 +58,7 @@ ssh-keygen -f "/root/.ssh/known_hosts" -R  <ip_adresi>
 
 * uzak makinada komut calistirmak
 ```
-ssh -t <uzak_makina> "komut"
+ssh <uzak_makina> -t "komut"
 ```
 
 
