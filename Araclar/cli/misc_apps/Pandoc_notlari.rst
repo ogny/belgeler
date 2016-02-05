@@ -23,3 +23,8 @@
 * pandoc : rst => wiki::
 
     pandoc -s -S -w mediawiki --toc test.rst -o test.pandoc.wiki
+
+* Dizindeki tum html'leri md yap
+```
+for file in $(find . -type f -iname "*.html") ; do pandoc -f html -t markdown "${file}" -o "${file%html}md"; done
+```
