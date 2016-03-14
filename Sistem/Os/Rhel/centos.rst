@@ -6,7 +6,7 @@ Kurulum
 =======
 
 Kurulum medyası: CentOS 6.6 x86_64 minimal
-`Indirme adresi <http://ftp.linux.org.tr/centos/6.6/isos/x86_64/CentOS-6.6-x86_64-minimal.iso>`_
+`Indirme adresi <http://ftp.linux.org.tr/centos/6.7/isos/x86_64/CentOS-6.7-x86_64-minimal.iso>`_
 işletim sistemi text mode'da kurulur. Grub ekranında tab'a
 basıp editleyin. en sona text yazıp enter'a basın.
 

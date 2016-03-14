@@ -52,7 +52,7 @@ http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=display
 
 #. Bos alani ekleme::
 
-    lvextend -L+<Bos_yer>G /dev/VolGroup/lv_root
+    lvextend -l 100%FREE /dev/VolGroup/lv_root
 
 #. Partition eklenen diski genisletme::
 
@@ -60,6 +60,6 @@ http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=display
 
 * lv_home'dan lv_root'a transfer (Centos default kurulumda 50G disindaki alani /home'a bagliyor)
 
-http://serverfault.com/questions/524962/how-to-integrate-home-back-into-main-partition-then-grow-partition*
+http://serverfault.com/questions/524962/how-to-integrate-home-back-into-main-partition-then-grow-partition
 
-Yukaridaki son iki adim eklenir.
+* Yukaridaki son iki adim eklenir.

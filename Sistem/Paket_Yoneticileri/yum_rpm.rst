@@ -84,3 +84,11 @@ Rpm Centos Calisma
     rpm -qa --queryformat="%{NAME} %{SIZE}\n" | sort -k 2 -n
 
 #. `yum reinstall <paket_adi>`
+
+#. Group paket komutlari::
+
+   yum grouplist --> Lists installed groups and groups that are available for installation.
+   yum groupinfo groupname --> Displays detailed information about a group.
+   yum groupinstall groupname  --> Installs all the packages in a group.
+   yum groupupdate groupname  --> Updates all the packages in a group.
+   yum groupremove groupname --> Removes all the packages in a group.

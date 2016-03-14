@@ -33,3 +33,26 @@ timeout = 120
 
   DistributionNotFound: No matching distribution found for <paket_adi>
   pip buraya bakiyor; http://pypi.python.org/simple/<paket_adi>
+
+#. whl paketi indirme, kurma::
+
+   pip install meld3 --download  dizin
+   pip install --user dizin/meld3-1.0.2-py2.py3-none-any.whl
+
+
+#. sudo izni olmayan kullanici ile kurulum, guncelleme::
+   
+   pip install --user paket_adi
+   pip install --user --upgrade pip
+
+#. pip 8.0.2'de download default geliyor::
+
+   cd indirilecek_dizin
+   pip download supervisor
+
+#. pip olmayan ortamda pip kurulumu::
+
+    python pip-8.0.2-py2.py3-none-any.whl/pip install \
+    --no-index pip-8.0.2-py2.py3-none-any.whl
+
+

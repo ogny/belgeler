@@ -278,3 +278,9 @@ kern.* /var/log/kern.log
 /etc/init.d/rsyslog restart
 tailf /var/log/kern.log
 ```
+ 
+* base64 ile (de/en)code etme;
+```
+echo -n 'test' | base64
+echo -n dGVzdA== | base64 -d
+```

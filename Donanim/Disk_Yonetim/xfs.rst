@@ -38,8 +38,15 @@ xfs_repair'le check et, sorun yoksa repair et::
     xfs_repair -n -vv /dev/<disk_yolu>
     xfs_repair -vv /dev/<disk_yolu>
 
-
-
+Phase 2 - using internal log
+        - zero log...
+zero_log: head block 895671 tail block 895667
+ERROR: The filesystem has valuable metadata changes in a log which needs to
+be replayed.  Mount the filesystem to replay the log, and unmount it before
+re-running xfs_repair.  If you are unable to mount the filesystem, then use
+the -L option to destroy the log and attempt a repair.
+Note that destroying the log may cause corruption -- please attempt a mount
+of the filesystem before doing this.
 
 
 

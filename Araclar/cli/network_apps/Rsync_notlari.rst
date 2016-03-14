@@ -20,6 +20,10 @@ Rsync Calismasi
     rsync -avzuhe "ssh -l kullanici" IP_ADRESI:/etc/nginx/ etc/nginx/ \
     --exclude='sites-enabled'
 
+rsync -aAXvP --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*",\
+"/media/*","/lost+found","/etc/sysconfig/network-scripts/*","/etc/network/interfaces"} \
+kaynak/* /hedef/
+
 #. yedek almak icin::
 
     rsync -a --verbose --recursive --links --perms --executability \

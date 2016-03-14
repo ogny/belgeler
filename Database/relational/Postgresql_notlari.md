@@ -131,3 +131,44 @@ WAL - Continous Archiving
 
     ssh <kullanici>@<sunucu_ip> "gunzip -c dosya.sql.gz" | psql <import_edilecek_veri_tabani>
 
+#. Read-only user'a permission verme
+
+  "select 'grant select on ' || tablename || ' to jasperuser;' from pg_tables where schemaname = 'public'"
+
+* Centos binary'lerin oldugu path `/usr/pgsql-9.4/bin/`
+
+* read-only kullanici olusturma
+
+``` sql
+CREATE USER <kullanici> ENCRYPTED PASSWORD '<parola>';
+GRANT CONNECT ON DATABASE <veri_tabani> TO <kullanici>;
+GRANT USAGE ON SCHEMA public TO <kullanici>;
+\c <veri_tabani>
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO <kullanici>;
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO <kullanici>;
+GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA public TO <kullanici>;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO <kullanici>;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON SEQUENCES TO <kullanici>;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT EXECUTE ON FUNCTIONS TO <kullanici>;
+```
+
+#### HATALAR
+
+* role "" cannot be dropped because some objects depend on it
+Hangi db'ye ait objelere depend ediyorsa, o db'ye olan erisim geri alinir.
+```
+REVOKE CONNECT ON DATABASE <db> FROM <user>;
+drop owned by <user>;
+drop user <user>;
+```
+Halen silinemiyorsa, db'yi silersek kullanici siliniyor.
+db silinmeden nasil cozulur, henuz bilmiyorum.
+
+#### Debian; baslatma;
+
+```
+binary dizini: /usr/lib/postgresql/9.5/bin/
+pg_createcluster 9.5 main --start 
+```
+
+

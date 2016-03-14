@@ -4,6 +4,13 @@ Vmware ESXI 5.5
 
 :date: 2015-02-11
 
+#. vmware disk turleri arasindaki farklar;
+  * en guvenlisi egar zeroed thic duruyor. fault tolerance icin o oneriliyor
+  * lazy zeroed 
+   
+
+
+
 #. Disk klonlarken dikkat edilecek;
 Emrah'in notta duzeltme;
 http://www.emrah.com/notlar/vmware_notlari.txt 

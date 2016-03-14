@@ -6,8 +6,12 @@ sudo systemctl list-units -t service --no-legend
 * Gecici (temp) dosyalarin silinmesi; `systemd-tmpfiles-clean.timer` hazir geliyor
 ```
 sudo systemctl status systemd-tmpfiles-clean.timer
+```
 
-
+* suspend calismiyorsa elle baslat
+```
+/lib/systemd/systemd-sleep suspend
+```
 
 #### Platform
 `debian wheezy amd64 3.2.0-4`

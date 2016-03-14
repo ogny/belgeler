@@ -1,4 +1,4 @@
-## Test edilen ortam: ubuntu precise x86 on vagrant
+# Test edilen ortam: ubuntu precise x86 on vagrant
 
 ## Kurulum: (unstable)
 ```

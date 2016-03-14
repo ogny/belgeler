@@ -7,7 +7,9 @@
 /set weechat.look.buffer_time_format ""      
 /set plugins.var.perl.highmon.output bar
 /set plugins.var.perl.highmon.bar_lines 250
+
 /alias clear_highmon /mute /set plugins.var.perl.highmon.bar_lines -1;/mute /set weechat.bar.highmon.items "";/mute /set weechat.bar.highmon.items "highmon";/mute /set plugins.var.perl.highmon.bar_lines 250
+
 /set irc.look.smart_filter on
 /filter add jpk * irc_join,irc_part,irc_quit *
 /bar toggle nicklist
@@ -58,7 +60,7 @@ account skype set auto_join true
 ##### Bitlbee'ye baglanma
 ```
 /connect localhost/6667
-registter <parola>
+register <parola>
 /server add im localhost -autoconnect
 /set irc.server.im.password <parola>
 /set irc.server.im.command "/msg &bitlbee identify <parola>"
@@ -67,3 +69,5 @@ help quickstart
 ```
 [Facebook ekleme](https://wiki.bitlbee.org/HowtoFacebookMQTT)
 [Gtalk ekleme](https://wiki.bitlbee.org/HowtoGtalk)
+
+### Bitlbee kurulum ve weechat script kurulumlari eklenecek

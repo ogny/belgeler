@@ -6,6 +6,9 @@ SSH Notlari
     ssh-add -D
     ssh-add -l
 
+* ozel anahtar olusturma::
+
+   ssh-keygen -C "$(whoami)@$(hostname)-$(date -I)"  -t rsa -b 2048 -f ~/.ssh/$(hostname)
 
 * ozel anahtardan genel anahtar olusturma::
 
@@ -61,4 +64,12 @@ ssh-keygen -f "/root/.ssh/known_hosts" -R  <ip_adresi>
 ssh <uzak_makina> -t "komut"
 ```
 
+* config dosyasini bypass ederek default tanimla baglanma
+```
+ssh -F /dev/null <ip_adresi>
+```
 
+* key olusturma
+```
+ssh-keygen -C "$(whoami)@$(hostname)-$(date -I)" -b 2048
+```

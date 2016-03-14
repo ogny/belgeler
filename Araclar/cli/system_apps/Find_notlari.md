@@ -69,6 +69,10 @@ find <dizin> -newermt "nov 10, 2015" -not -newermt  "nov 11, 2015"
 find -maxdepth 0 
 ```
 
+* belli bir tarih araliginda olusan dosyalari bulup tasima;
+```
+```
+
 ### Kaynaklar:
 
 * [UsingFind](http://mywiki.wooledge.org/UsingFind)
