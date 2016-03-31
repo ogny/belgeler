@@ -73,3 +73,12 @@ ssh -F /dev/null <ip_adresi>
 ```
 ssh-keygen -C "$(whoami)@$(hostname)-$(date -I)" -b 2048
 ```
+
+* uzak sunucuya parolasiz erisimde sorun cikiyorsa kullanicinin ev dizinin
+  haklarini kontrol et;
+```
+chmod 700 /home/<kullanici>
+```
+
+
+

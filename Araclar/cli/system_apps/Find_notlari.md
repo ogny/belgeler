@@ -73,6 +73,11 @@ find -maxdepth 0
 ```
 ```
 
+* belli bir gruba ait dosyalari bulma, (kullaniciya ait olanlar da bulunabilir mi, arastir,)
+```
+-group <grup_adi>
+```
+
 ### Kaynaklar:
 
 * [UsingFind](http://mywiki.wooledge.org/UsingFind)

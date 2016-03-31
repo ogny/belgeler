@@ -63,3 +63,5 @@ http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=display
 http://serverfault.com/questions/524962/how-to-integrate-home-back-into-main-partition-then-grow-partition
 
 * Yukaridaki son iki adim eklenir.
+
+

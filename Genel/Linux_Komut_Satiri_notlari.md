@@ -266,6 +266,11 @@ touch -t yilaygunsaat oldfile
 lspci -knn|grep -iA2 vga
 ```
 
+* kullaniciyi spesifik bir ev dizininde olusturma; (hali hazirdaki bir gruba eklemek icin -g <grup_adi>>) 
+```
+useradd -d /home/james jim
+```
+
 * kullaniciyi gruba ekleme
 ```
 sudo gpasswd -a <kullanici> <grup>

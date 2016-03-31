@@ -48,9 +48,9 @@ host    replication     repmgr_usr  <IP_blogu>/24         trust
 * monitoring and replication data'nin tutulmasi icin kullanici ve veri tabani
   olusmasi gerekiyor.
 ```
-createuser -s repmgr_usr
-createdb repmgr_db -O repmgr_usr
-psql -f /usr/pgsql-9.4/share/contrib/repmgr_funcs.sql repmgr_db
+createuser -s repmgr
+createdb repmgr -O repmgr
+psql -f /usr/pgsql-9.4/share/contrib/repmgr_funcs.sql repmgr
 ```
 
 * repmgr.conf (master/standby) (root ile)
@@ -60,7 +60,7 @@ vi /etc/repmgr/9.4/repmgr.conf
 cluster=test
 node=1
 node_name=node1
-conninfo='host=<IP> repmgr_db user=repmgr_usr'
+conninfo='host=<IP> repmgr user=repmgr'
 pg_bindir=/usr/pgsql-9.4/bin
 use_replication_slots=1
 pg_basebackup_options='--xlog-method=s'
@@ -69,9 +69,9 @@ logfile='/var/log/repmgr/repmgr-9.4.log'
 
 * Master/Standby node'lari kaydet ve kontrol et
 ```
-repmgr -f /etc/repmgr/9.4/repmgr.conf master register
-repmgr -f /etc/repmgr/9.4/repmgr.conf standby register
-repmgr -f /etc/repmgr/9.4/repmgr.conf cluster show
+repmgr -f /etc/repmgr/repmgr.conf master register
+repmgr -f /etc/repmgr/repmgr.conf standby register
+repmgr -f /etc/repmgr/repmgr.conf cluster show
 ```
 
 

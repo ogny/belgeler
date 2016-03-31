@@ -13,6 +13,21 @@ http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-redhat94-9.4-1.noarch.rp
 pdns=> DROP DATABASE pdns;
 ERROR:  must be owner of database pdns
 
+### DB olusturma ve baslatma 
+
+* centos
+```
+initdb -D $PGDATA -A trust -U postgres
+pg_ctl -D $PGDATA -l logfile -w start
+```
+
+* Debian
+```
+binary dizini: /usr/lib/postgresql/9.5/bin/
+pg_createcluster 9.5 main --start 
+```
+
+
 ### Db silme
 ```
 dropdb <db_adi>
@@ -164,11 +179,5 @@ drop user <user>;
 Halen silinemiyorsa, db'yi silersek kullanici siliniyor.
 db silinmeden nasil cozulur, henuz bilmiyorum.
 
-#### Debian; baslatma;
-
-```
-binary dizini: /usr/lib/postgresql/9.5/bin/
-pg_createcluster 9.5 main --start 
-```
 
 

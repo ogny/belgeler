@@ -21,3 +21,9 @@ C-a X
 screen -c /etc/screenrc
 ```
 
+* screen oturumuna yeniden baglandiginda, pencere boyutu, ciktigindaki gibi, kucuk kalirsa
+
+```
+ctrl-a F 
+screen -x -A
+```
