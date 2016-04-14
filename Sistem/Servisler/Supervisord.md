@@ -11,9 +11,11 @@ files = /etc/supervisor.d/*.conf , /home/<kullanici_adi>/supervisord_conf/*.conf
 
 mkdir /home/<kullanici_adi>/supervisord_conf
 cp  /etc/supervisor.d/*.conf /home/<kullanici_adi>/supervisord_conf/
+mv /etc/supervisor.d/*.conf  ~/supervisord_tasklar/
 supervisorctl stop all
 supervisorctl reload 
 su - <kullanici_adi>
+supervisorctl update all
 supervisorctl start all
 ```
 

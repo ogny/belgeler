@@ -13,12 +13,13 @@ http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-redhat94-9.4-1.noarch.rp
 pdns=> DROP DATABASE pdns;
 ERROR:  must be owner of database pdns
 
-### DB olusturma ve baslatma 
+### DB olusturma baslatma ve durdurma
 
 * centos
 ```
 initdb -D $PGDATA -A trust -U postgres
 pg_ctl -D $PGDATA -l logfile -w start
+pg_ctl  -D $PGDATA -m immediate stop
 ```
 
 * Debian
