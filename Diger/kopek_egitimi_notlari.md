@@ -1,6 +1,6 @@
 * Eğitimci: Uğur Kurşun
-
 konunun iki başlığı var, insan ve köpek eğitimi;
+
 #### insan eğitimi 
 toplumumuz olaylarda 'ya hep ya hiç' yaklaşımı sergiliyor
 ya çok seviyoruz, ya nefret ediyoruz.
@@ -24,6 +24,6 @@ köpekler ırk ve kinolojiye göre 2 tipe ayrılıyor;
 #### Sorular
 * köpekler taşmasız şekilde birbirleriyle bir süre oynarlarsa, birbirlerinden rol çalmaya başlarlar. bu da köpeğin kendi benliğini kaybetmesine neden olur, başka köpeklerle fazla oynatmaya gerek yok.
 * Havlama-susmama gibi sorunları varsa, komuta bağlamak çözüm olabilir. havladığında ve sustuğunda komut vererek, bir dahaki sefere komutu dinlemesini sağlayabilirsin.
-* taşmasız dolaştırma sahiplerin fantezisi, sokakta ne olacağını bilemezsin, tamamen kontrollü bir alanda açabilirsin.
+* tasmasız dolaştırma sahiplerin fantezisi, sokakta ne olacağını bilemezsin, tamamen kontrollü bir alanda açabilirsin.
 * Kendi köpeğinle bağ kurmadan başka köpeklerle ilgilenmen köpeğinde agresyon yaratır.
 * eğitim 5 haftalıkken, patı altına dokunma, tarağa alıştırma, boynuna bir ip geçirme aşamalarıyla başlar. 6 aylıkken itaat eğitimi başlar.
