@@ -1,30 +1,29 @@
-* Egitimci: Ugur Kursun
+* Eğitimci: Uğur Kurşun
 
-konunun iki basligi var, insan ve kopek egitimi;
-#### insan egitimi 
-toplumumuz olaylarda 'ya hep ya hic' yaklasimi sergiliyor
-ya cok seviyoruz, ya nefret ediyoruz.
-halbu ki once notr kalabilmeliyiz. yagilamadan.
+konunun iki başlığı var, insan ve köpek eğitimi;
+#### insan eğitimi 
+toplumumuz olaylarda 'ya hep ya hiç' yaklaşımı sergiliyor
+ya çok seviyoruz, ya nefret ediyoruz.
+halbu ki önce nötr kalabilmeliyiz. yagılamadan.
 
 
-#### kopek egitimi 
-Kopegin temel amaci suru liderini yani seni korumak, eger lider huzurlu ve guvende hissediyorsa, kopek de huzursuz olmaz ve seni dinler.
-kopege once avuc kokunu vereceksin, bunun icin en iyi yol elinden beslemek.
-Kopege mutlaka adiyla hitap edilsin. 
-Temelde sen ve kopegin bir iliski kuruyorsunuz, o iliskide, kendi yasayamadiklarini ona yasatmaya calisirsan simaracak ve daha fazlasini isteyecektir. Iliskiyi kurarken karsililiklilik ilkesini gozetmelisin.
-Kopeginle goz temasi kurmalisin
-surekli odul-surekli ceza, giderek anlamini yitirecek.
-Kopege yapabilecegi bir is vermezsen, onun beynini yormazsan, bedenini yoramazsin.
-Kopekler kontrol edebilecekleri kucuk bir alanlarinin olmasi mutlu ediyor. Evde bir Box'u olmali. 
-Disipline etmek icin, her istedigini yapmayacaksin, istedigin zaman onu ignore edebilmelisin. Herkes kendi hayatini yasamali.
-kopekler irk ve kinolojiye gore 2 tipe ayriliyor;
+#### köpek eğitimi 
+Köpeğin temel amacı sürü liderini yani seni korumak, eğer lider huzurlu ve güvende hissediyorsa, köpek de huzursuz olmaz ve seni dinler.
+köpeğe önce avuç kökünü vereceksin, bunun için en iyi yol elinden beslemek.
+Köpeğe mutlaka adıyla hitap edilsin. 
+Temelde sen ve köpeğin bir ilişki kuruyorsunuz, o ilişkide, kendi yaşayamadıklarını ona yaşatmaya çalışırsan şımaracak ve daha fazlasını isteyecektir. İlişkiyi kurarken karşılılıklılık ilkesini gözetmelisin.
+Köpeğinle göz teması kurmalısın
+sürekli ödül-sürekli ceza, giderek anlamını yitirecek.
+Köpeğe yapabileceği bir iş vermezsen, onun beynini yormazsan, bedenini yoramazsın.
+Köpekler kontrol edebilecekleri küçük bir alanlarının olması mutlu ediyor. Evde bir Box'u olmalı. 
+Disipline etmek için, her istediğini yapmayacaksın, istediğin zaman onu ignore edebilmelisin. Herkes kendi hayatını yaşamalı.
+köpekler ırk ve kinolojiye göre 2 tipe ayrılıyor;
 * working
-* showline: evde bakilabilecek cinsler
+* showline: evde bakılabilecek cinsler
 
 #### Sorular
-* kopekler tasmasiz sekilde birbirleriyle bir sure oynarlarsa, birbirlerinden rol calmaya baslarlar. bu da kopegin kendi benligini kaybetmesine neden olur, baska kopeklerle fazla oynatmaya gerek yok.
-* Havlama-susmama gibi sorunlari varsa, komuta baglamak cozum olabilir. havladiginda ve sustugunda komut vererek, bir dahaki sefere komutu dinlemesini saglayabilirsin.
-* tasmasiz dolastirma sahiplerin fantezisi, sokakta ne olacagini bilemezsin, tamamen kontrollu bir alanda acabilirsin.
-* Kendi kopeginle bag kurmadan baska kopeklerle ilgilenmen kopeginde agresyon yaratir.
-* egitim 5 haftalikken, pati altina dokunma, taraga alistirma, boynuna bir ip gecirme asamalariyla baslar.
-6 aylikken itaat egitimi baslar.
+* köpekler taşmasız şekilde birbirleriyle bir süre oynarlarsa, birbirlerinden rol çalmaya başlarlar. bu da köpeğin kendi benliğini kaybetmesine neden olur, başka köpeklerle fazla oynatmaya gerek yok.
+* Havlama-susmama gibi sorunları varsa, komuta bağlamak çözüm olabilir. havladığında ve sustuğunda komut vererek, bir dahaki sefere komutu dinlemesini sağlayabilirsin.
+* taşmasız dolaştırma sahiplerin fantezisi, sokakta ne olacağını bilemezsin, tamamen kontrollü bir alanda açabilirsin.
+* Kendi köpeğinle bağ kurmadan başka köpeklerle ilgilenmen köpeğinde agresyon yaratır.
+* eğitim 5 haftalıkken, patı altına dokunma, tarağa alıştırma, boynuna bir ip geçirme aşamalarıyla başlar. 6 aylıkken itaat eğitimi başlar.
