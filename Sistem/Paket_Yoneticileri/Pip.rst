@@ -55,4 +55,8 @@ timeout = 120
     python pip-8.0.2-py2.py3-none-any.whl/pip install \
     --no-index pip-8.0.2-py2.py3-none-any.whl
 
+#. pip'le kurarken flag vermek mumkun::
+
+    pip install <paket> --global-option="build_ext" --global-option="--disable-<bagimlilik>"
+
 

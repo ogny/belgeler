@@ -94,4 +94,3 @@ Internet and the Transport layers
   COMMIT
 
 iptables -t nat -A PREROUTING -i eth0 -p udp -m udp --dport 514 -j REDIRECT --to-ports 5514
-

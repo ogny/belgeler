@@ -24,16 +24,28 @@ Relay izinleri
 
 * erisim izni olan makinede gerekli paketler kurulur
 ```
-yum install -y cyrus-sasl-plain
+yum install -y cyrus-sasl-plain cyrus-sasl
 ```
 - Genel ayarlar
 ```
 vi /etc/postfix/main.cf
 mynetworks_style = subnet
 mynetworks = 127.0.0.0/8, <yerel_ag>/24
-inet_interfaces = all
+inet_interfaces = localhost
 ```
 
+- Hesap bilgilerinin girilmesi
+/etc/postfix/sasl_passwd
+
+* sasldb2'de tutulacak kullaniciyi olusturma ve olustugunu gorme;
+```
+saslpasswd2 -c -u <hostname_veya_domain> <kullanici_adi>
+sasldblistusers2 
+```
+* yanlis olusturulani silmek icin;
+```
+saslpasswd2 -d <kullanici_adi>
+```
 - Relay hesabin tanimlanmasi
 ```
 vi /etc/postfix/main.cf
@@ -48,6 +60,16 @@ relayhost:<ip>
 echo "<ip>:25    <kullanici_adi>:<parola>" >> /etc/postfix/sasl_passwd
 postmap hash:/etc/postfix/sasl_passwd
 ```
+
+* Servisleri yeniden baslatip test etme 
+```
+/etc/init.d/saslauthd restart
+/etc/init.d/postfix restart
+```
+
+================================================
+
+
 
 * Yerel sunucudan izinli sunucuya erismek icin
 ```
@@ -67,7 +89,7 @@ Sasl ile smtp kullanici dogrulama
 
 ```
 yum install -y cyrus-sasl cyrus-sasl-plain
-/etc/postfix/main.cf
+/cyrus-sasletc/postfix/main.cf
 smtpd_sasl_path = sasl2/smtpd.conf
 smtpd_sasl_auth_enable = yes
 smtpd_sasl_local_domain = <hostname_veya_domain>
@@ -106,7 +128,7 @@ saslpasswd2 -d <kullanici_adi>
 
 * smtpd'nin kullanacagi dogrulama yontemini belirleme; (bunu yapma)
 ```
-etc/sasl2/smtpd.conf:
+/etc/sasl2/smtpd.conf:
     pwcheck_method: auxprop
     auxprop_plugin: sasldb
     mech_list: PLAIN LOGIN CRAM-MD5 DIGEST-MD5
@@ -120,7 +142,6 @@ chmod 660 /etc/sasldb2
 ```
 
 * Servisleri yeniden baslatip test etme 
-
 ```
 /etc/init.d/saslauthd restart
 /etc/init.d/postfix restart
