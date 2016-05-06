@@ -32,6 +32,12 @@ vi /etc/postfix/main.cf
 mynetworks_style = subnet
 mynetworks = 127.0.0.0/8, <yerel_ag>/24
 inet_interfaces = localhost
+smtp_sasl_mechanism_filter = plain, login
+smtp_sasl_auth_enable = yes
+smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+smtp_sasl_security_options = noanonymous
+smtp_always_send_ehlo = yes
+relayhost:<ip>
 ```
 
 - Hesap bilgilerinin girilmesi
@@ -48,14 +54,6 @@ saslpasswd2 -d <kullanici_adi>
 ```
 - Relay hesabin tanimlanmasi
 ```
-vi /etc/postfix/main.cf
-smtp_sasl_mechanism_filter = plain, login
-smtp_sasl_auth_enable = yes
-smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
-smtp_sasl_security_options = noanonymous
-smtp_always_send_ehlo = yes
-relayhost:<ip>
-
 /etc/init.d/postfix restart
 echo "<ip>:25    <kullanici_adi>:<parola>" >> /etc/postfix/sasl_passwd
 postmap hash:/etc/postfix/sasl_passwd

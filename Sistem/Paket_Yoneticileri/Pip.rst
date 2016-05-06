@@ -1,7 +1,10 @@
 Centos 6.6 kurulum
 ~~~~~~~~~~~~~~~~~~
 
-::
+#.  Pip kurulum (ex_setup'tan daha guncel)::
+
+    curl -L -O https://bootstrap.pypa.io/get-pip.py
+    python get-pip.py
 
     curl -L -O https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
     python ez_setup.py
@@ -58,5 +61,4 @@ timeout = 120
 #. pip'le kurarken flag vermek mumkun::
 
     pip install <paket> --global-option="build_ext" --global-option="--disable-<bagimlilik>"
-
 

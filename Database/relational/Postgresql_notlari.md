@@ -19,7 +19,7 @@ ERROR:  must be owner of database pdns
 ```
 initdb -D $PGDATA -A trust -U postgres
 pg_ctl -D $PGDATA -l logfile -w start
-pg_ctl  -D $PGDATA -m immediate stop
+pg_ctl -D $PGDATA -m immediate stop
 ```
 
 * Debian

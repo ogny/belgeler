@@ -60,6 +60,65 @@ client kurulum
 
      mount -t nfs -rw <nfs_server_ip>:/media/dizin /media/dizin
 
+#. client'ta bir sey kurma, mount etmek yeterli.
+
+
+#. iptables'ta izinler::
+
+  vi /etc/sysconfig/nfs
+  
+  Modify config directive as follows to set TCP/UDP unused ports:
+  
+  # TCP port rpc.lockd should listen on.
+  LOCKD_TCPPORT=lockd-port-number
+  # UDP port rpc.lockd should listen on.
+  LOCKD_UDPPORT=lockd-port-number 
+  # Port rpc.mountd should listen on.
+  MOUNTD_PORT=mountd-port-number
+  # Port rquotad should listen on.
+  RQUOTAD_PORT=rquotad-port-number
+  # Port rpc.statd should listen on.
+  STATD_PORT=statd-port-number
+  # Outgoing port statd should used. The default is port is random
+  STATD_OUTGOING_PORT=statd-outgoing-port-number
+  Here is sample listing from one of my production NFS server:
+  
+  LOCKD_TCPPORT=32803
+  LOCKD_UDPPORT=32769
+  MOUNTD_PORT=892
+  RQUOTAD_PORT=875
+  STATD_PORT=662
+  STATD_OUTGOING_PORT=2020
+  Save and close the files. Restart NFS and portmap services:
+  # service portmap restart
+  # service nfs restart
+  # service rpcsvcgssd restart
+  
+  Update /etc/sysconfig/iptables files
+  Open /etc/sysconfig/iptables, enter:
+  # vi /etc/sysconfig/iptables
+  
+  Add the following lines, ensuring that they appear before the final LOG and DROP lines for the RH-Firewall-1-INPUT chain:
+  
+  -A RH-Firewall-1-INPUT -s 192.168.1.0/24 -m state --state NEW -p udp --dport 111 -j ACCEPT
+  -A RH-Firewall-1-INPUT -s 192.168.1.0/24 -m state --state NEW -p tcp --dport 111 -j ACCEPT
+  -A RH-Firewall-1-INPUT -s 192.168.1.0/24 -m state --state NEW -p tcp --dport 2049 -j ACCEPT
+  -A RH-Firewall-1-INPUT -s 192.168.1.0/24  -m state --state NEW -p tcp --dport 32803 -j ACCEPT
+  -A RH-Firewall-1-INPUT -s 192.168.1.0/24  -m state --state NEW -p udp --dport 32769 -j ACCEPT
+  -A RH-Firewall-1-INPUT -s 192.168.1.0/24  -m state --state NEW -p tcp --dport 892 -j ACCEPT
+  -A RH-Firewall-1-INPUT -s 192.168.1.0/24  -m state --state NEW -p udp --dport 892 -j ACCEPT
+  -A RH-Firewall-1-INPUT -s 192.168.1.0/24  -m state --state NEW -p tcp --dport 875 -j ACCEPT
+  -A RH-Firewall-1-INPUT -s 192.168.1.0/24  -m state --state NEW -p udp --dport 875 -j ACCEPT
+  -A RH-Firewall-1-INPUT -s 192.168.1.0/24  -m state --state NEW -p tcp --dport 662 -j ACCEPT
+  -A RH-Firewall-1-INPUT -s 192.168.1.0/24 -m state --state NEW -p udp --dport 662 -j ACCEP
+
+  Save and close the file. Replace 192.168.1.0/24 with your actual LAN subnet
+  /mask combo. You need to use static port values defined by /etc/sysconfig/nfs
+  config file. 
+
+  service iptables restart
+
+
 server'da yapilandirma;
 -----------------------
 
@@ -81,4 +140,5 @@ Kaynaklar;
 #. `<http://www.faqs.org/docs/Linux-HOWTO/NFS-HOWTO.html#CLIENT>`_
 
 #. `<http://www.tecmint.com/how-to-setup-nfs-server-in-linux/>`_
+
 

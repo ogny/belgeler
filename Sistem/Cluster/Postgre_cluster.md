@@ -66,3 +66,22 @@ wget -P /etc/yum.repos.d/ http://download.opensuse.org/repositories/network:/ha-
 
 
 /data/graphiteuser/graphite-web/.venv/bin/python2.7 /data/graphiteuser/graphite-web/.venv/bin/gunicorn -c /data/graphiteuser/graphite-web/graphite_gconfig.py graphite.wsgi:application
+
+Resource silme;
+crm resource stop <Resource>
+crm configure delete <Resource>
+
+grup silme
+ crm configure delete group PGCLUSTER
+crm configure primitive PGSQL ocf:heartbeat:pgsql params pgctl="/usr/pgsql-9.5/bin/pg_ctl" pgdata="/var/lib/pgsql/9.5/data" op monitor interval="30" timeout="30" depth="0"
+
+
+Onemli: crm resource cleanup PGSQL
+
+NODE2 ~]$ sudo crm resource failcount PGSQL show node2.example.net
+scope=status name=fail-count-PGSQL value=0
+Now back to some real testing, lets bring node1 back online in the pool and see what happens. N
+
+crm configure order PGCLUSTER_START_ORDER inf: VIP DBFS PGSQL
+
+

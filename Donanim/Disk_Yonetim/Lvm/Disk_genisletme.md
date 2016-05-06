@@ -19,6 +19,7 @@ vgextend VolGroup /dev/sdX1
 ```
 
 * Volume group'taki bos alan bulunup VG o kadar buyultulur, kontrol edilir
+Centos7'nin default fs'i xfs. resize2fs yerine xfs_growfs kullan.
 ```
 vgdisplay VolGroup | grep "Free"
 lvextend --extents +100%FREE /dev/VolGroup/lv_root

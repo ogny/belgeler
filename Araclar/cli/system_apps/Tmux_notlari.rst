@@ -87,3 +87,8 @@ N - jumps to the previous match
 * oturumu yeniden adlandirma::
 
   Ctrl + B, $
+
+* Kullanim aliskanliklarina ekle; pane'i yeni session'a cevirme::
+
+  prefix + @ 
+

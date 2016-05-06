@@ -1,0 +1,30 @@
+yapilacaklar;
+* permit root login'i kaldirmayi unutma
+chrome
+python modullerini sistemden user'a tasi
+local lib python2 site-pac
+local/bin'i user pathi'ine ekle
+sudo ln -s ~/Git_Repolari/kisisel/private/server-side/conf/system/vpnc_default.conf \
+/etc/vpnc/default.conf
+* owncloud-client repo'su yanlis
+* /etc/apt/trusted.gpg 'yi tasi 
+hepsinin paragraf olacak sekilde ayir
+kurulamayanlar
+bitlbee-facebook  
+wine kurmadk
+vpn key atmatdik
+emrah_com sadece .git esitlenecek.(snapshot'lar durursa devamli dosyalari tutmak zorunda kalmazsin)
+not: i3wm .local/bin'i gormuyor, sisteme bakiyor.
+
+bakilacaklar
+
+* ekran karti
+* autofs
+* belgeler gunluk, blog repolari kurulacak.
+* offlineimap 
+* fzf calis
+* wine
+* css notlari: letter-spacing: -.03em;
+* lenovo touchpad'e bak
+
+* pastebinit kur

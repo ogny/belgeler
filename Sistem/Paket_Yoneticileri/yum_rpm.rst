@@ -5,7 +5,7 @@ Yum
 
 * Kurmadan::
 
-    yum install yum-plugin-downloadonly
+    yum install -y yum-plugin-downloadonly
     yum install --downloadonly --downloaddir=<dizin_adi> <paket_adi>
 
         * --downloaddir= belirtilmezse /var/cache/yum/ altina indirir.
