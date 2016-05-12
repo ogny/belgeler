@@ -1,0 +1,3 @@
+```
+lynx -dump -nonumbers
+```

@@ -233,3 +233,4 @@ vim-bookmarks
 :set conceallevel=2
 ```
 
+* vim buffer list `:ls`

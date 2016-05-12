@@ -83,6 +83,10 @@ Rpm Centos Calisma
 
     rpm -qa --queryformat="%{NAME} %{SIZE}\n" | sort -k 2 -n
 
+#. dosyalari acma::
+    mkdir acilacak_dizin ; cd acilacak_dizin
+    rpm2cpio <paket_adi.rpm> | cpio -idmv
+
 #. `yum reinstall <paket_adi>`
 
 #. Group paket komutlari::
@@ -92,3 +96,11 @@ Rpm Centos Calisma
    yum groupinstall groupname  --> Installs all the packages in a group.
    yum groupupdate groupname  --> Updates all the packages in a group.
    yum groupremove groupname --> Removes all the packages in a group.
+
+#### Dnf 
+
+*  Yum command has been deprecated, redirecting to '/usr/bin/dnf -y install tmux'.
+   See 'man dnf' and 'man yum2dnf' for more information.
+   To transfer transaction metadata from yum to DNF, run:
+   'dnf install python-dnf-plugins-extras-migrate && dnf-2 migrate'
+
