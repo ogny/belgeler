@@ -68,6 +68,7 @@ systemd-cat
 Connect a pipeline or program's output with the journal
 
 * journalctl -u .service
+* journalctl -xn
 
 systemd-analyze
 systemd-analyze blame

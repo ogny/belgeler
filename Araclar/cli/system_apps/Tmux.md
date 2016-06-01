@@ -1,6 +1,7 @@
 #. Oturumu yeniden adlandirma::
 ```
 :rename-session -t eski yeni
+<META>$
 ```
 #. oturumu öldürme::
 ```

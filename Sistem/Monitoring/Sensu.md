@@ -1,8 +1,30 @@
 ### Sensu Monitoring framework
 
+
 * Prod ve staging sunucularini ayri ayri takip edebilmek icin 2 sensu-api
   calistirilir.
     
+* The Sensu architecture flow in a nutshell:
+`Client` -> Subscription <- Check -> Event -> Filter -> Mutator -> Handler
+`Client`: A client is a server running a check. Usually this is either a server
+you are monitoring or a server monitoring another server/service.
+`Subscription: Clients and checks are matched together through a subscription.
+This can be fairly analogous to a template in other monitoring software since
+you decide which check to run in a subscription and then you subscribe clients
+to it.`
+`Check`: A check, for checking things like resource usage or anything you can
+think of.
+`Event`: An event is generated every time a check is done. It’s the result of
+the check, positive or negative, there’s always going to be one.
+`Filter`: A filter is a way to decide which event is going to be triggering
+notifications (handler execution).
+`Mutator`: A mutator is run after a filter and modifies the event data. This
+can be useful if your handler expects additional information not usually found
+in the event.
+`Handler`: A handler is actually anything that receives an event data and does
+something with it. This could be an e-mail notification or a script that
+restarts things. Anything.
+
 
 
 #### Kurulum

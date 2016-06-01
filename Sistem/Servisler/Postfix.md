@@ -48,6 +48,7 @@ relayhost:<ip>
 saslpasswd2 -c -u <hostname_veya_domain> <kullanici_adi>
 sasldblistusers2 
 ```
+172.25.6.35
 * yanlis olusturulani silmek icin;
 ```
 saslpasswd2 -d <kullanici_adi>
@@ -164,5 +165,6 @@ Kaynaklar
 * [Authenticated SMTP with Postfix on CentOS](http://blog.penumbra.be/2010/04/authenticated-smtp-postfix/)
 * [Postfix Sasl Okubeni](http://www.postfix.org/SASL_README.html)
 * [python smtplib ile mail gonderme](http://www.pythonforbeginners.com/code-snippets-source-code/using-python-to-send-email)
+fail_silently=False)
 
 

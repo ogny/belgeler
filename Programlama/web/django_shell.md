@@ -3,7 +3,7 @@
 python manage.py shell --settings=settings.<calistiralacak_settings>
 from django.core.mail import send_mail
 send_mail('baslik', 'icerik', 'from@example.com', ['to@example.com'], fail_silently=False)
-```
+skapalarm@turktelekom.com.tr:skap2015!!
 
 * alternatif
 ```

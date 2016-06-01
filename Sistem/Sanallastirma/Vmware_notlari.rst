@@ -52,6 +52,12 @@ acisindan uygun
     vmkfstools -U <eski_imaj> 
     vmkload_mod -u multiextent
 
-* vmdk'nin tipini belirt
+#. vmdk'nin tipini belirt
 ..code:: sh
--d thin
+  -d thin
+
+#. Vmware host makinaya erisim gidip geldiginde vm'lerin otomatik baslamasi:: 
+   ayarlar > software > startup ve shutdown'da servisi enable edip sunuculari
+   tek tek tasimak gerekiyor.
+
+
