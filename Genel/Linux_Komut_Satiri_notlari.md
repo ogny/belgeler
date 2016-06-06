@@ -289,3 +289,8 @@ tailf /var/log/kern.log
 echo -n 'test' | base64
 echo -n dGVzdA== | base64 -d
 ```
+
+* sadece link'leri listele;
+```
+ls -l `find ./ -maxdepth 1 -type l -print`
+```
