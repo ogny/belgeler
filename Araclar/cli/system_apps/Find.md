@@ -42,7 +42,7 @@ find . -type d -iname "<aranan_string>" -not -path "*<sub_directory>*"
 
 * Dosya ve dizin haklarinin web sunucunun erismesi icin ayarlanmasi
 ```
-find * -type d -exec chmod 755 {} \;
+find * -type d -exec  chmod 755 {} \;
 find * -type f -exec chmod 644 {} \;
 ```
 * dosyalari uzantilarina gore bul ve kopyala;
@@ -61,7 +61,8 @@ backup-2015-10-16.tar.bz2 -T -
 ```
 * belli bir araliktaki dosyalari bulma;
 ```
-find <dizin> -newermt "nov 10, 2015" -not -newermt  "nov 11, 2015"
+find <dizin> -newermt "nov 10, 2015" -not -newermt  "nov 11, 2015" \
+-exec mv -t ./<tasinacak_dizin>/ {} +
 ```
 
 * buyukluge gore siralama;

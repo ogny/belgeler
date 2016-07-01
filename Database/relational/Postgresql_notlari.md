@@ -1,7 +1,7 @@
 * Guncel surum: 
 ```
 yum install \
-http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-redhat94-9.4-1.noarch.rpm
+http://yum.postgresql.org/9.5/redhat/rhel-6-x86_64/pgdg-centos95-9.5-2.noarch.rpm
 ```
 * WAL backup'lama point-in-time recovery yapma imkani da sagliyor
 * pg_basebackup: binary dosya, tum db'leri birarada alabiliyorsun
@@ -14,6 +14,14 @@ pdns=> DROP DATABASE pdns;
 ERROR:  must be owner of database pdns
 
 ### DB olusturma baslatma ve durdurma
+
+* servis olarak calistiracaksan (acilista baslatma gibi avantajlari var)
+  scrtipti ilk olusturuken root oldugundan sahibi root oluyor. dizin olustuktan
+  sonra sahipligini guncelle
+
+```
+chown postgres: /var/lib/pgsql -R 
+```
 
 * centos
 ```

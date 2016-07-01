@@ -1,0 +1,73 @@
+calisma;
+
+multipath -ll
+cat /etc/multipath.conf
+cat /etc/multipath/bindings
+cat /etc/multipath/wwids
+
+vi /etc/modprobe.d/bonding.conf
+tune2fs -l /dev/mapper/mpathb
+fdisk -l /dev/dm-2
+fdisk -l /dev/dm-2p1
+partx /dev/dm-2p1
+ll /dev/mapper/mpathb
+fdisk -l /dev/dm-2
+fdisk -l /dev/mapper/mpathb
+mke2fs -t ext4 /dev/mapper/mpathbp1
+mke2fs -t ext4 /dev/dm-2p1
+mkfs.ext4 /dev/mapper/mpathbp1
+
+multipath -ll
+mpathb (36005076300808361c800000000000005) dm-2 IBM,2145
+size=2.0T features='1 queue_if_no_path' hwhandler='0' wp=rw
+|-+- policy='round-robin 0' prio=50 status=active
+| |- 4:0:3:0 sde 8:64 active ready running
+| `- 4:0:2:0 sdd 8:48 active ready running
+`-+- policy='round-robin 0' prio=10 status=enabled
+  |- 4:0:0:0 sdb 8:16 active ready running
+  `- 4:0:1:0 sdc 8:32 active ready running
+`
+# /sbin/mpathconf
+multipath is enabled
+find_multipaths is disabled
+user_friendly_names is enabled
+dm_multipath module is loaded
+multipathd is chkconfiged on
+# /sbin/mpathconf
+multipath is enabled
+find_multipaths is disabled
+user_friendly_names is enabled
+dm_multipath module is loaded
+multipathd is chkconfiged on
+
+### NOT
+IBM VirtualDisk (scsi)
+IBM-ESXS Model: ST9146852SS
+
+multipathd ayarlari
+dmsetup ls --target=multipath
+cat /proc/scsi/scsi
+dmesg | grep -i "attached"
+multipath -l
+cat /proc/partitions
+fdisk -l
+ll /sys/block
+multipath -l
+df -h
+
+
+yum -y install iscsi-initiator-utils
+iscsiadm -m discovery -t sendtargets -p 10.106.1.117
+vi /etc/iscsi/iscsid.conf
+/etc/init.d/iscsi restart
+cp /usr/share/doc/device-mapper-multipath-0.4.9/multipath.conf /etc/multipath/
+vi /etc/multipath/multipath.conf
+iscsiadm -m discovery -t st -d8 -p 10.106.1.117
+iscsiadm -m node -o show
+iscsiadm -m node --login
+iscsiadm -m session -o show  -secret
+vi /etc/iscsi/initiatorname.iscsi
+/sbin/mpathconf
+service multipathd start
+multipath -ll
+

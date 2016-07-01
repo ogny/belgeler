@@ -57,7 +57,7 @@ Rpm Centos Calisma
 
 #. kurulu paketlerde arama yapmak::
 
-    rpm -qa |grep <paket_adi>
+    rpm -q <paket_adi>
 
 #. paket hakkinda bilgi almak (apt-show)::
 

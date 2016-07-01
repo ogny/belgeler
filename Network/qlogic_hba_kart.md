@@ -18,16 +18,3 @@ Kendim elle ql2500_fw.bin 'i sunucuya yukleyip gosterdigimde;
 
 # /opt/QLogic_Corporation/QConvergeConsoleCLI/qaucli -fc -b all /lib/firmware/ql2500_fw.bin'
 
-IBM VirtualDisk (scsi)
-IBM-ESXS Model: ST9146852SS
-
-multipathd ayarlari
-dmsetup ls --target=multipath
-cat /proc/scsi/scsi
-dmesg | grep -i "attached"
-multipath -l
-cat /proc/partitions
-fdisk -l
-ll /sys/block
-multipath -l
-df -h

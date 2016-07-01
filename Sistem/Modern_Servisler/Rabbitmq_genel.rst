@@ -370,3 +370,4 @@ Kaynaklar
 # Exchange olusturma::
 
   rabbitmqctl declare exchange name=alarm-event type=fanout
+  curl -XDELETE http://195.175.249.100:4567/client/

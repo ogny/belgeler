@@ -1,3 +1,48 @@
+### Crm Resource'lari ile cluster yapılandırması
+* crm help Overview
+* crm help topics
+
+  primitive apache apache \
+    params configfile=/disk0/etc/apache2/site0.conf
+
+crm ls
+cibstatus        help             site             
+cd               cluster          quit             
+end              script           exit             
+ra               maintenance      bye              
+?                ls               node             
+configure        back             report           
+cib              resource         up               
+status           corosync         options          
+history          
+
+cib nedir?
+cib/           CIB shadow management
+
+
+
+Usage: crm_resource (query|command) [options]
+Options:
+ -?, --help     This text
+ -$, --version      Version information
+ -V, --verbose      Increase debug output
+ -Q, --quiet      Print only the value on stdout
+
+crm_resource --list-standards
+ocf
+lsb
+service
+stonith
+
+crm_resource --list-agents=lsb
+crm_resource --list-agents=ofc
+crm_resource --list-agents=service
+crm_resource --list-ocf-providers
+
+* service ve lsb agent'lari ayni.
+
+
+
 Heartbleed ve pacemaker kullanilarak yapilabiliyor
 Pacemaker 
 [Kaynak](http://clusterlabs.org/doc/en-US/Pacemaker/1.1-pcs/html-single/Clusters_from_Scratch/index.html)

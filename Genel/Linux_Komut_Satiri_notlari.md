@@ -294,3 +294,15 @@ echo -n dGVzdA== | base64 -d
 ```
 ls -l `find ./ -maxdepth 1 -type l -print`
 ```
+
+* bir process ne kadar suredir calisiyor?
+```
+ps -p "$$" -o etime=
+```
+
+* fsck yapmamasi icin;
+```
+This filesystem will be automatically checked every 27 mounts or
+180 days, whichever comes first.  Use tune2fs -c or -i to override.
+```
+

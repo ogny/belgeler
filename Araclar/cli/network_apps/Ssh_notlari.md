@@ -79,6 +79,11 @@ ssh-keygen -C "$(whoami)@$(hostname)-$(date -I)" -b 2048
 ```
 chmod 700 /home/<kullanici>
 ```
-
-
+* sunucular arasi parolasiz transfer; (ssh server'da)
+```
+passwd -d kullanici
+sudo vim  /etc/ssh/sshd_config
+PermitEmptyPasswords yes
+/etc/init.d/sshd restart
+```
 

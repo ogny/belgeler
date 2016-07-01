@@ -57,4 +57,14 @@ before saving the buffer.
   yazmak gerek; `<s></s>`
 
 
+### Notebook adlarim
 
+* akilfikir
+* bet
+* gunluk
+* is
+* kitapnotlari
+* kisisel
+* mucizeyim
+* tamamlanan
+* yenialiskanlik

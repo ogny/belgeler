@@ -234,3 +234,5 @@ vim-bookmarks
 ```
 
 * vim buffer list `:ls`
+* case senstive'i kaldirmak icin
+`:set ignorecase`
