@@ -1,7 +1,8 @@
 ### TANIMLAR:
 
 * Docker images: 
-read-only template. konteyner olusturmakta kullaniliyor. Docker images are the
+
+read-only template. konteyner olusturmakta kullaniliyor. Docker images are he
 **build** component of Docker.
 
 * Docker registries:
@@ -35,7 +36,9 @@ returns a final image.
 
 #### Temeller
 
-* container sadece sen bir komut calistiginda aktif, degilse kapaniyor; run -it ile interaktif kullaniyoruz. Kapandiktan sonra, yapilan degisiklikler commit edilmediyse, ucuyor.
+* container sadece sen bir komut calistiginda aktif, degilse kapaniyor; run -it
+  ile interaktif kullaniyoruz. Kapandiktan sonra, yapilan degisiklikler commit
+  edilmediyse, ucuyor.
 So what happened to our container after that? Well Docker containers
 only run as long as the command you specify is active. Here, as soon as
 `Hello world` was echoed, the container stopped.
@@ -65,13 +68,19 @@ docker commit -m "foo" <MEVCUT Container id veya name> \
   - `-l` son olusturulan.
   - `-a` simdiye kadar olusturulmus tum container'lar.
 
-* bir docker imajindan istedigin sayida yeni docker container'i ayni anda aktif kullanabiliyorsun. bir nevi klonlamak gibi. (cluster vb. yapilar icin inanilmaz bir kolaylik)
+* bir docker imajindan istedigin sayida yeni docker container'i ayni anda aktif
+  kullanabiliyorsun. bir nevi klonlamak gibi. (cluster vb. yapilar icin
+  inanilmaz bir kolaylik)
 
-* docker container'a login olurken image adini yaziyoruz, bunun disinda her seyi container_id ile yapiyoruz, 
+* docker container'a login olurken image adini yaziyoruz, bunun disinda her
+  seyi container_id ile yapiyoruz, 
 
-* `docker image history`, image building'le ilgili bir olay. container tarafini baglamiyor.
+* `docker image history`, image building'le ilgili bir olay. container tarafini
+  baglamiyor.
 
-* bir container'i kapattiginda `docker stop` , tekrar ihtiyac duyulursa, yeni bir container olusturmak yerine  `docker start takma_ad` ile tekrar calistirabilirsin.
+* bir container'i kapattiginda `docker stop` , tekrar ihtiyac duyulursa, yeni
+  bir container olusturmak yerine  `docker start takma_ad` ile tekrar
+  calistirabilirsin.
 
 * imaj olusturma (build): Yapi: INSTRUCTION arguments
   - DockerFile'a tanimlanan her instruction birbirinden bagimsiz calisir ve
@@ -93,8 +102,6 @@ docker commit -m "foo" <MEVCUT Container id veya name> \
 
 #### sorunlar:
   konetyniri baslattigimda ftp server acilmiyor (chkconfig on)
-
-
 
 
 #### Kurulum
@@ -167,7 +174,6 @@ Storage Driver: devicemapper
   anlayabilmek
 
 * -i ile container attach edilmese de tty'de acilir.
-
 
 
 ###### Kisayollar

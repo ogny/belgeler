@@ -3,48 +3,55 @@ Yum
 
 1. Repo'lardan paket indirme;
 
-* Kurmadan::
+* Kurmadan
+```
+yum install -y yum-plugin-downloadonly
+yum install --downloadonly --downloaddir=<dizin_adi> <paket_adi>
+```
 
-    yum install -y yum-plugin-downloadonly
-    yum install --downloadonly --downloaddir=<dizin_adi> <paket_adi>
+* `--downloaddir=` belirtilmezse `/var/cache/yum/` altina indirir.
+* `yum groupinstall` ve `yum groupinfo` ile calismaz.
 
-        * --downloaddir= belirtilmezse /var/cache/yum/ altina indirir.
-        * yum groupinstall ve yum groupinfo ile calismaz.
+*  Kurduktan sonra
+```
+yum install yum-utils
+yumdownloader <paket_adi>
+```
 
-*  Kurduktan sonra::
-
-    yum install yum-utils
-    yumdownloader <paket_adi>
-
-        * Indirilecek dizin belirtilmezse bulunulan dizine indirir.
+* Indirilecek dizin belirtilmezse bulunulan dizine indirir.
         
-* Bagimliliklari cozme::
+* Bagimliliklari cozme
+```
+yum deplist <paket_adi>
+```
 
-  yum deplist <paket_adi>
+`yum-utils` paketi ile geliyor
+```
+repoquery --requires --recursive --resolve <paket_adi>
+```
 
-yum-utils ile geliyor::
+* Hata
+There are unfinished transactions remaining. You might consider running
+yum-complete-transaction first to finish them
+```
+yum-complete-transaction --cleanup-only
+```
 
-   repoquery --requires --recursive --resolve <paket_adi>
+* spesifik bir repo'dan paket sorgulama
+```
+yum --disablerepo="*" --enablerepo="epel" search <paket_adi>
+```
 
-* Hata::
-    There are unfinished transactions remaining. You might consider running
-    yum-complete-transaction first to finish them
+* multi architecture'yi iptal etme /etc/yum.conf'a ekle
+```
+exclude=*.i386 *.i686
+```
 
-    yum-complete-transaction --cleanup-only
+* paketlerin bagimliliklarini gorme
+```
+yum deplist <package>
+```
 
-* spesifik bir repo'dan paket sorgulama::
-
-    yum --disablerepo="*" --enablerepo="epel" search <paket_adi>
-
-* multi architecture'yi iptal etme /etc/yum.conf'a ekle::
-
-  exclude=*.i386 *.i686
-
-* paketlerin bagimliliklarini gorme::
-
-    yum deplist <package>
-
-=================
 Rpm Centos Calisma
 =================
 

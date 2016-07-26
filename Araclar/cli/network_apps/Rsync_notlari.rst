@@ -1,4 +1,4 @@
-===============
+==============
 Rsync Calismasi
 ===============
 
@@ -59,3 +59,5 @@ kaynak/* /hedef/
 #. rsync ile silme::
     rsync -d --delete <bos_dizin>/ <silinecek_dizin>/
 
+#. find ile bulup rsync'le gonderme::
+  rsync -avz --files-from=<(find . -type f -iname "*.mp3" -mtime -1) ./ /hedef

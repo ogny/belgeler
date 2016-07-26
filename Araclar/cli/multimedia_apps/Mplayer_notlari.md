@@ -7,3 +7,8 @@ ao=pulse,alsa,sdl:aalib
 https://bugs.launchpad.net/ubuntu/+source/mplayer/+bug/550517
 
 * repeat icin -loop <repeat count> sonsuz icin 0
+
+* son yuklenenleri calma
+```
+find . -type f -iname "*.mp3" -mtime -1 -exec mplayer -loop 0 {} \+ 
+```

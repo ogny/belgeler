@@ -43,8 +43,8 @@ timeout = 120
    pip install --user dizin/meld3-1.0.2-py2.py3-none-any.whl
 
 
-#. sudo izni olmayan kullanici ile kurulum, guncelleme::
-   
+   #. sudo izni olmayan kullanici ile kurulum, guncelleme::
+
    pip install --user paket_adi
    pip install --user --upgrade pip
 
