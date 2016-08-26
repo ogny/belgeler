@@ -175,4 +175,12 @@ kill -USR1 <process_id>
 
 * LUN; genel olarak bir storage ünitesi üzerinde bir ya da daha fazla sunucunun kullanımına sunulan disk alanına denir. Storage üniteleri üzerinde takılan diskler ile raid vs. işlemler tamamlandıktan sonra ortaya çıkan kullanılabilir disk alanı üzerinde LUN’lar oluşturulur. Daha sonra bu LUN bir (ya da birkaç) sunucuya atanarak kullanılır. Sunucu atanan LUN’u kendi local disklerini formatlar gibi formatlar ve üzerine data yazıp okur. Kısaca sunucu kendi lokalindeki bir storage ünitesini değil de farklı bir lokasyondaki (SAN-NAS-DAS) storage ünitesini kullanıyorsa bu birim LUN olarak adlandırılır.Aşağıdaki örnek daha açıklyıcı olacaktır.
 
-
+#. Linux'ta Windows ve Mac OS Uyumlu USB biçimlendirme:
+   Ortam: Debian 8.5 Jessie
+   Gereksinimler:
+   sudo apt install -y exfat-fuse exfat-utils
+   Yapılandırma:
+   sudo parted /dev/sdb
+   mkpart primary 0% 100%
+   set 1 msftdata
+   sudo mkfs.exfat -n <görünecek_isim> /dev/sdb1

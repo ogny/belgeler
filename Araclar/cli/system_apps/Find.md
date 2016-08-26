@@ -92,4 +92,12 @@ find . -type d -mtime -0 -exec mv -t /path/to/target-dir {} +
 This makes find group convenient numbers of file (directory) names into a single invocation of the program. You don't have the level of control over the numbers of arguments passed to mv that xargs provides, but you seldom actually need that anyway. This still hinges on the -t option to GNU mv.
 [sto](http://stackoverflow.com/questions/13899746/use-xargs-to-mv-the-find-directory-into-another-directory)
 
+* gizli dizinleri gosterme;
+```
+find . -not -path '*/\.*' -type d
+```
 
+* bos dizinleri bul;
+```
+find . -type d -empty
+```

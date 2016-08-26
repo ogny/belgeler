@@ -61,3 +61,6 @@ kaynak/* /hedef/
 
 #. find ile bulup rsync'le gonderme::
   rsync -avz --files-from=<(find . -type f -iname "*.mp3" -mtime -1) ./ /hedef
+  rsync -zavh --files-from=<(ssh <kullanici>@<IP> 'find /backups/* -mtime -1 -exec ls -d {} \;') <kullanici>@<IP>:/ b/
+
+

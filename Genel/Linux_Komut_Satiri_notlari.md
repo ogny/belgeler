@@ -252,6 +252,12 @@ netstat -anpt | grep ESTABLISHED | awk '{ print $7 }' | cut -d/ -f2 | sort -u
 sudo wodim -eject -tao speed=4 dev=/dev/sr<number> ~/path_to.iso
 sudo dd bs=4M if=/path/to/iso of=/dev/sdb oflag=direct && sudo sync
 ```
+
+* tcp port'unu acma
+```
+nc -l <port>
+```
+
 * uzak sunucudaki udp port'unun acik olup olmadigini gorme
 ```
 nc -uzv <ip> <port>

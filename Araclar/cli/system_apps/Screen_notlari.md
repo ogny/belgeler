@@ -27,3 +27,7 @@ screen -c /etc/screenrc
 ctrl-a F 
 screen -x -A
 ```
+* session'u ad vererek olusturma
+```
+screen -S mySessionName
+```

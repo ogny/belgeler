@@ -368,5 +368,40 @@ directory where you run that line or it could get interesting :)
 ```
 pg_ctl: directory "/var/lib/pgsql/9.4/data" is not a database cluster directory
 ```
-
 RUN echo '' >> /etc/sudoers && echo 'jenkins ALL=(ALL NOPASSWD: ALL' >> /etc/sudoers)'
+
+### Registry repo komutlari
+
+Nexus Repo Manager 3 ile private Docker registry repo özelliği geldi. 
+Özetle; docker imajlarınızı upload/download edebiliyorsunuz.
+Bu yazıda docker registry repo'yu lokal makinanıza nasıl tanıtacağınızdan bahsedilecek.
+
+docker kurulumu icin: https://docs.docker.com/engine/installation/
+
+sudo vi /etc/hosts
+ip hostname
+
+Ubuntu 16.04 icin;
+docker.servisini başlatan ExecStart parametresi düzenlenir, servis yeniden başlatılır.
+
+sudo vi /etc/systemd/system/docker.service 
+ExecStart=/usr/bin/dockerd -H fd:// --insecure-registry "hostname:port"
+sudo systemctl daemon-reload
+sudo systemctl restart docker.service
+
+Ubuntu 14.04 icin;
+Test edilmedi
+
+Debian Jessie;
+ExecStart parametresi mevcut çalışan dosyadan silinip override oluşturalacak
+yeni yapılandırma dosyasında belirtilir.
+sudo vi /lib/systemd/system/docker.service
+sudo mkdir  /etc/systemd/system/docker.service.d
+sudo vi /etc/systemd/system/docker.service.d/docker.service.conf
+[Service]
+ExecStart=/usr/bin/docker daemon -H fd:// --insecure-registry "hostname:port"
+sudo systemctl daemon-reload
+sudo systemctl restart docker.service
+
+Mac OS X icin;
+Test edilmedi

@@ -10,6 +10,4 @@ unbind [
 bind Escape copy-mode
 tmux
 echo "set -o vi" >> ~/.bashrc
-#```
-unbind [ 
-bind Escape copy-mode  ]
+```

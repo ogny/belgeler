@@ -9,7 +9,8 @@ graphite:
 grafana: 
 
 ###### Kapsam
-bir sunucuda toplanan verinin carbon-relay ile diger sunucuya aktarimi ve aktarilan sunucuda carbon-cache/Graphite/Grafana ile sunumu anlatilacak.
+bir sunucuda toplanan verinin carbon-relay ile diger sunucuya aktarimi ve
+aktarilan sunucuda carbon-cache/Graphite/Grafana ile sunumu anlatilacak.
 
 * Gerekli paketler kurulur:
 ```

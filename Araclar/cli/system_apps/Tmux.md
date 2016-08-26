@@ -28,7 +28,8 @@ join-pane -s kaynak_oturum:pane_id'si
 
 #. pencereleri yeniden siralama::
 ```
-move-window ile var olmayan bir pencereye atayabiliyoruz.
+move-window ile var olmayan bir pencereye atayabiliyoruz. Ornek:
+`move-window -s 1:6 -t 0:6`
 swap-window ile varolanlarin siralamasini değiştirebiliyoruz.
 swap-window -s 3 -t 1
 ```

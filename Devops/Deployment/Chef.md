@@ -292,7 +292,7 @@ Data Bags
 * A data bag is a global variable that is stored as JSON data and is
    accessible from a Chef server. A data bag is indexed for searching and can
    be loaded by a recipe or accessed during a search.  **data_bags usage**; for
-   storing data that doesn’t map one-to-one with nodes.  For example, having a
+  storing data that doesn’t map one-to-one with nodes.  For example, having a
    bag calls users with one item for each of your system users with keys like
    name and ssh_keys. You can then write a single Chef recipe to loop over each
    item in the bag and create their user account, populate authorized_keys, and
@@ -410,6 +410,8 @@ Kaynaklar
 Chef Sever Installation
 =======================
 
+
+
 * Server Kurulum adimlari tamamlanmadi
 
     curl -L -O  https://web-dl.packagecloud.io/chef/stable/packages/el/6/chef-server-core-12.0.7-1.el6.x86_64.rpm
@@ -506,4 +508,5 @@ done
 ```
 
 * chef server process'leri kapatma; `chef-server-ctl stop`
+
 

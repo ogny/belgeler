@@ -30,6 +30,7 @@ Degistirecegin yeri secip visual mode'a gec
 :bn, :bp
 
 * bos satirlari silme;
+:%s/^[^a-zA-Z0-9]$\n//ig
 :g/^$/d
 
 * her satir sonuna 2 bos karakter ekle 
