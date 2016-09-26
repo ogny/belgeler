@@ -111,3 +111,6 @@ Rpm Centos Calisma
    To transfer transaction metadata from yum to DNF, run:
    'dnf install python-dnf-plugins-extras-migrate && dnf-2 migrate'
 
+online repo'lari tekrar install etme
+sudo rm -rf /etc/yum.repos.d/* && sudo yum reinstall \
+http://vault.centos.org/6.7/os/x86_64/Packages/centos-release-6-7.el6.centos.12.3.x86_64.rpm

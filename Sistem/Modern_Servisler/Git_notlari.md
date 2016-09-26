@@ -1,3 +1,10 @@
+#### Yapilacaklar
+
+* repo dizininde remote'a gonderilmesini istemedigimiz degisiklikleri geri alma;(reset ve clean ile)
+```
+git clean -df
+```
+
 * Yeni acilmis repo'ya ilk push'u yapmadan once asagidaki komut verilir;  
 ```
 git push origin master
@@ -31,14 +38,12 @@ git branch -a
 * yeni uzak dal acma
 
 ### rebase kullanimi
-* iki dalin var fix_dali ve master_dali. fix_dalinda guncelleme yaptin,
-* test ettin, artik master_dalina uygulayabilirsin. 
+* iki dalin var fix_dali ve master_dali. fix_dalinda guncelleme yaptin, test ettin, artik master_dalina uygulayabilirsin. 
 ```
 git checkout master_dali
 git rebase fix_dali
 ```
-* uzak repo'da ayni dalda baskalariyla calisiyorsan senden onceki rebase'leri
-cek;
+* uzak repo'da ayni dalda baskalariyla calisiyorsan senden onceki rebase'leri cek;
 ```
 git pull --rebase  
 git push origin master 
@@ -70,8 +75,7 @@ sayfasindan](https://github.com/nvie/gitflow) notlar cikartilacak
 * Not: git-flow en onemli konular arasinda, flow cikartilacak
 
 #### Cesitli konular;
-`fatal: The current branch master has multiple upstream branches, refusing to
-push.`  
+`fatal: The current branch master has multiple upstream branches, refusing to push.`  
 ```
 git config remote.origin.push HEAD  
 ```
@@ -121,11 +125,6 @@ git log -p <dosya_adi>
 git log --color -p
 ```
 
-* repo dizininde remote'a gonderilmesini istemedigimiz degisiklikleri geri
-  alma;
-```
-git clean -df
-```
 
 * pretty log format
 ```
@@ -133,8 +132,7 @@ git log --pretty=format:user:%aN%n%ct --reverse \
 --raw --encoding=UTF-8 --no-renames --no-merge
 ```
 
-* tum degistirilmis dosya/dizinleri ekleyemediginde, sorun yeni eklenen bir
-  dizindeki .git dizininden kaynaklanabilir.
+* tum degistirilmis dosya/dizinleri ekleyemediginde, sorun yeni eklenen bir dizindeki .git dizininden kaynaklanabilir.
 ```
 rm -rf subfolder/.git
 git add -A
@@ -143,3 +141,5 @@ git add -A
 
 * temizlenen repolarla çalışırken öncesinde `git clean -fd` çalıştırın pyc
   dosyalarından dolayı silinmemiş gibi görünüyor
+
+

@@ -86,6 +86,7 @@ Bu alanda sik kullanilan cesitli eklentiler mevcut, bunlardan Unite.vim ile
 calisacagim.
 `:Unite-vertical file buffer` ile nerdtree'deki gibi dosyalari ve buffer'lari goruntuleyebiliyoruz.
 
+
 * satirlari sutuna cevirme; donusturulecek satira gecip,
 `set relativenumber` ile kac satir oldugunu ogren
 sayiJ ile birlestir.
@@ -197,6 +198,7 @@ vim-buffergator
 * unite vimproc ve neobundle'dan henuz verim alamadigimdan listeden cikarttim.
 
 * nerdtree
+   - window split orientation'u var, sirayla aciyorsun, once horizontal, sonra vertical calisiyorsun
 
 * easymotion
 backward search: <header><header>b

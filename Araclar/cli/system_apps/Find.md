@@ -101,3 +101,8 @@ find . -not -path '*/\.*' -type d
 ```
 find . -type d -empty
 ```
+
+* gruba gore aratma
+```
+/  -type f -group <grup_adi> -ls   
+```
