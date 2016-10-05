@@ -235,3 +235,10 @@ vim-bookmarks
 * vim buffer list `:ls`
 * case senstive'i kaldirmak icin
 `:set ignorecase`
+
+#### Tanimlar: 
+
+the buffer is your file proxy,
+the window is a view into a buffer,
+the tab page is a "workspace", an arrangement of windows.
+Forget all your old habits as they will slow your learning down.

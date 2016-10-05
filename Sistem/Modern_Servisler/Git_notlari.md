@@ -142,4 +142,14 @@ git add -A
 * temizlenen repolarla çalışırken öncesinde `git clean -fd` çalıştırın pyc
   dosyalarından dolayı silinmemiş gibi görünüyor
 
-
+* Getting the difference between two repositories
+The scenario: We have a repo_a and repo_b. The latter was created as a copy of
+repo_a. There have been parallel development in both the repositories
+afterwards. Is there a way we can list the differences of the current versions
+of these two repositories? solution: In repo_a:
+```
+git remote add -f b path/to/repo_b.git
+git remote update
+git diff master remotes/b/master
+git remote rm b
+```
