@@ -10,6 +10,7 @@ ffmpeg -ss 00:00 -i k.mp4 -q:a 0  -map a -t 00:54 k.mp3
 * ekranda oynayan görüntüyü kaydetme
 ```
 ffmpeg -f x11grab -r 25 -s 1024x768 -i :0.0 /tmp/outputFile.mpg
+ffmpeg -f x11grab -r 135 -s 1920x1080 -i :0.0 /tmp/outputFile.mp4
 ```
 
 * herhangi bir formattaki yayini alip oynatma
