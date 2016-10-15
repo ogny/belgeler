@@ -1,4 +1,5 @@
 * register
+
 kopyala-yapistir vim'de aslinda default register'daki degeri alip verme gibi.
 bundan baska istedigin kadar register atayabiliyorsun, default olan
 disindakileri cagirmak icin; `"ayy` `"ap` gibi a'ya atadigini kopyala-yapistir
@@ -198,7 +199,8 @@ vim-buffergator
 * unite vimproc ve neobundle'dan henuz verim alamadigimdan listeden cikarttim.
 
 * nerdtree
-   - window split orientation'u var, sirayla aciyorsun, once horizontal, sonra vertical calisiyorsun
+  - window split orientation'u var, sirayla aciyorsun, once horizontal, sonra vertical calisiyorsun
+  - <shift-i> ile gizli dosyalari toggle et.    
 
 * easymotion
 backward search: <header><header>b
@@ -242,3 +244,8 @@ the buffer is your file proxy,
 the window is a view into a buffer,
 the tab page is a "workspace", an arrangement of windows.
 Forget all your old habits as they will slow your learning down.
+
+
+* window-buffer yonetimi
+  - bdelete: buffer'i tum pencerelerde kapatir. tum pencerelerde ayni buffer
+    aciksa, buffer'i oldurmek icin tum pencereleri de kapatir.
