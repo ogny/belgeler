@@ -257,3 +257,4 @@ Forget all your old habits as they will slow your learning down.
 * `:Gcommit` 
 * `:Merginal` ile branch secilir
 * `ps` ile push edilir
+* merge dahil edilecek.
