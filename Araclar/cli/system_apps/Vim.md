@@ -263,3 +263,5 @@ Forget all your old habits as they will slow your learning down.
 ##### branch'lerin merge edilmesi disinda, merginal'e gerek yok, process soyle:
 * dosyada duzenleme bittiginde kaydedilir.
 * `L+g` ve `-` `cc` `L+p` ile gonder
+* ilk deneme basarisiz oldu
+
