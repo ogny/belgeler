@@ -262,4 +262,4 @@ Forget all your old habits as they will slow your learning down.
 
 ##### branch'lerin merge edilmesi disinda, merginal'e gerek yok, process soyle:
 * dosyada duzenleme bittiginde kaydedilir.
-* `L+g` ve `-` `cc` buffer'i kaydet `L+p` ile gonder
+* `L+g` ve `-` `cc` buffer'i kaydet kapat `L+p` ile gonder
