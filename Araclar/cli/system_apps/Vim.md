@@ -265,3 +265,4 @@ Forget all your old habits as they will slow your learning down.
 * `L+g` ve `-` `cc` `L+p` ile gonder
 * ilk deneme basarisiz oldu
 * bu da basarisiz
+* ahanda oldu, ama anlayamadim hangi asamada oldugunu
