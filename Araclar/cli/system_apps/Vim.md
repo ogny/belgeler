@@ -259,3 +259,7 @@ Forget all your old habits as they will slow your learning down.
 * `ps` ile push edilir
 * asil branch'e gecilip `mn` ile  merge et (test edilmedi.)
 
+
+##### branch'lerin merge edilmesi disinda, merginal'e gerek yok, process soyle:
+* dosyada duzenleme bittiginde kaydedilir.
+* `L+g` ve `-` `cc` `L+p` ile gonder
