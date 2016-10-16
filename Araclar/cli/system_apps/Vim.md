@@ -249,3 +249,11 @@ Forget all your old habits as they will slow your learning down.
 * window-buffer yonetimi
   - bdelete: buffer'i tum pencerelerde kapatir. tum pencerelerde ayni buffer
     aciksa, buffer'i oldurmek icin tum pencereleri de kapatir.
+
+#### Git ile calisma
+* merginal ve fugitive kurulur
+* dosyada duzenleme bittiginde kaydedilir.
+* `:Gstatus` ve `-` ile `git add` 
+* `:Gcommit` 
+* `:Merginal` ile branch secilir
+* `ps` ile push edilir
