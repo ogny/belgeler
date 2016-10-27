@@ -23,3 +23,7 @@ SHUTDOWN_USERS=all
 #. Guest icin static ip atama;
 [Kaynak:](http://coding4streetcred.com/blog/post/VirtualBox-Configuring-Static-IPs-for-VMs)
 
+#. vm inaccessible olmussa (vbox dosyasi kayipsa) vbox-prev dosyasinin vbox olarak kopyala
+```
+cp /path/VirtualBox_VMs/<vm>/<vim>.vbox-prev /path/VirtualBox_VMs/<vm>/<vim>.vbox
+```
