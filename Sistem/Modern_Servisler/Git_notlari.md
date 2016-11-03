@@ -153,3 +153,103 @@ git remote update
 git diff master remotes/b/master
 git remote rm b
 ```
+### Genel Kullanım
+
+* refs/heads tanımla.
+* hook nedir, nerede kullanılıyor? 
+* Pull Request'in kullanım amacını tanımla.
+
+#### Geri alım senaryoları
+* yerel branch'ta üzerinde çalışılan, fakat uzak branch'a eklenmemiş dosyaların
+* uzak branch'a eklenmiş dosyaların durumu:
+* uzak branch'a commit'lenmiş dosyaların durumu:
+
+#### Git Geliştirmeleriyle çalışma 
+
+#### Tag'larla çalışma
+```
+git tag
+git checkout tags/0.9.15
+```
+
+##### branch'lerle çalışma 
+
+
+* hangi branch'te olduğunu kontrol et: `git branch`
+* yerel branch'ına geç: `git checkout <yerel_branch>`
+* çalışmanı yerel branch'ına gönder: 
+```
+git add . 
+git commit -m "<açıklama>"
+```
+* çalışmanı uzak branch'ına gönder: `git push origin <uzak_branch>`
+* birleştireceğin branch'a geç, değişimleri al:
+```
+git checkout <asıl_branch>
+git fetch --all && git pull origin <asıl_branch>
+```
+
+* uzak branch'ını asıl branch'la birleştir:
+```
+git merge --no-ff <uzak_branch>
+git push origin  <asıl_branch>
+```
+
+###### Merge/Rebase
+* Dosyada yaptığınız değişikliği geri alıp pull alınca auto-merge yapıyor. Bunda bir problem yok. Adımlar:
+geri alma: `git checkout .` 
+pull alma, uyari: `Auto-merging <dosyanin_yolu>`
+
+##### Flow örnek çalışma eklenecek.
+
+```
+$ git flow init -d                                           
+Branch name for production releases: [master] 
+Branch name for "next release" development: [develop] 
+Feature branches? [feature/] 
+Release branches? [release/] 
+Hotfix branches? [hotfix/] 
+Support branches? [support/] 
+Version tag prefix? [] 
+```
+
+* [git flow cheatsheet](http://danielkummer.github.io/git-flow-cheatsheet/)
+* [A successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/)
+* [Gitflow Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow/)
+
+#### Global kullanılabilecek convention'lar
+
+##### gitconfig Örnekleri 
+##### gitalias  Örnekleri 
+##### gitignore Örnekleri
+
+#### Log 
+```
+git log --oneline --graph -4 --decorate 
+git log --no-merges -p --function-context --pretty=format:user:%aN%n%ct \
+--reverse --encoding=UTF-8 --no-renames
+```
+
+#### Reset
+```
+git reset --soft HEAD~n veya git reset --soft commit_id
+```
+
+Commit kayıtlarında "n" (1,2,3...) kere geri gider ve değiştirilen tüm
+dosyaları index alanına geri koyar. O andan onceki ve sonraki tüm commit
+kayıtlarındaki değişiklikler olduğu gibi kalır. Örnek: eğer 3. committen 1.
+commite geri dönülüp, tekrar commit işlemi gerçekleştirilirse, commit 2 ve 3
+kayıtlarından kaldırılır çünkü onlar artık commit 1'in içine geçmiş olurlar.
+
+#### Kullanışlı araçlar
+* cherry-pick
+* rebase
+
+
+#### Kaynaklar
+* [Ali Özgür](https://aliozgur.gitbooks.io/git101/content)
+* [Seçkin Alan](http://sckn.org/git_notlari.txt)
+* [Emrah Eryılmaz](https://raw.githubusercontent.com/emrahcom/www_emrah_com/master/public_html/notlar/git_notlari.txt)
+* [Muhammet Macit](https://sekomy.atlassian.net/wiki/pages/viewpage.action?spaceKey=DEV&title=Editing+Template+Repo)
+* [inanzzz](http://www.inanzzz.com/index.php/yazi/9j27/en-yaygin-sekilde-kullanilan-git-komutlari)
+* [Git Görsellestirme](http://marklodato.github.io/visual-git-guide/index-en.html)

@@ -32,3 +32,9 @@ mount -t vboxsf -o uid=`id -u vagrant`,gid=`id -g vagrant` vagrant /vagrant
 ** `vagrant plugin install vagrant-vbguest`
 * guest sunucularda; `ln -s /opt/VBoxGuestAdditions-4.3.10/lib/VBoxGuestAdditions
 /usr/lib/VBoxGuestAdditions`
+Virtualbox tabanlı sanallaştırma çözümü, konsol komutlarıyla sanal makina
+yönetmeyi sağlıyor.
+
+#### Kullanımı (eklenecek)
+* `vagrant <komut> <sunucu_adi>` # birden çok sunucu gelebilir.
+* calıştırırken `--force`  kullan. gereksiz sorulari ignore et.
