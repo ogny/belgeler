@@ -1,4 +1,7 @@
-# platform; 3.13.0-29-generic x86_64 jessie/sid (ubuntu trusty 14.04) 
+ platform; 3.13.0-29-generic x86_64 jessie/sid (ubuntu trusty 14.04) 
+
+Virtualbox tabanlı sanallaştırma çözümü, konsol komutlarıyla sanal makina
+yönetmeyi sağlıyor.
 
 # kurulumu vagrantup.com'daki paketten yap.
 
@@ -28,12 +31,10 @@ vagrant /vagrant
 mount -t vboxsf -o uid=`id -u vagrant`,gid=`id -g vagrant` vagrant /vagrant
 ```
 * host sunucuda;
-** `virtualbox-guest-additions-iso` paketini kur.
+* `virtualbox-guest-additions-iso` paketini kur.
 ** `vagrant plugin install vagrant-vbguest`
 * guest sunucularda; `ln -s /opt/VBoxGuestAdditions-4.3.10/lib/VBoxGuestAdditions
 /usr/lib/VBoxGuestAdditions`
-Virtualbox tabanlı sanallaştırma çözümü, konsol komutlarıyla sanal makina
-yönetmeyi sağlıyor.
 
 #### Kullanımı (eklenecek)
 * `vagrant <komut> <sunucu_adi>` # birden çok sunucu gelebilir.

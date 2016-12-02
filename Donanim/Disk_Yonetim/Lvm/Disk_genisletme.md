@@ -31,9 +31,11 @@ ext4
 ----
 
 diski umount et
-partition table'ini parted'la silip yeniden olustur
+partition table'ini parted'la silip yeniden olustur. asagidakini yemezse `partprobe` komutunu calistir.
+```
 e2fsck -f -p /dev/sdb1 
-resize2fs -p /dev/sdb1 <yeni_boyut>
+resize2fs -p /dev/sdb1 
+```
 
 
 Varolan bir partition'u lvm grubuna dahil etme;

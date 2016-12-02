@@ -189,4 +189,11 @@ Halen silinemiyorsa, db'yi silersek kullanici siliniyor.
 db silinmeden nasil cozulur, henuz bilmiyorum.
 
 
+* psql'de çıktıları dikey olarak görüntülemek için
+```
+\x on
+```
 
+* tarihi ogrenme:
+
+`SELECT EXTRACT(TIMEZONE FROM now())/3600.0;`

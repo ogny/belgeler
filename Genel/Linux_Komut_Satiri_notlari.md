@@ -203,11 +203,14 @@ netstat -anpt | grep ESTABLISHED | awk '{ print $7 }' | cut -d/ -f2 | sort -u
 lpstat -p -d
 ```
 
-* Default printer'a is gonderm
+* Default printer'a is gonderme (cups-bsd paketinin lpr binary'sini kullan)
 
-```
-lpr -P <printer_adi> <dosya(lar)>
-```
+| What to Type              | What it Does                                                                    |
+| ---                       | ---                                                                             |
+| `lpr -Pmmlab file1`       | send "file1" to the printer                                                     |
+| `lpstat -a`               | list all the printers                                                           |
+| `lpq -Pprinter_name`      | see who is also printing to the printer and list the print job numbers          | 
+| `lprm -Pprinter_name 200` | remove print job #200 from a printer. You can only do that if you own that job  | 
 
 ```
 convert 2015-02-06-152435_1366x768_scrot.png -quality 100 -alpha off -density \
@@ -303,3 +306,5 @@ This filesystem will be automatically checked every 27 mounts or
 180 days, whichever comes first.  Use tune2fs -c or -i to override.
 ```
 
+#### Kaynaklar
+* [The lpr command](https://cmgm.stanford.edu/classes/unix/lpr.html)

@@ -1,0 +1,348 @@
+   Link: [1]canonical
+   Link: [2]RSS (alternate)
+   Link: [3]canonical
+   [4]IFrame
+
+                                    Contents
+
+                                     Share
+
+     *  [5]Twitter
+     *  [6]Facebook
+     *  [7]Google+
+     *  [8]Hacker News
+
+                                     Share
+
+     *  [9]Twitter
+     *  [10]Facebook
+     *  [11]Google+
+     *  [12]Hacker News
+
+   [13]×
+
+    Sign up for our newsletter.
+
+   Get the latest tutorials on SysAdmin and open source topics.
+
+   [14]_____________________
+   [15]Sign Up
+   Thanks for signing up!
+   [16]Sign Up [17]Log In
+   [18]_____________________ [19]submit
+
+     * [20]Tutorials
+     * [21]Questions
+     * [22]Projects
+     * [23]Meetups
+     * [24]Main Site
+
+   DigitalOcean [25]Community
+   Menu
+
+     * [26]Tutorials
+     * [27]Questions
+     * [28]Projects
+     * [29]Meetups
+     * [30]Main Site
+
+   [31]Sign Up [32]Log In
+   [33]_____________________ [34]submit
+   [35]View All Results
+   [36][jellingwood]
+   By:
+   [37]Justin Ellingwood
+   Subscribe Subscribed
+   [38]Share
+   [39]Contents
+   We hope you find this tutorial helpful. In addition to guides like this
+   one, we provide simple cloud infrastructure for developers. [40]Learn more
+   →
+   [41]7
+
+      How To Install and Configure an OpenVPN Access Server on CentOS 6.5
+
+   PostedApril 4, 2014 95.3k views [42]VPN [43]Networking [44]CentOS
+
+  Introduction
+
+   VPN, or virtual private network, is a secure method of connecting remote
+   internet resources together as if they were under the same LAN. OpenVPN is
+   a popular implementation that works on Linux, Windows, and Mac operating
+   systems and can be utilized to create complex, encrypted networks between
+   physically dispersed servers.
+
+   The OpenVPN Access Server is a solution built on top of traditional
+   OpenVPN that is used as a complete portal for managing connections, users,
+   and interfaces. It provides the underlying VPN instance, a web interface
+   for managing the suite, and a client that can be used within a web
+   browser.
+
+   In this guide, we'll install and configure the OpenVPN Access Server on a
+   CentOS 6.5 VPS instance.
+
+Download and Install Packages
+
+   We can obtain the OpenVPN Access Server package for CentOS from the
+   [45]project's website.
+
+   Right click on the package that matches your version of CentOS and your
+   machine's architecture. Select the "copy link address" item or whatever
+   option is closest.
+
+   On your CentOS droplet, download the package with curl -O (that's the
+   letter "o" not a zero) followed by the URL you copied from the page. In my
+   case, this turned out to be:
+
+ cd ~
+ curl -O http://swupdate.openvpn.org/as/openvpn-as-2.0.5-CentOS6.x86_64.rpm
+
+   When the package has been downloaded, you can install it with using the
+   rpm command:
+
+ sudo rpm -i openvpn-as-2.0.5-CentOS6.x86_64.rpm
+
+   After installing the package, an administration account is created called
+   openvpn. However, no password has been set.
+
+   Set a password for the administrator's account by typing:
+
+ sudo passwd openvpn
+
+   Now, the command line configuration steps are complete. The rest of the
+   guide will focus on configuring options through the web interface.
+
+Accessing the Web Interface
+
+   We can access our VPN portal by going to our server's IP address or domain
+   name, at port 943. The server operates using TLS, so we will need to
+   specify the https protocol.
+
+   For our initial interaction, we actually want to go to the administrative
+   interface, which is the same, except ending with /admin:
+
+ https://server_ip_or_domain:943/admin
+
+   You will get a warning that the site's SSL certificates are not trusted:
+
+   [46][OpenVPN access server ssl warning]
+
+   This is expected and perfectly fine. All that this is telling us is that
+   OpenVPN is using a self-signed SSL certificate, which is not trusted by
+   default by our browser. We can click on the "Proceed anyway" button or
+   whatever similar option you have.
+
+   You will be presented with the admin login page. Use the username openvpn
+   and the password you set for this user:
+
+   [47][OpenVPN access admin login]
+
+   You will be taken to the OpenVPN Access Server's EULA, which you will have
+   to agree to if you wish to continue:
+
+   [48][OpenVPN access EULA]
+
+   Once you log in, you can see the administrative interface, complete with
+   some useful at-a-glance stats on the landing page:
+
+   [49][OpenVPN admin landing]
+
+   Here, you can configure your VPN server. The access server separates the
+   web interface and the actual VPN access and each can be configured
+   independently.
+
+   For instance, if you go to the Server Network Settings in the left-hand
+   menu, you will see a page where you can configure the port and interface
+   that each component operates on. You can also specify the address pool
+   that will be available to the clients.
+
+   Another thing you might want to do is add users and configure the
+   authentication methods. You can add VPN users that match your system
+   users, or add users that you might be controlling through an LDAP server.
+
+Logging in as a Client
+
+   When you are finished configuring things as an admin, you can visit the
+   client portion by going to your IP address or domain name followed by port
+   943:
+
+ https://server_ip_or_domain:943
+
+   You will have to type in a username of a user that you have configured VPN
+   access for:
+
+   [50][OpenVPN client login]
+
+   If you the user that you logged in as has been designated as an OpenVPN
+   admin account, you will see an "Admin" button that can be used to take you
+   back to the admin control panel. Either way, you will be taken to a page
+   that will allow you to download software for your client to connect to the
+   VPN server:
+
+   [51][OpenVPN client software]
+
+   If your desktop is Windows or OS X, or if you have an android or iOS
+   device, you can download an OpenVPN Connect client that will operate
+   within your browser. If your desktop is a Linux machine, you will be asked
+   to download the normal VPN client.
+
+   You should follow the directions of the client of your choice. If you are
+   using the Linux client, you'll need to download the connection settings
+   profile by clicking on the "Yourself" link:
+
+   [52][OpenVPN download yourself]
+
+   Using the regular Linux openvpn client, you can connect using something
+   like this:
+
+ sudo openvpn --config client.ovpn
+
+Conclusion
+
+   Now, you should have a portal that can be used to configure your VPN
+   access. This is an easy to manage interface that can be set up once and
+   configured on-the-fly. It automatically generates valid configuration
+   files for your users to connect to the server, which can save a lot of
+   headaches with explaining how to configure access.
+
+   By Justin Ellingwood
+   [53][jellingwood]
+   By:
+   [54]Justin Ellingwood
+   [55]Upvote7
+   Subscribe Subscribed
+   [56]Share
+
+Spin up an SSD cloud server in under a minute.
+
+   Simple setup. Full root access. Straightforward pricing.
+
+   [57]Deploy Server
+
+Related Tutorials
+
+     * [58]How To Setup Your Own VPN With PPTP
+     * [59]How to Create an Intranet with OpenVPN on Ubuntu 16.04
+     * [60]How To Set Up an OpenVPN Server on Ubuntu 16.04
+     * [61]How To Use Ansible and Tinc VPN to Secure Your Server
+       Infrastructure
+     * [62]3 Ways to Securely Browse the Internet with OpenVPN on Debian 8
+
+    15 Comments
+
+   [63]
+   _____________________
+   [64]Log In to Comment
+
+     [65]Load
+
+   [66][Creative Commons License]
+   This work is licensed under a [67]Creative Commons
+   Attribution-NonCommercial-ShareAlike 4.0 International License.
+   Copyright © 2016 DigitalOcean™ Inc.
+
+     * [68]Community
+     * [69]Tutorials
+     * [70]Questions
+     * [71]Projects
+     * [72]Tags
+     * [73]Newsletter
+     * [74]RSS
+
+     * [75]Distros & One-Click Apps
+     * [76]Terms, Privacy, & Copyright
+     * [77]Security
+     * [78]Report a Bug
+     * [79]Get Paid to Write
+
+                                 Almost there!
+
+   Sign into your account, or create a new one, to start interacting.
+   [80]Log In [81]Sign Up
+
+                                  Report a Bug
+
+   Use this form to report bugs related to the Community
+   Report a bug:
+   [82]_____________________
+   [83]_____________________
+   [84]
+   _____________________
+   [85][ Submit ]
+
+References
+
+   Visible links
+   1. https://www.digitalocean.com/community/tutorials/openvpn-access-server-centos
+   2. https://www.digitalocean.com/community/tutorials/feed
+   3. https://www.digitalocean.com/community/
+   4. https://www.googletagmanager.com/ns.html?id=GTM-KHWBBT
+   5. Share on Twitter
+	http://twitter.com/share?text=How To Install and Configure an OpenVPN Access Server on CentOS 6.5&url=https://www.digitalocean.com/community/tutorials/openvpn-access-server-centos?utm_content=openvpn-access-server-centos&utm_medium=community&utm_source=twshare
+   6. Share on Facebook
+	https://www.digitalocean.com/community/tutorials/openvpn-access-server-centos?utm_content=openvpn-access-server-centos&utm_medium=community&utm_source=fbshare
+   7. Share on Google+
+	https://plus.google.com/share?url=https://www.digitalocean.com/community/tutorials/openvpn-access-server-centos?utm_content=openvpn-access-server-centos&utm_medium=community&utm_source=gpshare
+   8. Submit to Hacker News
+	https://news.ycombinator.com/submitlink?t=How To Install and Configure an OpenVPN Access Server on CentOS 6.5&u=https://www.digitalocean.com/community/tutorials/openvpn-access-server-centos?utm_content=openvpn-access-server-centos&utm_medium=community&utm_source=hnshare
+   9. Share on Twitter
+	http://twitter.com/share?text=How To Install and Configure an OpenVPN Access Server on CentOS 6.5&url=https://www.digitalocean.com/community/tutorials/openvpn-access-server-centos?utm_content=openvpn-access-server-centos&utm_medium=community&utm_source=twshare
+  10. Share on Facebook
+	https://www.digitalocean.com/community/tutorials/openvpn-access-server-centos?utm_content=openvpn-access-server-centos&utm_medium=community&utm_source=fbshare
+  11. Share on Google+
+	https://plus.google.com/share?url=https://www.digitalocean.com/community/tutorials/openvpn-access-server-centos?utm_content=openvpn-access-server-centos&utm_medium=community&utm_source=gpshare
+  12. Submit to Hacker News
+	https://news.ycombinator.com/submitlink?t=How To Install and Configure an OpenVPN Access Server on CentOS 6.5&u=https://www.digitalocean.com/community/tutorials/openvpn-access-server-centos?utm_content=openvpn-access-server-centos&utm_medium=community&utm_source=hnshare
+  13. javascript:;
+  16. https://www.digitalocean.com/community/auth/digitalocean?display=sessionless+register
+  17. https://www.digitalocean.com/community/auth/digitalocean
+  20. https://www.digitalocean.com/community/tutorials
+  21. https://www.digitalocean.com/community/questions
+  22. https://www.digitalocean.com/community/projects
+  23. https://www.meetup.com/pro/digitalocean/?utm_source=do_community
+  24. https://www.digitalocean.com/
+  25. https://www.digitalocean.com/community
+  26. https://www.digitalocean.com/community/tutorials
+  27. https://www.digitalocean.com/community/questions
+  28. https://www.digitalocean.com/community/projects
+  29. https://www.meetup.com/pro/digitalocean/?utm_source=do_community
+  30. https://www.digitalocean.com/
+  31. https://www.digitalocean.com/community/auth/digitalocean?display=sessionless+register
+  32. https://www.digitalocean.com/community/auth/digitalocean
+  35. https://www.digitalocean.com/community/search
+  36. https://www.digitalocean.com/community/users/jellingwood
+  37. https://www.digitalocean.com/community/users/jellingwood
+  38. https://www.digitalocean.com/community/tutorials/openvpn-access-server-centos#
+  39. javascript:void(0);
+  40. https://www.digitalocean.com/?utm_medium=community&utm_source=community_gencta&utm_campaign=needaserver&utm_content=openvpn-access-server-centos
+  42. https://www.digitalocean.com/community/tags/vpn?type=tutorials
+  43. https://www.digitalocean.com/community/tags/networking?type=tutorials
+  44. https://www.digitalocean.com/community/tags/centos?type=tutorials
+  45. https://openvpn.net/index.php/access-server/download-openvpn-as-sw/113.html?osfamily=CentOS
+  53. https://www.digitalocean.com/community/users/jellingwood
+  54. https://www.digitalocean.com/community/users/jellingwood
+  56. https://www.digitalocean.com/community/tutorials/openvpn-access-server-centos#
+  57. https://www.digitalocean.com/?utm_medium=community&utm_source=community_gencta&utm_campaign=needaserver&utm_content=openvpn-access-server-centos
+  58. https://www.digitalocean.com/community/tutorials/how-to-setup-your-own-vpn-with-pptp
+  59. https://www.digitalocean.com/community/tutorials/how-to-create-an-intranet-with-openvpn-on-ubuntu-16-04
+  60. https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-16-04
+  61. https://www.digitalocean.com/community/tutorials/how-to-use-ansible-and-tinc-vpn-to-secure-your-server-infrastructure
+  62. https://www.digitalocean.com/community/tutorials/3-ways-to-securely-browse-the-internet-with-openvpn-on-debian-8
+  64. https://www.digitalocean.com/community/auth/digitalocean
+  65. https://www.digitalocean.com/community/tutorials/openvpn-access-server-centos/comments
+  66. https://creativecommons.org/licenses/by-nc-sa/4.0/
+  67. https://creativecommons.org/licenses/by-nc-sa/4.0/
+  68. https://www.digitalocean.com/community
+  69. https://www.digitalocean.com/community/tutorials
+  70. https://www.digitalocean.com/community/questions
+  71. https://www.digitalocean.com/community/projects
+  72. https://www.digitalocean.com/community/tags
+  73. https://www.digitalocean.com/community/newsletter
+  74. https://www.digitalocean.com/community/tutorials/feed
+  75. https://www.digitalocean.com/features/one-click-apps/
+  76. https://www.digitalocean.com/legal/terms/
+  77. https://www.digitalocean.com/security/
+  78. https://www.digitalocean.com/community/tutorials/openvpn-access-server-centos#
+  79. https://www.digitalocean.com/community/get-paid-to-write
+  80. https://www.digitalocean.com/community/auth/digitalocean
+  81. https://www.digitalocean.com/community/auth/digitalocean?display=sessionless+register

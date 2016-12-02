@@ -67,7 +67,7 @@ Resource relationships (called constraints)
 
 Resource silme;
 crm resource stop <Resource>
-crm configure dsupervisorctl  -c supervisord_conf/supervisord.inielete <Resource>
+crm configure delete <Resource>
 
 grup silme
  crm configure delete group PGCLUSTER

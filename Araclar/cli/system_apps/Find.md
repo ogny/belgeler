@@ -76,7 +76,7 @@ find -maxdepth 0
 
 * belli bir gruba ait dosyalari bulma, (kullaniciya ait olanlar da bulunabilir mi, arastir,)
 ```
--group <grup_adi>
+-type f -group <grup_adi> -ls
 ```
 
 ### Kaynaklar:

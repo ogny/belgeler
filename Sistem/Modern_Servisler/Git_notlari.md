@@ -245,6 +245,16 @@ kayıtlarından kaldırılır çünkü onlar artık commit 1'in içine geçmiş 
 * cherry-pick
 * rebase
 
+…or create a new repository on the command line
+echo "# acik_notlar" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin git@github.com:haticey/acik_notlar.git
+git push -u origin master
+…or push an existing repository from the command line
+git remote add origin git@github.com:haticey/acik_notlar.git
+git push -u origin master
 
 #### Kaynaklar
 * [Ali Özgür](https://aliozgur.gitbooks.io/git101/content)
