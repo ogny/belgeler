@@ -279,7 +279,7 @@ sudo gpasswd -a <kullanici> <grup>
 * dmesg log'unda tarih gorme; (centos6.6)
 ```
 vi /etc/rsyslog.conf
-kern.* /var/log/kern.log
+`kern.* /var/log/kern.log
 /etc/init.d/rsyslog restart
 tailf /var/log/kern.log
 ```
@@ -306,5 +306,17 @@ This filesystem will be automatically checked every 27 mounts or
 180 days, whichever comes first.  Use tune2fs -c or -i to override.
 ```
 
+* tanimli bir ip'yi elle silme
+```
+ip a add 10.50.100.5/24 dev eth0
+```
+
+```
+echo -n '<parola>'  | md5sum | cut -d' ' -f1 
+SELECT md5('<parola>');
+```
+
 #### Kaynaklar
 * [The lpr command](https://cmgm.stanford.edu/classes/unix/lpr.html)
+
+

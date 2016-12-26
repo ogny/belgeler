@@ -5,6 +5,7 @@ mount: unknown filesystem type 'LVM2_member'
 parted ile LVM label'i tanimlamak icin 
 
 
+lvmdiskscan
 
 
 

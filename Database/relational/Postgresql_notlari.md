@@ -197,3 +197,17 @@ db silinmeden nasil cozulur, henuz bilmiyorum.
 * tarihi ogrenme:
 
 `SELECT EXTRACT(TIMEZONE FROM now())/3600.0;`
+
+SELECT pg_terminate_backend(pid)
+    FROM pg_stat_activity
+    WHERE datname = 'ii'
+    AND pid <> pg_backend_pid()
+    AND application_name !~ '(?:psql)|(?:pgAdmin.+)'
+    AND state in ('idle', 'idle in transaction', 'idle in transaction (aborted)', 'disabled')
+    AND state_change < current_timestamp - INTERVAL '5' MINUTE;
+
+* md5 ile alma
+```
+U=u0; P=foobar; echo -n md5; echo -n $P$U | md5sum | cut -d' ' -f1 - 
+```
+

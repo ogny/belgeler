@@ -37,6 +37,15 @@ An example can be seen below.
 ```
 cp /etc/sysconfig/network-scripts/ifcfg-em1 /etc/sysconfig/networkscripts/ifcfg-em1.bkup
 cp /etc/sysconfig/network-scripts/ifcfg-em2 /etc/sysconfig/networkscripts/ifcfg-em2.bkup
+DEVICE=bond0
+IPADDR=172.25.6.64
+NETMASK=255.255.255.0
+ONBOOT=yes
+BOOTPROTO=none
+USERCTL=no
+BONDING_OPTS="mode=1 miimon=100"
+NM_CONTROLLED="no"
+
 cat /etc/sysconfig/network-scripts/ifcfg-bond0
 DEVICE="bond0"
 BONDING_OPTS="mode=1 miimon=100 primary=em1"
@@ -45,6 +54,7 @@ IPADDR="10.16.142.51"
 NETMASK="255.255.248.0"
 GATEWAY="10.16.143.254"
 ONBOOT="yes"
+
 # cat /etc/sysconfig/network-scripts/ifcfg-em1
 DEVICE="em1"
 BOOTPROTO="none"
@@ -56,6 +66,7 @@ TYPE="Ethernet"
 UUID="3db45d28-e63c-401b-906a-ef095de4fc1e"
 SLAVE="yes"
 MASTER="bond0"
+
 # cat /etc/sysconfig/network-scripts/ifcfg-em2
 DEVICE="em2"
 BOOTPROTO="none"
@@ -67,6 +78,7 @@ TYPE="Ethernet"
 UUID="7d29d87f-52bb-4dc6-88ca-d0857c7d7fd9"
 SLAVE="yes"
 MASTER="bond0"
+
 # cat /etc/sysconfig/network-scripts/ifcfg-bond0
 ifcfg-bond0
 DEVICE=bond0
@@ -115,4 +127,33 @@ Kaynaklar
   6](https://access.redhat.com/sites/default/files/attachments/deploying-oracle-12c-on-rhel6_1.2_1.pdf)
 
 
+
+
+/etc/modprobe.d/bonding.conf
+cat /proc/net/bonding/bond0
+Ethernet Channel Bonding Driver: v3.6.0 (September 26, 2009)
+
+Bonding Mode: fault-tolerance (active-backup)
+Primary Slave: None
+Currently Active Slave: eth0
+MII Status: up
+MII Polling Interval (ms): 100
+Up Delay (ms): 0
+Down Delay (ms): 0
+
+Slave Interface: eth0
+MII Status: up
+Speed: 1000 Mbps
+Duplex: full
+Link Failure Count: 0
+Permanent HW addr: e4:1f:13:78:f7:04
+Slave queue ID: 0
+
+Slave Interface: eth1
+MII Status: up
+Speed: 1000 Mbps
+Duplex: full
+Link Failure Count: 0
+Permanent HW addr: e4:1f:13:78:f7:06
+Slave queue ID: 0
 
