@@ -62,3 +62,5 @@ timeout = 120
 
     pip install <paket> --global-option="build_ext" --global-option="--disable-<bagimlilik>"
 
+#. pypi olmadan standart dosya sistemi uzerinden paketleri --find-links opsiyonu ile kurabiliyoruz
+pip install --no-index  --find-links /Users/u/dev/django-packages Django -v   

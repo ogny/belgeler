@@ -59,13 +59,14 @@ client kurulum
 #. elle baglama::
 
      mount -t nfs -rw <nfs_server_ip>:/media/dizin /media/dizin
+     mount -t nfs -rw 195.175.250.23:/media/sas600gb/ipam_raporlama /home/barman
 
 #. client'ta bir sey kurma, mount etmek yeterli.
 
 
 #. iptables'ta izinler::
 
-  vi /etc/sysconfig/nfs
+    vi /etc/sysconfig/nfs
   
   Modify config directive as follows to set TCP/UDP unused ports:
   

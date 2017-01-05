@@ -146,7 +146,7 @@ docker-engine dkms acct ca-certificates patch tree ncdu apt-listchanges bundler 
 dos2unix dstat coreutils gnupg parted autofs htop dosfstools parallel sysstat \
 ccrypt cryptsetup pwgen dbus-x11 wicd wicd-daemon wicd-curses whois cisco-vpnc \
 mtr-tiny sshpass sshuttle curl lftp rfkill resolvconf apache2-utils rdesktop graphviz \
-dnsutils iftop pptp-linux nuttcp mutt dunst npm nodejs-legacy
+dnsutils iftop pptp-linux nuttcp mutt dunst npm nodejs-legacy sdcv mesa-utils
 sudo pip install cheat geeknote python-gist pika howdoi pgcli chronos
 sudo gem install ncurses-ruby 
 sudo systemctl start pulseaudio
