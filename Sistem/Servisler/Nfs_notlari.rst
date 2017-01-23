@@ -142,4 +142,4 @@ Kaynaklar;
 
 #. `<http://www.tecmint.com/how-to-setup-nfs-server-in-linux/>`_
 
-
+conflict olusturmak icin 
