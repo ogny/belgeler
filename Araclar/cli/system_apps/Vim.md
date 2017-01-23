@@ -23,7 +23,10 @@ Degistirecegin yeri secip visual mode'a gec
 `shift+v` 
 
 * pencereleri yeniden boyutlandirma 
-`c+w sayi +-
+```
+c+w sayi +-
+:res +-sayi
+```
 
 * bos buffer'da bir dosya acma 
 :n
@@ -263,3 +266,5 @@ Forget all your old habits as they will slow your learning down.
 ##### branch'lerin merge edilmesi disinda, merginal'e gerek yok, process soyle:
 * dosyada duzenleme bittiginde kaydedilir.
 * `L+g` ve `-` `cc` buffer'i kaydet kapat `L+p` ile gonder
+
+

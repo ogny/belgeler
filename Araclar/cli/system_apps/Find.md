@@ -106,3 +106,8 @@ find . -type d -empty
 ```
 /  -type f -group <grup_adi> -ls   
 ```
+
+* alt dizinlerdeki mp3'leri yakalayip gonder;
+```
+find ~/muzikler -type f -iname "*.mp3" -exec sudo mv -t /media/usb/MUSIC {} \+ 
+```

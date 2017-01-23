@@ -55,12 +55,12 @@ String formatting [*]_
 #. dict'lerde giris cikis duzenli olmuyor. Neden burada siranin garantisi yok?
    insertion sirada degil, alphabetic (key order'de da degil). Neden? dict
    aslinda hashtable (burada hashmap'e karsilik geliyor)
-    key'i hash'e veriyorum, bana bir sayi veriyor 35
-    2.key'i hash'e veriyorum, bana bir sayi veriyor 75
-    bellekte tamamen random duruyor. Bunun avantaji sirali arama yapmiyorum,
-    nokta atisiyla gidiyorum. for'la in not in yaparak __contains__ metoduyyla
-    direk bulabiliyorsun. sirali yazmak istiyorsan std. kutuphanede yok,
-    on-the-fly yazabilirsin.
+   key'i hash'e veriyorum, bana bir sayi veriyor 35
+   2.key'i hash'e veriyorum, bana bir sayi veriyor 75
+   bellekte tamamen random duruyor. Bunun avantaji sirali arama yapmiyorum,
+   nokta atisiyla gidiyorum. for'la in not in yaparak __contains__ metoduyyla
+   direk bulabiliyorsun. sirali yazmak istiyorsan std. kutuphanede yok,
+   on-the-fly yazabilirsin.
 
 #. ftp'ye baglanma
 

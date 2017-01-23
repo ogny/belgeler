@@ -320,3 +320,8 @@ SELECT md5('<parola>');
 * [The lpr command](https://cmgm.stanford.edu/classes/unix/lpr.html)
 
 
+* Bozuk Karakter sorunu (karakter seti cevirme)
+```
+iconv -f old-encoding -t new-encoding file.txt > newfile.txt
+```
+

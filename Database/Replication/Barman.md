@@ -114,9 +114,9 @@ pgespresso
 * host tanimlari /etc/hosts'a girilir.
 * kurulum
 wget https://yum.postgresql.org/9.5/redhat/rhel-6-x86_64/pgdg-centos95-9.5-3.noarch.rpm
-rpm -ivh pgdg-centos95-9.5-3.noarch.rpm
+ppm -ivh pgdg-centos95-9.5-3.noarch.rpm
+yum install -y postgresql95-server rsync
 yum install -y barman barman-cli
-yum install -y postgesql95-server rsync
 
 * pg'de olusturulan keyler alinir 
 mkdir -p ~barman/.ssh
@@ -162,23 +162,20 @@ retention_policy_mode = auto
 retention_policy = RECOVERY WINDOW OF 7 days
 wal_retention_policy = main
 archiver = on
+backup_method = rsync
 
 * postgresql server'larda yapilacaklar (restart gerektirir)
-wget
-https://yum.postgresql.org/9.5/redhat/rhel-6-x86_64/pgdg-centos95-9.5-3.noarch.rpm
-rpm -ivh pgdg-centos95-9.5-3.noarch.rpm
-yum install -y postgesql95-server rsync
-
 wal_level = archive
 archive_mode = on
 archive_command = 'rsync -a %p barman@sunucu_hostname:/data_dizini/incoming/%f'
 pg_hba.conf
+createuser -s barman
 
 pratikte:
 1 kere hata aliyrosun, xlog.db'yi duzeltip yeniden calistirinca
 calisiyor. (test edicez)
 
-psql -Upostgres -c"select i into test from generate_series(1, 100000) i"
+psql -U postgres -c "select i into test from generate_series(1, 100000) i"
 
 
 yapilacaklar: 
@@ -204,4 +201,5 @@ yaptigimiz tanimlar
    a production system, you should probably set this value higher so you
    have older backups on hand.
 
-psql -Upostgres -c"select i into test from generate_series(1, 100000) i"
+
+* `switch xlog calisiyor!` bununla ansible'a gecebiliriz.
