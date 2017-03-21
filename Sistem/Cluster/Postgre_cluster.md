@@ -108,3 +108,33 @@ ERROR: Cannot create HA-sensu:primitive: Found existing HA-sensu:primitive
 primitive DBFS Filesystem \
         params device="/dev/mapper/mpathep1" directory="/dbvolume" fstype=ext4 \
         op monitor interval=10 timeout=40 depth=10
+
+
+crm configure primitive TTDBFS Filesystem \
+params device="/dev/sdc" directory="/db" fstype="ext4" \
+op monitor interval="20" timeout="40" depth="10"
+
+
+primitive DBFS Filesystem \
+        params device="/dev/sdb" directory="/data" fstype=ext4 \
+        op monitor interval=20 timeout=40 depth=10
+
+
+primitive VIP IPaddr2 \
+        params ip=172.25.6.63 cidr_netmask=24 \
+        op monitor interval=1s
+
+crm configure primitive TTVIP ocf:heartbeat:IPaddr2 \
+params ip=172.25.6.63 cidr_netmask=24 \
+op monitor interval=1s
+
+sources will migrate to the other node after a failure.
+crm configure group TTCLUSTER VIP DBFS PGSQL
+Now that we have a group and some basic ordering configured lets set a default node that resources will perfer on
+startup. We'll name this prefered location PREFER-NODE1 and give it a weight of 100
+crm configure location PREFER-NODE1 PGCLUSTER 100: node1.example.net
+Now lets take a minute to check the status of the cluster with crm_mon. You should notice that the PGSQL
+resource now is showing under the resource group PGCLUSTER as stopped and you still have the failed PGSQL
+
+crm configure group TTCLUSTER TTPGSQL TTDBFS
+crm configure location PREFER-NODE1 TTCLUSTER 100: ist-yaz-prod3

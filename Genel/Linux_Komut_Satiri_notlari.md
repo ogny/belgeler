@@ -270,6 +270,10 @@ lspci -knn|grep -iA2 vga
 ```
 useradd -d /home/james jim
 ```
+* yetkisiz kullanici olustur:
+```
+groupadd test && useradd -g test test
+```
 
 * kullaniciyi gruba ekleme
 ```

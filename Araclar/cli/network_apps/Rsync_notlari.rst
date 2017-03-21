@@ -1,11 +1,10 @@
-==============
 Rsync Calismasi
 ===============
 
 :date: Prş 26 Şub 2015 15:23:22 EET
 :comments: true
-:categories: 
-:tags: 
+:categories:
+:tags:
 :Author: Orkun Gunay
 
 
@@ -32,7 +31,7 @@ kaynak/* /hedef/
 #. linklenmis dosyalarin gonderilmesi rsync over ssh'le dosya gonderilirken -l
    secenegi kullanilamiyor, hata veriyor.
 
-#. rsync'le kaynaktaki dosyalari hedefe tasimak icin; (kopyalamadan):: 
+#. rsync'le kaynaktaki dosyalari hedefe tasimak icin; (kopyalamadan)::
 
     rsync --remove-source-files --compress-level=1 \
     -av  kaynak_makina:/*.dosya_uzantisi hedef_makina:/dizin
@@ -41,7 +40,7 @@ kaynak/* /hedef/
 
 #. progress bar::
 
-    --progress 
+    --progress
 
 #. Rsync kesildikten sonra kopyalamanin kaldigi yerden devam etmesi::
 
@@ -49,18 +48,18 @@ kaynak/* /hedef/
     <kullanici_adi>@<uzak_sunucu>:<uzak_dizin>
 
 #.  Append'de dosyanin boyutuna bakiyor, gonderilecek yerdekiyle esit veya
-    ondan kucukse gondermeyi atliyor. 
+    ondan kucukse gondermeyi atliyor.
 
 #. debug etmek icin `--debug=all4`
 
 #. mv ile alinan `preserving permissions for ... Operation not permitted` hatasindan kurtulmak::
-  rsync -avh --no-owner --no-group --remove-source-files "$backupfile" "$destination"
+rsync -avh --no-owner --no-group --remove-source-files "$backupfile" "$destination"
 
 #. rsync ile silme::
     rsync -d --delete <bos_dizin>/ <silinecek_dizin>/
 
 #. find ile bulup rsync'le gonderme::
-  rsync -avz --files-from=<(find . -type f -iname "*.mp3" -mtime -1) ./ /hedef
-  rsync -zavh --files-from=<(ssh <kullanici>@<IP> 'find /backups/* -mtime -1 -exec ls -d {} \;') <kullanici>@<IP>:/ b/
+rsync -avz --files-from=<(find . -type f -iname "*.mp3" -mtime -1) ./ /hedef
+rsync -zavh --files-from=<(ssh <kullanici>@<IP> 'find /backups/* -mtime -1 -exec ls -d {} \;') <kullanici>@<IP>:/ b/
 
 

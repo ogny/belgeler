@@ -1,13 +1,9 @@
-===
 XFS
 ===
 
 #. olusturma-mount etmede ext4'ten farki yok
 #. mount ederken dikkat: If you have environment with filesystem above 2 TB ,
    you could try benchmark with mounting with inode64 option.
-
-.. code:: sh
-
 # mount -o inode64 /dev/device /mount/point
 
 Genisletme
@@ -23,15 +19,15 @@ yeni bir partiton olustur.
 
 xfs_growfs -d /mnt/db
 
-`Keynak:linoxide <http://linoxide.com/file-system/create-mount-extend-xfs-filesystem/>`_
+`Keynak:linoxide <http://linoxide.com/file-system/create-mount-extend-xfs-filesystem/`
 
 Case'ler
 --------
 #. Dosyalari goruntulemek istediginde olusan hata: "Structure needs cleaning"
-   fs'i dizinden umount et. mount edemezsen (file system busy now)::
+   fs'i dizinden umount et. mount edemezsen (file system busy now)
     umount -f -l /dizin
 
-NFS servisini durdur::
+NFS servisini durdur
     service nfs stop
 
 xfs_repair'le check et, sorun yoksa repair et::
@@ -49,6 +45,4 @@ Note that destroying the log may cause corruption -- please attempt a mount
 of the filesystem before doing this.
 
 
-
-
-
+# mkfs.xfs -f -L /data -d agcount=50 -l size=1024m,version=2 /dev/sdb1

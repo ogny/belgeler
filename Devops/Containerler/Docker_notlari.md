@@ -1,4 +1,4 @@
-### TANIMLAR:
+## TANIMLAR:
 
 * Docker images: 
 
@@ -345,7 +345,6 @@ sudo docker run -ti mycentos/base /bin/bash
 * https://www.debian-administration.org/article/696/A_brief_introduction_to_using_docker
 * https://docs.google.com/document/d/1Yb8pVDnibkipHw5lgftGkeN2s8oE0ex0QSl7aI4u89U/edit
 * https://github.com/odewahn/docker-jumpstart/blob/master/public/docker-images.md
-
 * http://nareshv.blogspot.com.tr/ 
 #### Diger Bilgiler
 * Docker imajlarinin tutuldugu path: /var/lib/docker/containers
@@ -356,7 +355,7 @@ sudo docker run -ti mycentos/base /bin/bash
 docker inspect -f '{{ .NetworkSettings.IPAddress }}' imaj_adi
 ```
 
-```
+```bash
 for file in *.tar; do eval `echo $file | \
 sed -nr 's;([a-zA-Z0-9\.-]+)_([a-zA-Z0-9-]+)-([a-f0-9]+)\.tar;IMAGE=\1/\2\nVERSION=\3;pg'`; \
 cat $file | docker import - ${IMAGE}:${VERSION}; done   
@@ -367,8 +366,8 @@ directory where you run that line or it could get interesting :)
 * centos7 docker'da  `pg_ctl status` ciktisi
 ```
 pg_ctl: directory "/var/lib/pgsql/9.4/data" is not a database cluster directory
-```
 RUN echo '' >> /etc/sudoers && echo 'jenkins ALL=(ALL NOPASSWD: ALL' >> /etc/sudoers)'
+```
 
 ### Registry repo komutlari
 
@@ -403,5 +402,104 @@ ExecStart=/usr/bin/docker daemon -H fd:// --insecure-registry "hostname:port"
 sudo systemctl daemon-reload
 sudo systemctl restart docker.service
 
-Mac OS X icin;
-Test edilmedi
+#### centos yapilanlar
+* [kaynak](https://docs.docker.com/engine/installation/linux/centos/)
+```
+vi /etc/hosts
+10.134.50.229 registry.sekomy.com
+systemctl enable docker.service
+vi /usr/lib/systemd/system/docker.service
+ExecStart=/usr/bin/dockerd  --insecure-registry registry.sekomy.com --insecure-registry registry.sekomyazilim.com.tr 
+ln -s /usr/lib/systemd/system/docker.service /etc/systemd/system/ 
+systemctl daemon-reload 
+systemctl restart docker.service
+docker info
+docker login registry.sekomy.com
+```
+çıktıda Insecure Registries'te oluşturduğun ip'lerin görünecek
+
+http://uadmin.nl/init/docker-share-data-between-containers/
+1. Share a docker volume
+- create the volume in a container that you do not run
+docker create -v /webdata –name webd1 centos
+
+- start a second container and use the volume from the 1st container
+docker run -it -d –volumes-from webd1 –name webd2 centos
+
+- attach to the container
+docker attach `docker ps -a|grep webd2|awk ‘{print $1}’`
+
+- put a file in /webdata
+touch /webdata/afile
+
+- exit the container
+[root@6c6e823f6eb4 /]# exit
+
+- start a third container and use the volume from the 1st container
+docker run -it -d –volumes-from webd1 –name webd3 centos
+
+-attach to the third container
+docker attach `docker ps -a|grep webd3|awk ‘{print $1}’`
+
+- list the contents of /webdata
+ls /webdata
+afile
+
+- exit the container
+[root@4531a52b8e2a /]# exit
+
+- remove all three containers
+docker rm -f `docker ps -a|grep webd*|awk ‘{print $1}’`
+
+- remove the orphaned volume
+docker volume ls -qf dangling=true | xargs -r docker volume rm
+
+In the following example we create a directory on the host
+and share the directory between containers.
+
+2. share a host directory
+- create a directory on the host
+mkdir -p /docker/shared
+
+- create a container and use the directory
+docker run -d -it –name webd5 -v /docker/shared:/shared centos
+
+-attach to the container
+docker attach `docker ps -a|grep webd5|awk ‘{print $1}’`
+
+- create file in /shared
+touch /shared/afile
+
+- exit the container and remove it.
+[root@a4f1061d8d9f /]# exit
+docker rm -f `docker ps -a|grep webd5|awk ‘{print $1}’`
+
+- list the contents of /docker/shared
+ls /docker/shared
+afile
+
+- start a new container with the shared directory
+docker run -d -it –name webd6 -v /docker/shared:/shared centos
+
+- attach to the container
+docker attach `docker ps -a|grep webd6|awk ‘{print $1}’`
+
+- create a file in /shared
+touch /shared/bfile
+
+- list the contents of /shared
+ls /shared
+afile bfile
+
+- exit the container and check /docker/shared
+[root@f4ba93a953c3 /]# exit
+ls /docker/shared
+afile bfile
+
+Ornek:
+docker run -d -p 9000:9000 portainer/portainer
+docker ps -a
+CONTAINER ID        IMAGE                 COMMAND             CREATED             STATUS                      PORTS                    NAMES
+a5c3fa760bc         centos6-pg94          "/bin/bash"          10 minutes ago      Exited (0) 10 minutes ago                            focused_roentgen
+eece181300d4        portainer/portainer   "/portainer"        About an hour ago   Up About an hour            0.0.0.0:9000->9000/tcp   festive_joliot
+docker run -it centos6-pg94 bash

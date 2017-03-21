@@ -85,5 +85,10 @@ passwd -d kullanici
 sudo vim  /etc/ssh/sshd_config
 PermitEmptyPasswords yes
 /etc/init.d/sshd restart
-```
 
+* debug etmek icin;
+```bash
+vi /etc/sysconfig/sshd 
+options="-ddd"
+/etc/init.d/sshd restart
+```

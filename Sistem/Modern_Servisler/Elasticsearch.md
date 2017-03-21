@@ -17,9 +17,11 @@ JAVA_OPTS="$JAVA_OPTS -XX:+PrintGCApplicationStoppedTime"
 JAVA_OPTS="$JAVA_OPTS -Xloggc:/home/<kullanici>/es/logs/gc.log"
 ```
 
-* baslatma
+* baslatma ve check etme
 ```
 nohup ./es/bin/elasticsearch 2>&1 & 
+./es/bin/elasticsearch -d
+jps
 ```
 
 * Head plugin kurulumu eklenecek  (offline ortamda elle tasiyarak calistirabildik.)

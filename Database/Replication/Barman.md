@@ -72,14 +72,13 @@ PostgreSQL 9.5.5 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 4.4.7 20120313
 (Red Hat 4.4.7-17), 64-bit
 
 psql -U streaming_barman -h pg -c "IDENTIFY_SYSTEM" replication=1 psql -U
-
 streaming_barman -h pg -c ""
       systemid       | timeline |  xlogpos  | dbname 
 ---------------------+----------+-----------+--------
  6368754516593252106 |        1 | 0/17A1960 | 
 (1 row)
 
-echo "0" > /var/lib/barman/pg/wals/xlog.db  
+echo "0" > /var/lib/barman/streaming-pg//wals/xlog.db  
 
 barman komutlari
 diagnose
@@ -110,15 +109,15 @@ pgespresso
   streaming replicated standby.
 
 ### Step by step guide 
-#### for online;
+#### for log shipping method, online Centos 6.8;
 * host tanimlari /etc/hosts'a girilir.
 * kurulum
 wget https://yum.postgresql.org/9.5/redhat/rhel-6-x86_64/pgdg-centos95-9.5-3.noarch.rpm
-ppm -ivh pgdg-centos95-9.5-3.noarch.rpm
-yum install -y postgresql95-server rsync
+rpm -ivh pgdg-centos95-9.5-3.noarch.rpm
 yum install -y barman barman-cli
 
 * pg'de olusturulan keyler alinir 
+chown barman: authorized_keys id_rsa.pub id_rsa
 mkdir -p ~barman/.ssh
 chown barman: authorized_keys id_rsa.pub id_rsa
 chown barman: ~barman/.ssh
@@ -130,7 +129,7 @@ ssh-keygen -t rsa
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 chmod go-rwx ~/.ssh/\*
 cd ~/.ssh
-scp id_rsa.pub id_rsa authorized_keys postgres_sunucu:~/
+scp id_rsa.pub id_rsa authorized_keys postgres_sunucu
 
 * barman'a ait dosya/dizinlerin sahiplikleri duzenlenir:
 chown barman: /etc/barman.\* -R
@@ -149,33 +148,26 @@ log_level = INFO
 compression = gzip
 immediate_checkpoint = true
 reuse_backup = link 
+                    
 basebackup_retry_times =  3
 basebackup_retry_sleep = 30
 last_backup_maximum_age = 3 DAYS
+archiver = on
 
 /etc/barman.d/sunucu_hostname.conf
 [sunucu_hostname]
 description = "sunucu_hostname"
-conninfo = host=main-db-server-ip user=postgres
 ssh_command = ssh postgres@main-db-server-ip
+conninfo = host=main-db-server-ip user=postgres
 retention_policy_mode = auto
 retention_policy = RECOVERY WINDOW OF 7 days
 wal_retention_policy = main
-archiver = on
-backup_method = rsync
+
 
 * postgresql server'larda yapilacaklar (restart gerektirir)
 wal_level = archive
 archive_mode = on
 archive_command = 'rsync -a %p barman@sunucu_hostname:/data_dizini/incoming/%f'
-pg_hba.conf
-createuser -s barman
-
-pratikte:
-1 kere hata aliyrosun, xlog.db'yi duzeltip yeniden calistirinca
-calisiyor. (test edicez)
-
-psql -U postgres -c "select i into test from generate_series(1, 100000) i"
 
 
 yapilacaklar: 
@@ -200,6 +192,3 @@ yaptigimiz tanimlar
    entire database server to any point in time in the last seven days. For
    a production system, you should probably set this value higher so you
    have older backups on hand.
-
-
-* `switch xlog calisiyor!` bununla ansible'a gecebiliriz.

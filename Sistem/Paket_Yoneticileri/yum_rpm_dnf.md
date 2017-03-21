@@ -112,5 +112,33 @@ Rpm Centos Calisma
    'dnf install python-dnf-plugins-extras-migrate && dnf-2 migrate'
 
 online repo'lari tekrar install etme
-sudo rm -rf /etc/yum.repos.d/* && sudo yum reinstall \
+sudo rm -rf /etc/yum.repos.d/\* && sudo yum reinstall \
 http://vault.centos.org/6.7/os/x86_64/Packages/centos-release-6-7.el6.centos.12.3.x86_64.rpm
+
+                      │ Package
+Arch                                    Version
+Repository                               Size
+===============================================================================================================================================================================================
+Installing:
+ barman
+el6
+
+Installing for dependencies:
+ python-argcomplete
+el6
+
+ python-argh
+.el6
+
+ python-dateutil
+3.rhel6
+
+ python-psycopg2
+rhel6
+
+ python-six
+el6
+
+
+Transaction Summary
+

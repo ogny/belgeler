@@ -107,7 +107,11 @@ find . -type d -empty
 /  -type f -group <grup_adi> -ls   
 ```
 
-* alt dizinlerdeki mp3'leri yakalayip gonder;
+* alt dizinlerdeki mp3'leri yakalayip gonder; (yakalayamadi)
 ```
 find ~/muzikler -type f -iname "*.mp3" -exec sudo mv -t /media/usb/MUSIC {} \+ 
+```
+* dizinde belli bir dosyayi yakala (en yeni 11.), ondan oncekileri sil
+``
+find .  ! -newer $(ls -t | sed '11!d') -exec rm {} \;`
 ```
