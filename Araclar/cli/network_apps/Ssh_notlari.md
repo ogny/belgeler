@@ -92,3 +92,7 @@ vi /etc/sysconfig/sshd
 options="-ddd"
 /etc/init.d/sshd restart
 ```
+* Duz proxy ile uzak baglantiyi uzerinden gecir, ornegin;
+  uzak sunucunun 5433 portuna kendi 1234 portundan vekil ol;
+  ssh -L 1234:localhost:5433 <kullanici>@<uzak_sunucu> sleep 10000000000
+

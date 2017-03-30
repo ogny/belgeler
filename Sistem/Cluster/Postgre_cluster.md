@@ -138,3 +138,5 @@ resource now is showing under the resource group PGCLUSTER as stopped and you st
 
 crm configure group TTCLUSTER TTPGSQL TTDBFS
 crm configure location PREFER-NODE1 TTCLUSTER 100: ist-yaz-prod3
+crm configure primitive MONCACHE lsb:carbon-cache op start interval=0 timeout=30s op stop interval=0 timeout=30s op monitor interval=30s meta target-role=Started
+crm configure primitive MONRELAY lsb:carbon-relay op start interval=0 timeout=30s op stop interval=0 timeout=30s op monitor interval=30s meta target-role=Started

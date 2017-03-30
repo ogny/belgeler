@@ -503,3 +503,8 @@ CONTAINER ID        IMAGE                 COMMAND             CREATED           
 a5c3fa760bc         centos6-pg94          "/bin/bash"          10 minutes ago      Exited (0) 10 minutes ago                            focused_roentgen
 eece181300d4        portainer/portainer   "/portainer"        About an hour ago   Up About an hour            0.0.0.0:9000->9000/tcp   festive_joliot
 docker run -it centos6-pg94 bash
+
+* Dosya kopyalama
+```
+docker cp <containerId>:/file/path/within/container /host/path/target
+```
