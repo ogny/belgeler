@@ -62,8 +62,6 @@ nohup /usr/sbin/redis-server /etc/redis_6380.conf  &
 nohup /opt/sensu/bin/sensu-api  &
 ```
 
-
-
 #### Notlar:
 
 * herhangi bir client'ta config.json'la isin yok. o sensu-server icin
@@ -85,6 +83,12 @@ nohup /opt/sensu/bin/sensu-api  &
   edilen sunuculara da yuklenmesi gerekiyor.
 
 * metric'leri toplarken json dosyalarinda type:metric diye eklemeyi unutma
+
+#### Filtreleme ;
+
+filtreler handler'larda sonlanan event'leri filtrelemeye yariyor.
+
+
 
 #### Redis
 

@@ -10,25 +10,25 @@ Degistirecegin yeri secip visual mode'a gec
 `U Uppercase u Lowercase`
 
 * satir atlama: jump --> j satir sayisi
-`5j`	
+`5j`
 
-* imlecin bir altindaki satirla bulundugu satiri birlestirme; 
-`J`	
+* imlecin bir altindaki satirla bulundugu satiri birlestirme;
+`J`
 
-* normal modda `e` kelimenin son karakterine goturur. 
+* normal modda `e` kelimenin son karakterine goturur.
 * Pencere acikken buffer'i kapatma
 `:Bclose`
 
-* Tum satiri secme 
-`shift+v` 
+* Tum satiri secme
+`shift+v`
 
-* pencereleri yeniden boyutlandirma 
+* pencereleri yeniden boyutlandirma
 ```
 c+w sayi +-
 :res +-sayi
 ```
 
-* bos buffer'da bir dosya acma 
+* bos buffer'da bir dosya acma
 :n
 * buffer'lar arasi gezinme;
 :bn, :bp
@@ -37,8 +37,8 @@ c+w sayi +-
 :%s/^[^a-zA-Z0-9]$\n//ig
 :g/^$/d
 
-* her satir sonuna 2 bos karakter ekle 
-:%norm A  
+* her satir sonuna 2 bos karakter ekle
+:%norm A
 
 * her satirin sonundaki boslugu sil
 `:%s/\s\+$//`
@@ -178,7 +178,7 @@ http://vim.wikia.com/wiki/Working_with_CSV_files
 * sayfadaki url'i tarayicida acma: `gx`
 
 
-### eklentiler 
+### eklentiler
 * Kisa Kisa kullandigim eklentileri tanitmak istiyorum.
 
 bclose.vim
@@ -203,7 +203,7 @@ vim-buffergator
 
 * nerdtree
   - window split orientation'u var, sirayla aciyorsun, once horizontal, sonra vertical calisiyorsun
-  - <shift-i> ile gizli dosyalari toggle et.    
+  - <shift-i> ile gizli dosyalari toggle et.
 
 * easymotion
 backward search: <header><header>b
@@ -241,7 +241,7 @@ vim-bookmarks
 * case senstive'i kaldirmak icin
 `:set ignorecase`
 
-#### Tanimlar: 
+#### Tanimlar:
 
 the buffer is your file proxy,
 the window is a view into a buffer,
@@ -256,8 +256,8 @@ Forget all your old habits as they will slow your learning down.
 #### Git ile calisma
 * merginal ve fugitive kurulur
 * dosyada duzenleme bittiginde kaydedilir.
-* `:Gstatus` ve `-` ile `git add` 
-* `:Gcommit` 
+* `:Gstatus` ve `-` ile `git add`
+* `:Gcommit`
 * `:Merginal` ile branch secilir
 * `ps` ile push edilir
 * asil branch'e gecilip `mn` ile  merge et (test edilmedi.)
@@ -267,4 +267,12 @@ Forget all your old habits as they will slow your learning down.
 * dosyada duzenleme bittiginde kaydedilir.
 * `L+g` ve `-` `cc` buffer'i kaydet kapat `L+p` ile gonder
 
+##### renklendirme
+* gui = gvim.
+* cterm = terminal
+* fg = foreground
+* bg = background
 
+#### tarball'daki dosyayi acmadan icerigini kopyalama;
+* tarball editlenir
+* :w !xclip -sel c

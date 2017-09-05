@@ -35,10 +35,11 @@ vi $PGDATA/postgresql.conf
     hot_standby = on
     wal_level = 'hot_standby'
     max_wal_senders = 10
-    max_replication_slots = 4
-    shared_preload_libraries = 'repmgr_funcs'
+#   max_replication_slots = 4
+#   shared_preload_libraries = 'repmgr_funcs'
     archive_mode = on
     archive_command = 'cd .'
+    wal_keep_segments = 5000
 # wal_keep_segments kullanma
 vi $PGDATA/pg_hba.conf
 host    repmgr_db       repmgr_usr  <IP_blogu>/24         trust
@@ -50,32 +51,102 @@ host    replication     repmgr_usr  <IP_blogu>/24         trust
 ```
 createuser -s repmgr
 createdb repmgr -O repmgr
-psql -f /usr/pgsql-9.4/share/contrib/repmgr_funcs.sql repmgr
+#psql -f /usr/pgsql-9.4/share/contrib/repmgr_funcs.sql repmgr
 ```
 
 * repmgr.conf (master/standby) (root ile)
 ```
 chmod 777 /var/log/repmgr
-vi /etc/repmgr/9.4/repmgr.conf
+vi /etc/sysconfig/pgsql/repmgr.conf
+ 
 cluster=test
 node=1
 node_name=node1
 conninfo='host=<IP> repmgr user=repmgr'
 pg_bindir=/usr/pgsql-9.4/bin
-use_replication_slots=1
-pg_basebackup_options='--xlog-method=s'
-logfile='/var/log/repmgr/repmgr-9.4.log'
+#use_replication_slots=1
+pg_basebackup_options='--xlog-method=fetch'
+logfile='/var/log/repmgr/repmgr.log'
 ```
 
-* Master/Standby node'lari kaydet ve kontrol et
+* Master node register edilir.
 ```
-repmgr -f /etc/repmgr/repmgr.conf master register
-repmgr -f /etc/repmgr/repmgr.conf standby register
-repmgr -f /etc/repmgr/repmgr.conf cluster show
+repmgr  master register
 ```
 
+* standby node'a pg_basebackup alinir. (rsync'le henuz basarili olamadim)
+  register edilir ve baslatilir
+```
+repmgr --force --verbose -h <master_ip -d repmgr -U repmgr -D \
+/var/lib/pgsql/9.5/data standby clone
+repmgr --force --verbose -h <master_ip -d repmgr -U repmgr -D \
+/var/lib/pgsql/9.5/data standby clone --rsync-only 
+repmgr  standby register
+pg_ctl -D $PGDATA start
+```
+
+#### Kontroller
+* master'da
+```
+repmgr  cluster show
+psql -c "SELECT pg_current_xlog_location();"
+```
+* slave'de
+```
+repmgr  cluster show
+psql -c "SELECT pg_last_xlog_receive_location();"
+```
+* sensu-check'i aktif mi
+* slave makinaya bagli eski bir data diski var mi
+* disklerin son state'i nedir
+* postgre db'lerde yetkili mi (degilse ver)
+```
+psql
+\l
+GRANT ALL PRIVILEGES ON DATABASE pims to postgres;
 
 
+#### Geri Donus
+* baglantiyi tekrar sagla
+ip route del blackhole 172.27.98.90/32
+* son state'e bak, 2 makina da master/master mi
+crm cluster show
+* etlik'i durdur
+crm resource stop PGSQL
+* disk bu makinada mi bir daha  kontrol et
+crm_mon -1
+* mevcut data diskinin adini degistir
+mv /data/db/pgsql/9.5/data /data/db/pgsql/9.5/data_old
+* basebackup al
+repmgr --force --verbose -h 172.27.98.90 -U repmgr -d repmgr -D \
+/data/db/pgsql/9.5/data standby clone
+* db'yi ac
+crm resource start PGSQL
+* cluster'a bak
+repmgr cluster show
+* kontrolleri yap
+  - master'da
+psql -c "SELECT pg_current_xlog_location();"
+  - slave'de
+psql -c "SELECT pg_last_xlog_receive_location();"
+* eski data disk'lerini sil
+cd /data/db/pgsql/9.5/
+rm -rf data_ data.old data__
+* sensu check'ini geri getir
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Diger
 #. Repmgrd ile replication'u yonetme:
 ```  
 nohup repmgrd -f /etc/repmgr/10.4/repmgr.conf --daemonize  --monitoring-history --verbose &
@@ -263,4 +334,27 @@ DELETE FROM repmgr_<cluster_name>.repl_nodes WHERE name = '<node_name>';
 promote script'inde follow'lar
 sleep 5
 
+### Diger
 
+UPDATE repmgr_fatih.repl_nodes SET type='standby' WHERE id=2;
+
+ip route add blackhole 192.168.33.15
+ip route add blackhole 192.168.33.17
+export PATH=/usr/pgsql-9.5/bin:$PATH
+
+```
+psql -d pims
+create table yeni_tablo(
+id int PRIMARY KEY,
+last_name varchar NOT NULL,
+salary int
+);
+INSERT INTO yeni_tablo VALUES (1,'Jones',45000);
+\q
+```
+
+### debian'a 9.4 kurulum icin
+```
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - 
+```
+sudo apt-get install libpq-dev=9.4* libpq5=9.4*

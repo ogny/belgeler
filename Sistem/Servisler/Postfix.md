@@ -32,6 +32,7 @@ vi /etc/postfix/main.cf
 mynetworks_style = subnet
 mynetworks = 127.0.0.0/8, <yerel_ag>/24
 inet_interfaces = localhost
+smtp_use_tls=yes
 smtp_sasl_mechanism_filter = plain, login
 smtp_sasl_auth_enable = yes
 smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd

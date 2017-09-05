@@ -2,6 +2,7 @@ disk genisletme
 ---
 
 * parted ile disk'in label/flag/fstype'i belirlenir;
+n p 1 <enter><enter> t 8e w
 
 ```
 parted /dev/sdX

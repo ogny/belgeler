@@ -3,15 +3,15 @@
 * Docker images: 
 
 read-only template. konteyner olusturmakta kullaniliyor. Docker images are he
-**build** component of Docker.
+build component of Docker.
 
 * Docker registries:
-imajlarin yuklenip indirildigi alan. Docker registries are the **distribution**
+imajlarin yuklenip indirildigi alan. Docker registries are the distribution
 component of Docker.
 
 * Docker containers
 Tipki bir dizinmis gibi dusun. calistirilacak her sey icinde. imajdan
-olusturuluyor. Docker containers are the **run** component of Docker.
+olusturuluyor. Docker containers are the run component of Docker.
 
 #### Buraya kadar ne ogrendik?
 
@@ -98,6 +98,7 @@ docker commit -m "foo" <MEVCUT Container id veya name> \
 `VOLUME`
 `STOPSIGNAL`
 
+* Debugging;
 
 
 #### sorunlar:
@@ -496,6 +497,22 @@ afile bfile
 ls /docker/shared
 afile bfile
 
+Yöntem:
+önce imajdan bir container oluşturuyoruz, sonra onu bir servis gibi açıp
+kapıyıp silip yeniden oluşturabiliyoruz.
+
+* host'tan dosya kopyalamak
+`docker cp foo.txt mycontainer:/foo.txt`
+
+* container'dan komut çalıştırma 
+`docker run ubuntu /bin/echo 'Hello world'`
+
+* daemon (detached) modda çalıştırmak icin `-d` 
+  bu moddan çıkmak için: `docker stop`
+
+* farkli bir config ile çalıştırmak icin `--config <dizin>`
+
+
 Ornek:
 docker run -d -p 9000:9000 portainer/portainer
 docker ps -a
@@ -507,4 +524,112 @@ docker run -it centos6-pg94 bash
 * Dosya kopyalama
 ```
 docker cp <containerId>:/file/path/within/container /host/path/target
+```
+#### Dockerfile notlari;
+* RUN: build ederken tanimli komutu calistiriyor.
+2.kez build ettiginde bu asamayi geciyor;
+```
+Step 2/3 : RUN apt-get -y update
+ ---> Using cache
+ ---> 8bbc00346b46
+```
+* CMD duz olarak calistirildinda tanimli komutlari calistiriyor, burada ansible
+  playbook devreye girebilir. fakat container'in icine nasil kuracagiz, o iste
+  kitchen calismalarindan devsirilebilir.
+
+* EXEC (Dockerfile'da gecmiyor)
+Run a command in a running container
+
+* Note that each instruction is run independently, and causes a new image to be
+  created - so RUN cd /tmp will not have any effect on the next instructions.
+
+#### Dockerfile Ansible karsiliklari;
+
+* FROM \*must\* be the first instruction in the Dockerfile.
+* LABEL (meta/main.yml )
+* ENV = inventory this instruction allows one to set and persist
+  environment variables in the resulting Docker image. Instructions following
+  this can reference the set environment variables if needed.
+* ADD = files/ kopyalar.
+* EXPOSE docker'daki uygulama hangi portu dinleyecek
+* ENTRYPOINT imaj baslatildiginda container'da son olarak hangi uygulama calisacak
+  syntax: ENTRYPOINT ["<executable>", "<arg-1>", "<arg-2>", ..., "<arg-n>"]
+  Or: ENTRYPOINT ["python", "/home/flask/app.py"]
+* WORKDIR RUN, ADD, or ENTRYPOINT'in calisacagi dizini belirt. 
+  syntax: WORKDIR <path> (full path)
+
+
+
+#### Services in containers: <service> dead but pid file exists
+Images don't preserve running processes. Images are essentially a snapshot of
+the filesystem. Thus you're starting something, the PID file is created, and
+then you create a snapshot of the filesystem. So when you create a container
+based on that snapshot, there is no process matching the PID file.
+
+* Build'te birden cok tag ver ve dockerfile path'i goster
+```
+docker build -f tests/Dockerfile-centos6 -t ansx/centos6_pg95:v1 -t ansx/centos6_pg95:latest .
+```
+
+```
+run  herseferinde yeni bir container başlatir, gecici, denemelik bi is icin kullan,
+exec ile calisan container'a attach olursun 
+docker exec -it prod_postgresql_1 bash 
+```
+
+#### cheat sheet
+```
+docker build -t friendlyname .  # Create image using this directory's Dockerfile
+docker run -p 4000:80 friendlyname  # Run "friendlyname" mapping port 4000 to 80
+docker run -d -p 4000:80 friendlyname         # Same thing, but in detached mode
+docker ps                                 # See a list of all running containers
+docker stop <hash>                     # Gracefully stop the specified container
+docker ps -a           # See a list of all containers, even the ones not running
+docker kill <hash>                   # Force shutdown of the specified container
+docker rm <hash>              # Remove the specified container from this machine
+docker rm $(docker ps -a -q)           # Remove all containers from this machine
+docker images -a                               # Show all images on this machine
+docker rmi <imagename>            # Remove the specified image from this machine
+docker rmi $(docker images -q)             # Remove all images from this machine
+docker login             # Log in this CLI session using your Docker credentials
+docker tag <image> username/repository:tag  # Tag <image> for upload to registry
+docker push username/repository:tag            # Upload tagged image to registry
+docker run username/repository:tag                   # Run image from a registry
+```
+
+#### docker-machine
+virtualbox'ta boot2docker ile imaj olusturuyor.
+
+* imajlari ve tag'larini alfabetik listeleme;
+```
+docker image ls |awk '{print " "$1":"$2" "}' |sort -n 
+```
+
+* detach olamadigin durumlar yasanmamasi icin;
+```
+--sig-proxy=false
+```
+
+### networking
+
+* User-defined networks
+It is recommended to use user-defined bridge networks to control which
+containers can communicate with each other, and also to enable automatic DNS
+resolution of container names to IP addresses. 
+You can create a new bridge network, *overlay* network or *MACVLAN* network. You
+can also create a network plugin or remote network for complete customization
+and control.
+Within a user-defined bridge network, linking is not supported. You can expose
+and publish container ports on containers in this network. This is useful if
+you want to make a portion of the bridge network available to an outside
+network
+A bridge network is useful in cases where you want to run a relatively small
+network on a single host. You can, however, create significantly larger
+networks by creating an overlay network.
+
+#### docker-machine
+```
+curl -L https://github.com/docker/machine/releases/download/v0.11.0/docker-machine-`uname -s`-`uname -m` \
+>/tmp/docker-machine &&  chmod +x /tmp/docker-machine && \
+sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
 ```

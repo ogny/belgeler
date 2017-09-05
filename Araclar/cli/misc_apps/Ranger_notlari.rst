@@ -13,23 +13,23 @@ Kisayollar
 yon:
 G ve gg
 <c-u> move up=0.5    pages=True
-<c-d> move down=0.5  pages=True 
+<c-d> move down=0.5  pages=True
 
-<enter> move right=1  
+<enter> move right=1
 / console search
-f console find 
+f console find
 q quit
-r console open_with 
-s console shell 
-V toggle_visual_mode 
+r console open_with
+s console shell
+V toggle_visual_mode
 dc get_cumulative_size
 zh toggle_option show_hidden
 
-H history_go -1                                                       
+H history_go -1
 L history_go 1
 
 # yeniden adlandirirken basa ve sona ekleme
-A eval fm.open_console('rename ' + fm.env.cf.basename)  
+A eval fm.open_console('rename ' + fm.env.cf.basename)
 I eval fm.open_console('rename ' + fm.env.cf.basename, position=7)
 
 # cut mode

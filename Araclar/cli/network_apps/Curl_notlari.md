@@ -23,3 +23,9 @@ curl -o /dev/null -s -w %{time_connect}:%{time_starttransfer}:%{time_total}\\n h
 ```
 curl -O <url_adresi>
 ```
+
+
+```
+curl -H 'Content-Type: application/json' -H 'Accept: application/json' -X PUT \
+'http://<ip>:<port>/api/<uri>' -d '{"by": "orkun"}'
+```

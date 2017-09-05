@@ -1,4 +1,3 @@
-=================
 Disk yonetim komutlari
 =================
 
@@ -14,6 +13,15 @@ Disk yonetim komutlari
 
 Disk Baglama
 ============
+
+#. loop device baglama (mountpoint kontrolu yapmak icin)
+  ...code:: sh
+
+  dd if=/dev/sda1 of=dummydevice.img 
+  losetup /dev/loop0 dummydevice.img
+  mkdir <dizin>
+  mount -o loop dummydevice.img <dizin>
+
 
 #. Diski bagli oldugu partition'dan cikartip /var altindaki
 icerikle yeni bir diske tasima;

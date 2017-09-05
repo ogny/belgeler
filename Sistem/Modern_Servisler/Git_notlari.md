@@ -160,9 +160,9 @@ git remote rm b
 * Pull Request'in kullanım amacını tanımla.
 
 #### Geri alım senaryoları
-* yerel branch'ta üzerinde çalışılan, fakat uzak branch'a eklenmemiş dosyaların
-* uzak branch'a eklenmiş dosyaların durumu:
-* uzak branch'a commit'lenmiş dosyaların durumu:
+* yerel dal'ta üzerinde çalışılan, fakat uzak dal'a eklenmemiş dosyaların
+* uzak dal'a eklenmiş dosyaların durumu:
+* uzak dal'a commit'lenmiş dosyaların durumu:
 
 #### Git Geliştirmeleriyle çalışma 
 
@@ -172,27 +172,27 @@ git tag
 git checkout tags/0.9.15
 ```
 
-##### branch'lerle çalışma 
+##### dal'lerle çalışma 
 
 
-* hangi branch'te olduğunu kontrol et: `git branch`
-* yerel branch'ına geç: `git checkout <yerel_branch>`
-* çalışmanı yerel branch'ına gönder: 
+* hangi dal'te olduğunu kontrol et: `git branch`
+* yerel dal'ına geç: `git checkout <yerel_dal>`
+* çalışmanı yerel dal'ına gönder: 
 ```
 git add . 
 git commit -m "<açıklama>"
 ```
-* çalışmanı uzak branch'ına gönder: `git push origin <uzak_branch>`
-* birleştireceğin branch'a geç, değişimleri al:
+* çalışmanı uzak dal'ına gönder: `git push origin <uzak_dal>`
+* birleştireceğin dal'a geç, değişimleri al:
 ```
-git checkout <asıl_branch>
-git fetch --all && git pull origin <asıl_branch>
+git checkout <asıl_dal>
+git fetch --all && git pull origin <asıl_dal>
 ```
 
-* uzak branch'ını asıl branch'la birleştir:
+* uzak dal'ını asıl dal'la birleştir:
 ```
-git merge --no-ff <uzak_branch>
-git push origin  <asıl_branch>
+git merge --no-ff <uzak_dal>
+git push origin  <asıl_dal>
 ```
 
 ###### Merge/Rebase

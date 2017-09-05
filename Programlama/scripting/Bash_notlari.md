@@ -56,3 +56,11 @@ for i in *.tar.gz; do tar -zxvf $i; done
 * [Check if a directory exists in a shell script](http://stackoverflow.com/questions/59838/check-if-a-directory-exists-in-a-shell-script)
 
 * `!` Ozel karakterini kullanmak icin `set -o histexpand`
+
+|| ile && arasindaki fark
+1.si kosullu sonuc false ise calisiyor,
+2.si kosullu sonuc true ise;
+Buna gore asagidakiler calismaz;
+false && echo howdy!
+true || echo howdy!
+

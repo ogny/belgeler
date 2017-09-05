@@ -30,6 +30,16 @@ operations.
 Unless... (this is becaming a class!) that in the client you mounted the nfs 
 share in "soft" mode (not "hard" -- but then you could have data loss...
 
+server'da yapilandirma;
+-----------------------
+#. duzenlemeler /etc altinda exports ve fstab (emrah.com'da)
+#. exports dosyasi duzeni;
+
+..code:: sh
+    directory machine1(option11,option12) machine2(option21,option22)
+
+#. NOT: NFS server duzenlemeleri /etc/sysconfig/nfs'ten 
+
 client kurulum
 -----------------
 
@@ -120,18 +130,6 @@ client kurulum
   service iptables restart
 
 
-server'da yapilandirma;
------------------------
-
-#. duzenlemeler /etc altinda exports ve fstab (emrah.com'da)
-
-#. exports dosyasi duzeni;
-
-..code:: sh
-
-    directory machine1(option11,option12) machine2(option21,option22)
-
-#. NOT: NFS server duzenlemeleri /etc/sysconfig/nfs'ten 
 
 Kaynaklar;
 ----------

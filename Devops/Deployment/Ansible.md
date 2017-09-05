@@ -585,3 +585,8 @@ set/retrieve extended attributes (setfattr/getfattr utilities)
     - xattr: path=/etc/foo.conf key=user.foo value=ba
 ear
 
+#### Calisilacak
+```
+ansible-playbook -i inventory -c local --become tests/playbook.yml
+```
+ansible-playbook -i inventory -c local --become tests/playbook.yml

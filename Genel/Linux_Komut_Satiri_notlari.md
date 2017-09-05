@@ -245,6 +245,10 @@ tree -dfi -L 1 "$(pwd)"
 ```
 pkill -9 -u `id -u username`
 ```
+* belli bir dizini iceren process'leri oldurme;
+```
+ps -efd |grep -e ' <dizin>' |grep -v grep | awk '{print $2}' | xargs kill -9
+```
 
 * aktif baglantilari yapan uygulamalar
 ```

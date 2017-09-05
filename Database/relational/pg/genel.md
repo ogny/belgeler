@@ -1,7 +1,7 @@
 * Guncel surum:
 ```
 yum install \
-http://yum.postgresql.org/9.5/redhat/rhel-6-x86_64/pgdg-centos95-9.5-2.noarch.rpm
+https://yum.postgresql.org/9.6/redhat/rhel-6-x86_64/pgdg-centos96-9.6-3.noarch.rpm
 ```
 * WAL backup'lama point-in-time recovery yapma imkani da sagliyor
 * pg_basebackup: binary dosya, tum db'leri birarada alabiliyorsun
@@ -53,7 +53,7 @@ DROP DATABASE "<db_adi>";
 * yeni veri tabani - kullanici ekleme
 ```
 CREATE USER kullanici_adi WITH PASSWORD '<parola>';
-CREATE DATABASE <db_adi>
+CREATE DATABASE a
     ENCODING = 'UTF8'
     TABLESPACE = pg_default
     LC_COLLATE = 'tr_TR.UTF-8'

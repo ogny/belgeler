@@ -109,3 +109,17 @@ Ctrl + B, $
 ```
   prefix + @ 
 ```
+
+* resurrcet default keybindings
+```
+prefix + Ctrl-s - save
+prefix + Ctrl-r - restore
+```
+
+* bazen tmux session'unu arka tarafta calismaya devam ediyor, fakat terminalin
+  boyutlarindan oturu duzgun goruntulenemiyor, bu durumda;
+Tartisma basligi: Is there any way to redraw tmux window when switching smaller
+monitor to bigger one?
+```
+tmux detach -a
+```

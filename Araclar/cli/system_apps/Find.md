@@ -64,6 +64,7 @@ backup-2015-10-16.tar.bz2 -T -
 find <dizin> -newermt "nov 10, 2015" -not -newermt  "nov 11, 2015" \
 -exec mv -t ./<tasinacak_dizin>/ {} +
 ```
+* buna alternatif olarak "-and -not -mtime +365 "
 
 * buyukluge gore siralama;
 ```
@@ -114,4 +115,15 @@ find ~/muzikler -type f -iname "*.mp3" -exec sudo mv -t /media/usb/MUSIC {} \+
 * dizinde belli bir dosyayi yakala (en yeni 11.), ondan oncekileri sil
 ``
 find .  ! -newer $(ls -t | sed '11!d') -exec rm {} \;`
+```
+
+#### Prune
+The construct -prune -o \(  ...  -print0  \)  is quite  common.
+
+
+```
+find / -type d -mtime +3 -iname "*-daily" -exec rm -rf {} \;
+find / -type f -ctime +30 -name "*.log" -exec /bin/rm {} \;
+find / -type f -prune -mtime +$number_of_days -exec rm -f {} \;
+find / -type f -maxdepth 0 ! -iname ".*" -exec rm -f {} \;
 ```
