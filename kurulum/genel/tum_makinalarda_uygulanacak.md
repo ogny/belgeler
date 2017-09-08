@@ -3,56 +3,56 @@
 mv /etc/yum.repos.d/CentOS-* ~/ 
 cat << EOF > /etc/yum.repos.d/base.repo
 [base]
-name= Sekomy Dpic Base
-baseurl=ftp://172.27.98.84/base/
+name=  Base
+baseurl=ftp://<IP>/base/
 gpgcheck=0
 enabled=1
 EOF
 
 cat << EOF > /etc/yum.repos.d/updates.repo
 [updates]
-name= Sekomy Dpic updates
-baseurl=ftp://172.27.98.84/updates/
+name=  updates
+baseurl=ftp://<IP>/updates/
 gpgcheck=0
 enabled=1
 EOF
 
 cat << EOF > /etc/yum.repos.d/sensu.repo
 [sensu]
-name= Sekomy Dpic Sensu
-baseurl=ftp://172.27.98.84/sensu/packages/
+name=  Sensu
+baseurl=ftp://<IP>/sensu/packages/
 gpgcheck=0
 enabled=1
 EOF
 
 cat << EOF > /etc/yum.repos.d/epel.repo
 [epel]
-name= Sekomy Dpic Epel
-baseurl=ftp://172.27.98.84/epel
+name=  Epel
+baseurl=ftp://<IP>/epel
 gpgcheck=0
 enabled=1
 EOF
 
 cat << EOF > /etc/yum.repos.d/nginx.repo
 [nginx]
-name= Sekomy Dpic nginx
-baseurl=ftp://172.27.98.84/nginx
+name=  nginx
+baseurl=ftp://<IP>/nginx
 gpgcheck=0
 enabled=1
 EOF
 
 cat << EOF > /etc/yum.repos.d/pgdg95.repo
 [pgdg95]
-name= Sekomy Dpic PG
-baseurl=ftp://172.27.98.84/pgdg95/packages
+name=  PG
+baseurl=ftp://<IP>/pgdg95/packages
 gpgcheck=0
 enabled=1
 EOF
 
 cat << EOF > /etc/yum.repos.d/scl.repo
 [scl]
-name= Sekomy Dpic Python
-baseurl=ftp://172.27.98.84/scl/packages
+name=  Python
+baseurl=ftp://<IP>/scl/packages
 gpgcheck=0
 enabled=1
 EOF
@@ -64,7 +64,7 @@ EOF
 * kurulacak paketler
 ```
 yum install -y screen ntp rsync sensu bc unzip
-rsync -avh 172.27.98.84:~egem/repo_files/files/sensu/sensu-community-plugins ~/
+rsync -avh <IP>:~egem/repo_files/files/sensu/sensu-community-plugins ~/
 sudo mv sensu-community-plugins /opt/sensu/
 sudo chown sensu: /opt/sensu/ -R
 ```
@@ -123,7 +123,7 @@ sysctl -p
 ```
 chkconfig ntpd on
 vi /etc/ntp.conf
-server 172.25.6.254
+server <IP>
 (diger server'lari comment et)
 /etc/init.d/ntpd start
 ```
@@ -156,13 +156,13 @@ cat <<EOF> /etc/sensu/config.json
 {
     "rabbitmq": {
             "port": 5672,
-            "host": "172.25.0.82",
+            "host": "<IP>",
             "user": "sensu",
             "password": "sensu",
             "vhost": "/sensu"
     },
     "redis": {
-            "host": "172.25.0.11",
+            "host": "<IP>",
             "port": 6379
     },
     "api": {
@@ -171,7 +171,7 @@ cat <<EOF> /etc/sensu/config.json
             "port": 4567
     },
     "dashboard": {
-            "host": "172.25.0.238",
+            "host": "<IP>",
             "port": 3000,
             "user": "admin",
             "password": "secret"
