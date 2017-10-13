@@ -1,6 +1,4 @@
-`unbind [
-bind Escape copy-mode
-]``
+```
 yum install -y vim-enhanced epel-release wget
 yum install -y tmux 
 mkdir -p /root/.vim/syntax/

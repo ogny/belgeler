@@ -1,5 +1,12 @@
+---
+title: postgre notlari
+---
+
+
+
+
 * Guncel surum:
-```
+```bash
 yum install \
 https://yum.postgresql.org/9.6/redhat/rhel-6-x86_64/pgdg-centos96-9.6-3.noarch.rpm
 ```
@@ -19,31 +26,31 @@ ERROR:  must be owner of database pdns
   scrtipti ilk olusturuken root oldugundan sahibi root oluyor. dizin olustuktan
   sonra sahipligini guncelle
 
-```
+```bash
 chown postgres: /var/lib/pgsql -R
 ```
 
 * centos
-```
+```bash
 initdb -D $PGDATA -A trust -U postgres
 pg_ctl -D $PGDATA -l logfile -w start
 pg_ctl -D $PGDATA -m immediate stop
 ```
 
 * Debian
-```
+```bash
 binary dizini: /usr/lib/postgresql/9.5/bin/
 pg_createcluster 9.5 main --start
 ```
 
 
 ### Db silme
-```
+```bash
 dropdb <db_adi>
 psql -U postgres -c "drop database <db_adi>"
 ```
 * error: database is being accessed by other users
-```
+```bash
 select pg_terminate_backend(pid)
 from pg_stat_activity
 where datname='<db_adi>';
@@ -51,7 +58,7 @@ DROP DATABASE "<db_adi>";
 ```
 
 * yeni veri tabani - kullanici ekleme
-```
+```bash
 CREATE USER kullanici_adi WITH PASSWORD '<parola>';
 CREATE DATABASE a
     ENCODING = 'UTF8'
@@ -504,4 +511,6 @@ barman
 barman-cli
 python-argcomplete
 python-argh
+
+
 
