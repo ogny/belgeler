@@ -278,3 +278,15 @@ systemd-update-utmp.service
 systemd-user.conf
 systemd-user-sessions
 systemd-user-sessions.service
+
+user iles systemd'yi baslatmak icin bu gerekli:
+
+you might be interested in using systemd's "user lingering" functionality. it
+is enabled via loginctl enable-linger username. it causes a separate service
+manager for the respective user being started at boot, so your user-defined
+units in ~/.config/systemd/user will be picked up and processed at boot and
+shutdown times according to your service configuration. you can also use
+systemctl --user for managing and configuring the service(s), which will
+operate on your user's service manager, not the one of the system.
+
+sudo loginctl enable-linger orkung
