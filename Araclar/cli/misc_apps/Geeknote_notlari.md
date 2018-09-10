@@ -79,3 +79,16 @@ before saving the buffer.
 #. notlari guncellemek icin buffer'lar arasinda gezinip `:wa` yapman yeterli 
 
 [Kaynak](https://github.com/neilagabriel/vim-geeknote)
+
+```
+geeknote create --notebook "yeni" \
+--title "altyaziyi indir: fm15cmYU0IM" \
+--content ""
+```
+
+```
+geeknote create --notebook "pc_gundelik" \             
+--title "trash-cli'ye gecmemiz lazim, boyle olmaz, sans yardim etti" \
+--reminder "2018-5-17 19:00" \
+--content ""
+```

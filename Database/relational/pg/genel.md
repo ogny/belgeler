@@ -513,4 +513,8 @@ python-argcomplete
 python-argh
 
 
+* baglanma
+```
+sudo -i -u postgres psql 
+```
 
