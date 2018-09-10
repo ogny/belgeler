@@ -333,3 +333,32 @@ SELECT md5('<parola>');
 iconv -f old-encoding -t new-encoding file.txt > newfile.txt
 ```
 
+```
+google-chrome --app="https://open.spotify.com/collection/tracks"
+A=$(ls -t ~/Downloads/*.ovpn | head -n1)
+tree -dfi -L 1  |less
+sudo sshuttle --remote user@ip 0/0 --exclude ip --listen 0.0.0.0
+desktop -g 1920x1080 -u orkung 192.168.56.2
+VBoxHeadless --startvm mswin7 
+gotty -w vim ~/Raspberry_Pi_Webpage_Display_Script.sh 
+git fetch --all && git pull origin develop
+git diff --color | diff-so-fancy 
+w | cut -d " " -f 1 -
+make html && make serve
+make github 
+git add -A && git commit -a -m "san disk yazisi eklendi" && git push --all
+curl -XDELETE http://<ip>:4567/clients/<client_name>
+fd -e sh --exec wc -l
+youtube-dl --extract-audio --audio-format mp3 cqOaTgBC3-0
+printenv
+ranger --copy-config=all 
+vim -S template.vim  
+ansible-playbook -i tests/inventory tests/test.yml 
+ansible-playbook -i inventory/office_dsmart cm/office_dsmart.yml -vvv
+BoxManage modifyvm mswin7 --bridgeadapter3 enp0s25 
+VBoxManage showvminfo mswin7 |grep NIC
+mtr --report <IP>
+ssh -i "/home/orkung/.ssh/orkung_aof.pem"
+ubuntu@ec2-35-178-124-227.eu-west-2.compute.amazonaws.com
+icdiff
+```
