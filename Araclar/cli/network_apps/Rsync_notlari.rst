@@ -7,6 +7,18 @@ Rsync Calismasi
 :tags:
 :Author: Orkun Gunay
 
+```
+/usr/bin/rsync -a \
+--omit-dir-times \
+--compress \
+--acls \
+--recursive \
+--links \
+--perms \
+--executability \
+--owner \
+--group \
+```
 
 #. --existing ile sadece varolan dosyalari guncelliyoruz::
 
