@@ -146,8 +146,15 @@ docker-engine dkms acct ca-certificates patch tree ncdu apt-listchanges bundler 
 dos2unix dstat coreutils gnupg parted autofs htop dosfstools parallel sysstat \
 ccrypt cryptsetup pwgen dbus-x11 wicd wicd-daemon wicd-curses whois cisco-vpnc \
 mtr-tiny sshpass sshuttle curl lftp rfkill resolvconf apache2-utils rdesktop graphviz \
-dnsutils iftop pptp-linux nuttcp mutt dunst npm nodejs-legacy sdcv mesa-utils webhttrack
-sudo pip install cheat geeknote python-gist pika howdoi pgcli chronos
+dnsutils iftop pptp-linux nuttcp mutt dunst npm nodejs-legacy sdcv mesa-utils webhttrack \
+trash-cli bat ufw iotop lmodern timewarrior fasd bubblewrap cockpit \
+cockpit-bridge cockpit-dashboard cockpit-docker cockpit-networkmanager \
+cockpit-storaged cockpit-system cockpit-ws cockpit-bridge tmpreaper apt-file \
+pulseaudio-module-bluetooth cacher atom
+qemu packages (burasi uzerinde calisilacak) qemu-system-common ipxe-qemu \
+libxen-4.4 seabios qemu-system-x86 qemu-kvm qemu-utils python-libvirt virtinst \
+virtmanager virt-viewer ioping patat 
+sudo pip install cheat geeknote python-gist pika howdoi pgcli chronos glances
 sudo gem install ncurses-ruby 
 sudo systemctl start pulseaudio
 sudo systemctl start alsa-state.service

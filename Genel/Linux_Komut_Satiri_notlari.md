@@ -363,3 +363,7 @@ ubuntu@ec2-35-178-124-227.eu-west-2.compute.amazonaws.com
 rdesktop -u orkung 192.168.56.2 -g 1920x1080
 icdiff
 ```
+* satirlari sutuna cevirme
+```
+tr '\n'''
+```

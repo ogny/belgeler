@@ -3,6 +3,12 @@ sudo aptitude hold paket_adı veya sudo apt-mark hold paket_adı 
 Sistemde askıya alınmış paket olup olmadığını kontrol etmek için;
 sudo aptitude search "~ahold"
 
+* kurulu paketleri listeleme
+```
+zgrep " install " /var/log/dpkg.log.8.gz | awk '{print$4}' |cut -d ':' -f -1 |less
+```
+
+
 #### paketle ilgili bilgi
 * repo'lardaki paketle ilgili kisa bilgi. (kac repo'da varsa hepsini
   gorebiliyorsun)
