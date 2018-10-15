@@ -151,6 +151,9 @@ trash-cli bat ufw iotop lmodern timewarrior fasd bubblewrap cockpit \
 cockpit-bridge cockpit-dashboard cockpit-docker cockpit-networkmanager \
 cockpit-storaged cockpit-system cockpit-ws cockpit-bridge tmpreaper apt-file \
 pulseaudio-module-bluetooth cacher atom
+
+
+
 qemu packages (burasi uzerinde calisilacak) qemu-system-common ipxe-qemu \
 libxen-4.4 seabios qemu-system-x86 qemu-kvm qemu-utils python-libvirt virtinst \
 virtmanager virt-viewer ioping patat 
