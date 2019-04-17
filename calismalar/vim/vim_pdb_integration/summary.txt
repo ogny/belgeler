@@ -1,2 +1,0 @@
-isin mantigini anladim, neyi debug edecegine karar vermen lazim. henuz tam
-tesekkullu kod yazmadigimdan, konuya derinlemesine girmiyorum.

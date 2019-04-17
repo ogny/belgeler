@@ -1,4 +1,0 @@
-
-konu - arac eslesmesi
-
-
