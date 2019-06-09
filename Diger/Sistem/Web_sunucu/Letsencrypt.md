@@ -25,7 +25,24 @@ server {
     server_name www.orkun.design orkun.design;
     return 404; # managed by Certbot
 
-
-
-
 }
+
+* haproxy icin 
+
+certbot certonly            \
+    --standalone            \
+    -d <domain_name >       \
+    --non-interactive       \
+    --agree-tos             \
+    --email <e-mail>        \
+    --http-01-port=8888
+
+docker run                                                  \
+    --detach                                                \
+    --name grafana                                          \
+    --env "VIRTUAL_HOST=othersubdomain.yourdomain.tld"      \
+    --env "VIRTUAL_PORT=3000"                               \
+    --env "LETSENCRYPT_HOST=othersubdomain.yourdomain.tld"  \
+    --env "LETSENCRYPT_EMAIL=mail@yourdomain.tld"           \
+    grafana/grafana
+

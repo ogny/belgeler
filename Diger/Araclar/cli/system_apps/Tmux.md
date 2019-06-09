@@ -40,7 +40,7 @@ swap-window -s 3 -t 1
 ```
 prefix+ '
 ```
-`kaynak <http://stackoverflow.com/questions/25335730/how-do-i-jump-to-double-digit-window-number-in-tmux>`_
+`kaynak <http://stackoverflow.com/questions/25335730/how-do-i-jump-to-double-digit-window-number-in-tmux>`
 
 #. copy mode'u sectigimizde olusan gecikmeyi engelleme::
 ```
@@ -70,7 +70,7 @@ ITY".
 Eklentiler
 ----------
 
-`tmux-copycat <https://github.com/tmux-plugins/tmux-copycat>`_
+`tmux-copycat <https://github.com/tmux-plugins/tmux-copycat>`
 
 Search
 ```

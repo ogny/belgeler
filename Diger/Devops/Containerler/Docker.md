@@ -637,3 +637,15 @@ sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
 #### How do I change the Docker image installation directory 
 /etc/default/docker file with the -g option: DOCKER_OPTS="-dns 8.8.8.8 -dns 8.8.4.4 -g /mnt"
 
+* `dokcer ps`  ciktisinda container id &  container name'i gorme
+docker ps |awk '{print " "$1"     "$NF" "}' |sort -n
+
+* Note: One advantage of using nsenter to run commands in a pod's namespace –
+  versus using something like docker exec – is that you have access to all of
+  the commands available on the node, instead of the typically limited set of
+  commands installed in containers.
+```
+docker ps
+docker inspect --format '{{ .State.Pid }}' container-id-or-name
+nsenter -t your-container-pid -n ip addr
+```

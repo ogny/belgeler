@@ -1,5 +1,20 @@
 #### Yapilacaklar
 
+* merge backed or reverted (bunu daha once kullanmamistim, test edecegim)
+
+* birden cok dosyada degisiklik yaparsan, `git add dosya1 && git commit -m
+"1.dosya" seklinde duzgun log tutarak git'e gonder
+
+* log'lari izleme
+```
+git log         \        
+    --oneline   \
+    --graph     \
+    --all       \ 
+    --decorate  
+```
+
+
 * repo dizininde remote'a gonderilmesini istemedigimiz degisiklikleri geri alma;(reset ve clean ile)
 ```
 git clean -df
@@ -118,6 +133,7 @@ git push -u origin master
 
 * son commit'le onceki arasindaki farklari gorme;
 ```
+git diff --color Head~1..
 git diff --color HEAD^ HEAD
 git log -p <dosya_adi>
 ```

@@ -9,16 +9,20 @@ Rsync Calismasi
 
 ```
 
-/usr/bin/rsync \
-    --archive \
-    --compress \
-    --owner \
-    --group \
-    --perms \
-    --recursive \
-    --remove-source-files \
-    /home/deployer/dizin/ \
-    /home/deployer/
+/usr/bin/rsync              \
+    --acls                  \
+    --archive               \
+    --executability         \
+    --compress              \
+    --owner                 \
+    --group                 \
+    --links                 \
+    --omit-dir-times        \
+    --perms                 \
+    --recursive             \
+    --remove-source-files   \
+    /dizin/                 \
+    /dizin2/
 
 ```
 

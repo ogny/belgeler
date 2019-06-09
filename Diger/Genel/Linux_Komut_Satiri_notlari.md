@@ -358,8 +358,6 @@ ansible-playbook -i inventory/office_dsmart cm/office_dsmart.yml -vvv
 BoxManage modifyvm mswin7 --bridgeadapter3 enp0s25 
 VBoxManage showvminfo mswin7 |grep NIC
 mtr --report <IP>
-ssh -i "/home/orkung/.ssh/orkung_aof.pem"
-ubuntu@ec2-35-178-124-227.eu-west-2.compute.amazonaws.com
 rdesktop -u orkung 192.168.56.2 -g 1920x1080
 icdiff
 sudo mount -o  umask=0022,gid=1000,uid=1000 /dev/sdb1 ~/usbstick
