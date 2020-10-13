@@ -1,3 +1,8 @@
+terminal penceresini toggle fullscreen yapinca, horizontal split window boyutu
+degisiyor, cozumunu bulana kadar horizontal split acmak yerine, tek window'da 
+buffer'lar acip gezinerek calis. 
+
+
 * register
 
 kopyala-yapistir vim'de aslinda default register'daki degeri alip verme gibi.
